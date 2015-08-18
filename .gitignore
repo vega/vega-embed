@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+_site
+bower_components
+coverage
+node_modules
+output
+temp
+vega-embed.js
+vega-embed.js.map
+vega-embed.min.js
