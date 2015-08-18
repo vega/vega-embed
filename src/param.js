@@ -1,4 +1,5 @@
-var d3 = require('d3');
+var d3 = require('d3'),
+    $ = require('vega').util.mutator;
 
 module.exports = function(el, param, spec) {
   return (rewrite(param, spec), handle(el, param));
@@ -21,20 +22,8 @@ function rewrite(param, spec) {
 
   // replace values for re-write entries
   (param.rewrite || []).forEach(function(path) {
-    setValue(spec, path, {signal: param.signal});
+    $(path)(spec, {signal: param.signal});
   });
-}
-
-// set a value on a JS object at the provided path location
-function setValue(obj, path, value) {
-  var fields = path.split('/'),
-      prop = fields.pop();
-
-  for (var i=0; i<fields.length; ++i) {
-    obj = obj[fields[i]];
-  }
-
-  obj[prop] = value;
 }
 
 // HTML output handlers

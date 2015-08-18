@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="../node_modules/topojson/topojson.min.js" charset="utf8"></script>
     <script src="../node_modules/d3/d3.min.js" charset="utf8"></script>
-    <script src="../node_modules/vega/vega.min.js" charset="utf8"></script>
+    <script src="../node_modules/vega/vega.js" charset="utf8"></script>
     <script src="../vega-embed.js"></script>
     <style>
       body > div { margin-bottom: 2em; }
@@ -25,25 +25,25 @@ vg.embed('#force', {
     { 
       name: 'distance',
       signal: "linkDistance", type: "range", value: 30, min: 10, max: 200,
-      rewrite: ["data/2/transform/0/linkDistance"]
+      rewrite: ["data[2].transform[0].linkDistance"]
     },
     { 
       name: 'strength',
       signal: "linkStrength", type: "range", value: 0.5, min: 0.1, max: 2,
-      rewrite: ["data/2/transform/0/linkStrength"]
+      rewrite: ["data[2].transform[0].linkStrength"]
     },
     { 
       signal: "charge", type: "range", value: -80, min: -200, max: 100,
-      rewrite: ["data/2/transform/0/charge"]
+      rewrite: ["data[2].transform[0].charge"]
     },
     { 
       signal: "gravity", type: "range", value: 0.1, min: 0, max: 1,
-      rewrite: ["data/2/transform/0/gravity"]
+      rewrite: ["data[2].transform[0].gravity"]
     },
     { 
       signal: "interactive", type: "radio", value: false,
       options: [true, false],
-      rewrite: ["data/2/transform/0/interactive"]
+      rewrite: ["data[2].transform[0].interactive"]
     }
   ]
 }, function(view) { fv = view; });
@@ -52,29 +52,29 @@ vg.embed('#airports', {
   params: [
     {
       signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
-      rewrite: ["data/0/transform/0/scale", "data/2/transform/1/scale"]
+      rewrite: ["data[0].transform[0].scale", "data[2].transform[1].scale"]
     },
     {
       signal: "tx", type: "range", value: 450, min: -500, max: 1200,
-      rewrite: ["data/0/transform/0/translate/0", "data/2/transform/1/translate/0"]
+      rewrite: ["data[0].transform[0].translate[0]", "data[2].transform[1].translate[0]"]
     },
     {
       signal: "ty", type: "range", value: 280, min: -300, max: 700,
-      rewrite: ["data/0/transform/0/translate/1", "data/2/transform/1/translate/1"]
+      rewrite: ["data[0].transform[0].translate[1]", "data[2].transform[1].translate[1]"]
     },
     {
       signal: "shape", type: "radio", value: "line", options: ["line", "curve"],
-      rewrite: ["data/3/transform/2/shape"]
+      rewrite: ["data[3].transform[2].shape"]
     }
   ],
-  source: '{\n  "width": 900,\n  "height": 560,\n  "padding": {"top": 25, "left": 0, "right": 0, "bottom": 0},\n\n  "data": [\n    {\n      "name": "states",\n      "url": "data/us-10m.json",\n      "format": {"type": "topojson", "feature": "states"},\n      "transform": [\n        {\n          "type": "geopath", "projection": "albersUsa",\n          "scale": 1200, "translate": [450, 280]\n        }\n      ]\n    },\n    {\n      "name": "traffic",\n      "url": "data/flights-airport.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "aggregate", "groupby": ["origin"],\n          "summarize": [{"field": "count", "ops": ["sum"], "as": ["flights"]}]\n        }\n      ]\n    },\n    {\n      "name": "airports",\n      "url": "data/airports.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "lookup", "on": "traffic", "onKey": "origin",\n          "keys": ["iata"], "as": ["traffic"]\n        },\n        {\n          "type": "geo", "projection": "albersUsa",\n          "scale": 1200, "translate": [450, 280],\n          "lon": "longitude", "lat": "latitude"\n        },\n        {\n          "type": "filter",\n          "test": "datum.traffic && datum.layout_x != null && datum.layout_y != null"\n        },\n        { "type": "sort", "by": "-traffic.flights" },\n        { "type": "voronoi", "x": "layout_x", "y": "layout_y" }\n      ]\n    },\n    {\n      "name": "routes",\n      "url": "data/flights-airport.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "lookup", "on": "airports", "onKey": "iata",\n          "keys": ["origin", "destination"], "as": ["_source", "_target"]\n        },\n        { "type": "filter", "test": "datum._source && datum._target" },\n        { "type": "linkpath", "shape": "line" },\n        { "type": "filter", "test": "hover && hover.iata == datum.origin" }\n      ]\n    }\n  ],\n\n  "scales": [\n    {\n      "name": "size",\n      "type": "linear",\n      "domain": {"data": "traffic", "field": "flights"},\n      "range": [16, 1000]\n    }\n  ],\n\n  "signals": [\n    {\n      "name": "hover", "init": null,\n      "streams": [\n        {"type": "@cell:mouseover", "expr": "datum"},\n        {"type": "@cell:mouseout", "expr": "null"}\n      ]\n    },\n    {\n      "name": "title", "init": "U.S. Airports, 2008",\n      "streams": [{\n        "type": "hover", \n        "expr": "hover ? hover.name + \' (\' + hover.iata + \')\' : \'U.S. Airports, 2008\'"\n      }]\n    },\n    {\n      "name": "cell_stroke", "init": null,\n      "streams": [{"type": "dblclick", "expr": "cell_stroke ? null : \'brown\'"}]\n    }\n  ],\n\n  "marks": [\n    {\n      "type": "path",\n      "from": {"data": "states"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "fill": {"value": "#dedede"},\n          "stroke": {"value": "white"}\n        }\n      }\n    },\n    {\n      "type": "symbol",\n      "from": {"data": "airports"},\n      "properties": {\n        "update": {\n          "x": {"field": "layout_x"},\n          "y": {"field": "layout_y"},\n          "size": {"scale": "size", "field": "traffic.flights"},\n          "fill": {"value": "steelblue"},\n          "fillOpacity": {"value": 0.8},\n          "stroke": {"value": "white"},\n          "strokeWidth": {"value": 1.5}\n        }\n      }\n    },\n    {\n      "type": "path",\n      "name": "cell",\n      "from": {"data": "airports"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "fill": {"value": "transparent"},\n          "strokeWidth": {"value": 0.35},\n          "stroke": {"signal": "cell_stroke"}\n        }\n      }\n    },\n    {\n      "type": "path",\n      "interactive": false,\n      "from": {"data": "routes"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "stroke": {"value": "black"},\n          "strokeOpacity": {"value": 0.35}\n        }\n      }\n    },\n    {\n      "type": "text",\n      "interactive": false,\n      "properties": {\n        "enter": {\n          "x": {"value": 895},\n          "y": {"value": 0},\n          "fill": {"value": "black"},\n          "fontSize": {"value": 20},\n          "align": {"value": "right"}\n        },\n        "update": {\n          "text": {"signal": "title"}\n        }\n      }\n    }\n  ]\n}'
+  source: '{\n  "width": 900,\n  "height": 560,\n  "padding": {"top": 25, "left": 0, "right": 0, "bottom": 0},\n\n  "data": [\n    {\n      "name": "states",\n      "url": "data/us-10m.json",\n      "format": {"type": "topojson", "feature": "states"},\n      "transform": [\n        {\n          "type": "geopath", "projection": "albersUsa",\n          "scale": 1200, "translate": [450, 280]\n        }\n      ]\n    },\n    {\n      "name": "traffic",\n      "url": "data/flights-airport.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "aggregate", "groupby": ["origin"],\n          "summarize": [{"field": "count", "ops": ["sum"], "as": ["flights"]}]\n        }\n      ]\n    },\n    {\n      "name": "airports",\n      "url": "data/airports.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "lookup", "on": "traffic", "onKey": "origin",\n          "keys": ["iata"], "as": ["traffic"]\n        },\n        {\n          "type": "geo", "projection": "albersUsa",\n          "scale": 1200, "translate": [450, 280],\n          "lon": "longitude", "lat": "latitude"\n        },\n        {\n          "type": "filter",\n          "test": "datum.traffic && datum.layout_x != null && datum.layout_y != null"\n        },\n        { "type": "sort", "by": "-traffic.flights" },\n        { "type": "voronoi", "x": "layout_x", "y": "layout_y" }\n      ]\n    },\n    {\n      "name": "routes",\n      "url": "data/flights-airport.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        { "type": "filter", "test": "hover && hover.iata == datum.origin" },\n        {\n          "type": "lookup", "on": "airports", "onKey": "iata",\n          "keys": ["origin", "destination"], "as": ["_source", "_target"]\n        },\n        { "type": "filter", "test": "datum._source && datum._target" },\n        { "type": "linkpath", "shape": "line" }\n      ]\n    }\n  ],\n\n  "scales": [\n    {\n      "name": "size",\n      "type": "linear",\n      "domain": {"data": "traffic", "field": "flights"},\n      "range": [16, 1000]\n    }\n  ],\n\n  "signals": [\n    {\n      "name": "hover", "init": null,\n      "streams": [\n        {"type": "@cell:mouseover", "expr": "datum"},\n        {"type": "@cell:mouseout", "expr": "null"}\n      ]\n    },\n    {\n      "name": "title", "init": "U.S. Airports, 2008",\n      "streams": [{\n        "type": "hover", \n        "expr": "hover ? hover.name + \' (\' + hover.iata + \')\' : \'U.S. Airports, 2008\'"\n      }]\n    },\n    {\n      "name": "cell_stroke", "init": null,\n      "streams": [{"type": "dblclick", "expr": "cell_stroke ? null : \'brown\'"}]\n    }\n  ],\n\n  "marks": [\n    {\n      "type": "path",\n      "from": {"data": "states"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "fill": {"value": "#dedede"},\n          "stroke": {"value": "white"}\n        }\n      }\n    },\n    {\n      "type": "symbol",\n      "from": {"data": "airports"},\n      "properties": {\n        "update": {\n          "x": {"field": "layout_x"},\n          "y": {"field": "layout_y"},\n          "size": {"scale": "size", "field": "traffic.flights"},\n          "fill": {"value": "steelblue"},\n          "fillOpacity": {"value": 0.8},\n          "stroke": {"value": "white"},\n          "strokeWidth": {"value": 1.5}\n        }\n      }\n    },\n    {\n      "type": "path",\n      "name": "cell",\n      "from": {"data": "airports"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "fill": {"value": "transparent"},\n          "strokeWidth": {"value": 0.35},\n          "stroke": {"signal": "cell_stroke"}\n        }\n      }\n    },\n    {\n      "type": "path",\n      "interactive": false,\n      "from": {"data": "routes"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "stroke": {"value": "black"},\n          "strokeOpacity": {"value": 0.35}\n        }\n      }\n    },\n    {\n      "type": "text",\n      "interactive": false,\n      "properties": {\n        "enter": {\n          "x": {"value": 895},\n          "y": {"value": 0},\n          "fill": {"value": "black"},\n          "fontSize": {"value": 20},\n          "align": {"value": "right"}\n        },\n        "update": {\n          "text": {"signal": "title"}\n        }\n      }\n    }\n  ]\n}'
 }, function(view) { av = view; });
 
 vg.embed('#jobs', {
   params: [
     {
       "name": "job", "signal": "q", "type": "text",
-      "value": "", "placeholder": "search", "autocomplete": false
+      "value": "", "placeholder": "search", "autocomplete": "off"
     },
     {
       "signal": "sex", "type": "radio", "value": "all",
@@ -96,7 +96,13 @@ vg.embed('#jobs', {
         "transform": [
           {
             "type": "filter",
-            "test": "(sex === 'all' || datum.sex === sex) && (!q || indexof(lower(datum.job), lower(q)) >=0)"
+            "test": "(sex === 'all' || datum.sex === sex) && (!q || test(lower(q), lower(datum.job)))"
+          },
+          {
+            "type": "stack",
+            "groupby": ["year"],
+            "field": "perc",
+            "sortby": ["-job", "-sex"]
           }
         ]
       },
@@ -105,19 +111,9 @@ vg.embed('#jobs', {
         "source": "jobs",
         "transform": [
           {
-            "type": "stack",
-            "groupby": ["year"],
-            "field": "perc",
-            "sortby": ["-job", "-sex"]
-          },
-          {
-            "type": "facet",
-            "groupby": ["job", "sex"],
-            "summarize": [{
-              "field": "perc",
-              "ops": ["sum", "argmax"],
-              "as": ["sum", "argmax"]
-            }]
+            "type": "aggregate",
+            "groupby": ["job"],
+            "summarize": [{"field": "perc", "ops": ["max"], "as": ["max"]}]
           }
         ]
       },
@@ -136,9 +132,8 @@ vg.embed('#jobs', {
     "scales": [
       {
         "name": "x",
-        "type": "linear",
+        "type": "ordinal",
         "range": "width",
-        "zero": false, "round": true,
         "domain": {"data": "jobs", "field": "year"}
       },
       {
@@ -156,14 +151,13 @@ vg.embed('#jobs', {
       {
         "name": "alpha",
         "type": "linear",
-        "domain": {"data": "series", "field": "sum"},
-        "range": [0.4, 0.8]
+        "domain": {"data": "series", "field": "max"},
+        "range": [0.4, 1]
       }
     ],
     "axes": [
       {
-        "type": "x", "scale": "x", "format": "d",
-        "ticks": 15, "tickSizeEnd": 0
+        "type": "x", "scale": "x", "format": "d", "tickSizeEnd": 0
       },
       {
         "type": "y", "scale": "y", "format": "n", "orient": "right",
@@ -177,32 +171,36 @@ vg.embed('#jobs', {
     ],
     "marks": [
       {
-        "type": "group",
-        "from": {"data": "series"},
-        "marks": [
-          {
-            "type": "area",
-            "properties": {
-              "update": {
-                "x": {"scale": "x", "field": "year"},
-                "y": {"scale": "y", "field": "layout_start"},
-                "y2": {"scale": "y", "field": "layout_end"},
-                "fill": {"scale": "color", "field": "sex"},
-                "fillOpacity": {
-                  "scale": "alpha",
-                  "field": {"parent": "sum"}
-                }
-              },
-              "hover": {
-                "fillOpacity": {"value": 0.2}
-              }
+        "type": "rect",
+        "from": {
+          "data": "jobs",
+          "transform": [
+            {
+              "type": "lookup", "on": "series", "onKey": "job",
+              "keys": ["job"], "as": ["agg"]
             }
+          ]
+        },
+        "properties": {
+          "enter": {
+            "x": {"scale": "x", "field": "year"},
+            "width": {"scale": "x", "band": true},
+            "fill": {"scale": "color", "field": "sex"}
+          },
+          "update": {
+            "y": {"scale": "y", "field": "layout_start"},
+            "y2": {"scale": "y", "field": "layout_end"},
+            "fillOpacity": {"scale": "alpha", "field": "agg.max"}
+          },
+          "hover": {
+            "fillOpacity": {"value": 0.2}
           }
-        ]
+        }
       }
     ]
   }
-})
+}, function(view) { jv = view; });
+
 </script>
   </body>
 </html>
