@@ -11,7 +11,7 @@ if [ ! -z "$(git status --porcelain)" ]; then
 fi 
 echo "All tracked files are commited. Publishing for npm & bower."
 
-# generate build files
+# 0.3 generate build files
 npm run build
 
 # 1. NPM PUBLISH 
@@ -23,7 +23,7 @@ if [[ $rc != 0 ]]; then
   exit $rc; 
 fi
 
-# 3. BOWER PUBLISH 
+# 2. BOWER PUBLISH
 # read version
 gitsha=$(git rev-parse HEAD)
 version=$(cat package.json | jq .version | sed -e 's/^"//'  -e 's/"$//')
