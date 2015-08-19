@@ -133,10 +133,6 @@ function range(el, param) {
   return rn.node();
 }
 
-function step(min, max) {
-  return vg.util.bins({min:min, max:max, maxbins:200}).step;
-}
-
 function update(value) {
   if (value === undefined) value = this.__data__ || d3.event.target.value;
   this.__vega__.signal(this.name, value).update();

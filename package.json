@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -24,28 +24,14 @@
     "vega": "^2.1.1",
     "browserify": "^10.2.6",
     "browserify-shim": "^3.8.9",
-    "browserify-versionify": "^1.0.4",
-    "chai": "^3.0.0",
-    "istanbul": "latest",
     "jshint": "^2.8.0",
-    "mocha": "^2.2.5",
     "uglify-js": "^2.4.24"
   },
   "scripts": {
+    "deploy": "npm run lint && scripts/deploy.sh",
     "lint": "jshint src/",
-    "test": "mocha --timeout 30000 --recursive test/",
-    "cover": "istanbul cover _mocha -- --timeout 30000 --recursive test/",
     "build": "browserify src/embed.js -d -s vg.embed > vega-embed.js",
     "postbuild": "uglifyjs vega-embed.js -cm > vega-embed.min.js"
-  },
-  "browser": {
-    "buffer": false,
-    "canvas": false,
-    "fs": false,
-    "http": false,
-    "request": false,
-    "sync-request": false,
-    "url": false
   },
   "browserify": {
     "transform": [
