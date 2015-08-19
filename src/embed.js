@@ -19,7 +19,8 @@ var config = {
 // opt: Embedding specification (parsed JSON or string)
 // callback: invoked with the generated Vega View instance
 function embed(el, opt, callback) {
-  var source, spec, params = [];
+  var renderer = opt.renderer || 'canvas',
+      params = [], source, spec;
 
   if (opt.source) {
     source = opt.source;
@@ -55,7 +56,7 @@ function embed(el, opt, callback) {
   }
 
   vg.parse.spec(spec, function(chart) {
-    var view = chart({el: el});
+    var view = chart({el: el, renderer: renderer});
 
     // add child div to house action links
     var ctrl = div.append('div')

@@ -68,7 +68,8 @@ d3.text('airports.json', function(err, source) {
         rewrite: ["data[3].transform[3].shape"]
       }
     ],
-    source: source
+    source: source,
+    renderer: "svg"
   }, function(view) { av = view; });
 });
 
@@ -83,6 +84,7 @@ vg.embed('#jobs', {
       "options": ["men", "women", "all"]
     }
   ],
+  renderer: "canvas",
   spec: {
     "width": 800,
     "height": 500,
