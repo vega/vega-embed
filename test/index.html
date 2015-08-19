@@ -48,27 +48,29 @@ vg.embed('#force', {
   ]
 }, function(view) { fv = view; });
 
-vg.embed('#airports', {
-  params: [
-    {
-      signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
-      rewrite: ["data[0].transform[0].scale", "data[2].transform[1].scale"]
-    },
-    {
-      signal: "tx", type: "range", value: 450, min: -500, max: 1200,
-      rewrite: ["data[0].transform[0].translate[0]", "data[2].transform[1].translate[0]"]
-    },
-    {
-      signal: "ty", type: "range", value: 280, min: -300, max: 700,
-      rewrite: ["data[0].transform[0].translate[1]", "data[2].transform[1].translate[1]"]
-    },
-    {
-      signal: "shape", type: "radio", value: "line", options: ["line", "curve"],
-      rewrite: ["data[3].transform[2].shape"]
-    }
-  ],
-  source: '{\n  "width": 900,\n  "height": 560,\n  "padding": {"top": 25, "left": 0, "right": 0, "bottom": 0},\n\n  "data": [\n    {\n      "name": "states",\n      "url": "data/us-10m.json",\n      "format": {"type": "topojson", "feature": "states"},\n      "transform": [\n        {\n          "type": "geopath", "projection": "albersUsa",\n          "scale": 1200, "translate": [450, 280]\n        }\n      ]\n    },\n    {\n      "name": "traffic",\n      "url": "data/flights-airport.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "aggregate", "groupby": ["origin"],\n          "summarize": [{"field": "count", "ops": ["sum"], "as": ["flights"]}]\n        }\n      ]\n    },\n    {\n      "name": "airports",\n      "url": "data/airports.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        {\n          "type": "lookup", "on": "traffic", "onKey": "origin",\n          "keys": ["iata"], "as": ["traffic"]\n        },\n        {\n          "type": "geo", "projection": "albersUsa",\n          "scale": 1200, "translate": [450, 280],\n          "lon": "longitude", "lat": "latitude"\n        },\n        {\n          "type": "filter",\n          "test": "datum.traffic && datum.layout_x != null && datum.layout_y != null"\n        },\n        { "type": "sort", "by": "-traffic.flights" },\n        { "type": "voronoi", "x": "layout_x", "y": "layout_y" }\n      ]\n    },\n    {\n      "name": "routes",\n      "url": "data/flights-airport.csv",\n      "format": {"type": "csv", "parse": "auto"},\n      "transform": [\n        { "type": "filter", "test": "hover && hover.iata == datum.origin" },\n        {\n          "type": "lookup", "on": "airports", "onKey": "iata",\n          "keys": ["origin", "destination"], "as": ["_source", "_target"]\n        },\n        { "type": "filter", "test": "datum._source && datum._target" },\n        { "type": "linkpath", "shape": "line" }\n      ]\n    }\n  ],\n\n  "scales": [\n    {\n      "name": "size",\n      "type": "linear",\n      "domain": {"data": "traffic", "field": "flights"},\n      "range": [16, 1000]\n    }\n  ],\n\n  "signals": [\n    {\n      "name": "hover", "init": null,\n      "streams": [\n        {"type": "@cell:mouseover", "expr": "datum"},\n        {"type": "@cell:mouseout", "expr": "null"}\n      ]\n    },\n    {\n      "name": "title", "init": "U.S. Airports, 2008",\n      "streams": [{\n        "type": "hover", \n        "expr": "hover ? hover.name + \' (\' + hover.iata + \')\' : \'U.S. Airports, 2008\'"\n      }]\n    },\n    {\n      "name": "cell_stroke", "init": null,\n      "streams": [{"type": "dblclick", "expr": "cell_stroke ? null : \'brown\'"}]\n    }\n  ],\n\n  "marks": [\n    {\n      "type": "path",\n      "from": {"data": "states"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "fill": {"value": "#dedede"},\n          "stroke": {"value": "white"}\n        }\n      }\n    },\n    {\n      "type": "symbol",\n      "from": {"data": "airports"},\n      "properties": {\n        "update": {\n          "x": {"field": "layout_x"},\n          "y": {"field": "layout_y"},\n          "size": {"scale": "size", "field": "traffic.flights"},\n          "fill": {"value": "steelblue"},\n          "fillOpacity": {"value": 0.8},\n          "stroke": {"value": "white"},\n          "strokeWidth": {"value": 1.5}\n        }\n      }\n    },\n    {\n      "type": "path",\n      "name": "cell",\n      "from": {"data": "airports"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "fill": {"value": "transparent"},\n          "strokeWidth": {"value": 0.35},\n          "stroke": {"signal": "cell_stroke"}\n        }\n      }\n    },\n    {\n      "type": "path",\n      "interactive": false,\n      "from": {"data": "routes"},\n      "properties": {\n        "update": {\n          "path": {"field": "layout_path"},\n          "stroke": {"value": "black"},\n          "strokeOpacity": {"value": 0.35}\n        }\n      }\n    },\n    {\n      "type": "text",\n      "interactive": false,\n      "properties": {\n        "enter": {\n          "x": {"value": 895},\n          "y": {"value": 0},\n          "fill": {"value": "black"},\n          "fontSize": {"value": 20},\n          "align": {"value": "right"}\n        },\n        "update": {\n          "text": {"signal": "title"}\n        }\n      }\n    }\n  ]\n}'
-}, function(view) { av = view; });
+d3.text('airports.json', function(err, source) {
+  vg.embed('#airports', {
+    params: [
+      {
+        signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
+        rewrite: ["data[0].transform[0].scale", "data[2].transform[2].scale"]
+      },
+      {
+        signal: "tx", type: "range", value: 450, min: -500, max: 1200,
+        rewrite: ["data[0].transform[0].translate[0]", "data[2].transform[2].translate[0]"]
+      },
+      {
+        signal: "ty", type: "range", value: 280, min: -300, max: 700,
+        rewrite: ["data[0].transform[0].translate[1]", "data[2].transform[2].translate[1]"]
+      },
+      {
+        signal: "shape", type: "radio", value: "line", options: ["line", "curve"],
+        rewrite: ["data[3].transform[3].shape"]
+      }
+    ],
+    source: source
+  }, function(view) { av = view; });
+});
 
 vg.embed('#jobs', {
   params: [
