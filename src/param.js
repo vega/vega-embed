@@ -1,8 +1,14 @@
 var d3 = require('d3'),
     $ = require('vega').util.mutator;
 
-module.exports = function(el, param, spec) {
-  return (rewrite(param, spec), handle(el, param));
+module.exports = {
+  init: function(el, param, spec) {
+    return (rewrite(param, spec), handle(el, param));
+  },
+  bind: function(param, view) {
+    param.dom.forEach(function(el) { el.__vega__ = view; });
+    view.onSignal(param.dom[0].name, function(k, v) { param.set(v); });
+  }
 };
 
 // spec re-write
@@ -57,16 +63,25 @@ function form(el, param) {
   }
   fm.attr('name', param.signal);
 
-  return fm.node();
+  var node = fm.node();
+  return {
+    dom: [node],
+    set: function(value) { node.value = value; }
+  };
 }
 
 function checkbox(el, param) {
-  return el.append('input')
+  var cb = el.append('input')
     .on('change', function() { update.call(this, this.checked); })
     .attr('type', 'checkbox')
     .attr('name', param.signal)
     .attr('checked', param.value || null)
     .node();
+
+  return {
+    dom: [cb],
+    set: function(value) { cb.checked = !!value || null; }
+  };
 }
 
 function select(el, param) {
@@ -83,14 +98,21 @@ function select(el, param) {
     .attr('selected', function(x) { return x === param.value || null; })
     .text(vg.util.identity);
   
-  return sl.node();
+  var node = sl.node();
+  return {
+    dom: [node],
+    set: function(value) {
+      var idx = param.options.indexOf(value);
+      node.selectedIndex = idx;
+    }
+  };
 }
 
 function radio(el, param) {
   var rg = el.append('span')
     .attr('class', 'vega-param-radio');
 
-  return param.options.map(function(option) {
+  var nodes = param.options.map(function(option) {
     var id = 'vega-option-' + param.signal + '-' + option;
 
     var rb = rg.append('input')
@@ -108,6 +130,17 @@ function radio(el, param) {
 
     return rb.node();
   });
+
+  return {
+    dom: nodes,
+    set: function(value) {
+      for (var i=0; i<nodes.length; ++i) {
+        if (nodes[i].value === value) {
+          nodes[i].checked = true;
+        }
+      }
+    }
+  };
 }
 
 function range(el, param) {
@@ -128,9 +161,17 @@ function range(el, param) {
     }).step);
 
   var lbl = el.append('label')
+    .attr('class', 'vega-range')
     .text(param.value);
 
-  return rn.node();
+  var node = rn.node();
+  return {
+    dom: [node],
+    set: function(value) {
+      node.value = value;
+      lbl.text(value);
+    }
+  };
 }
 
 function update(value) {

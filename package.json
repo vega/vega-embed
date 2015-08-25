@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -20,6 +20,7 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "d3": "^3.5.6",
+    "d3-geo-projection": "^0.2.15",
     "topojson": "^1.6.19",
     "vega": "^2.1.1",
     "browserify": "^10.2.6",

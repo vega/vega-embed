@@ -50,8 +50,8 @@ function embed(el, opt, callback) {
   if (opt.params) {
     var pdiv = div.append('div')
       .attr('class', 'vega-params');
-    opt.params.forEach(function(p) {
-      params = params.concat(parameter(pdiv, p, spec));
+    params = opt.params.map(function(p) {
+      return parameter.init(pdiv, p, spec);
     });
   }
 
@@ -81,7 +81,7 @@ function embed(el, opt, callback) {
       });
 
     // bind all parameter elements
-    params.forEach(function(el) { el.__vega__ = view; });
+    params.forEach(function(p) { parameter.bind(p, view); });
 
     // initialize and return visualization
     view.update();

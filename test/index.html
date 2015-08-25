@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="../node_modules/topojson/topojson.min.js" charset="utf8"></script>
     <script src="../node_modules/d3/d3.min.js" charset="utf8"></script>
+    <script src="../node_modules/d3-geo-projection/d3.geo.projection.min.js" charset="utf-8"></script>
     <script src="../node_modules/vega/vega.js" charset="utf8"></script>
     <script src="../vega-embed.js"></script>
     <style>
@@ -14,10 +15,11 @@
   </head>
   <body>
     <div id="force"></div>
+    <div id="world"></div>
     <div id="airports"></div>
     <div id="jobs"></div>
 <script>
-var fv, av, jv;
+var fv, wv, av, jv;
 
 vg.embed('#force', {
   url: './force_drag.json',
@@ -41,12 +43,21 @@ vg.embed('#force', {
       rewrite: ["data[2].transform[0].gravity"]
     },
     { 
-      signal: "interactive", type: "radio", value: false,
-      options: [true, false],
+      signal: "interactive", type: "checkbox", value: false,
       rewrite: ["data[2].transform[0].interactive"]
     }
   ]
 }, function(view) { fv = view; });
+
+vg.embed('#world', {
+  url: './map.json',
+  params: [
+    { 
+      signal: "rotate", type: "range", value: 0, min: -540, max: 540,
+      rewrite: ["data[0].transform[0].rotate"]
+    }
+  ]
+}, function(view) { wv = view; });
 
 d3.text('airports.json', function(err, source) {
   vg.embed('#airports', {
@@ -90,8 +101,18 @@ vg.embed('#jobs', {
     "height": 500,
     "padding": {"left": 15, "right": 65, "top": 10, "bottom": 20},
     "signals": [
-      { "name": "sex", "init": "all" },
-      { "name": "q", "init": "" }
+      { "name": "sex", "init": "all",
+        "streams": [
+          {"type": "rect:click", "expr": "datum.sex"},
+          {"type": "dblclick", "expr": "'all'"}
+        ]
+      },
+      { "name": "q", "init": "",
+        "streams": [
+          {"type": "rect:click", "expr": "datum.job"},
+          {"type": "dblclick", "expr": "''"}
+        ]
+      }
     ],
     "data": [
       {

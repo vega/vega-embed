@@ -55,10 +55,21 @@ a:hover {
 
 .vega-embed .vega-param-name {
   display: inline-block;
-  width: 70px;
+  width: 60px;
   margin-right: 10px;
   font-size: 11px;
   font-weight: 500;
+  overflow: hidden;
+}
+
+.vega-embed .vega-params label {
+  font-size: 10px;
+  margin-right: 5px;
+}
+
+.vega-embed label.vega-range {
+  display: inline-block;
+  max-width: 30px;
   overflow: hidden;
 }
 
@@ -67,7 +78,16 @@ a:hover {
   margin-right: 5px;
 }
 
-.vega-embed .vega-params label {
-  font-size: 10px;
-  margin-right: 5px;
+.vega-embed .vega-params input[type=text] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: 2px 0;
+}
+
+.vega-embed .vega-params select,
+.vega-embed .vega-params input[type=text] {
+  box-sizing: border-box;
+  width: 130px;
+  max-width: 130px;
 }

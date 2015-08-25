@@ -33,7 +33,13 @@
     {
       "name": "dblclick", "init": null, "verbose": true,
       "streams": [
-        { "type": "symbol:dblclick", "expr": "datum._id" }
+        { "type": "click", "expr": "event.shiftKey ? datum._id : null" }
+      ]
+    },
+    {
+      "name": "interactive", "init": false,
+      "streams": [
+        { "type": "dblclick", "expr": "!interactive" }
       ]
     }
   ],
@@ -72,8 +78,8 @@
           "linkDistance": 30,
           "linkStrength": 0.5,
           "charge": -80,
-          "interactive": true,
           "fixed": "fixed",
+          "interactive": {"signal": "interactive"},
           "active": {"signal": "active"}
         }
       ]
