@@ -144,6 +144,9 @@ function radio(el, param) {
 }
 
 function range(el, param) {
+  var val = param.value !== undefined ? param.value :
+    ((+param.max) + (+param.min)) / 2;
+
   var rn = el.append('input')
     .on('input', function() {
       lbl.text(this.value);
@@ -151,7 +154,7 @@ function range(el, param) {
     })
     .attr('type', 'range')
     .attr('name', param.signal)
-    .attr('value', param.value)
+    .attr('value', val)
     .attr('min', param.min)
     .attr('max', param.max)
     .attr('step', param.step || vg.util.bins({
@@ -162,7 +165,7 @@ function range(el, param) {
 
   var lbl = el.append('label')
     .attr('class', 'vega-range')
-    .text(param.value);
+    .text(val);
 
   var node = rn.node();
   return {

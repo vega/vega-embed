@@ -1,0 +1,10 @@
+{
+  "url": "./map.json",
+  "params": [
+    { 
+      "signal": "rotate", "type": "range",
+      "value": 0, "min": -540, "max": 540,
+      "rewrite": ["data[0].transform[0].rotate"]
+    }
+  ]
+}

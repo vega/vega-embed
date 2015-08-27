@@ -6,6 +6,7 @@ coverage
 node_modules
 output
 temp
+vega-embed-schema.json
 vega-embed.js
 vega-embed.js.map
 vega-embed.min.js

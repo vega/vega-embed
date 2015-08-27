@@ -19,8 +19,7 @@ var config = {
 // opt: Embedding specification (parsed JSON or string)
 // callback: invoked with the generated Vega View instance
 function embed(el, opt, callback) {
-  var renderer = opt.renderer || 'canvas',
-      params = [], source, spec;
+  var params = [], source, spec;
 
   if (opt.source) {
     source = opt.source;
@@ -44,11 +43,13 @@ function embed(el, opt, callback) {
 
   // ensure container div has class 'vega-embed'
   var div = d3.select(el)
-    .attr('class', 'vega-embed');
+    .classed('vega-embed', true)
+    .html(''); // clear container
 
   // handle parameters
   if (opt.params) {
-    var pdiv = div.append('div')
+    var elp = opt.el_params ? d3.select(opt.el_params) : div;
+    var pdiv = elp.append('div')
       .attr('class', 'vega-params');
     params = opt.params.map(function(p) {
       return parameter.init(pdiv, p, spec);
@@ -56,36 +57,42 @@ function embed(el, opt, callback) {
   }
 
   vg.parse.spec(spec, function(chart) {
-    var view = chart({el: el, renderer: renderer});
+    var view = chart({
+      el: el,
+      data: opt.data || undefined,
+      renderer: opt.renderer || 'canvas'
+    });
 
-    // add child div to house action links
-    var ctrl = div.append('div')
-      .attr('class', 'vega-actions');
+    if (opt.actions !== false) {
+      // add child div to house action links
+      var ctrl = div.append('div')
+        .attr('class', 'vega-actions');
 
-    // add 'View Source' action
-    ctrl.append('a')
-      .text('View Source')
-      .attr('href', '#')
-      .on('click', function() {
-        viewSource(source);
-        d3.event.preventDefault();
-      });
+      // add 'View Source' action
+      ctrl.append('a')
+        .text('View Source')
+        .attr('href', '#')
+        .on('click', function() {
+          viewSource(source);
+          d3.event.preventDefault();
+        });
 
-    // add 'Open in Vega Editor' action
-    ctrl.append('a')
-      .text('Open in Vega Editor')
-      .attr('href', '#')
-      .on('click', function() {
-        post(window, embed.config.editor_url, {spec: source});
-        d3.event.preventDefault();
-      });
+      // add 'Open in Vega Editor' action
+      ctrl.append('a')
+        .text('Open in Vega Editor')
+        .attr('href', '#')
+        .on('click', function() {
+          post(window, embed.config.editor_url, {spec: source});
+          d3.event.preventDefault();
+        });
+    }
 
     // bind all parameter elements
     params.forEach(function(p) { parameter.bind(p, view); });
 
     // initialize and return visualization
     view.update();
-    if (callback) callback(view);
+    if (callback) callback(view, spec);
   });
 }
 
