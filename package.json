@@ -32,7 +32,7 @@
     "uglify-js": "^2.4.24"
   },
   "scripts": {
-    "deploy": "npm run lint && scripts/deploy.sh",
+    "deploy": "npm run lint && npm run test && scripts/deploy.sh",
     "lint": "jshint src/",
     "test": "npm run schema && mocha --timeout 5000 --recursive test/",
     "build": "browserify src/embed.js -d -s vg.embed > vega-embed.js",
