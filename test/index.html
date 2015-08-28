@@ -23,7 +23,7 @@ var fv, wv, av, jv;
 
 vg.embed('#force', {
   url: './force_drag.json',
-  params: [
+  parameters: [
     { 
       name: 'distance',
       signal: "linkDistance", type: "range", value: 30, min: 10, max: 200,
@@ -51,7 +51,7 @@ vg.embed('#force', {
 
 vg.embed('#world', {
   url: './map.json',
-  params: [
+  parameters: [
     { 
       signal: "rotate", type: "range", value: 0, min: -540, max: 540,
       rewrite: ["data[0].transform[0].rotate"]
@@ -61,7 +61,7 @@ vg.embed('#world', {
 
 d3.text('airports.json', function(err, source) {
   vg.embed('#airports', {
-    params: [
+    parameters: [
       {
         signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
         rewrite: ["data[0].transform[0].scale", "data[2].transform[2].scale"]
@@ -85,7 +85,7 @@ d3.text('airports.json', function(err, source) {
 });
 
 vg.embed('#jobs', {
-  "params": [
+  "parameters": [
     {
       "name": "job", "signal": "q", "type": "text",
       "value": "", "placeholder": "search", "autocomplete": "off"

@@ -1,6 +1,6 @@
 var d3 = require('d3'),
     vg = require('vega'),
-    parameter = require('./param'),
+    parameter = require('./parameter'),
     post = require('./post');
 
 var config = {
@@ -47,11 +47,11 @@ function embed(el, opt, callback) {
     .html(''); // clear container
 
   // handle parameters
-  if (opt.params) {
-    var elp = opt.el_params ? d3.select(opt.el_params) : div;
+  if (opt.parameters) {
+    var elp = opt.parameter_el ? d3.select(opt.parameter_el) : div;
     var pdiv = elp.append('div')
       .attr('class', 'vega-params');
-    params = opt.params.map(function(p) {
+    params = opt.parameters.map(function(p) {
       return parameter.init(pdiv, p, spec);
     });
   }

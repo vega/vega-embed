@@ -1,6 +1,6 @@
 {
   "url": "./map.json",
-  "params": [
+  "parameters": [
     { 
       "signal": "rotate", "type": "range",
       "value": 0, "min": -540, "max": 540,

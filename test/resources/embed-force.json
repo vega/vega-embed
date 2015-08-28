@@ -1,6 +1,6 @@
 {
   "url": "force_drag.json",
-  "params": [
+  "parameters": [
     { 
       "name": "distance",
       "signal": "linkDistance", "type": "range",

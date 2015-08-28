@@ -1,5 +1,5 @@
 {
-  "params": [
+  "parameters": [
     {
       "signal": "scale", "type": "range",
       "value": 1200, "min": 500, "max": 3000,

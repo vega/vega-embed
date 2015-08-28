@@ -3,7 +3,7 @@ function spec(name, props) {
   for (var key in props) {
     p[key] = props[key];
   } 
-  p.params = { "$ref": "#/refs/params" };
+  p.parameters = { "$ref": "#/refs/parameters" };
   p.renderer = { "enum": ["canvas", "svg"] };
 
   return {
@@ -49,26 +49,26 @@ var schema = {
     // $ref": "http://vega.github.io/vega/vega-schema.json"
   ],
   "refs": {
-    "params": {
+    "parameters": {
       "type": "array",
-      "items": { "$ref": "#/refs/param" }
+      "items": { "$ref": "#/refs/parameter" }
     },
 
-    "param": {
+    "parameter": {
       "oneOf": [
-        { "$ref": "#/refs/param-checkbox" },
-        { "$ref": "#/refs/param-select" },
-        { "$ref": "#/refs/param-radio" },
-        { "$ref": "#/refs/param-range" },
-        { "$ref": "#/refs/param-input" }
+        { "$ref": "#/refs/parameter-checkbox" },
+        { "$ref": "#/refs/parameter-select" },
+        { "$ref": "#/refs/parameter-radio" },
+        { "$ref": "#/refs/parameter-range" },
+        { "$ref": "#/refs/parameter-input" }
       ]
     },
 
-    "param-checkbox": param('checkbox', {
+    "parameter-checkbox": param('checkbox', {
       "value": { "type": "boolean", "default": false }
     }),
 
-    "param-select": param('select', {
+    "parameter-select": param('select', {
       "value": { "type": ["string", "number", "boolean"] },
       "options": {
         "type": "array",
@@ -76,7 +76,7 @@ var schema = {
       }
     }, ["options"]),
 
-    "param-radio": param('radio', {
+    "parameter-radio": param('radio', {
       "value": { "type": ["string", "number", "boolean"] },
       "options": {
         "type": "array",
@@ -84,14 +84,14 @@ var schema = {
       }
     }, ["options"]),
 
-    "param-range": param('range', {
+    "parameter-range": param('range', {
       "value": { "type": "number" },
       "min": { "type": "number" },
       "max": { "type": "number" },
       "step": { "type": "number" },
     }, ["min", "max"]),
 
-    "param-input": param('text', {
+    "parameter-input": param('text', {
       "value": { "type": ["string", "number", "boolean"], "default": "" }
     }, null, true),
   }

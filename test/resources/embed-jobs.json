@@ -1,5 +1,5 @@
 {
-  "params": [
+  "parameters": [
     {
       "name": "job", "signal": "q", "type": "text",
       "value": "", "placeholder": "search", "autocomplete": "off"

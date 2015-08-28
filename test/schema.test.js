@@ -72,51 +72,51 @@ describe('schema', function() {
 
   it('should invalidate extra checkbox property', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-force.json'));
-    spec.params[4].foo = 'bar';
+    spec.parameters[4].foo = 'bar';
     assert.notOk(tv4.validate(spec, schema));
   });
 
   it('should invalidate missing range min/max', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-world.json'));
-    delete spec.params[0].min;
+    delete spec.parameters[0].min;
     assert.notOk(tv4.validate(spec, schema));
 
     spec = JSON.parse(fs.readFileSync(res + 'embed-world.json'));
-    delete spec.params[0].max;
+    delete spec.parameters[0].max;
     assert.notOk(tv4.validate(spec, schema));
   });
 
   it('should invalidate extra range property', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-world.json'));
-    spec.params[0].foo = 'bar';
+    spec.parameters[0].foo = 'bar';
     assert.notOk(tv4.validate(spec, schema));
   });
 
   it('should invalidate missing select options', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-jobs.json'));
-    spec.params[1].type = 'select';
-    delete spec.params[1].options;
+    spec.parameters[1].type = 'select';
+    delete spec.parameters[1].options;
     assert.notOk(tv4.validate(spec, schema));
   });
 
   it('should invalidate extra select property', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-jobs.json'));
-    spec.params[1].type = 'select';
-    spec.params[1].foo = 'bar';
+    spec.parameters[1].type = 'select';
+    spec.parameters[1].foo = 'bar';
     assert.notOk(tv4.validate(spec, schema));
   });
 
   it('should invalidate missing radio options', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-jobs.json'));
-    spec.params[1].type = 'radio';
-    delete spec.params[1].options;
+    spec.parameters[1].type = 'radio';
+    delete spec.parameters[1].options;
     assert.notOk(tv4.validate(spec, schema));
   });
 
   it('should invalidate extra radio property', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-jobs.json'));
-    spec.params[1].type = 'radio';
-    spec.params[1].foo = 'bar';
+    spec.parameters[1].type = 'radio';
+    spec.parameters[1].foo = 'bar';
     assert.notOk(tv4.validate(spec, schema));
   });
 
