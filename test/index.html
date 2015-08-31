@@ -14,12 +14,40 @@
     </style>
   </head>
   <body>
-    <div id="force"></div>
-    <div id="world"></div>
     <div id="airports"></div>
+    <div id="force"></div>
     <div id="jobs"></div>
+    <div id="world"></div>
+    <div id="plain"></div>
 <script>
-var fv, wv, av, jv;
+var av, vv, jv, wv, pv;
+
+// Test Vega source code; range + select params
+d3.text('airports.json', function(err, source) {
+  vg.embed('#airports', {
+    parameters: [
+      {
+        signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
+        rewrite: ["data[0].transform[0].scale", "data[2].transform[2].scale"]
+      },
+      {
+        signal: "tx", type: "range", value: 450, min: -500, max: 1200,
+        rewrite: ["data[0].transform[0].translate[0]", "data[2].transform[2].translate[0]"]
+      },
+      {
+        signal: "ty", type: "range", value: 280, min: -300, max: 700,
+        rewrite: ["data[0].transform[0].translate[1]", "data[2].transform[2].translate[1]"]
+      },
+      {
+        signal: "shape", type: "select",
+        value: "line", options: ["line", "curve"],
+        rewrite: ["data[3].transform[3].shape"]
+      }
+    ],
+    source: source,
+    renderer: "svg"
+  }, function(view) { av = view; });
+});
 
 // Test URL vega spec load; range + checkbox params
 vg.embed('#force', {
@@ -49,37 +77,6 @@ vg.embed('#force', {
     }
   ]
 }, function(view) { fv = view; });
-
-// Test URL embed spec load; two-way binding
-vg.embed('#world', 'resources/embed-world.json',
-  function(view) { wv = view; });
-
-// Test Vega source code; range + select params
-d3.text('airports.json', function(err, source) {
-  vg.embed('#airports', {
-    parameters: [
-      {
-        signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
-        rewrite: ["data[0].transform[0].scale", "data[2].transform[2].scale"]
-      },
-      {
-        signal: "tx", type: "range", value: 450, min: -500, max: 1200,
-        rewrite: ["data[0].transform[0].translate[0]", "data[2].transform[2].translate[0]"]
-      },
-      {
-        signal: "ty", type: "range", value: 280, min: -300, max: 700,
-        rewrite: ["data[0].transform[0].translate[1]", "data[2].transform[2].translate[1]"]
-      },
-      {
-        signal: "shape", type: "select",
-        value: "line", options: ["line", "curve"],
-        rewrite: ["data[3].transform[3].shape"]
-      }
-    ],
-    source: source,
-    renderer: "svg"
-  }, function(view) { av = view; });
-});
 
 // Test inline Vega spec; range + radio params, two-way binding
 vg.embed('#jobs', {
@@ -223,6 +220,14 @@ vg.embed('#jobs', {
     ]
   }
 }, function(view) { jv = view; });
+
+// Test URL embed spec load; two-way binding
+vg.embed('#world', 'resources/embed-world.json',
+  function(view) { wv = view; });
+
+// Test plain Vega spec input
+vg.embed('#plain', 'map.json',
+  function(view) { pv = view; });
 
 </script>
   </body>

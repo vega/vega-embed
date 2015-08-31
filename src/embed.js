@@ -43,6 +43,10 @@ function embed(el, opt, callback) {
     source = JSON.stringify(spec, null, 2);
   } else if (opt.url) {
     return load(opt.url, opt, el, callback);
+  } else {
+    spec = opt;
+    source = JSON.stringify(spec, null, 2);
+    opt = {spec: spec, actions: false};
   }
 
   // ensure container div has class 'vega-embed'
