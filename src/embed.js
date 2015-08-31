@@ -14,31 +14,35 @@ var config = {
   source_footer: ''
 };
 
+function load(url, arg, el, callback) {
+  vg.util.load({url: url}, function(err, data) {
+    if (err || !data) {
+      console.error(err || ('No data found at ' + url));
+    } else {
+      // marshal embedding spec and restart
+      var opt = !arg ? JSON.parse(data) : vg.util.extend({source: data}, arg);
+      embed(el, opt, callback);
+    }
+  });
+}
+
 // Embed a Vega visualization component in a web page.
 // el: DOM element in which to place component (DOM node or CSS selector)
-// opt: Embedding specification (parsed JSON or string)
+// opt: Embedding specification (parsed JSON or URL string)
 // callback: invoked with the generated Vega View instance
 function embed(el, opt, callback) {
   var params = [], source, spec;
 
-  if (opt.source) {
+  if (vg.util.isString(opt)) {
+    return load(opt, null, el, callback);
+  } else if (opt.source) {
     source = opt.source;
     spec = JSON.parse(source);
   } else if (opt.spec) {
     spec = opt.spec;
     source = JSON.stringify(spec, null, 2);
   } else if (opt.url) {
-    vg.util.load({url: opt.url}, function(err, data) {
-      if (err) {
-        console.error(err);
-      } else if (!data) {
-        console.error('No data found at ' + opt.url);
-      } else {
-        // load code, extends options, and restart
-        embed(el, vg.util.extend({source: data}, opt), callback);
-      }
-    });
-    return;
+    return load(opt.url, opt, el, callback);
   }
 
   // ensure container div has class 'vega-embed'

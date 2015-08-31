@@ -21,6 +21,7 @@
 <script>
 var fv, wv, av, jv;
 
+// Test URL vega spec load; range + checkbox params
 vg.embed('#force', {
   url: './force_drag.json',
   parameters: [
@@ -49,16 +50,11 @@ vg.embed('#force', {
   ]
 }, function(view) { fv = view; });
 
-vg.embed('#world', {
-  url: './map.json',
-  parameters: [
-    { 
-      signal: "rotate", type: "range", value: 0, min: -540, max: 540,
-      rewrite: ["data[0].transform[0].rotate"]
-    }
-  ]
-}, function(view) { wv = view; });
+// Test URL embed spec load; two-way binding
+vg.embed('#world', 'resources/embed-world.json',
+  function(view) { wv = view; });
 
+// Test Vega source code; range + select params
 d3.text('airports.json', function(err, source) {
   vg.embed('#airports', {
     parameters: [
@@ -75,7 +71,8 @@ d3.text('airports.json', function(err, source) {
         rewrite: ["data[0].transform[0].translate[1]", "data[2].transform[2].translate[1]"]
       },
       {
-        signal: "shape", type: "radio", value: "line", options: ["line", "curve"],
+        signal: "shape", type: "select",
+        value: "line", options: ["line", "curve"],
         rewrite: ["data[3].transform[3].shape"]
       }
     ],
@@ -84,6 +81,7 @@ d3.text('airports.json', function(err, source) {
   }, function(view) { av = view; });
 });
 
+// Test inline Vega spec; range + radio params, two-way binding
 vg.embed('#jobs', {
   "parameters": [
     {

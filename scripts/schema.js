@@ -4,6 +4,7 @@ function spec(name, props) {
     p[key] = props[key];
   } 
   p.parameters = { "$ref": "#/refs/parameters" };
+  p.parameter_el = { "type": "string" };
   p.renderer = { "enum": ["canvas", "svg"] };
 
   return {
