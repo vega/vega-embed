@@ -65,16 +65,39 @@ function embed(el, opt, callback) {
   }
 
   vg.parse.spec(spec, function(chart) {
+    var renderer = opt.renderer || 'canvas',
+        isCanvas = renderer === 'canvas';
+
     var view = chart({
       el: el,
       data: opt.data || undefined,
-      renderer: opt.renderer || 'canvas'
+      renderer: renderer
     });
 
     if (opt.actions !== false) {
       // add child div to house action links
       var ctrl = div.append('div')
         .attr('class', 'vega-actions');
+
+      // add 'Export' action
+      ctrl.append('a')
+        .text('Export as ' + (isCanvas ? 'PNG' : 'SVG'))
+        .attr('href', '#')
+        .attr('download', spec.name || 'vega')
+        .on('mousedown', function() {
+          var ren = view.renderer(),
+              data, blob;
+
+          if (isCanvas) {
+            data = ren.scene().toDataURL('image/png');
+          } else if (renderer === 'svg') {
+            blob = new Blob([ren.svg()], {type: 'image/svg+xml'});
+            data = window.URL.createObjectURL(blob);
+          }
+
+          this.href = data;
+          d3.event.preventDefault();
+        });
 
       // add 'View Source' action
       ctrl.append('a')
