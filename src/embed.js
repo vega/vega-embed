@@ -66,7 +66,8 @@ function embed(el, opt, callback) {
 
   vg.parse.spec(spec, function(chart) {
     var renderer = opt.renderer || 'canvas',
-        isCanvas = renderer === 'canvas';
+        isCanvas = renderer === 'canvas',
+        actions  = opt.actions || {};
 
     var view = chart({
       el: el,
@@ -74,48 +75,54 @@ function embed(el, opt, callback) {
       renderer: renderer
     });
 
-    if (opt.actions !== false) {
+    if (actions !== false) {
       // add child div to house action links
       var ctrl = div.append('div')
         .attr('class', 'vega-actions');
 
       // add 'Export' action
-      ctrl.append('a')
-        .text('Export as ' + (isCanvas ? 'PNG' : 'SVG'))
-        .attr('href', '#')
-        .attr('download', spec.name || 'vega')
-        .on('mousedown', function() {
-          var ren = view.renderer(),
-              data, blob;
+      if (actions.export !== false) {
+        ctrl.append('a')
+          .text('Export as ' + (isCanvas ? 'PNG' : 'SVG'))
+          .attr('href', '#')
+          .attr('download', spec.name || 'vega')
+          .on('mousedown', function() {
+            var ren = view.renderer(),
+                data, blob;
 
-          if (isCanvas) {
-            data = ren.scene().toDataURL('image/png');
-          } else if (renderer === 'svg') {
-            blob = new Blob([ren.svg()], {type: 'image/svg+xml'});
-            data = window.URL.createObjectURL(blob);
-          }
+            if (isCanvas) {
+              data = ren.scene().toDataURL('image/png');
+            } else if (renderer === 'svg') {
+              blob = new Blob([ren.svg()], {type: 'image/svg+xml'});
+              data = window.URL.createObjectURL(blob);
+            }
 
-          this.href = data;
-          d3.event.preventDefault();
-        });
+            this.href = data;
+            d3.event.preventDefault();
+          });
+      }
 
       // add 'View Source' action
-      ctrl.append('a')
-        .text('View Source')
-        .attr('href', '#')
-        .on('click', function() {
-          viewSource(source);
-          d3.event.preventDefault();
-        });
+      if (actions.source !== false) {
+        ctrl.append('a')
+          .text('View Source')
+          .attr('href', '#')
+          .on('click', function() {
+            viewSource(source);
+            d3.event.preventDefault();
+          });
+      }
 
       // add 'Open in Vega Editor' action
-      ctrl.append('a')
-        .text('Open in Vega Editor')
-        .attr('href', '#')
-        .on('click', function() {
-          post(window, embed.config.editor_url, {spec: source});
-          d3.event.preventDefault();
-        });
+      if (actions.editor !== false) {
+        ctrl.append('a')
+          .text('Open in Vega Editor')
+          .attr('href', '#')
+          .on('click', function() {
+            post(window, embed.config.editor_url, {spec: source});
+            d3.event.preventDefault();
+          });
+      }
     }
 
     // bind all parameter elements
