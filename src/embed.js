@@ -75,7 +75,7 @@ function embed(el, opt, callback) {
       renderer: renderer
     });
 
-    if (actions !== false) {
+    if (opt.actions !== false) {
       // add child div to house action links
       var ctrl = div.append('div')
         .attr('class', 'vega-actions');
