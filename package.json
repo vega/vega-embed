@@ -37,7 +37,8 @@
     "test": "npm run schema && mocha --timeout 5000 --recursive test/",
     "build": "browserify src/embed.js -d -s vg.embed > vega-embed.js",
     "postbuild": "uglifyjs vega-embed.js -cm > vega-embed.min.js",
-    "schema": "node scripts/schema.js > vega-embed-schema.json"
+    "schema": "node scripts/schema.js > vega-embed-schema.json",
+    "watch": "watchify src/embed.js -v -d -s vg.embed -o vega-embed.js"
   },
   "browserify": {
     "transform": [
