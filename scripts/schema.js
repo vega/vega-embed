@@ -6,6 +6,19 @@ function spec(name, props) {
   p.parameters = { "$ref": "#/refs/parameters" };
   p.parameter_el = { "type": "string" };
   p.renderer = { "enum": ["canvas", "svg"] };
+  p.actions = {
+    "oneOf": [
+      { "type": "boolean" },
+      {
+        "type": "object",
+        "properties": {
+          "export": { "type": "boolean" },
+          "source": { "type": "boolean" },
+          "editor": { "type": "boolean" }
+        }
+      }
+    ]
+  };
 
   return {
     type: "object",
@@ -46,7 +59,7 @@ var schema = {
     spec("source", {"source": { "type": "string" }}),
     spec("url", {"url": { "type": "string", "format": "uri" }}),
     spec("spec", {"spec": { "type": "object" } })
-    // External URLs are not supported by tv4
+    // External URLs are not (directly) supported by tv4
     // $ref": "http://vega.github.io/vega/vega-schema.json"
   ],
   "refs": {
