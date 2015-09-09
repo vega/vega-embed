@@ -81,12 +81,14 @@ function embed(el, opt, callback) {
 
       // add 'Export' action
       if (actions.export !== false) {
+        var ext = (renderer==='canvas' ? 'png' : 'svg');
         ctrl.append('a')
-          .text('Export as ' + (renderer==='canvas' ? 'PNG' : 'SVG'))
+          .text('Export as ' + ext.toUpperCase())
           .attr('href', '#')
-          .attr('download', spec.name || 'vega')
+          .attr('target', '_blank')
+          .attr('download', (spec.name || 'vega') + '.' + ext)
           .on('mousedown', function() {
-            this.href = imageURL(view);
+            this.href = view.toImageURL(ext);
             d3.event.preventDefault();
           });
       }
@@ -123,20 +125,6 @@ function embed(el, opt, callback) {
   });
 }
 
-function imageURL(view) {
-  var ren = view.renderer(),
-      scene = ren.scene();
-
-  if (ren.svg) {
-    var blob = new Blob([ren.svg()], {type: 'image/svg+xml'});
-    return window.URL.createObjectURL(blob);
-  } else if (scene.toDataURL) {
-    return scene.toDataURL('image/png');
-  } else {
-    throw Error('Renderer does not support image export.');
-  }
-}
-
 function viewSource(source) {
   var header = '<html><head>' + config.source_header + '</head>' + '<body><pre><code class="json">';
   var footer = '</code></pre>' + config.source_footer + '</body></html>';
@@ -145,8 +133,7 @@ function viewSource(source) {
   win.document.title = 'Vega JSON Source';
 }
 
-// make config and imageURL externally visible
+// make config externally visible
 embed.config = config;
-embed.imageURL = imageURL;
 
 module.exports = embed;
