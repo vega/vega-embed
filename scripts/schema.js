@@ -2,10 +2,11 @@ function spec(name, props) {
   var p = {};
   for (var key in props) {
     p[key] = props[key];
-  } 
+  }
   p.parameters = { "$ref": "#/refs/parameters" };
   p.parameter_el = { "type": "string" };
   p.renderer = { "enum": ["canvas", "svg"] };
+  p.mode = { "enum": ["vega", "vega-lite"] };
   p.actions = {
     "oneOf": [
       { "type": "boolean" },
@@ -60,7 +61,9 @@ var schema = {
     spec("url", {"url": { "type": "string", "format": "uri" }}),
     spec("spec", {"spec": { "type": "object" } })
     // External URLs are not (directly) supported by tv4
+    // Moreover, spec formats differ by mode
     // $ref": "http://vega.github.io/vega/vega-schema.json"
+    // $ref": "http://vega.github.io/vega-lite/vega-lite-schema.json"
   ],
   "refs": {
     "parameters": {

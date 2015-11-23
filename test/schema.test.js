@@ -40,6 +40,31 @@ describe('schema', function() {
     assert.ok(v, error_msg('World', tv4.error));
   });
 
+  it('should validate vega mode', function() {
+    var spec = JSON.parse(fs.readFileSync(res + 'embed-world.json'));
+    spec.mode = 'vega';
+    var v = tv4.validate(spec, schema);
+    assert.ok(v, error_msg('World', tv4.error));
+  });
+
+  it('should validate vega-lite spec', function() {
+    var spec = JSON.parse(fs.readFileSync(res + 'embed-vl.json'));
+    var v = tv4.validate(spec, schema);
+    assert.ok(v, error_msg('World', tv4.error));
+  });
+
+  it('should validate vega-lite url', function() {
+    var spec = JSON.parse(fs.readFileSync(res + 'embed-vl-url.json'));
+    var v = tv4.validate(spec, schema);
+    assert.ok(v, error_msg('World', tv4.error));
+  });
+
+  it('should invalidate unrecognized mode', function() {
+    var spec = JSON.parse(fs.readFileSync(res + 'embed-world.json'));
+    spec.mode = 'foobar';
+    assert.notOk(tv4.validate(spec, schema));
+  });
+
   it('should invalidate mising vega chart ref', function() {
     var spec = JSON.parse(fs.readFileSync(res + 'embed-world.json'));
     delete spec.url;

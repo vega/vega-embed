@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -23,6 +23,7 @@
     "d3-geo-projection": "^0.2.15",
     "topojson": "^1.6.19",
     "vega": "^2.2.4",
+    "vega-lite": "^0.8.0",
     "browserify": "^10.2.6",
     "browserify-shim": "^3.8.9",
     "chai": "^3.0.0",
@@ -47,6 +48,7 @@
   },
   "browserify-shim": {
     "d3": "global:d3",
-    "vega": "global:vg"
+    "vega": "global:vg",
+    "vega-lite": "global:vl"
   }
 }
