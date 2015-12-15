@@ -1,5 +1,6 @@
 var d3 = require('d3'),
     vg = require('vega'),
+    vl = require('vega-lite'),
     parameter = require('./parameter'),
     post = require('./post');
 
@@ -12,6 +13,16 @@ var config = {
 
   // HTML to inject before view source closing body tag
   source_footer: ''
+};
+
+var MODES = {
+  'vega':      'vega',
+  'vega-lite': 'vega-lite'
+};
+
+var PREPROCESSOR = {
+  'vega':      function(vgjson) { return vgjson; },
+  'vega-lite': function(vljson) { return vl.compile(vljson).spec; }
 };
 
 function load(url, arg, el, callback) {
@@ -31,97 +42,105 @@ function load(url, arg, el, callback) {
 // opt: Embedding specification (parsed JSON or URL string)
 // callback: invoked with the generated Vega View instance
 function embed(el, opt, callback) {
-  var params = [], source, spec;
+  var cb = callback || function(){},
+      params = [], source, spec, mode;
 
-  if (vg.util.isString(opt)) {
-    return load(opt, null, el, callback);
-  } else if (opt.source) {
-    source = opt.source;
-    spec = JSON.parse(source);
-  } else if (opt.spec) {
-    spec = opt.spec;
-    source = JSON.stringify(spec, null, 2);
-  } else if (opt.url) {
-    return load(opt.url, opt, el, callback);
-  } else {
-    spec = opt;
-    source = JSON.stringify(spec, null, 2);
-    opt = {spec: spec, actions: false};
-  }
-
-  // ensure container div has class 'vega-embed'
-  var div = d3.select(el)
-    .classed('vega-embed', true)
-    .html(''); // clear container
-
-  // handle parameters
-  if (opt.parameters) {
-    var elp = opt.parameter_el ? d3.select(opt.parameter_el) : div;
-    var pdiv = elp.append('div')
-      .attr('class', 'vega-params');
-    params = opt.parameters.map(function(p) {
-      return parameter.init(pdiv, p, spec);
-    });
-  }
-
-  vg.parse.spec(spec, function(chart) {
-    var renderer = opt.renderer || 'canvas',
-        actions  = opt.actions || {};
-
-    var view = chart({
-      el: el,
-      data: opt.data || undefined,
-      renderer: renderer
-    });
-
-    if (opt.actions !== false) {
-      // add child div to house action links
-      var ctrl = div.append('div')
-        .attr('class', 'vega-actions');
-
-      // add 'Export' action
-      if (actions.export !== false) {
-        var ext = (renderer==='canvas' ? 'png' : 'svg');
-        ctrl.append('a')
-          .text('Export as ' + ext.toUpperCase())
-          .attr('href', '#')
-          .attr('target', '_blank')
-          .attr('download', (spec.name || 'vega') + '.' + ext)
-          .on('mousedown', function() {
-            this.href = view.toImageURL(ext);
-            d3.event.preventDefault();
-          });
-      }
-
-      // add 'View Source' action
-      if (actions.source !== false) {
-        ctrl.append('a')
-          .text('View Source')
-          .attr('href', '#')
-          .on('click', function() {
-            viewSource(source);
-            d3.event.preventDefault();
-          });
-      }
-
-      // add 'Open in Vega Editor' action
-      if (actions.editor !== false) {
-        ctrl.append('a')
-          .text('Open in Vega Editor')
-          .attr('href', '#')
-          .on('click', function() {
-            post(window, embed.config.editor_url, {spec: source});
-            d3.event.preventDefault();
-          });
-      }
+  try {
+    if (vg.util.isString(opt)) {
+      return load(opt, null, el, callback);
+    } else if (opt.source) {
+      source = opt.source;
+      spec = JSON.parse(source);
+    } else if (opt.spec) {
+      spec = opt.spec;
+      source = JSON.stringify(spec, null, 2);
+    } else if (opt.url) {
+      return load(opt.url, opt, el, callback);
+    } else {
+      spec = opt;
+      source = JSON.stringify(spec, null, 2);
+      opt = {spec: spec, actions: false};
     }
+    mode = MODES[opt.mode] || MODES.vega;
+    spec = PREPROCESSOR[mode](spec);
 
-    // bind all parameter elements
-    params.forEach(function(p) { parameter.bind(p, view); });
+    // ensure container div has class 'vega-embed'
+    var div = d3.select(el)
+      .classed('vega-embed', true)
+      .html(''); // clear container
 
-    // initialize and return visualization
-    view.update();
-    if (callback) callback(view, spec);
+    // handle parameters
+    if (opt.parameters) {
+      var elp = opt.parameter_el ? d3.select(opt.parameter_el) : div;
+      var pdiv = elp.append('div')
+        .attr('class', 'vega-params');
+      params = opt.parameters.map(function(p) {
+        return parameter.init(pdiv, p, spec);
+      });
+    }
+  } catch (err) { cb(err); }
+
+  vg.parse.spec(spec, function(error, chart) {
+    if (error) { cb(error); return; }
+    try {
+      var renderer = opt.renderer || 'canvas',
+          actions  = opt.actions || {};
+
+      var view = chart({
+        el: el,
+        data: opt.data || undefined,
+        renderer: renderer
+      });
+
+      if (opt.actions !== false) {
+        // add child div to house action links
+        var ctrl = div.append('div')
+          .attr('class', 'vega-actions');
+
+        // add 'Export' action
+        if (actions.export !== false) {
+          var ext = (renderer==='canvas' ? 'png' : 'svg');
+          ctrl.append('a')
+            .text('Export as ' + ext.toUpperCase())
+            .attr('href', '#')
+            .attr('target', '_blank')
+            .attr('download', (spec.name || 'vega') + '.' + ext)
+            .on('mousedown', function() {
+              this.href = view.toImageURL(ext);
+              d3.event.preventDefault();
+            });
+        }
+
+        // add 'View Source' action
+        if (actions.source !== false) {
+          ctrl.append('a')
+            .text('View Source')
+            .attr('href', '#')
+            .on('click', function() {
+              viewSource(source);
+              d3.event.preventDefault();
+            });
+        }
+
+        // add 'Open in Vega Editor' action
+        if (actions.editor !== false) {
+          ctrl.append('a')
+            .text('Open in Vega Editor')
+            .attr('href', '#')
+            .on('click', function() {
+              post(window, embed.config.editor_url, {spec: source, mode: mode});
+              d3.event.preventDefault();
+            });
+        }
+      }
+
+      // bind all parameter elements
+      params.forEach(function(p) { parameter.bind(p, view); });
+
+      // initialize and return visualization
+      view.update();
+      cb(null, {view: view, spec: spec});
+    } catch (err) { cb(err); }
   });
 }
 

@@ -1,0 +1,5 @@
+{
+  "mode": "vega-lite",
+  "url": "barh-vl.json",
+  "renderer": "svg"
+}

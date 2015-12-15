@@ -7,10 +7,12 @@
     <script src="../node_modules/d3/d3.min.js" charset="utf8"></script>
     <script src="../node_modules/d3-geo-projection/d3.geo.projection.min.js" charset="utf-8"></script>
     <script src="../node_modules/vega/vega.js" charset="utf8"></script>
+    <script src="../node_modules/vega-lite/vega-lite.js" charset="utf8"></script>
     <script src="../vega-embed.js"></script>
     <style>
       body > div { margin-bottom: 2em; }
-     .vega-embed .vega-params { right: -250px; }
+      body > span { display: inline-block; width: 290px; }
+      .vega-embed .vega-params { right: -250px; }
     </style>
   </head>
   <body>
@@ -19,8 +21,11 @@
     <div id="jobs"></div>
     <div id="world"></div>
     <div id="plain"></div>
+    <span id="vl1"></span>
+    <span id="vl2"></span>
+    <span id="vl3"></span>
 <script>
-var av, vv, jv, wv, pv;
+var av, vv, jv, wv, pv, vl1, vl2, vl3;
 
 // Test Vega source code; range + select params
 d3.text('airports.json', function(err, source) {
@@ -46,37 +51,37 @@ d3.text('airports.json', function(err, source) {
     ],
     source: source,
     renderer: "svg"
-  }, function(view) { av = view; });
+  }, function(error, result) { av = result.view; });
 });
 
 // Test URL vega spec load; range + checkbox params
 vg.embed('#force', {
   url: './force_drag.json',
   parameters: [
-    { 
+    {
       name: 'distance',
       signal: "linkDistance", type: "range", value: 30, min: 10, max: 200,
       rewrite: ["data[2].transform[0].linkDistance"]
     },
-    { 
+    {
       name: 'strength',
       signal: "linkStrength", type: "range", value: 0.5, min: 0.1, max: 2,
       rewrite: ["data[2].transform[0].linkStrength"]
     },
-    { 
+    {
       signal: "charge", type: "range", value: -80, min: -200, max: 100,
       rewrite: ["data[2].transform[0].charge"]
     },
-    { 
+    {
       signal: "gravity", type: "range", value: 0.1, min: 0, max: 1,
       rewrite: ["data[2].transform[0].gravity"]
     },
-    { 
+    {
       signal: "interactive", type: "checkbox", value: false,
       rewrite: ["data[2].transform[0].interactive"]
     }
   ]
-}, function(view) { fv = view; });
+}, function(error, result) { fv = result.view; });
 
 // Test inline Vega spec; range + radio params, two-way binding
 vg.embed('#jobs', {
@@ -219,16 +224,40 @@ vg.embed('#jobs', {
       }
     ]
   }
-}, function(view) { jv = view; });
+}, function(error, result) { jv = result.view; });
 
 // Test URL embed spec load; two-way binding
 vg.embed('#world', 'resources/embed-world.json',
-  function(view) { wv = view; });
+  function(error, result) { wv = result.view; });
 
 // Test plain Vega spec input
 vg.embed('#plain', 'map.json',
-  function(view) { pv = view; });
+  function(error, result) { pv = result.view; });
 
+// Test Vega-Lite spec input
+vg.embed('#vl1', {mode: 'vega-lite', url: 'barh-vl.json'},
+  function(error, result) { vl1 = result.view; });
+
+// Test Vega-Lite spec input
+vg.embed('#vl2', {mode: 'vega-lite', url: 'barv-vl.json'},
+  function(error, result) { vl2 = result.view; });
+
+// Test Vega-Lite spec input
+// Load and embed external data due to current vl stats handling
+vg.util.json("data/jobs.json", function(error, data) {
+  vg.embed('#vl3', {
+    mode: 'vega-lite',
+    spec: {
+      "data": {"values": data},
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "year", "type": "O"},
+        "y": {"aggregate": "sum", "field": "count", "type": "Q"},
+        "color": {"field": "sex", "type": "N"}
+      }
+    }
+  }, function(error, result) { vl3 = result.view; });
+});
 </script>
   </body>
 </html>
