@@ -249,7 +249,7 @@ vg.util.json("data/jobs.json", function(error, data) {
     mode: 'vega-lite',
     spec: {
       "data": {"values": data},
-      "marktype": "line",
+      "mark": "line",
       "encoding": {
         "x": {"field": "year", "type": "O"},
         "y": {"aggregate": "sum", "field": "count", "type": "Q"},
