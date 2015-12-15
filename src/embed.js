@@ -80,7 +80,8 @@ function embed(el, opt, callback) {
     }
   } catch (err) { cb(err); }
 
-  vg.parse.spec(spec, function(chart) {
+  vg.parse.spec(spec, function(error, chart) {
+    if (error) { cb(error); return; }
     try {
       var renderer = opt.renderer || 'canvas',
           actions  = opt.actions || {};
