@@ -18,6 +18,7 @@
     "url": "http://idl.cs.washington.edu"
   },
   "license": "BSD-3-Clause",
+  "main": "src/embed.js",
   "devDependencies": {
     "d3": "^3.5.16",
     "d3-geo-projection": "^0.2.16",
