@@ -25,13 +25,19 @@ var PREPROCESSOR = {
   'vega-lite': function(vljson) { return vl.compile(vljson).spec; }
 };
 
-function load(url, arg, el, callback) {
+function load(url, arg, prop, el, callback) {
   vg.util.load({url: url}, function(err, data) {
+    var opt;
     if (err || !data) {
       console.error(err || ('No data found at ' + url));
     } else {
       // marshal embedding spec and restart
-      var opt = !arg ? JSON.parse(data) : vg.util.extend({source: data}, arg);
+      if (!arg) { // Loading embed spec from URL
+        opt = JSON.parse(data);
+      } else {  // Loading vg/vl spec or config from URL
+        opt = vg.util.extend({}, arg);
+        opt[prop] = prop === 'source' ? data : JSON.parse(data);
+      }
       embed(el, opt, callback);
     }
   });
@@ -43,11 +49,12 @@ function load(url, arg, el, callback) {
 // callback: invoked with the generated Vega View instance
 function embed(el, opt, callback) {
   var cb = callback || function(){},
-      params = [], source, spec, mode;
+      params = [], source, spec, mode, config;
 
   try {
+    // Load the visualization specification.
     if (vg.util.isString(opt)) {
-      return load(opt, null, el, callback);
+      return load(opt, null, null, el, callback);
     } else if (opt.source) {
       source = opt.source;
       spec = JSON.parse(source);
@@ -55,7 +62,7 @@ function embed(el, opt, callback) {
       spec = opt.spec;
       source = JSON.stringify(spec, null, 2);
     } else if (opt.url) {
-      return load(opt.url, opt, el, callback);
+      return load(opt.url, opt, 'source', el, callback);
     } else {
       spec = opt;
       source = JSON.stringify(spec, null, 2);
@@ -63,6 +70,13 @@ function embed(el, opt, callback) {
     }
     mode = MODES[opt.mode] || MODES.vega;
     spec = PREPROCESSOR[mode](spec);
+
+    // Load Vega theme/configuration.
+    if (vg.util.isString(opt.config)) {
+      return load(opt.config, opt, 'config', el, callback);
+    } else if (opt.config) {
+      config = opt.config;
+    }
 
     // ensure container div has class 'vega-embed'
     var div = d3.select(el)
@@ -80,7 +94,7 @@ function embed(el, opt, callback) {
     }
   } catch (err) { cb(err); }
 
-  vg.parse.spec(spec, function(error, chart) {
+  vg.parse.spec(spec, config, function(error, chart) {
     if (error) { cb(error); return; }
     try {
       var renderer = opt.renderer || 'canvas',
