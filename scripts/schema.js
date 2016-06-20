@@ -7,6 +7,9 @@ function spec(name, props) {
   p.parameter_el = { "type": "string" };
   p.renderer = { "enum": ["canvas", "svg"] };
   p.mode = { "enum": ["vega", "vega-lite"] };
+  p.config = {
+    "oneOf": [{"type": "string"}, {"type": "object"}]
+  };
   p.actions = {
     "oneOf": [
       { "type": "boolean" },

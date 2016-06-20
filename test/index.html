@@ -24,15 +24,17 @@
     <span id="vl1"></span>
     <span id="vl2"></span>
     <span id="vl3"></span>
+    <span id="ggplot2"></span>
+    <span id="quartz"></span>
 <script>
-var av, vv, jv, wv, pv, vl1, vl2, vl3;
+var av, vv, jv, wv, pv, vl1, vl2, vl3, gv, qv;
 
 // Test Vega source code; range + select params
 d3.text('airports.json', function(err, source) {
   vg.embed('#airports', {
     parameters: [
       {
-        signal: "scale", type: "range", value: 1200, min: 500, max: 3000,
+        signal: "geoscale", type: "range", value: 1200, min: 500, max: 3000,
         rewrite: ["data[0].transform[0].scale", "data[2].transform[2].scale"]
       },
       {
@@ -258,6 +260,56 @@ vg.util.json("data/jobs.json", function(error, data) {
     }
   }, function(error, result) { vl3 = result.view; });
 });
+
+// Test support for Vega configuration/themes.
+d3.text('bar-vg.json', function(err, source) {
+  vg.embed('#ggplot2', {
+    renderer: 'svg',
+    source: source,
+    config: {
+      "width": 480,
+      "height": 288,
+
+      "scene": {
+        "fill": "#e5e5e5"
+      },
+
+      "marks": {
+        "color": "#000000",
+        "symbolSize": 30
+      },
+
+      "axis": {
+        "grid": true,
+        "padding": 4,
+        "axisColor": "transparent",
+        "gridColor": "#FFFFFF",
+        "gridOpacity": 1,
+        "tickColor": "#7F7F7F",
+        "tickLabelColor": "#7F7F7F",
+        "tickSize": 5.67,
+        "titleFontSize": 16,
+        "titleFontWeight": "normal"
+      },
+
+      "legend": {
+        "baseline": "middle",
+        "labelFontSize": 11
+      },
+
+      "range": {
+        "category10": ["#000000", "#7F7F7F", "#1A1A1A", "#999999", "#333333",
+          "#B0B0B0", "#4D4D4D", "#C9C9C9", "#666666", "#DCDCDC"]
+      }
+    }
+  }, function(error, result) { gv = result.view; });
+
+  vg.embed('#quartz', {
+    source: source,
+    config: './quartz.json'
+  }, function(error, result) { qv = result.view; });
+});
+
 </script>
   </body>
 </html>
