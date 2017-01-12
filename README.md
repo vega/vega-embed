@@ -1,5 +1,7 @@
 # vega-embed
 
+[![CDNJS](https://img.shields.io/cdnjs/v/vega-embed.svg)](https://cdnjs.com/libraries/vega-embed)
+
 The [vega-embed](http://github.com/vega/vega-embed) module provides advanced support for embedding interactive Vega views into web pages. The primary features include:
 
 - Load Vega specs from source text, parsed JSON, or URLs.
