@@ -1,5 +1,7 @@
 # vega-embed
 
+[![npm version](https://img.shields.io/npm/v/vega-embed.svg)](https://www.npmjs.com/package/vega-embed)
+
 The [vega-embed](http://github.com/vega/vega-embed) module provides advanced support for embedding interactive Vega views into web pages. The primary features include:
 
 - Load Vega specs from source text, parsed JSON, or URLs.
