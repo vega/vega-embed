@@ -1,5 +1,17 @@
 var d3 = require('d3'),
-    $ = require('vega').util.mutator;
+  vega = require('vega');
+
+
+mutator = function(f) {
+  var s;
+  return vega.isString(f) && (s=vega.field(f)).length > 1 ?
+    function(x, v) {
+      for (var i=0; i<s.length-1; ++i) x = x[s[i]];
+      x[s[i]] = v;
+    } :
+    function(x, v) { x[f] = v; };
+};
+
 
 module.exports = {
   init: function(el, param, spec) {
@@ -28,7 +40,7 @@ function rewrite(param, spec) {
 
   // replace values for re-write entries
   (param.rewrite || []).forEach(function(path) {
-    $(path)(spec, {signal: param.signal});
+    mutator(path)(spec, {signal: param.signal});
   });
 }
 
@@ -97,7 +109,7 @@ function select(el, param) {
     .attr('value', vg.util.identity)
     .attr('selected', function(x) { return x === param.value || null; })
     .text(vg.util.identity);
-  
+
   var node = sl.node();
   return {
     dom: [node],
