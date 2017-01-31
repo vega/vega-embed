@@ -1,7 +1,6 @@
 var d3 = require('d3'),
-    vg = require('vega'),
+    vega = require('vega'),
     vl = require('vega-lite'),
-    parameter = require('./parameter'),
     post = require('./post');
 
 var config = {
@@ -26,20 +25,23 @@ var PREPROCESSOR = {
 };
 
 function load(url, arg, prop, el, callback) {
-  vg.load({url: url}, function(err, data) {
+  var loader = vega.loader();
+  loader.load(url).then(function(data) {
     var opt;
-    if (err || !data) {
-      console.error(err || ('No data found at ' + url));
+    if (!data) {
+      console.error('No data found at ' + url);
     } else {
       // marshal embedding spec and restart
       if (!arg) { // Loading embed spec from URL
         opt = JSON.parse(data);
       } else {  // Loading vg/vl spec or config from URL
-        opt = vg.extend({}, arg);
+        opt = vega.extend({}, arg);
         opt[prop] = prop === 'source' ? data : JSON.parse(data);
       }
       embed(el, opt, callback);
     }
+  }).catch(function(error){
+    console.error(error);
   });
 }
 
@@ -48,12 +50,11 @@ function load(url, arg, prop, el, callback) {
 // opt: Embedding specification (parsed JSON or URL string)
 // callback: invoked with the generated Vega View instance
 function embed(el, opt, callback) {
-  var cb = callback || function(){},
-      params = [], source, spec, mode, config;
+  var cb = callback || function(){}, source, spec, mode, config;
 
   try {
     // Load the visualization specification.
-    if (vg.isString(opt)) {
+    if (vega.isString(opt)) {
       return load(opt, null, null, el, callback);
     } else if (opt.source) {
       source = opt.source;
@@ -72,7 +73,7 @@ function embed(el, opt, callback) {
     spec = PREPROCESSOR[mode](spec);
 
     // Load Vega theme/configuration.
-    if (vg.isString(opt.config)) {
+    if (vega.isString(opt.config)) {
       return load(opt.config, opt, 'config', el, callback);
     } else if (opt.config) {
       config = opt.config;
@@ -83,24 +84,15 @@ function embed(el, opt, callback) {
       .classed('vega-embed', true)
       .html(''); // clear container
 
-    // handle parameters
-    if (opt.parameters) {
-      var elp = opt.parameter_el ? d3.select(opt.parameter_el) : div;
-      var pdiv = elp.append('div')
-        .attr('class', 'vega-params');
-      params = opt.parameters.map(function(p) {
-        return parameter.init(pdiv, p, spec);
-      });
-    }
   } catch (err) { cb(err); }
 
   var renderer = opt.renderer || 'canvas',
       actions  = opt.actions || {};
 
-  const runtime = vg.parse(spec); // may throw an Error if parsing fails
+  const runtime = vega.parse(spec); // may throw an Error if parsing fails
   try{
-    var view = new vg.View(runtime)
-      .logLevel(vg.Warn)
+    var view = new vega.View(runtime)
+      .logLevel(vega.Warn)
       .initialize(document.querySelector(el))
       .renderer(renderer)
       .hover()
@@ -150,10 +142,6 @@ function embed(el, opt, callback) {
           });
       }
     }
-
-
-    // bind all parameter elements
-    params.forEach(function(p) { parameter.bind(p, view); });
 
     cb(null, {view: view, spec: spec});
   } catch (err) { cb(err); }
