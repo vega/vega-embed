@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -24,27 +24,20 @@
   "license": "BSD-3-Clause",
   "main": "src/embed.js",
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "browserify-shim": "^3.8.12",
-    "chai": "^3.5.0",
-    "d3": "^4.4.4",
-    "d3-geo-projection": "^0.2.16",
-    "jshint": "^2.9.1",
-    "mocha": "^2.4.5",
-    "topojson": "^1.6.24",
-    "tv4": "^1.2.7",
-    "uglify-js": "^2.6.2",
-    "vega": "3.0.0-beta.18",
+    "browserify": "^14.0.0",
+    "browserify-shim": "^3.8.13",
+    "eslint": "^3.14.1",
+    "uglify-js": "^2.7.5",
+    "vega": "3.0.0-beta.20",
     "vega-lite": "2.0.0-alpha.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.9.0",
+    "vega-schema-url-parser": "^1.0.0-beta.1"
   },
   "scripts": {
-    "deploy": "npm run lint && npm run test && scripts/deploy.sh",
-    "lint": "jshint src/",
-    "test": "npm run schema && mocha --timeout 5000 --recursive test/",
+    "deploy": "npm run lint && scripts/deploy.sh",
+    "lint": "eslint src/",
     "build": "browserify src/embed.js -d -s vega.embed > vega-embed.js",
     "postbuild": "uglifyjs vega-embed.js -cm > vega-embed.min.js",
-    "schema": "node scripts/schema.js > vega-embed-schema.json",
     "watch": "watchify src/embed.js -v -d -s vega.embed -o vega-embed.js"
   },
   "browserify": {

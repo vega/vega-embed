@@ -1,7 +1,8 @@
 var d3 = require('d3'),
     vega = require('vega'),
     vl = require('vega-lite'),
-    post = require('./post');
+    post = require('./post')
+    ural_parser = require('vega-schema-url-parser');
 
 var config = {
   // URL for loading specs into editor
@@ -90,7 +91,7 @@ function embed(el, opt, callback) {
       actions  = opt.actions || {};
 
   const runtime = vega.parse(spec); // may throw an Error if parsing fails
-  try{
+  try {
     var view = new vega.View(runtime)
       .logLevel(vega.Warn)
       .initialize(document.querySelector(el))
