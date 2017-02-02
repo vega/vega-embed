@@ -2,7 +2,8 @@ var d3 = require('d3'),
     vega = require('vega'),
     vl = require('vega-lite'),
     post = require('./post'),
-    vgSchema = require('vega-schema-url-parser').default;
+    ural_parser = require('vega-schema-url-parser').default;
+
 
 var config = {
   // URL for loading specs into editor
@@ -80,7 +81,7 @@ function embed(el, opt, callback) {
     if (opt.mode) {
       mode = MODES[opt.mode]
     } else if(spec.$schema) {
-      const parsed = vgSchema(spec.$schema);
+      const parsed = ural_parser(spec.$schema);
       mode = MODES[parsed.library];
       if (parsed.version !== VERSION[mode]){
         console.warn("The input spec uses " + parsed.library + " " + parsed.version + ", "
@@ -109,8 +110,8 @@ function embed(el, opt, callback) {
   var renderer = opt.renderer || 'canvas',
       actions  = opt.actions || {};
 
-  const runtime = vega.parse(spec); // may throw an Error if parsing fails
-  try{
+  const runtime = vega.parse(spec, config); // may throw an Error if parsing fails
+  try {
     var view = new vega.View(runtime)
       .logLevel(vega.Warn)
       .initialize(document.querySelector(el))
