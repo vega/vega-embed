@@ -11,6 +11,14 @@
 <script src="node_modules/vega-lite/vega-lite.js" charset="utf-8"></script>
 <script type="text/javascript" src="vega-embed.js"></script>
 <script type="text/javascript">
+	var config = {
+
+    // default view background color
+    // covers the entire view component
+    background: "#e5e5e5",
+
+
+  };
 	var spec = {
 		"$schema": "https://vega.github.io/schema/vega/v3.0.json",
 		"width": 400,
@@ -80,7 +88,8 @@
 	};
 
 	vega.embed('#vis', {
-		spec: spec
+		spec: spec,
+		config: config
 	}, function(error, result) {
 	  // Callback receiving the View instance and parsed Vega spec
 	  // result.view is the View, which resides under the '#vis' element
