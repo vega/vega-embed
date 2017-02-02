@@ -50,17 +50,7 @@ The embed function accepts the following arguments:
 | 1       | `embed_spec` | A JavaScript object containing the embedding specification. |
 | 2       | `callback`   | An optional callback function that upon successful parsing will be invoked with the instantiated Vega `View` instance and a copy of the parsed JSON Vega spec. |
 
-```html
-<script>
-vega.embed('#vis', embed_spec, function(error, result) {
-  // Callback receiving the View instance and parsed Vega spec
-  // result.view is the View object of Vega 3
-  // result.spec is the parsed spec
-});
-</script>
-```
-
-### Vega Embed Specification Reference
+##### Vega Embed Specification Reference
 
 ```JS
 var embed_spec = {
@@ -70,20 +60,13 @@ var embed_spec = {
   "config"  : ...
 }
 ```
-Here is the complete vega-embed specification definition, broken down by category.
-
-#### Loading a Vega Specification
+Here is the complete vega-embed specification definition.
 
 | Property | Type             | Description    |
 | :------- | :--------------- | :------------- |
 | `source` | String | The Vega specification as a JSON text string. The _source_ property takes precedence over both the _spec_ and _url_ properties. |
 | `spec`   | Object | The Vega specification as a parsed JSON object. The _spec_ property takes precedence over the _url_ property, but not the _source_. |
 | `url`    | String | A URL from which to load the Vega specification. Note that this URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. The _url_ property has lower precedence than either the _source_ or _spec_ properties. |
-
-#### Configuration Propeties
-
-| Property      | Type          | Description    |
-| :------------ | :------------ | :------------- |
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. |
 | `actions`     | Boolean &#124; Object       | Determines if action links ("Export as PNG/SVG", "View Source", "Open in Vega Editor") are included with the embedded view. If the value is `true` (default), all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `editor`) to boolean values for determining if each action link should be shown.  Unspecified keys will be `true` by default.  For example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".        |
 | `config`      | Object        | An optional object to override the [default configuration options](https://github.com/vega/vega-parser/blob/master/src/config.js) or [specify a theme](https://github.com/vega/vega-parser#configuration-reference). |
