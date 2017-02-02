@@ -1,7 +1,8 @@
 var d3 = require('d3'),
     vega = require('vega'),
     vl = require('vega-lite'),
-    post = require('./post');
+    post = require('./post'),
+    vgSchema = require('vega-schema-url-parser').default;
 
 var config = {
   // URL for loading specs into editor
@@ -18,6 +19,11 @@ var MODES = {
   'vega':      'vega',
   'vega-lite': 'vega-lite'
 };
+
+var VERSION = {
+  'vega':      vega.version,
+  'vega-lite': vl.version
+}
 
 var PREPROCESSOR = {
   'vega':      function(vgjson) { return vgjson; },
@@ -69,7 +75,21 @@ function embed(el, opt, callback) {
       source = JSON.stringify(spec, null, 2);
       opt = {spec: spec, actions: false};
     }
-    mode = MODES[opt.mode] || MODES.vega;
+
+    // Decide mode
+    if (opt.mode) {
+      mode = MODES[opt.mode]
+    } else if(spec.$schema) {
+      const parsed = vgSchema(spec.$schema);
+      mode = MODES[parsed.library];
+      if (parsed.version !== VERSION[mode]){
+        console.warn("The input spec uses " + parsed.library + " " + parsed.version + ", "
+                   + "but current version of " + parsed.library + " is " + VERSION[parsed.library]);
+      }
+    } else {
+      mode = MODES.vega;
+    }
+
     spec = PREPROCESSOR[mode](spec);
 
     // Load Vega theme/configuration.

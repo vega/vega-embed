@@ -36,6 +36,7 @@
     "uglify-js": "^2.6.2",
     "vega": "3.0.0-beta.18",
     "vega-lite": "2.0.0-alpha.0",
+    "vega-schema-url-parser": "latest",
     "watchify": "^3.7.0"
   },
   "scripts": {
