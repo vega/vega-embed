@@ -60,8 +60,6 @@ var embed_spec = {
   "config"  : ...
 }
 ```
-Here is the complete vega-embed specification definition.
-
 | Property | Type             | Description    |
 | :------- | :--------------- | :------------- |
 | `source` | String | The Vega specification as a JSON text string. The _source_ property takes precedence over both the _spec_ and _url_ properties. |
@@ -70,6 +68,8 @@ Here is the complete vega-embed specification definition.
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. |
 | `actions`     | Boolean &#124; Object       | Determines if action links ("Export as PNG/SVG", "View Source", "Open in Vega Editor") are included with the embedded view. If the value is `true` (default), all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `editor`) to boolean values for determining if each action link should be shown.  Unspecified keys will be `true` by default.  For example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".        |
 | `config`      | Object        | An optional object to override the [default configuration options](https://github.com/vega/vega-parser/blob/master/src/config.js) or [specify a theme](https://github.com/vega/vega-parser#configuration-reference). |
+
+
 
 
 <a name="embed.config" href="#embed.config">#</a>
