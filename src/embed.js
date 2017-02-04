@@ -101,8 +101,6 @@ function embed(el, spec, opt, callback) {
       }
     }
 
-
-
     // ensure container div has class 'vega-embed'
     var div = d3.select(el)
       .classed('vega-embed', true)

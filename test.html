@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <title>Vega-Embed test</title>
+  <style>
+    .vega-actions a {
+      padding: 5px;
+    }
+  </style>
 </head>
 <body>
 
@@ -11,106 +16,35 @@
 <script src="node_modules/vega-lite/vega-lite.js" charset="utf-8"></script>
 <script type="text/javascript" src="vega-embed.js"></script>
 <script type="text/javascript">
-	var config = {
-
+  var config = {
     // default view background color
     // covers the entire view component
     background: "#e5e5e5",
-
-
   };
-	// var spec = {
-	// 	"$schema": "https://vega.github.io/schema/vega/v3.0.json",
-	// 	"width": 400,
-	// 	"height": 200,
-	// 	"padding": 5,
 
-	// 	"data": [
-	// 		{
-	// 			"name": "table",
-	// 			"values": [
-	// 				{"u": 1,  "v": 28}, {"u": 2,  "v": 55},
-	// 				{"u": 3,  "v": 43}, {"u": 4,  "v": 91},
-	// 				{"u": 5,  "v": 81}, {"u": 6,  "v": 53},
-	// 				{"u": 7,  "v": 19}, {"u": 8,  "v": 87},
-	// 				{"u": 9,  "v": 52}, {"u": 10, "v": 48},
-	// 				{"u": 11, "v": 24}, {"u": 12, "v": 49},
-	// 				{"u": 13, "v": 87}, {"u": 14, "v": 66},
-	// 				{"u": 15, "v": 17}, {"u": 16, "v": 27},
-	// 				{"u": 17, "v": 68}, {"u": 18, "v": 16},
-	// 				{"u": 19, "v": 49}, {"u": 20, "v": 15}
-	// 			]
-	// 		}
-	// 	],
+  var spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v2.0.json",
+    "description": "A simple bar chart with embedded data.",
+    "data": {
+      "values": [
+        {"a": "A","b": 28}, {"a": "B","b": 55}, {"a": "C","b": 43},
+        {"a": "D","b": 91}, {"a": "E","b": 81}, {"a": "F","b": 53},
+        {"a": "G","b": 19}, {"a": "H","b": 87}, {"a": "I","b": 52}
+      ]
+    },
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "a", "type": "ordinal"},
+      "y": {"field": "b", "type": "quantitative"}
+    }
+  }
 
-	// 	"scales": [
-	// 		{
-	// 			"name": "xscale",
-	// 			"type": "band",
-	// 			"range": "width",
-	// 			"domain": {"data": "table", "field": "u"}
-	// 		},
-	// 		{
-	// 			"name": "yscale",
-	// 			"type": "linear",
-	// 			"range": "height",
-	// 			"domain": {"data": "table", "field": "v"},
-	// 			"zero": true,
-	// 			"nice": true
-	// 		}
-	// 	],
-
-	// 	"axes": [
-	// 		{"orient": "bottom", "scale": "xscale"},
-	// 		{"orient": "left", "scale": "yscale"}
-	// 	],
-
-	// 	"marks": [
-	// 		{
-	// 			"type": "rect",
-	// 			"from": {"data": "table"},
-	// 			"encode": {
-	// 				"enter": {
-	// 					"x": {"scale": "xscale", "field": "u", "offset": 1},
-	// 					"width": {"scale": "xscale", "band": 1, "offset": -1},
-	// 					"y": {"scale": "yscale", "field": "v"},
-	// 					"y2": {"scale": "yscale", "value": 0}
-	// 				},
-	// 				"update": {
-	// 					"fill": {"value": "steelblue"}
-	// 				},
-	// 				"hover": {
-	// 					"fill": {"value": "red"}
-	// 				}
-	// 			}
-	// 		}
-	// 	]
-	// };
-
-	var spec = {
-		"$schema": "https://vega.github.io/schema/vega-lite/v2.0.1.json",
-	  "description": "A simple bar chart with embedded data.",
-	  "data": {
-	    "values": [
-	      {"a": "A","b": 28}, {"a": "B","b": 55}, {"a": "C","b": 43},
-	      {"a": "D","b": 91}, {"a": "E","b": 81}, {"a": "F","b": 53},
-	      {"a": "G","b": 19}, {"a": "H","b": 87}, {"a": "I","b": 52}
-	    ]
-	  },
-	  "mark": "bar",
-	  "encoding": {
-	    "x": {"field": "a", "type": "ordinal"},
-	    "y": {"field": "b", "type": "quantitative"}
-	  }
-	}
-
-
-	vega.embed('#vis', spec, {config: "config.json"}, function(error, result) {
-		console.log(result);
-	  // Callback receiving the View instance and parsed Vega spec
-	  // result.view is the View, which resides under the '#vis' element
-	  // result.spec is the parsed spec
-	});
+  vega.embed('#vis', spec, {config: "config.json"}, function(error, result) {
+    if (error) {
+      return console.error(error);
+    }
+    console.log(result);
+  });
 
 </script>
 </body>

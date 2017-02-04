@@ -12,6 +12,7 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 <!--TODO : Link the older version document -->
 
 ## Basic Example
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -52,7 +53,7 @@ The embed function accepts the following arguments:
 
 ##### Vega Embed Specification Reference
 
-```JS
+```js
 var embed_spec = {
   "source"/"spec"/"url" : ... ,
   "renderer" : ...,
@@ -60,6 +61,7 @@ var embed_spec = {
   "config"  : ...
 }
 ```
+
 | Property | Type             | Description    |
 | :------- | :--------------- | :------------- |
 | `source` | String | The Vega specification as a JSON text string. The _source_ property takes precedence over both the _spec_ and _url_ properties. |
