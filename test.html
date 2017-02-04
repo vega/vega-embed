@@ -97,20 +97,16 @@
 	      {"a": "G","b": 19}, {"a": "H","b": 87}, {"a": "I","b": 52}
 	    ]
 	  },
-	  "mark": "xx",
+	  "mark": "bar",
 	  "encoding": {
-	    "x": {"field": "a1", "type": "ordinal"},
+	    "x": {"field": "a", "type": "ordinal"},
 	    "y": {"field": "b", "type": "quantitative"}
 	  }
 	}
 
 
-	vega.embed('#vis', {
-		spec: spec,
-		config: config,
-		mode: "vega"
-	}, function(error, result) {
-		console.log(error);
+	vega.embed('#vis', spec, {config: "config.json"}, function(error, result) {
+		console.log(result);
 	  // Callback receiving the View instance and parsed Vega spec
 	  // result.view is the View, which resides under the '#vis' element
 	  // result.spec is the parsed spec

@@ -35,18 +35,15 @@ var PREPROCESSOR = {
 function load(url, arg, prop, el, callback) {
   var loader = vega.loader();
   loader.load(url).then(function(data) {
-    var opt;
     if (!data) {
       console.error('No data found at ' + url);
     } else {
-      // marshal embedding spec and restart
-      if (!arg) { // Loading embed spec from URL
-        opt = JSON.parse(data);
-      } else {  // Loading vg/vl spec or config from URL
-        opt = vega.extend({}, arg);
-        opt[prop] = prop === 'source' ? data : JSON.parse(data);
+      if (prop === 'config') {
+        arg.opt['config'] = JSON.parse(data);
+        embed(el, arg.spec, arg.opt, callback);
+      } else {
+        embed(el, JSON.parse(data), arg, callback);
       }
-      embed(el, opt, callback);
     }
   }).catch(function(error){
     console.error(error);
@@ -57,53 +54,54 @@ function load(url, arg, prop, el, callback) {
 // el: DOM element in which to place component (DOM node or CSS selector)
 // opt: Embedding specification (parsed JSON or URL string)
 // callback: invoked with the generated Vega View instance
-function embed(el, opt, callback) {
-  var cb = callback || function(){}, source, spec, mode, config;
-
+function embed(el, spec, opt, callback) {
+  var cb = callback || function(){}, source,
+  renderer = opt.renderer || 'canvas',
+  actions  = opt.actions || {}, mode;
+  opt = opt || {};
   try {
     // Load the visualization specification.
-    if (vega.isString(opt)) {
-      return load(opt, null, null, el, callback);
-    } else if (opt.source) {
-      source = opt.source;
-      spec = JSON.parse(source);
-    } else if (opt.spec) {
-      spec = opt.spec;
-      source = JSON.stringify(spec, null, 2);
-    } else if (opt.url) {
-      return load(opt.url, opt, 'source', el, callback);
+    if (vega.isString(spec)) {
+      return load(spec, opt, 'source', el, callback);
     } else {
-      spec = opt;
       source = JSON.stringify(spec, null, 2);
-      opt = {spec: spec, actions: false};
     }
-
-    // Decide mode
-    if (spec.$schema) {
-      const parsed = url_parser(spec.$schema);
-      mode = MODES[parsed.library];
-      if (opt.mode && mode !== opt.mode) {
-        console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
-                   + "but mode argument is assigned as \"" + opt.mode + "\".");
-      }
-      if (versionCompare(parsed.version.replace(/^v/g,''), VERSION[mode]) !== 0 ){
-        console.warn("The input spec uses \"" + parsed.library + "\" " + parsed.version + ", "
-                   + "but current version of \"" + parsed.library + "\" is " + VERSION[parsed.library] + ".");
-      }
-    } else if(opt.mode) {
-      mode = MODES[opt.mode]
-    } else {
-      mode = MODES.vega;
-    }
-
-    spec = PREPROCESSOR[mode](spec);
 
     // Load Vega theme/configuration.
     if (vega.isString(opt.config)) {
-      return load(opt.config, opt, 'config', el, callback);
-    } else if (opt.config) {
-      config = opt.config;
+      return load(opt.config, {spec: spec, opt: opt}, 'config', el, callback);
     }
+
+    // Decide mode
+    var parsed;
+    if (spec.$schema) {
+      parsed = url_parser(spec.$schema);
+      if (opt.mode && opt.mode !== MODES[parsed.library]) {
+        console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
+                   + "but mode argument is assigned as \"" + mode + "\".");
+      }
+      mode = MODES[parsed.library];
+    } else {
+      mode = MODES[opt.mode] || MODES.vega;
+    }
+
+
+
+    if (versionCompare(parsed.version.replace(/^v/g,''), VERSION[mode]) !== 0 ){
+      console.warn("The input spec uses \"" + mode + "\" " + parsed.version + ", "
+                 + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
+    }
+
+    spec = PREPROCESSOR[mode](spec);
+    if (mode === MODES['vega-lite']) {
+      const parsed = url_parser(spec.$schema);
+      if (versionCompare(parsed.version.replace(/^v/g,''), VERSION['vega']) !== 0 ){
+        console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
+                   + "but current version of \"vega\" is " + VERSION['vega'] + ".");
+      }
+    }
+
+
 
     // ensure container div has class 'vega-embed'
     var div = d3.select(el)
@@ -112,10 +110,7 @@ function embed(el, opt, callback) {
 
   } catch (err) { cb(err); }
 
-  var renderer = opt.renderer || 'canvas',
-      actions  = opt.actions || {};
-
-  const runtime = vega.parse(spec, config); // may throw an Error if parsing fails
+  const runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
   try {
     var view = new vega.View(runtime)
       .logLevel(vega.Warn)
@@ -124,7 +119,7 @@ function embed(el, opt, callback) {
       .hover()
       .run();
 
-    if (opt.actions !== false) {
+    if (actions !== false) {
       // add child div to house action links
       var ctrl = div.append('div')
         .attr('class', 'vega-actions');
