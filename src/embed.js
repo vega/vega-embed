@@ -2,7 +2,8 @@ var d3 = require('d3'),
     vega = require('vega'),
     vl = require('vega-lite'),
     post = require('./post'),
-    ural_parser = require('vega-schema-url-parser').default;
+    versionCompare = require('./version'),
+    url_parser = require('vega-schema-url-parser').default;
 
 
 var config = {
@@ -78,15 +79,19 @@ function embed(el, opt, callback) {
     }
 
     // Decide mode
-    if (opt.mode) {
-      mode = MODES[opt.mode]
-    } else if(spec.$schema) {
-      const parsed = ural_parser(spec.$schema);
+    if (spec.$schema) {
+      const parsed = url_parser(spec.$schema);
       mode = MODES[parsed.library];
-      if (parsed.version !== VERSION[mode]){
-        console.warn("The input spec uses " + parsed.library + " " + parsed.version + ", "
-                   + "but current version of " + parsed.library + " is " + VERSION[parsed.library]);
+      if (opt.mode && mode !== opt.mode) {
+        console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
+                   + "but mode argument is assigned as \"" + opt.mode + "\".");
       }
+      if (versionCompare(parsed.version.replace(/^v/g,''), VERSION[mode]) !== 0 ){
+        console.warn("The input spec uses \"" + parsed.library + "\" " + parsed.version + ", "
+                   + "but current version of \"" + parsed.library + "\" is " + VERSION[parsed.library] + ".");
+      }
+    } else if(opt.mode) {
+      mode = MODES[opt.mode]
     } else {
       mode = MODES.vega;
     }
@@ -175,6 +180,9 @@ function viewSource(source) {
   win.document.write(header + source + footer);
   win.document.title = 'Vega JSON Source';
 }
+
+
+
 
 // make config externally visible
 embed.config = config;
