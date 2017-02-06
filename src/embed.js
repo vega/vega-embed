@@ -95,11 +95,13 @@ function embed(el, spec, opt, callback) {
 
     spec = PREPROCESSOR[mode](spec);
     if (mode === MODES['vega-lite']) {
-      const parsed = url_parser(spec.$schema);
-      var parsed_version = parsed.version.replace(/^v/g,'');
-      if (versionCompare(parsed_version, VERSION['vega']) !== 0 ){
-        console.warn("The compiled spec uses \"vega\" " + parsed_version + ", "
-                   + "but current version of \"vega\" is " + VERSION['vega'] + ".");
+      if (spec.$schema) {
+        const parsed = url_parser(spec.$schema);
+        var parsed_version = parsed.version.replace(/^v/g,'');
+        if (versionCompare(parsed_version, VERSION['vega']) !== 0 ){
+          console.warn("The compiled spec uses \"vega\" " + parsed_version + ", "
+                     + "but current version of \"vega\" is " + VERSION['vega'] + ".");
+        }
       }
     }
 
