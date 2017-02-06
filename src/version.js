@@ -1,8 +1,9 @@
 module.exports = function(v1, v2, options) {
     var lexicographical = options && options.lexicographical || true,
         zeroExtend = options && options.zeroExtend || true,
-        v1parts = v1.split('.'),
-        v2parts = v2.split('.');
+        depth = options && options.depth || 2,
+        v1parts = v1.split('.').splice(0, depth),
+        v2parts = v2.split('.').splice(0, depth);
 
     function isValidPart(x) {
         return (lexicographical ? /^\d+[A-Za-z]*$/ : /^\d+$/).test(x);

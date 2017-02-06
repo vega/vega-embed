@@ -83,22 +83,22 @@ function embed(el, spec, opt, callback) {
                    + "but mode argument is assigned as \"" + mode + "\".");
       }
       mode = MODES[parsed.library];
+
+      var parsed_version = parsed.version.replace(/^v/g,'');
+      if (versionCompare(parsed_version, VERSION[mode]) !== 0 ){
+        console.warn("The input spec uses \"" + mode + "\" " + parsed_version + ", "
+                   + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
+      }
     } else {
       mode = MODES[opt.mode] || MODES.vega;
-    }
-
-
-
-    if (versionCompare(parsed.version.replace(/^v/g,''), VERSION[mode]) !== 0 ){
-      console.warn("The input spec uses \"" + mode + "\" " + parsed.version + ", "
-                 + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
     }
 
     spec = PREPROCESSOR[mode](spec);
     if (mode === MODES['vega-lite']) {
       const parsed = url_parser(spec.$schema);
-      if (versionCompare(parsed.version.replace(/^v/g,''), VERSION['vega']) !== 0 ){
-        console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
+      var parsed_version = parsed.version.replace(/^v/g,'');
+      if (versionCompare(parsed_version, VERSION['vega']) !== 0 ){
+        console.warn("The compiled spec uses \"vega\" " + parsed_version + ", "
                    + "but current version of \"vega\" is " + VERSION['vega'] + ".");
       }
     }
