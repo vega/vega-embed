@@ -27,10 +27,8 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 <div id="vis"></div>
 
 <script type="text/javascript">
-  var embed_spec = {
-    url: "https://raw.githubusercontent.com/vega/vega/master/spec/airports.vg.json"
-  };
-  vega.embed('#vis', embed_spec);
+  var spec = "https://raw.githubusercontent.com/vega/vega/master/spec/bar.vg.json";
+  vega.embed('#vis', spec);
 </script>
 </body>
 </html>
@@ -39,23 +37,25 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 
 ## API Reference
 
-<a name="embed" href="#embed">#</a>
+<a href="#embed" name="embed">#</a>
 vega.<b>embed</b>(<i>el</i>, <i>embed_spec</i>[, <i>callback</i>])
 [<>](https://github.com/vega/vega-embed/src/embed.js "Source")
 
 The embed function accepts the following arguments:
 
-| Index   | Name         | Description    |
-| :------ | :----------- | :------------- |
-| 0       | `el`         | A DOM element or CSS selector indicating the element on the page in which to add the embedded view. |
-| 1       | `embed_spec` | A JavaScript object containing the embedding specification. |
-| 2       | `callback`   | An optional callback function that upon successful parsing will be invoked with the instantiated Vega `View` instance and a copy of the parsed JSON Vega spec. |
+| Property| Type       | Description    |
+| :------ | :--------- | :------------- |
+| `el`      |  String  | A DOM element or CSS selector indicating the element on the page in which to add the embedded view. |
+| `spec`    | String / Object | _String_ : A URL string* from which to load the Vega specification. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
+| `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
+| `callback`| Function | _(Optional)_ An optional callback function that upon successful parsing will be invoked with the instantiated [Vega `View` instance](https://github.com/vega/vega-view#vega-view) and a copy of the parsed JSON Vega spec. |
 
-##### Vega Embed Specification Reference
+*_Note that this URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
+
+##### Vega Embed `opt` Specification Reference
 
 ```js
-var embed_spec = {
-  "source"/"spec"/"url" : ... ,
+var opt = {
   "renderer" : ...,
   "actions" : ...,
   "config"  : ...
@@ -64,28 +64,22 @@ var embed_spec = {
 
 | Property | Type             | Description    |
 | :------- | :--------------- | :------------- |
-| `source` | String | The Vega specification as a JSON text string. The _source_ property takes precedence over both the _spec_ and _url_ properties. |
-| `spec`   | Object | The Vega specification as a parsed JSON object. The _spec_ property takes precedence over the _url_ property, but not the _source_. |
-| `url`    | String | A URL from which to load the Vega specification. Note that this URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. The _url_ property has lower precedence than either the _source_ or _spec_ properties. |
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. |
-| `actions`     | Boolean &#124; Object       | Determines if action links ("Export as PNG/SVG", "View Source", "Open in Vega Editor") are included with the embedded view. If the value is `true` (default), all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `editor`) to boolean values for determining if each action link should be shown.  Unspecified keys will be `true` by default.  For example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".        |
+| `actions`     | Boolean | Object       | Determines if action links ("Export as PNG/SVG", "View Source", "Open in Vega Editor") are included with the embedded view. If the value is `true` (default), all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `editor`) to boolean values for determining if each action link should be shown.  Unspecified keys will be `true` by default.  For example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".        |
 | `config`      | Object        | An optional object to override the [default configuration options](https://github.com/vega/vega-parser/blob/master/src/config.js) or [specify a theme](https://github.com/vega/vega-parser#configuration-reference). |
 
-
-
-
-<a name="embed.config" href="#embed.config">#</a>
+<a href="#embed.config" name="embed.config">#</a>
 vega.embed.<b>config</b>
 [<>](https://github.com/vega/vega-embed/src/embed.js "Source")
 
 
-The `vega.embed.config` object can cofigure the `vega.embed` function to change the behavior of the action links through the following properties. 
+The `vega.embed.config` object can cofigure the `vega.embed` function to change the behavior of the action links through the following properties.
 
 | Property        | Type     | Description    |
 | :-------------- | :------- | :------------- |
 | `editor_url`    | String   | The URL at which to open embedded Vega specs in a Vega editor. Defaults to `"http://vega.github.io/vega-editor/"`. Internally, vega-embed uses [HTML5 postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to pass the specification information to the editor. |
-| `source_header` | String   | HTML to inject into the `<head>` tag of the page generated by the "View Source" action link. For example, this can be used to add code for [syntax highlighting](https://highlightjs.org/). |
-| `source_footer` | String   | HTML to inject into the end of the page generated by the "View Source" action link. The text will be added immediately before the closing `</body>` tag. |
+| `source_header` | String   | HTML to inject into the `` tag of the page generated by the "View Source" action link. For example, this can be used to add code for [syntax highlighting](https://highlightjs.org/). |
+| `source_footer` | String   | HTML to inject into the end of the page generated by the "View Source" action link. The text will be added immediately before the closing `` tag. |
 
 
 

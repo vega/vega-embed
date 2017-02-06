@@ -52,17 +52,19 @@ function load(url, arg, prop, el, callback) {
 
 // Embed a Vega visualization component in a web page.
 // el: DOM element in which to place component (DOM node or CSS selector)
-// opt: Embedding specification (parsed JSON or URL string)
+// spec : String : A URL string from which to load the Vega specification.
+//        Object : The Vega/Vega-Lite specification as a parsed JSON object.
+// opt: A JavaScript object containing options for embedding.
 // callback: invoked with the generated Vega View instance
 function embed(el, spec, opt, callback) {
   var cb = callback || function(){}, source,
-  renderer = opt.renderer || 'canvas',
-  actions  = opt.actions || {}, mode;
+  renderer = (opt && opt.renderer) || 'canvas',
+  actions  = (opt && opt.actions) || {}, mode;
   opt = opt || {};
   try {
     // Load the visualization specification.
     if (vega.isString(spec)) {
-      return load(spec, opt, 'source', el, callback);
+      return load(spec, opt, 'url', el, callback);
     } else {
       source = JSON.stringify(spec, null, 2);
     }
