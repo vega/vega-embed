@@ -1,4 +1,4 @@
-var d3 = require('d3'),
+var d3 = require('d3-selection'),
     vega = require('vega'),
     vl = require('vega-lite'),
     post = require('./post'),

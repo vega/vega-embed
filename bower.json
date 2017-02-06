@@ -15,10 +15,8 @@
   ],
   "license": "BSD-3-Clause",
   "dependencies": {
-    "d3": "^4.4.4",
-    "vega": "3.0.0-beta.18",
-    "vega-lite": "2.0.0-alpha.0",
-    "vega-schema-url-parser": "latest"
+    "vega": "3.0.0-beta.20",
+    "vega-lite": "2.0.0-alpha.0"
   },
   "ignore": [
     ".DS_Store",
