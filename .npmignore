@@ -1,6 +1,11 @@
 .DS_Store
+.gitignore
+.eslintrc
+bower_components
+node_modules
 coverage
 examples
 output
+scripts
 temp
 test

@@ -10,7 +10,6 @@ echo "All tracked files are commited. Publishing for npm & bower."
 
 # 0.2 generate build files
 npm run build
-npm run schema
 
 # 1. NPM PUBLISH 
 npm publish

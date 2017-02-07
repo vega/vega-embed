@@ -8,8 +8,7 @@ The [vega-embed](http://github.com/vega/vega-embed) module provides advanced sup
 - Add action links such as "View Source" and "Open in Vega Editor".
 
 
-_As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/PORTING_GUIDE.md#scales), `parameter` property in the older version is now deprecated._
-<!--TODO : Link the older version document -->
+_As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/PORTING_GUIDE.md#scales), `parameter` property from the [older version of vega-embed](https://github.com/vega/vega-embed/releases/tag/v2.2.0) is now deprecated._
 
 ## Basic Example
 
@@ -17,10 +16,11 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Please import Vega 3 & Vega-Lite 2 js  -->
-  <script src="vega.js" charset="utf-8"></script>
-  <script src="vega-lite.js" charset="utf-8"></script>
-  <script src="vega-embed.js" charset="utf-8"></script>
+  <!-- Import Vega 3 & Vega-Lite 2 js (does not have to be from cdn) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.20/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-alpha.1/vega-lite.js"></script>
+  <!-- Import evga-embed -->
+  <script src="vega-embed.js"></script>
 </head>
 <body>
 
@@ -73,7 +73,7 @@ vega.embed.<b>config</b>
 [<>](https://github.com/vega/vega-embed/src/embed.js "Source")
 
 
-The `vega.embed.config` object can cofigure the `vega.embed` function to change the behavior of the action links through the following properties.
+The `vega.embed.config` object can configure the `vega.embed` function to change the behavior of the action links through the following properties.
 
 | Property        | Type     | Description    |
 | :-------------- | :------- | :------------- |

@@ -18,7 +18,7 @@
   var config = {
     // default view background color
     // covers the entire view component
-    background: "#e5e5e5",
+    background: "#efefef",
   };
 
   var spec = {
@@ -38,7 +38,7 @@
     }
   }
 
-  vega.embed('#vis', spec, {config: "config.json"}, function(error, result) {
+  vega.embed('#vis', spec, {config: config}, function(error, result) {
     if (error) {
       return console.error(error);
     }
