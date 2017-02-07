@@ -179,8 +179,6 @@ function viewSource(source) {
 }
 
 
-
-
 // make config externally visible
 embed.config = config;
 

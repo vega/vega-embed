@@ -29,10 +29,10 @@
     "eslint": "^3.14.1",
     "uglify-js": "^2.7.5",
     "vega": "3.0.0-beta.20",
-    "vega-lite": "2.0.0-alpha.0",
+    "vega-lite": "2.0.0-alpha.1",
     "d3-selection": "^1.0.3",
     "watchify": "^3.9.0",
-    "vega-schema-url-parser": "^1.0.0-beta.1"
+    "vega-schema-url-parser": "^1.0.0-beta.2"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
