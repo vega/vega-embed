@@ -1,8 +1,10 @@
-var d3 = require('d3'),
-    vg = require('vega'),
+var d3 = require('d3-selection'),
+    vega = require('vega'),
     vl = require('vega-lite'),
-    parameter = require('./parameter'),
-    post = require('./post');
+    post = require('./post'),
+    versionCompare = require('./version'),
+    url_parser = require('vega-schema-url-parser').default;
+
 
 var config = {
   // URL for loading specs into editor
@@ -20,62 +22,87 @@ var MODES = {
   'vega-lite': 'vega-lite'
 };
 
+var VERSION = {
+  'vega':      vega.version,
+  'vega-lite': vl.version
+}
+
 var PREPROCESSOR = {
   'vega':      function(vgjson) { return vgjson; },
   'vega-lite': function(vljson) { return vl.compile(vljson).spec; }
 };
 
 function load(url, arg, prop, el, callback) {
-  vg.util.load({url: url}, function(err, data) {
-    var opt;
-    if (err || !data) {
-      console.error(err || ('No data found at ' + url));
+  var loader = vega.loader();
+  loader.load(url).then(function(data) {
+    if (!data) {
+      console.error('No data found at ' + url);
     } else {
-      // marshal embedding spec and restart
-      if (!arg) { // Loading embed spec from URL
-        opt = JSON.parse(data);
-      } else {  // Loading vg/vl spec or config from URL
-        opt = vg.util.extend({}, arg);
-        opt[prop] = prop === 'source' ? data : JSON.parse(data);
+      if (prop === 'config') {
+        arg.opt['config'] = JSON.parse(data);
+        embed(el, arg.spec, arg.opt, callback);
+      } else {
+        embed(el, JSON.parse(data), arg, callback);
       }
-      embed(el, opt, callback);
     }
+  }).catch(function(error){
+    console.error(error);
   });
 }
 
 // Embed a Vega visualization component in a web page.
 // el: DOM element in which to place component (DOM node or CSS selector)
-// opt: Embedding specification (parsed JSON or URL string)
+// spec : String : A URL string from which to load the Vega specification.
+//        Object : The Vega/Vega-Lite specification as a parsed JSON object.
+// opt: A JavaScript object containing options for embedding.
 // callback: invoked with the generated Vega View instance
-function embed(el, opt, callback) {
-  var cb = callback || function(){},
-      params = [], source, spec, mode, config;
-
+function embed(el, spec, opt, callback) {
+  var cb = callback || function(){}, source,
+  renderer = (opt && opt.renderer) || 'canvas',
+  actions  = (opt && opt.actions) || {}, mode;
+  opt = opt || {};
   try {
     // Load the visualization specification.
-    if (vg.util.isString(opt)) {
-      return load(opt, null, null, el, callback);
-    } else if (opt.source) {
-      source = opt.source;
-      spec = JSON.parse(source);
-    } else if (opt.spec) {
-      spec = opt.spec;
-      source = JSON.stringify(spec, null, 2);
-    } else if (opt.url) {
-      return load(opt.url, opt, 'source', el, callback);
+    if (vega.isString(spec)) {
+      return load(spec, opt, 'url', el, callback);
     } else {
-      spec = opt;
       source = JSON.stringify(spec, null, 2);
-      opt = {spec: spec, actions: false};
     }
-    mode = MODES[opt.mode] || MODES.vega;
-    spec = PREPROCESSOR[mode](spec);
 
     // Load Vega theme/configuration.
-    if (vg.util.isString(opt.config)) {
-      return load(opt.config, opt, 'config', el, callback);
-    } else if (opt.config) {
-      config = opt.config;
+    if (vega.isString(opt.config)) {
+      return load(opt.config, {spec: spec, opt: opt}, 'config', el, callback);
+    }
+
+    // Decide mode
+    var parsed;
+    if (spec.$schema) {
+      parsed = url_parser(spec.$schema);
+      if (opt.mode && opt.mode !== MODES[parsed.library]) {
+        console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
+                   + "but mode argument is assigned as \"" + mode + "\".");
+      }
+      mode = MODES[parsed.library];
+
+      var parsed_version = parsed.version.replace(/^v/g,'');
+      if (versionCompare(parsed_version, VERSION[mode]) !== 0 ){
+        console.warn("The input spec uses \"" + mode + "\" " + parsed_version + ", "
+                   + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
+      }
+    } else {
+      mode = MODES[opt.mode] || MODES.vega;
+    }
+
+    spec = PREPROCESSOR[mode](spec);
+    if (mode === MODES['vega-lite']) {
+      if (spec.$schema) {
+        const parsed = url_parser(spec.$schema);
+        var parsed_version = parsed.version.replace(/^v/g,'');
+        if (versionCompare(parsed_version, VERSION['vega']) !== 0 ){
+          console.warn("The compiled spec uses \"vega\" " + parsed_version + ", "
+                     + "but current version of \"vega\" is " + VERSION['vega'] + ".");
+        }
+      }
     }
 
     // ensure container div has class 'vega-embed'
@@ -83,79 +110,64 @@ function embed(el, opt, callback) {
       .classed('vega-embed', true)
       .html(''); // clear container
 
-    // handle parameters
-    if (opt.parameters) {
-      var elp = opt.parameter_el ? d3.select(opt.parameter_el) : div;
-      var pdiv = elp.append('div')
-        .attr('class', 'vega-params');
-      params = opt.parameters.map(function(p) {
-        return parameter.init(pdiv, p, spec);
-      });
-    }
   } catch (err) { cb(err); }
 
-  vg.parse.spec(spec, config, function(error, chart) {
-    if (error) { cb(error); return; }
-    try {
-      var renderer = opt.renderer || 'canvas',
-          actions  = opt.actions || {};
+  const runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
+  try {
+    var view = new vega.View(runtime)
+      .logLevel(vega.Warn)
+      .initialize(document.querySelector(el))
+      .renderer(renderer)
+      .hover()
+      .run();
 
-      var view = chart({
-        el: el,
-        data: opt.data || undefined,
-        renderer: renderer
-      });
+    if (actions !== false) {
+      // add child div to house action links
+      var ctrl = div.append('div')
+        .attr('class', 'vega-actions');
 
-      if (opt.actions !== false) {
-        // add child div to house action links
-        var ctrl = div.append('div')
-          .attr('class', 'vega-actions');
-
-        // add 'Export' action
-        if (actions.export !== false) {
-          var ext = (renderer==='canvas' ? 'png' : 'svg');
-          ctrl.append('a')
-            .text('Export as ' + ext.toUpperCase())
-            .attr('href', '#')
-            .attr('target', '_blank')
-            .attr('download', (spec.name || 'vega') + '.' + ext)
-            .on('mousedown', function() {
-              this.href = view.toImageURL(ext);
-              d3.event.preventDefault();
-            });
-        }
-
-        // add 'View Source' action
-        if (actions.source !== false) {
-          ctrl.append('a')
-            .text('View Source')
-            .attr('href', '#')
-            .on('click', function() {
-              viewSource(source);
-              d3.event.preventDefault();
-            });
-        }
-
-        // add 'Open in Vega Editor' action
-        if (actions.editor !== false) {
-          ctrl.append('a')
-            .text('Open in Vega Editor')
-            .attr('href', '#')
-            .on('click', function() {
-              post(window, embed.config.editor_url, {spec: source, mode: mode});
-              d3.event.preventDefault();
-            });
-        }
+      // add 'Export' action
+      if (actions.export !== false) {
+        var ext = (renderer==='canvas' ? 'png' : 'svg');
+        ctrl.append('a')
+          .text('Export as ' + ext.toUpperCase())
+          .attr('href', '#')
+          .attr('target', '_blank')
+          .attr('download', (spec.name || 'vega') + '.' + ext)
+          .on('mousedown', function() {
+            var that = this;
+            view.toImageURL(ext).then(function(url) {
+              that.href =  url;
+            }).catch(function(error) { throw error; });
+            d3.event.preventDefault();
+          });
       }
 
-      // bind all parameter elements
-      params.forEach(function(p) { parameter.bind(p, view); });
+      // add 'View Source' action
+      if (actions.source !== false) {
+        ctrl.append('a')
+          .text('View Source')
+          .attr('href', '#')
+          .on('click', function() {
+            viewSource(source);
+            d3.event.preventDefault();
+          });
+      }
 
-      // initialize and return visualization
-      view.update();
-      cb(null, {view: view, spec: spec});
-    } catch (err) { cb(err); }
-  });
+      // add 'Open in Vega Editor' action
+      if (actions.editor !== false) {
+        ctrl.append('a')
+          .text('Open in Vega Editor')
+          .attr('href', '#')
+          .on('click', function() {
+            post(window, embed.config.editor_url, {spec: source, mode: mode});
+            d3.event.preventDefault();
+          });
+      }
+    }
+
+    cb(null, {view: view, spec: spec});
+  } catch (err) { cb(err); }
 }
 
 function viewSource(source) {
@@ -165,6 +177,7 @@ function viewSource(source) {
   win.document.write(header + source + footer);
   win.document.title = 'Vega JSON Source';
 }
+
 
 // make config externally visible
 embed.config = config;
