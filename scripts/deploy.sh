@@ -11,8 +11,12 @@ echo "All tracked files are commited. Publishing for npm & bower."
 # 0.2 generate build files
 npm run build
 
-# 1. NPM PUBLISH 
-npm publish
+# 1. NPM PUBLISH
+
+# Use NPM tag to prevent people getting this by default when running `npm install``
+# https://medium.com/@mbostock/prereleases-and-npm-e778fc5e2420#.i9ko1erii
+npm publish --tag pre
+
 # exit if npm publish failed 
 rc=$?
 if [[ $rc != 0 ]]; then 

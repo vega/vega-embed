@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "3.0.0",
+  "version": "3.0.0-beta.0",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -14,12 +14,20 @@
     "url": "http://github.com/vega/vega-embed.git"
   },
   "author": {
-    "name": "Jeffrey Heer",
+    "name": "UW Interactive Data Lab",
     "url": "http://idl.cs.washington.edu"
   },
   "contributors": [{
+    "name": "Jeffrey Heer",
+    "url": "https://homes.cs.washington.edu/~jheer/"
+  }, {
     "name": "Arvind Satyanarayan",
     "url": "http://arvindsatya.com"
+  }, {
+    "name": "Younghoon Kim"
+  }, {
+    "name": "Dominik Moritz",
+    "url": "https://www.domoritz.de"
   }],
   "license": "BSD-3-Clause",
   "main": "src/embed.js",
