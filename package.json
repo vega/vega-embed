@@ -32,15 +32,21 @@
   "license": "BSD-3-Clause",
   "main": "src/embed.js",
   "devDependencies": {
-    "browserify": "^14.0.0",
+    "browserify": "^14.1.0",
     "browserify-shim": "^3.8.13",
     "eslint": "^3.14.1",
     "uglify-js": "^2.7.5",
-    "vega": "3.0.0-beta.20",
+    "vega": "3.0.0-beta.22",
     "vega-lite": "2.0.0-alpha.1",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
     "d3-selection": "^1.0.3",
-    "watchify": "^3.9.0",
     "vega-schema-url-parser": "^1.0.0-beta.2"
+  },
+  "peerDependencies": {
+    "vega": "3",
+    "vega-lite": "2"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
