@@ -38,7 +38,7 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 ## API Reference
 
 <a href="#embed" name="embed">#</a>
-vega.<b>embed</b>(<i>el</i>, <i>embed_spec</i>[, <i>callback</i>])
+vega.<b>embed</b>(<i>el</i>, <i>embed_spec</i>[, <i>opt</i>][, <i>callback</i>])
 [<>](https://github.com/vega/vega-embed/src/embed.js "Source")
 
 The embed function accepts the following arguments:
@@ -58,7 +58,8 @@ The embed function accepts the following arguments:
 var opt = {
   "renderer" : ...,
   "actions" : ...,
-  "config"  : ...
+  "config"  : ...,
+  "mode": ...,
 }
 ```
 
@@ -67,6 +68,8 @@ var opt = {
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. |
 | `actions`     | Boolean / Object       | Determines if action links ("Export as PNG/SVG", "View Source", "Open in Vega Editor") are included with the embedded view. If the value is `true` (default), all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `editor`) to boolean values for determining if each action link should be shown.  Unspecified keys will be `true` by default.  For example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".        |
 | `config`      | Object        | An optional object to override the [default configuration options](https://github.com/vega/vega-parser/blob/master/src/config.js) or [specify a theme](https://github.com/vega/vega-parser#configuration-reference). |
+| `mode`        | String        | An optional option to parse the spec as one of `vega` (default) or `vega-lite`|
+
 
 <a href="#embed.config" name="embed.config">#</a>
 vega.embed.<b>config</b>
