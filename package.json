@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -37,7 +37,7 @@
     "eslint": "^3.14.1",
     "uglify-js": "^2.7.5",
     "vega": "3.0.0-beta.22",
-    "vega-lite": "2.0.0-alpha.1",
+    "vega-lite": "2.0.0-alpha.2",
     "watchify": "^3.9.0"
   },
   "dependencies": {
@@ -45,8 +45,8 @@
     "vega-schema-url-parser": "^1.0.0-beta.2"
   },
   "peerDependencies": {
-    "vega": "3",
-    "vega-lite": "2"
+    "vega": ">3.0.0-beta",
+    "vega-lite": ">2.0.0-alpha"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
