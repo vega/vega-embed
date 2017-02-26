@@ -38,7 +38,7 @@
     }
   }
 
-  vega.embed('#vis', spec, function(error, result) {
+  vega.embed('#vis', spec, {config: config, 'actions': true}, function(error, result) {
     if (error) {
       return console.error(error);
     }
