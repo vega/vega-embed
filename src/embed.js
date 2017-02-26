@@ -116,7 +116,7 @@ function embed(el, spec, opt, callback) {
   try {
     var view = new vega.View(runtime)
       .logLevel(vega.Warn)
-      .initialize(document.querySelector(el))
+      .initialize(el)
       .renderer(renderer)
       .hover()
       .run();
