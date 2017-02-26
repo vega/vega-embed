@@ -59,7 +59,8 @@ function load(url, arg, prop, el, callback) {
 function embed(el, spec, opt, callback) {
   var cb = callback || function(){}, source,
   renderer = (opt && opt.renderer) || 'canvas',
-  actions  = (opt && opt.actions === undefined) ? true : opt.actions, mode;
+  actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
+  mode;
   opt = opt || {};
   try {
     // Load the visualization specification.
