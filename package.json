@@ -36,13 +36,13 @@
     "browserify-shim": "^3.8.13",
     "eslint": "^3.16.1",
     "uglify-js": "^2.8.4",
-    "watchify": "^3.9.0"
+    "watchify": "^3.9.0",
+    "vega": "^3.0.0-beta.25",
+    "vega-lite": "^2.0.0-alpha.4"
   },
   "dependencies": {
     "d3-selection": "^1.0.4",
-    "vega-schema-url-parser": "^1.0.0-beta.2",
-    "vega": "^3.0.0-beta.25",
-    "vega-lite": "^2.0.0-alpha.4"
+    "vega-schema-url-parser": "^1.0.0-beta.2"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",

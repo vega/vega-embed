@@ -17,8 +17,8 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 <html>
 <head>
   <!-- Import Vega 3 & Vega-Lite 2 js (does not have to be from cdn) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.20/vega.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-alpha.1/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.25/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-alpha.7/vega-lite.js"></script>
   <!-- Import evga-embed -->
   <script src="vega-embed.js"></script>
 </head>
@@ -27,7 +27,7 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 <div id="vis"></div>
 
 <script type="text/javascript">
-  var spec = "https://raw.githubusercontent.com/vega/vega/master/spec/bar.vg.json";
+  var spec = "https://raw.githubusercontent.com/vega/vega/master/test/specs-valid/bar.vg.json";
   vega.embed('#vis', spec);
 </script>
 </body>
