@@ -38,7 +38,7 @@
     "uglify-js": "^2.8.11",
     "watchify": "^3.9.0",
     "vega": "^3.0.0-beta.27",
-    "vega-lite": "^2.0.0-alpha.7"
+    "vega-lite": "^2.0.0-alpha.8"
   },
   "dependencies": {
     "d3-selection": "^1.0.5",
