@@ -12,6 +12,8 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 
 ## Basic Example
 
+You can import vega-embed from a local copy or (as shown below) [from CDNJS](https://cdnjs.com/libraries/vega-embed). 
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -19,8 +21,8 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
   <!-- Import Vega 3 & Vega-Lite 2 js (does not have to be from cdn) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.25/vega.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-alpha.7/vega-lite.js"></script>
-  <!-- Import evga-embed -->
-  <script src="vega-embed.js"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.7/vega-embed.js"></script>
 </head>
 <body>
 
