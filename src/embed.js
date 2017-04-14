@@ -183,4 +183,7 @@ function viewSource(source) {
 // make config externally visible
 embed.config = config;
 
+// for es5
 module.exports = embed;
+// for es 6
+module.exports.default = embed;
