@@ -39,8 +39,8 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "vega": "^3.0.0-beta.28",
-    "vega-lite": "^2.0.0-alpha.8",
+    "vega": "^3.0.0-beta.29",
+    "vega-lite": "^2.0.0-alpha.9",
     "d3-selection": "^1.0.5",
     "vega-schema-url-parser": "^1.0.0-beta.2"
   },
