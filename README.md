@@ -1,4 +1,4 @@
-# vega-embed
+# Vega-Embed
 
 [![npm version](https://img.shields.io/npm/v/vega-embed.svg)](https://www.npmjs.com/package/vega-embed)
 
