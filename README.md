@@ -8,21 +8,21 @@ The [vega-embed](http://github.com/vega/vega-embed) module provides advanced sup
 - Add action links such as "View Source" and "Open in Vega Editor".
 
 
-_As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/PORTING_GUIDE.md#scales), `parameter` property from the [older version of vega-embed](https://github.com/vega/vega-embed/releases/tag/v2.2.0) is now deprecated._
+_As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/PORTING_GUIDE.md#scales), the `parameter` property from the [older version of Vega-Embed](https://github.com/vega/vega-embed/releases/tag/v2.2.0) is now deprecated._
 
 ## Basic Example
 
-You can import vega-embed from a local copy or (as shown below) [from CDNJS](https://cdnjs.com/libraries/vega-embed). 
+You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](https://cdnjs.com/libraries/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://cdnjs.com/libraries/vega), [Vega-Lite](https://cdnjs.com/libraries/vega), and [Vega-Embed](https://cdnjs.com/libraries/vega-embed) versions.
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
   <!-- Import Vega 3 & Vega-Lite 2 js (does not have to be from cdn) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.25/vega.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-alpha.7/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/[VERSION]/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/[VERSION]/vega-lite.js"></script>
   <!-- Import vega-embed -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.7/vega-embed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/[VERSION]/vega-embed.js"></script>
 </head>
 <body>
 
