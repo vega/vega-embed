@@ -50,17 +50,21 @@ function load(url, arg, prop, el, callback) {
   });
 }
 
-// Embed a Vega visualization component in a web page.
-// el: DOM element in which to place component (DOM node or CSS selector)
-// spec : String : A URL string from which to load the Vega specification.
-//        Object : The Vega/Vega-Lite specification as a parsed JSON object.
-// opt: A JavaScript object containing options for embedding.
-// callback: invoked with the generated Vega View instance
+/**
+ * Embed a Vega visualization component in a web page.
+ * 
+ * @param el        DOM element in which to place component (DOM node or CSS selector)
+ * @param spec      String : A URL string from which to load the Vega specification.
+                    Object : The Vega/Vega-Lite specification as a parsed JSON object.
+ * @param opt       A JavaScript object containing options for embedding.
+ * @param callback  Invoked with the generated Vega View instance.
+ */
 function embed(el, spec, opt, callback) {
   var cb = callback || function(){}, source,
-  renderer = (opt && opt.renderer) || 'canvas',
-  actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
-  mode;
+    renderer = (opt && opt.renderer) || 'canvas',
+    actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
+    mode,
+    vgConfig;
   opt = opt || {};
   try {
     // Load the visualization specification.
@@ -74,6 +78,8 @@ function embed(el, spec, opt, callback) {
     if (vega.isString(opt.config)) {
       return load(opt.config, {spec: spec, opt: opt}, 'config', el, callback);
     }
+
+    vgConfig = opt.config;
 
     // Decide mode
     var parsed, parsedVersion;
@@ -92,6 +98,10 @@ function embed(el, spec, opt, callback) {
       }
     } else {
       mode = MODES[opt.mode] || MODES.vega;
+    }
+
+    if (mode === MODES['vega-lite']) {
+      vgConfig = vl.util.extend(spec.config || {}, vgConfig || {});
     }
 
     spec = PREPROCESSOR[mode](spec);
@@ -113,7 +123,7 @@ function embed(el, spec, opt, callback) {
 
   } catch (err) { cb(err); }
 
-  var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
+  var runtime = vega.parse(spec, vgConfig); // may throw an Error if parsing fails
   try {
     var view = new vega.View(runtime)
       .logLevel(vega.Warn)
