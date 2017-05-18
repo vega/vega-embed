@@ -63,8 +63,7 @@ function embed(el, spec, opt, callback) {
   var cb = callback || function(){}, source,
     renderer = (opt && opt.renderer) || 'canvas',
     actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
-    mode,
-    vgConfig;
+    mode;
   opt = opt || {};
   try {
     // Load the visualization specification.
@@ -78,8 +77,6 @@ function embed(el, spec, opt, callback) {
     if (vega.isString(opt.config)) {
       return load(opt.config, {spec: spec, opt: opt}, 'config', el, callback);
     }
-
-    vgConfig = opt.config;
 
     // Decide mode
     var parsed, parsedVersion;
@@ -98,10 +95,6 @@ function embed(el, spec, opt, callback) {
       }
     } else {
       mode = MODES[opt.mode] || MODES.vega;
-    }
-
-    if (mode === MODES['vega-lite']) {
-      vgConfig = vl.util.extend(spec.config || {}, vgConfig || {});
     }
 
     spec = PREPROCESSOR[mode](spec);
@@ -123,7 +116,7 @@ function embed(el, spec, opt, callback) {
 
   } catch (err) { cb(err); }
 
-  var runtime = vega.parse(spec, vgConfig); // may throw an Error if parsing fails
+  var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
   try {
     var view = new vega.View(runtime)
       .logLevel(vega.Warn)
