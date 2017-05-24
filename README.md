@@ -41,8 +41,7 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 
 <a href="#embed" name="embed">#</a>
 vega.<b>embed</b>(<i>el</i>, <i>embed_spec</i>[, <i>opt</i>][, <i>callback</i>])
-[<>](https://github.com/vega/vega-embed/src/embed.js "Source")
-
+[<>](https://github.com/vega/vega-embed/blob/master/src/embed.js "Source")
 The embed function accepts the following arguments:
 
 | Property| Type       | Description    |
@@ -76,7 +75,7 @@ var opt = {
 
 <a href="#embed.config" name="embed.config">#</a>
 vega.embed.<b>config</b>
-[<>](https://github.com/vega/vega-embed/src/embed.js "Source")
+[<>](https://github.com/vega/vega-embed/blob/master/src/embed.js "Source")
 
 
 The `vega.embed.config` object can configure the `vega.embed` function to change the behavior of the action links through the following properties.
