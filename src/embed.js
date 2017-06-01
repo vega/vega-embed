@@ -25,7 +25,7 @@ var MODES = {
 var VERSION = {
   'vega':      vega.version,
   'vega-lite': vl.version
-}
+};
 
 var PREPROCESSOR = {
   'vega':      function(vgjson) { return vgjson; },
@@ -52,7 +52,7 @@ function load(url, arg, prop, el, callback) {
 
 /**
  * Embed a Vega visualization component in a web page.
- * 
+ *
  * @param el        DOM element in which to place component (DOM node or CSS selector)
  * @param spec      String : A URL string from which to load the Vega specification.
                     Object : The Vega/Vega-Lite specification as a parsed JSON object.
@@ -84,7 +84,7 @@ function embed(el, spec, opt, callback) {
       parsed = schemaParser(spec.$schema);
       if (opt.mode && opt.mode !== MODES[parsed.library]) {
         console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
-                   + "but mode argument is assigned as \"" + mode + "\".");
+                   + "but mode argument is assigned as \"" + opt.mode + "\".");
       }
       mode = MODES[parsed.library];
 
@@ -122,7 +122,7 @@ function embed(el, spec, opt, callback) {
       .logLevel(opt.logLevel | vega.Warn)
       .initialize(el)
       .renderer(renderer)
-      .hover()
+      .hover();
 
     if (opt) {
       if (opt.width) {
