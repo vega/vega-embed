@@ -119,11 +119,24 @@ function embed(el, spec, opt, callback) {
   var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
   try {
     var view = new vega.View(runtime)
-      .logLevel(vega.Warn)
+      .logLevel(opt.logLevel | vega.Warn)
       .initialize(el)
       .renderer(renderer)
       .hover()
-      .run();
+
+    if (opt) {
+      if (opt.width) {
+        view.width(opt.width)
+      }
+      if (opt.height) {
+        view.height(opt.height)
+      }
+      if (opt.padding) {
+        view.padding(opt.padding)
+      }
+    }
+
+    view.run();
 
     if (actions !== false) {
       // add child div to house action links
