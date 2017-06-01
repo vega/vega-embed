@@ -118,7 +118,7 @@ function embed(el, spec, opt, callback) {
 
   var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
   try {
-    var view = new vega.View(runtime)
+    var view = new vega.View(runtime, opt.viewConfig)
       .logLevel(opt.logLevel | vega.Warn)
       .initialize(el)
       .renderer(renderer)
