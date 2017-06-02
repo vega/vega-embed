@@ -60,7 +60,7 @@ function load(url, arg, prop, el, callback) {
  * @param callback  Invoked with the generated Vega View instance.
  */
 function embed(el, spec, opt, callback) {
-  var cb = callback || function(){}, source,
+  var cb = callback || function(){},
     renderer = (opt && opt.renderer) || 'canvas',
     actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
     mode;
@@ -69,8 +69,6 @@ function embed(el, spec, opt, callback) {
     // Load the visualization specification.
     if (vega.isString(spec)) {
       return load(spec, opt, 'url', el, callback);
-    } else {
-      source = JSON.stringify(spec, null, 2);
     }
 
     // Load Vega theme/configuration.
@@ -166,7 +164,7 @@ function embed(el, spec, opt, callback) {
           .text('View Source')
           .attr('href', '#')
           .on('click', function() {
-            viewSource(source);
+            viewSource(JSON.stringify(spec, null, 2));
             d3.event.preventDefault();
           });
       }
@@ -177,7 +175,10 @@ function embed(el, spec, opt, callback) {
           .text('Open in Vega Editor')
           .attr('href', '#')
           .on('click', function() {
-            post(window, embed.config.editor_url, {spec: source, mode: mode});
+            post(window, embed.config.editor_url, {
+              spec: JSON.stringify(spec, null, 2),
+              mode: mode
+            });
             d3.event.preventDefault();
           });
       }
