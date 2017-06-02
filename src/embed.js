@@ -25,7 +25,7 @@ var MODES = {
 var VERSION = {
   'vega':      vega.version,
   'vega-lite': vl.version
-}
+};
 
 var PREPROCESSOR = {
   'vega':      function(vgjson) { return vgjson; },
@@ -52,7 +52,7 @@ function load(url, arg, prop, el, callback) {
 
 /**
  * Embed a Vega visualization component in a web page.
- * 
+ *
  * @param el        DOM element in which to place component (DOM node or CSS selector)
  * @param spec      String : A URL string from which to load the Vega specification.
                     Object : The Vega/Vega-Lite specification as a parsed JSON object.
@@ -60,7 +60,7 @@ function load(url, arg, prop, el, callback) {
  * @param callback  Invoked with the generated Vega View instance.
  */
 function embed(el, spec, opt, callback) {
-  var cb = callback || function(){}, source,
+  var cb = callback || function(){},
     renderer = (opt && opt.renderer) || 'canvas',
     actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
     mode;
@@ -69,8 +69,6 @@ function embed(el, spec, opt, callback) {
     // Load the visualization specification.
     if (vega.isString(spec)) {
       return load(spec, opt, 'url', el, callback);
-    } else {
-      source = JSON.stringify(spec, null, 2);
     }
 
     // Load Vega theme/configuration.
@@ -84,7 +82,7 @@ function embed(el, spec, opt, callback) {
       parsed = schemaParser(spec.$schema);
       if (opt.mode && opt.mode !== MODES[parsed.library]) {
         console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
-                   + "but mode argument is assigned as \"" + mode + "\".");
+                   + "but mode argument is assigned as \"" + opt.mode + "\".");
       }
       mode = MODES[parsed.library];
 
@@ -118,11 +116,11 @@ function embed(el, spec, opt, callback) {
 
   var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
   try {
-    var view = new vega.View(runtime)
+    var view = new vega.View(runtime, opt.viewConfig)
       .logLevel(opt.logLevel | vega.Warn)
       .initialize(el)
       .renderer(renderer)
-      .hover()
+      .hover();
 
     if (opt) {
       if (opt.width) {
@@ -166,7 +164,7 @@ function embed(el, spec, opt, callback) {
           .text('View Source')
           .attr('href', '#')
           .on('click', function() {
-            viewSource(source);
+            viewSource(JSON.stringify(spec, null, 2));
             d3.event.preventDefault();
           });
       }
@@ -177,7 +175,10 @@ function embed(el, spec, opt, callback) {
           .text('Open in Vega Editor')
           .attr('href', '#')
           .on('click', function() {
-            post(window, embed.config.editor_url, {spec: source, mode: mode});
+            post(window, embed.config.editor_url, {
+              spec: JSON.stringify(spec, null, 2),
+              mode: mode
+            });
             d3.event.preventDefault();
           });
       }
