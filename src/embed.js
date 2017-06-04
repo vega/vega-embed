@@ -119,8 +119,12 @@ function embed(el, spec, opt, callback) {
     var view = new vega.View(runtime, opt.viewConfig)
       .logLevel(opt.logLevel | vega.Warn)
       .initialize(el)
-      .renderer(renderer)
-      .hover();
+      .renderer(renderer);
+    
+    // Vega-Lite does not need hover so we can improve perf by not activating it
+    if (mode !== MODES['vega-lite']) {
+      view.hover();
+    }
 
     if (opt) {
       if (opt.width) {
