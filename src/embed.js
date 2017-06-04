@@ -24,7 +24,7 @@ var MODES = {
 
 var VERSION = {
   'vega':      vega.version,
-  'vega-lite': vl.version
+  'vega-lite': vl ? vl.version : -1
 };
 
 var PREPROCESSOR = {
