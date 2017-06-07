@@ -114,13 +114,18 @@ function embed(el, spec, opt, callback) {
 
   } catch (err) { cb(err); }
 
+  if (opt.onBeforeParse) {
+    // Allow Vega spec to be modified before being used
+    spec = opt.onBeforeParse(spec);
+  }
+
   var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
   try {
     var view = new vega.View(runtime, opt.viewConfig)
       .logLevel(opt.logLevel | vega.Warn)
       .initialize(el)
       .renderer(renderer);
-    
+
     // Vega-Lite does not need hover so we can improve perf by not activating it
     if (mode !== MODES['vega-lite']) {
       view.hover();
@@ -203,6 +208,10 @@ function viewSource(source) {
 
 // make config externally visible
 embed.config = config;
+
+// expose vega and vegalite libs
+embed.vega = vega;
+embed.vegalite = vl;
 
 // for es5
 module.exports = embed;
