@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveConstEnums": true,
+    "noEmitOnError": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "inlineSourceMap": true,
+    "typeRoots" : ["./typings", "node_modules/@types"]
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}

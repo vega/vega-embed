@@ -1,5 +1,5 @@
 // open editor url in a new window, and pass a message
-module.exports = function(window, url, data) {
+export function post(window: Window, url: string, data: object) {
   var editor = window.open(url),
       wait = 10000,
       step = 250,
