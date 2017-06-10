@@ -13,7 +13,7 @@ var MODES = {
 
 var VERSION = {
   'vega':      vega.version,
-  'vega-lite': vl ? vl.version : -1
+  'vega-lite': vl ? vl.version : 'not available'
 };
 
 var PREPROCESSOR = {
@@ -204,5 +204,5 @@ embedMain.vegalite = vl;
 
 // for es5
 module.exports = embedMain;
-// for es 6
+// for es6
 module.exports.default = embedMain;

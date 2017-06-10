@@ -6,3 +6,5 @@ vega-embed.js
 vega-embed.js.map
 vega-embed.min.js
 .idea/
+output
+temp
