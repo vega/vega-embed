@@ -63,7 +63,8 @@ function embed(el, spec, opt, callback) {
   var cb = callback || function(){},
     renderer = (opt && opt.renderer) || 'canvas',
     actions  = opt && (opt.actions !== undefined) ? opt.actions : true,
-    mode;
+    mode,
+    vgSpec;
   opt = opt || {};
   try {
     // Load the visualization specification.
@@ -82,27 +83,27 @@ function embed(el, spec, opt, callback) {
       parsed = schemaParser(spec.$schema);
       if (opt.mode && opt.mode !== MODES[parsed.library]) {
         console.warn("The given visualization spec is written in \"" + parsed.library + "\", "
-                   + "but mode argument is assigned as \"" + opt.mode + "\".");
+                   + "but mode argument is set to \"" + opt.mode + "\".");
       }
       mode = MODES[parsed.library];
 
       parsedVersion = parsed.version.replace(/^v/g,'');
       if (versionCompare(parsedVersion, VERSION[mode]) !== 0 ){
         console.warn("The input spec uses \"" + mode + "\" " + parsedVersion + ", "
-                   + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
+                   + "but the current version of \"" + mode + "\" is " + VERSION[mode] + ".");
       }
     } else {
       mode = MODES[opt.mode] || MODES.vega;
     }
 
-    spec = PREPROCESSOR[mode](spec);
+    vgSpec = PREPROCESSOR[mode](spec);
     if (mode === MODES['vega-lite']) {
-      if (spec.$schema) {
-        parsed = schemaParser(spec.$schema);
+      if (vgSpec.$schema) {
+        parsed = schemaParser(vgSpec.$schema);
         parsedVersion = parsed.version.replace(/^v/g,'');
         if (versionCompare(parsedVersion, VERSION['vega']) !== 0 ){
           console.warn("The compiled spec uses \"vega\" " + parsedVersion + ", "
-                     + "but current version of \"vega\" is " + VERSION['vega'] + ".");
+                     + "but the current version of \"vega\" is " + VERSION['vega'] + ".");
         }
       }
     }
@@ -112,9 +113,11 @@ function embed(el, spec, opt, callback) {
       .classed('vega-embed', true)
       .html(''); // clear container
 
-  } catch (err) { cb(err); }
+  } catch (err) {
+    return cb(err);
+  }
 
-  var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
+  var runtime = vega.parse(vgSpec, opt.config); // may throw an Error if parsing fails
   try {
     var view = new vega.View(runtime, opt.viewConfig)
       .logLevel(opt.logLevel | vega.Warn)
@@ -188,8 +191,10 @@ function embed(el, spec, opt, callback) {
       }
     }
 
-    cb(null, {view: view, spec: spec});
-  } catch (err) { cb(err); }
+    cb(null, {view: view, spec: vgSpec});
+  } catch (err) {
+    cb(err);
+  }
 }
 
 function viewSource(source) {
