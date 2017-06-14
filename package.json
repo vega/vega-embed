@@ -35,7 +35,7 @@
     "browserify": "^14.4.0",
     "browserify-shim": "^3.8.14",
     "eslint": "^3.19.0",
-    "uglify-js": "^3.0.13",
+    "uglify-es": "^3.0.15",
     "watchify": "^3.9.0"
   },
   "dependencies": {
