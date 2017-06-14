@@ -54,6 +54,7 @@ function load(url, arg, prop, el) {
                     Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
+
 function embed(el, spec, opt) {
   const renderer = (opt && opt.renderer) || 'canvas',
     actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
@@ -93,6 +94,7 @@ function embed(el, spec, opt) {
   if (mode === MODES['vega-lite']) {
     if (spec.$schema) {
       parsed = schemaParser(spec.$schema);
+
       parsedVersion = parsed.version.replace(/^v/g,'');
       if (versionCompare(parsedVersion, VERSION['vega']) !== 0 ){
         console.warn("The compiled spec uses \"vega\" " + parsedVersion + ", "
@@ -100,6 +102,7 @@ function embed(el, spec, opt) {
       }
     }
   }
+
 
   // ensure container div has class 'vega-embed'
   const div = d3.select(el)
@@ -110,6 +113,7 @@ function embed(el, spec, opt) {
     // Allow Vega spec to be modified before being used
     spec = opt.onBeforeParse(spec);
   }
+
 
   const runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
 
@@ -184,6 +188,7 @@ function embed(el, spec, opt) {
         });
     }
   }
+
 
   return Promise.resolve({view: view, spec: spec});
 }
