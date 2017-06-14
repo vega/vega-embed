@@ -1,12 +1,12 @@
-const d3 = require('d3-selection');
-const vega = require('vega');
-const vl = require('vega-lite');
-const post = require('./post');
-const versionCompare = require('./version');
-const schemaParser = require('vega-schema-url-parser').default;
+var d3 = require('d3-selection'),
+  vega = require('vega'),
+  vl = require('vega-lite'),
+  post = require('./post'),
+  versionCompare = require('./version'),
+  schemaParser = require('vega-schema-url-parser').default;
 
 
-const config = {
+var config = {
   // URL for loading specs into editor
   editor_url: 'http://vega.github.io/vega-editor/',
 
@@ -17,17 +17,17 @@ const config = {
   source_footer: ''
 };
 
-const MODES = {
+var MODES = {
   'vega':      'vega',
   'vega-lite': 'vega-lite'
 };
 
-const VERSION = {
+var VERSION = {
   'vega':      vega.version,
   'vega-lite': vl ? vl.version : -1
 };
 
-const PREPROCESSOR = {
+var PREPROCESSOR = {
   'vega':      function(vgjson) { return vgjson; },
   'vega-lite': function(vljson) { return vl.compile(vljson).spec; }
 };
@@ -56,7 +56,7 @@ function load(url, arg, prop, el) {
  */
 
 function embed(el, spec, opt) {
-  const renderer = (opt && opt.renderer) || 'canvas',
+  var renderer = (opt && opt.renderer) || 'canvas',
     actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
 
   opt = opt || {};
@@ -72,7 +72,7 @@ function embed(el, spec, opt) {
   }
 
   // Decide mode
-  let parsed, parsedVersion, mode;
+  var parsed, parsedVersion, mode;
   if (spec.$schema) {
     parsed = schemaParser(spec.$schema);
     if (opt.mode && opt.mode !== MODES[parsed.library]) {
@@ -105,7 +105,7 @@ function embed(el, spec, opt) {
 
 
   // ensure container div has class 'vega-embed'
-  const div = d3.select(el)
+  var div = d3.select(el)
     .classed('vega-embed', true)
     .html(''); // clear container
 
@@ -115,9 +115,9 @@ function embed(el, spec, opt) {
   }
 
 
-  const runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
+  var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
 
-  const view = new vega.View(runtime, opt.viewConfig)
+  var view = new vega.View(runtime, opt.viewConfig)
     .logLevel(opt.logLevel | vega.Warn)
     .initialize(el)
     .renderer(renderer);
@@ -143,19 +143,19 @@ function embed(el, spec, opt) {
 
   if (actions !== false) {
     // add child div to house action links
-    const ctrl = div.append('div')
+    var ctrl = div.append('div')
       .attr('class', 'vega-actions');
 
     // add 'Export' action
     if (actions.export !== false) {
-      const ext = (renderer==='canvas' ? 'png' : 'svg');
+      var ext = (renderer==='canvas' ? 'png' : 'svg');
       ctrl.append('a')
         .text('Export as ' + ext.toUpperCase())
         .attr('href', '#')
         .attr('target', '_blank')
         .attr('download', (spec.name || 'vega') + '.' + ext)
         .on('mousedown', function() {
-          const that = this;
+          var that = this;
           view.toImageURL(ext).then(function(url) {
             that.href =  url;
           }).catch(function(error) { throw error; });
@@ -194,9 +194,9 @@ function embed(el, spec, opt) {
 }
 
 function viewSource(source) {
-  const header = '<html><head>' + config.source_header + '</head>' + '<body><pre><code class="json">';
-  const footer = '</code></pre>' + config.source_footer + '</body></html>';
-  const win = window.open('');
+  var header = '<html><head>' + config.source_header + '</head>' + '<body><pre><code class="json">';
+  var footer = '</code></pre>' + config.source_footer + '</body></html>';
+  var win = window.open('');
   win.document.write(header + source + footer);
   win.document.title = 'Vega JSON Source';
 }
