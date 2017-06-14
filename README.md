@@ -43,17 +43,17 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 vega.<b>embed</b>(<i>el</i>, <i>embed_spec</i>[, <i>opt</i>][, <i>callback</i>])
 [<>](https://github.com/vega/vega-embed/blob/master/src/embed.js "Source")
 
-Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** that resolves to the instantiated [Vega `View` instance](https://github.com/vega/vega-view#vega-view) and a copy of the parsed JSON Vega spec. The embed function accepts the following arguments:
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)* that resolves to the instantiated [Vega `View` instance](https://github.com/vega/vega-view#vega-view) and a copy of the parsed JSON Vega spec. The embed function accepts the following arguments:
 
 | Property| Type       | Description    |
 | :------ | :--------- | :------------- |
 | `el`      |  String  | A DOM element or CSS selector indicating the element on the page in which to add the embedded view. |
-| `spec`    | String / Object | _String_ : A URL string* from which to load the Vega specification. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
+| `spec`    | String / Object | _String_ : A URL string** from which to load the Vega specification. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
 | `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
 
-*_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
+*_Internet Explorer does not support [the ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) feature. To make it work correctly, please see [this instruction](https://vega.github.io/vega/usage/#ie)._
 
-**_Internet Explorer does not support [the ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) feature. To make it work correctly, please see [this instruction](https://vega.github.io/vega/usage/#ie)._
+**_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 
 ##### Vega Embed `opt` Specification Reference
 
