@@ -51,7 +51,7 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 | `spec`    | String / Object | _String_ : A URL string** from which to load the Vega specification. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
 | `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
 
-*_Internet Explorer does not support [the ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) feature. To make it work correctly, please see [this instruction](https://vega.github.io/vega/usage/#ie)._
+*_Internet Explorer does not support [the ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) feature. To make it work correctly, please follow [the instructions on the Vega website](https://vega.github.io/vega/usage/#ie)._
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 
