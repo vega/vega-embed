@@ -1,9 +1,9 @@
-var d3 = require('d3-selection'),
-  vega = require('vega'),
-  vl = require('vega-lite'),
-  post = require('./post'),
-  versionCompare = require('./version'),
-  schemaParser = require('vega-schema-url-parser').default;
+var d3 = require('d3-selection');
+var vega = require('vega');
+var vl = require('vega-lite');
+var post = require('./post');
+var versionCompare = require('./version');
+var schemaParser = require('vega-schema-url-parser').default;
 
 
 var config = {
@@ -56,8 +56,8 @@ function load(url, arg, prop, el) {
  */
 
 function embed(el, spec, opt) {
-  var renderer = (opt && opt.renderer) || 'canvas',
-    actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
+  var renderer = (opt && opt.renderer) || 'canvas';
+  var actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
 
   opt = opt || {};
 
