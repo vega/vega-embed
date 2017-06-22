@@ -28,7 +28,9 @@
   }, {
     "name": "Dominik Moritz",
     "url": "https://www.domoritz.de"
-  }],
+  },
+    "Yuri Astrakhan <YuriAstrakhan@gmail.com>"
+  ],
   "license": "BSD-3-Clause",
   "main": "src/embed.js",
   "devDependencies": {
