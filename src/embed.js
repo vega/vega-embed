@@ -175,14 +175,22 @@ function embed(el, spec, opt) {
 
     // add 'Open in Vega Editor' action
     if (actions.editor !== false) {
+      var linkName = actions && actions.editor && actions.editor.linkName || 'Open in Vega Editor';
+      var editorURL = actions && actions.editor && actions.editor.url || embedMain.config.editor_url;
+      var postingItem = actions && actions.editor && actions.editor.postingItem || {
+        spec: JSON.stringify(spec, null, 2),
+        mode: mode
+      };
+
       ctrl.append('a')
-        .text('Open in Vega Editor')
+        .text(linkName)
         .attr('href', '#')
         .on('click', function() {
-          post(window, embedMain.config.editor_url, {
-            spec: JSON.stringify(spec, null, 2),
-            mode: mode
-          });
+          if (postingItem) {
+            post(window, editorURL, postingItem);
+          } else {
+            window.open(editorURL);
+          }
           d3.event.preventDefault();
         });
     }
