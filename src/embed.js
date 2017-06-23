@@ -72,7 +72,7 @@ function embed(el, spec, opt) {
   }
 
   // Decide mode
-  var parsed, parsedVersion, mode;
+  var parsed, mode;
   if (spec.$schema) {
     parsed = schemaParser(spec.$schema);
     if (opt.mode && opt.mode !== MODES[parsed.library]) {
@@ -81,9 +81,8 @@ function embed(el, spec, opt) {
     }
     mode = MODES[parsed.library];
 
-    parsedVersion = parsed.version.replace(/^v/g,'');
-    if (versionCompare(parsedVersion, VERSION[mode]) !== 0 ){
-      console.warn("The input spec uses \"" + mode + "\" " + parsedVersion + ", "
+    if (versionCompare(parsed.version, VERSION[mode]) !== 0 ){
+      console.warn("The input spec uses \"" + mode + "\" " + parsed.version + ", "
                  + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
     }
   } else {
@@ -94,10 +93,8 @@ function embed(el, spec, opt) {
   if (mode === MODES['vega-lite']) {
     if (spec.$schema) {
       parsed = schemaParser(spec.$schema);
-
-      parsedVersion = parsed.version.replace(/^v/g,'');
-      if (versionCompare(parsedVersion, VERSION['vega']) !== 0 ){
-        console.warn("The compiled spec uses \"vega\" " + parsedVersion + ", "
+      if (versionCompare(parsed.version, VERSION['vega']) !== 0 ){
+        console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
                    + "but current version of \"vega\" is " + VERSION['vega'] + ".");
       }
     }
