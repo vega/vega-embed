@@ -2,7 +2,7 @@ var d3 = require('d3-selection');
 var vega = require('vega');
 var vl = require('vega-lite');
 var post = require('./post');
-var versionCompare = require('./version');
+var versionCompare = require('compare-versions');
 var schemaParser = require('vega-schema-url-parser').default;
 
 
@@ -38,7 +38,7 @@ function load(url, arg, prop, el) {
       throw new Error('No data found at ' + url);
     }
     if (prop === 'config') {
-      arg.opt['config'] = JSON.parse(data);
+      arg.opt.config = JSON.parse(data);
       return embed(el, arg.spec, arg.opt);
     }
     return embed(el, JSON.parse(data), arg);
@@ -109,16 +109,20 @@ function embed(el, spec, opt) {
     .classed('vega-embed', true)
     .html(''); // clear container
 
+
   if (opt.onBeforeParse) {
     // Allow Vega spec to be modified before being used
     spec = opt.onBeforeParse(spec);
   }
 
-
   var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
 
-  var view = new vega.View(runtime, opt.viewConfig)
-    .logLevel(opt.logLevel | vega.Warn)
+  var viewConfig = opt.viewConfig || {};
+  if (viewConfig.logLevel === undefined) {
+    viewConfig.logLevel = vega.Warn;
+  }
+
+  var view = new vega.View(runtime, viewConfig)
     .initialize(el)
     .renderer(renderer);
 
