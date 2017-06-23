@@ -14,10 +14,7 @@
 <script src="node_modules/vega/build/vega.js" charset="utf-8"></script>
 <script type="text/javascript" src="vega-embed.js"></script>
 <script type="text/javascript">
-  vega.embed('#vis', 'https://vega.github.io/vega/examples/bar-chart.vg.json', {actions: true}, function(error, result) {
-    if (error) {
-      return console.error(error);
-    }
+  vega.embed('#vis', 'https://vega.github.io/vega/examples/bar-chart.vg.json', {actions: true}).then(function(result) {
     console.log(result);
   });
 </script>

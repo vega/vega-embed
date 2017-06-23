@@ -54,7 +54,6 @@ function load(url, arg, prop, el) {
                     Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-
 function embed(el, spec, opt) {
   var renderer = (opt && opt.renderer) || 'canvas';
   var actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
@@ -188,7 +187,6 @@ function embed(el, spec, opt) {
         });
     }
   }
-
 
   return Promise.resolve({view: view, spec: spec});
 }
