@@ -71,7 +71,7 @@ function embed(el, spec, opt) {
   }
 
   // Decide mode
-  var parsed, parsedVersion, mode;
+  var parsed, parsedVersion, mode, vgSpec;
   if (spec.$schema) {
     parsed = schemaParser(spec.$schema);
     if (opt.mode && opt.mode !== MODES[parsed.library]) {
@@ -89,10 +89,10 @@ function embed(el, spec, opt) {
     mode = MODES[opt.mode] || MODES.vega;
   }
 
-  spec = PREPROCESSOR[mode](spec);
+  vgSpec = PREPROCESSOR[mode](spec);
   if (mode === MODES['vega-lite']) {
-    if (spec.$schema) {
-      parsed = schemaParser(spec.$schema);
+    if (vgSpec.$schema) {
+      parsed = schemaParser(vgSpec.$schema);
 
       parsedVersion = parsed.version.replace(/^v/g,'');
       if (versionCompare(parsedVersion, VERSION['vega']) !== 0 ){
@@ -110,11 +110,11 @@ function embed(el, spec, opt) {
 
   if (opt.onBeforeParse) {
     // Allow Vega spec to be modified before being used
-    spec = opt.onBeforeParse(spec);
+    vgSpec = opt.onBeforeParse(vgSpec);
   }
 
 
-  var runtime = vega.parse(spec, opt.config); // may throw an Error if parsing fails
+  var runtime = vega.parse(vgSpec, opt.config); // may throw an Error if parsing fails
 
   var view = new vega.View(runtime, opt.viewConfig)
     .logLevel(opt.logLevel | vega.Warn)
