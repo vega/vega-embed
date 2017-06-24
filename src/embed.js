@@ -68,7 +68,7 @@ function embed(el, spec, opt) {
     }
     mode = MODES[parsed.library];
 
-    if (versionCompare(parsed.version, VERSION[mode]) <= 0) {
+    if (versionCompare(parsed.version, VERSION[mode]) > 0) {
       console.warn("The input spec uses \"" + mode + "\" " + parsed.version + ", "
                  + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
     }
@@ -81,7 +81,7 @@ function embed(el, spec, opt) {
     if (spec.$schema) {
       parsed = schemaParser(spec.$schema);
 
-      if (versionCompare(parsed.version, VERSION['vega']) <= 0) {
+      if (versionCompare(parsed.version, VERSION['vega']) > 0) {
         console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
                    + "but current version of \"vega\" is " + VERSION['vega'] + ".");
       }
