@@ -2,7 +2,7 @@ var d3 = require('d3-selection');
 var vega = require('vega');
 var vl = require('vega-lite');
 var post = require('./post');
-var versionCompare = require('./version');
+var versionCompare = require('compare-versions');
 var schemaParser = require('vega-schema-url-parser').default;
 
 
@@ -27,7 +27,7 @@ function load(url, arg, prop, el) {
       throw new Error('No data found at ' + url);
     }
     if (prop === 'config') {
-      arg.opt['config'] = JSON.parse(data);
+      arg.opt.config = JSON.parse(data);
       return embed(el, arg.spec, arg.opt);
     }
     return embed(el, JSON.parse(data), arg);
@@ -59,7 +59,7 @@ function embed(el, spec, opt) {
   }
 
   // Decide mode
-  var parsed, parsedVersion, mode, vgSpec;
+  var parsed, mode, vgSpec;
   if (spec.$schema) {
     parsed = schemaParser(spec.$schema);
     if (opt.mode && opt.mode !== MODES[parsed.library]) {
@@ -68,9 +68,8 @@ function embed(el, spec, opt) {
     }
     mode = MODES[parsed.library];
 
-    parsedVersion = parsed.version.replace(/^v/g,'');
-    if (versionCompare(parsedVersion, VERSION[mode]) !== 0 ){
-      console.warn("The input spec uses \"" + mode + "\" " + parsedVersion + ", "
+    if (versionCompare(parsed.version, VERSION[mode]) >= 0 ){
+      console.warn("The input spec uses \"" + mode + "\" " + parsed.version + ", "
                  + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
     }
   } else {
@@ -79,12 +78,11 @@ function embed(el, spec, opt) {
 
   vgSpec = PREPROCESSOR[mode](spec);
   if (mode === MODES['vega-lite']) {
-    if (vgSpec.$schema) {
-      parsed = schemaParser(vgSpec.$schema);
+    if (spec.$schema) {
+      parsed = schemaParser(spec.$schema);
 
-      parsedVersion = parsed.version.replace(/^v/g,'');
-      if (versionCompare(parsedVersion, VERSION['vega']) !== 0 ){
-        console.warn("The compiled spec uses \"vega\" " + parsedVersion + ", "
+      if (versionCompare(parsed.version, VERSION['vega']) >= 0 ){
+        console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
                    + "but current version of \"vega\" is " + VERSION['vega'] + ".");
       }
     }
@@ -96,16 +94,20 @@ function embed(el, spec, opt) {
     .classed('vega-embed', true)
     .html(''); // clear container
 
+
   if (opt.onBeforeParse) {
     // Allow Vega spec to be modified before being used
     vgSpec = opt.onBeforeParse(vgSpec);
   }
 
-
   var runtime = vega.parse(vgSpec, opt.config); // may throw an Error if parsing fails
 
-  var view = new vega.View(runtime, opt.viewConfig)
-    .logLevel(opt.logLevel | vega.Warn)
+  var viewConfig = opt.viewConfig || {};
+  if (viewConfig.logLevel === undefined) {
+    viewConfig.logLevel = vega.Warn;
+  }
+
+  var view = new vega.View(runtime, viewConfig)
     .initialize(el)
     .renderer(renderer);
 
