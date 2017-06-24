@@ -44,21 +44,9 @@ function load(url, arg, prop, el) {
  * @param opt       A JavaScript object containing options for embedding.
  */
 function embed(el, spec, opt) {
-  var renderer = (opt && opt.renderer) || 'canvas';
-  var actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
-
   opt = opt || {};
-
-  var embedConfig = Object.assign({
-    // URL for loading specs into editor
-    editorUrl: 'http://vega.github.io/editor/',
-
-    // HTML to inject within view source head element
-    sourceHeader: '',
-
-    // HTML to inject before view source closing body tag
-    sourceFooter: ''
-  }, opt.embedConfig || {})
+  var renderer = opt.renderer || 'canvas';
+  var actions  = opt.actions !== undefined ? opt.actions : true;
 
   // Load the visualization specification.
   if (vega.isString(spec)) {
@@ -168,18 +156,19 @@ function embed(el, spec, opt) {
         .text('View Source')
         .attr('href', '#')
         .on('click', function() {
-          viewSource(JSON.stringify(spec, null, 2), embedConfig);
+          viewSource(JSON.stringify(spec, null, 2), opt.sourceHeader || '', opt.sourceFooter || '');
           d3.event.preventDefault();
         });
     }
 
     // add 'Open in Vega Editor' action
     if (actions.editor !== false) {
+      var editorUrl = opt.editorUrl || 'https://vega.github.io/editor/'
       ctrl.append('a')
         .text('Open in Vega Editor')
         .attr('href', '#')
         .on('click', function() {
-          post(window, embedConfig.editorUrl, {
+          post(window, editorUrl, {
             spec: JSON.stringify(spec, null, 2),
             mode: mode
           });
@@ -191,9 +180,9 @@ function embed(el, spec, opt) {
   return Promise.resolve({view: view, spec: spec});
 }
 
-function viewSource(source, embedConfig) {
-  var header = '<html><head>' + embedConfig.sourceHeader + '</head>' + '<body><pre><code class="json">';
-  var footer = '</code></pre>' + embedConfig.sourceFooter + '</body></html>';
+function viewSource(source, sourceHeader, sourceFooter) {
+  var header = '<html><head>' + sourceHeader + '</head>' + '<body><pre><code class="json">';
+  var footer = '</code></pre>' + sourceFooter + '</body></html>';
   var win = window.open('');
   win.document.write(header + source + footer);
   win.document.title = 'Vega JSON Source';
