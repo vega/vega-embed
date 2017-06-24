@@ -67,7 +67,8 @@ var opt = {
   "height" : ...,
   "padding" : ...,
   "actions" : ...,
-  "config"  : ...
+  "config"  : ...,
+  "embedConfig": ...
 }
 ```
 
@@ -82,6 +83,7 @@ var opt = {
 | `padding`     | Object        | Sets the view padding in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_padding) for details. |
 | `actions`     | Boolean / Object       | Determines if action links ("Export as PNG/SVG", "View Source", "Open in Vega Editor") are included with the embedded view. If the value is `true` (default), all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `editor`) to boolean values for determining if each action link should be shown.  Unspecified keys will be `true` by default.  For example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".        |
 | `config`      | String / Object | _String_ : A URL string** from which to load a [Vega](https://vega.github.io/vega/docs/config/)/[Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) configuration file. <br> _Object_ : A Vega/Vega-Lite configuration as a parsed JSON object to override the [default configuration options](https://github.com/vega/vega-parser/blob/master/src/config.js) or [specify a theme](https://github.com/vega/vega-parser#configuration-reference). |
+| `embedConfig` | Object | Specifies the configuration for Vega-Embed. <ul><li>`editorUrl` is the url for loading specs into editor. The default is `https://vega.github.io/editor/`. </li><li>`sourceHeader` is the HTML to inject within view source head element. </li><li>`sourceFooter` is the HTML to inject before view source closing body tag.</li></ul> |
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 

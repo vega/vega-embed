@@ -6,17 +6,6 @@ var versionCompare = require('./version');
 var schemaParser = require('vega-schema-url-parser').default;
 
 
-var config = {
-  // URL for loading specs into editor
-  editor_url: 'http://vega.github.io/vega-editor/',
-
-  // HTML to inject within view source head element
-  source_header: '',
-
-  // HTML to inject before view source closing body tag
-  source_footer: ''
-};
-
 var MODES = {
   'vega':      'vega',
   'vega-lite': 'vega-lite'
@@ -59,6 +48,17 @@ function embed(el, spec, opt) {
   var actions  = opt && (opt.actions !== undefined) ? opt.actions : true;
 
   opt = opt || {};
+
+  var embedConfig = Object.assign({
+    // URL for loading specs into editor
+    editorUrl: 'http://vega.github.io/editor/',
+
+    // HTML to inject within view source head element
+    sourceHeader: '',
+
+    // HTML to inject before view source closing body tag
+    sourceFooter: ''
+  }, opt.embedConfig || {})
 
   // Load the visualization specification.
   if (vega.isString(spec)) {
@@ -168,29 +168,21 @@ function embed(el, spec, opt) {
         .text('View Source')
         .attr('href', '#')
         .on('click', function() {
-          viewSource(JSON.stringify(spec, null, 2));
+          viewSource(JSON.stringify(spec, null, 2), embedConfig);
           d3.event.preventDefault();
         });
     }
 
     // add 'Open in Vega Editor' action
     if (actions.editor !== false) {
-      var linkName = actions && actions.editor && actions.editor.linkName || 'Open in Vega Editor';
-      var editorURL = actions && actions.editor && actions.editor.url || embedMain.config.editor_url;
-      var postingItem = actions && actions.editor && actions.editor.postingItem || {
-        spec: JSON.stringify(spec, null, 2),
-        mode: mode
-      };
-
       ctrl.append('a')
-        .text(linkName)
+        .text('Open in Vega Editor')
         .attr('href', '#')
         .on('click', function() {
-          if (postingItem) {
-            post(window, editorURL, postingItem);
-          } else {
-            window.open(editorURL);
-          }
+          post(window, embedConfig.editorUrl, {
+            spec: JSON.stringify(spec, null, 2),
+            mode: mode
+          });
           d3.event.preventDefault();
         });
     }
@@ -199,9 +191,9 @@ function embed(el, spec, opt) {
   return Promise.resolve({view: view, spec: spec});
 }
 
-function viewSource(source) {
-  var header = '<html><head>' + config.source_header + '</head>' + '<body><pre><code class="json">';
-  var footer = '</code></pre>' + config.source_footer + '</body></html>';
+function viewSource(source, embedConfig) {
+  var header = '<html><head>' + embedConfig.sourceHeader + '</head>' + '<body><pre><code class="json">';
+  var footer = '</code></pre>' + embedConfig.sourceFooter + '</body></html>';
   var win = window.open('');
   win.document.write(header + source + footer);
   win.document.title = 'Vega JSON Source';
@@ -222,10 +214,7 @@ function embedMain(el, spec, opt) {
   });
 }
 
-// make config externally visible
-embedMain.config = config;
-
-// expose vega and vegalite libs
+// expose Vega and Vega-Lite libs
 embedMain.vega = vega;
 embedMain.vegalite = vl;
 
