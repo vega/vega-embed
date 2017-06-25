@@ -17,18 +17,22 @@
     "name": "UW Interactive Data Lab",
     "url": "http://idl.cs.washington.edu"
   },
-  "contributors": [{
-    "name": "Jeffrey Heer",
-    "url": "https://homes.cs.washington.edu/~jheer/"
-  }, {
-    "name": "Arvind Satyanarayan",
-    "url": "http://arvindsatya.com"
-  }, {
-    "name": "Younghoon Kim"
-  }, {
-    "name": "Dominik Moritz",
-    "url": "https://www.domoritz.de"
-  },
+  "contributors": [
+    {
+      "name": "Jeffrey Heer",
+      "url": "https://homes.cs.washington.edu/~jheer/"
+    },
+    {
+      "name": "Arvind Satyanarayan",
+      "url": "http://arvindsatya.com"
+    },
+    {
+      "name": "Younghoon Kim"
+    },
+    {
+      "name": "Dominik Moritz",
+      "url": "https://www.domoritz.de"
+    },
     "Yuri Astrakhan <YuriAstrakhan@gmail.com>"
   ],
   "license": "BSD-3-Clause",
@@ -42,7 +46,8 @@
   },
   "dependencies": {
     "vega": "^3.0.0-beta.38",
-    "vega-lite": "^2.0.0-beta.4",
+    "vega-lite": "^2.0.0-beta.5",
+    "compare-versions": "^3.0.1",
     "d3-selection": "^1.1.0",
     "vega-schema-url-parser": "^1.0.0-beta.2"
   },
