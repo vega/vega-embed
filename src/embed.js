@@ -78,8 +78,8 @@ function embed(el, spec, opt) {
 
   vgSpec = PREPROCESSOR[mode](spec);
   if (mode === MODES['vega-lite']) {
-    if (spec.$schema) {
-      parsed = schemaParser(spec.$schema);
+    if (vgSpec.$schema) {
+      parsed = schemaParser(vgSpec.$schema);
 
       if (versionCompare(parsed.version, VERSION['vega']) > 0) {
         console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
@@ -93,7 +93,6 @@ function embed(el, spec, opt) {
   var div = d3.select(el)
     .classed('vega-embed', true)
     .html(''); // clear container
-
 
   if (opt.onBeforeParse) {
     // Allow Vega spec to be modified before being used
