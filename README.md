@@ -30,7 +30,9 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
-  vega.embed('#vis', spec);
+  vega.embed('#vis', spec).then(function(result) {
+    // access view as result.view
+  }).catch(console.error);
 </script>
 </body>
 </html>
