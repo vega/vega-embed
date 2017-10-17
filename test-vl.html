@@ -48,7 +48,7 @@
 
   vega.embed('#vis', spec, {config: config, actions: true}).then(function(result) {
     console.log(result);
-  });
+  }).catch(console.error);
 </script>
 </body>
 </html>

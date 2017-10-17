@@ -22,15 +22,14 @@ var PREPROCESSOR = {
 };
 
 function load(url, arg, prop, el) {
-  return vega.loader().load(url).then(function (data) {
-    if (!data) {
-      throw new Error('No data found at ' + url);
-    }
+  return vega.loader().load(url).then(function(data) {
     if (prop === 'config') {
       arg.opt.config = JSON.parse(data);
       return embed(el, arg.spec, arg.opt);
     }
     return embed(el, JSON.parse(data), arg);
+  }).catch(function(error) {
+    return Promise.reject(error);
   });
 }
 
