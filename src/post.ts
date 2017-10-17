@@ -1,9 +1,11 @@
-// open editor url in a new window, and pass a message
+/**
+ * Open editor url in a new window, and pass a message.
+ */
 export function post(window: Window, url: string, data: object) {
-  var editor = window.open(url),
-      wait = 10000,
-      step = 250,
-      count = ~~(wait/step);
+  const  editor = window.open(url);
+  const wait = 10000;
+  const step = 250;
+  let count = ~~(wait/step);
 
   function listen(evt) {
     if (evt.source === editor) {
