@@ -46,7 +46,7 @@ function embed(el, spec, opt) {
 
   // Load Vega theme/configuration.
   if (vega.isString(opt.config)) {
-    return loader.load(spec).then(function(data) {
+    return loader.load(opt.config).then(function(data) {
       opt.config = JSON.parse(data);
       return embed(el, spec, opt);
     }).catch(Promise.reject);
