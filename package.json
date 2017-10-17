@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -33,23 +33,25 @@
       "name": "Dominik Moritz",
       "url": "https://www.domoritz.de"
     },
-    "Yuri Astrakhan <YuriAstrakhan@gmail.com>"
+    {
+      "name": "Yuri Astrakhan"
+    }
   ],
   "license": "BSD-3-Clause",
   "main": "src/embed.js",
   "devDependencies": {
     "browserify": "^14.4.0",
     "browserify-shim": "^3.8.14",
-    "eslint": "^4.3.0",
-    "uglify-es": "^3.0.27",
+    "eslint": "^4.9.0",
+    "uglify-es": "^3.1.3",
     "watchify": "^3.9.0"
   },
   "peerDependencies": {
     "vega": "^3.0.0"
   },
   "dependencies": {
-    "vega-lite": "^2.0.0-beta.13",
-    "compare-versions": "^3.0.1",
+    "vega-lite": "^2.0.0-rc4",
+    "compare-versions": "^3.1.0",
     "d3-selection": "^1.1.0",
     "vega-schema-url-parser": "^1.0.0-beta.2"
   },
