@@ -64,6 +64,7 @@ var opt = {
   "mode": ...,
   "renderer" : ...,
   "onBeforeParse" : ...,
+  "loader": ...,
   "logLevel" : ...,
   "width" : ...,
   "height" : ...,
@@ -82,6 +83,7 @@ var opt = {
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. |
 |`onBeforeParse`| Function      | Modifies the spec before being parsed.|
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
+| `loader`      | Loader        | Sets a custom Vega loader. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
 | `width`       | Number        | Sets the view width in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_width) for details. Note that Vega-Lite overrides this option. |
 | `height`      | Number        | Sets the view height in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_height) for details. Note that Vega-Lite overrides this option. |
 | `padding`     | Object        | Sets the view padding in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_padding) for details. |

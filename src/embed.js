@@ -21,18 +21,6 @@ var PREPROCESSOR = {
   'vega-lite': function(vljson) { return vl.compile(vljson).spec; }
 };
 
-function load(url, arg, prop, el) {
-  return vega.loader().load(url).then(function(data) {
-    if (prop === 'config') {
-      arg.opt.config = JSON.parse(data);
-      return embed(el, arg.spec, arg.opt);
-    }
-    return embed(el, JSON.parse(data), arg);
-  }).catch(function(error) {
-    return Promise.reject(error);
-  });
-}
-
 /**
  * Embed a Vega visualization component in a web page.
  * This function will either throw an exception, or return a promise
@@ -47,14 +35,21 @@ function embed(el, spec, opt) {
   var renderer = opt.renderer || 'canvas';
   var actions  = opt.actions !== undefined ? opt.actions : true;
 
+  var loader = opt.loader || vega.loader();
+
   // Load the visualization specification.
   if (vega.isString(spec)) {
-    return load(spec, opt, 'url', el);
+    return loader.load(spec).then(function(data) {
+      return embed(el, JSON.parse(data), opt);
+    }).catch(Promise.reject);
   }
 
   // Load Vega theme/configuration.
   if (vega.isString(opt.config)) {
-    return load(opt.config, {spec: spec, opt: opt}, 'config', el);
+    return loader.load(spec).then(function(data) {
+      opt.config = JSON.parse(data);
+      return embed(el, spec, opt);
+    }).catch(Promise.reject);
   }
 
   // Decide mode
