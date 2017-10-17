@@ -64,7 +64,8 @@
     "lint": "eslint src/",
     "build": "browserify src/embed.js -t browserify-shim -d -s vega.embed > build/vega-embed.js",
     "postbuild": "uglifyjs vega-embed.js -cm > build/vega-embed.min.js",
-    "watch": "watchify src/embed.js -t browserify-shim -v -d -s vega.embed -o build/vega-embed.js"
+    "watch": "watchify src/embed.js -t browserify-shim -v -d -s vega.embed -o build/vega-embed.js",
+    "tsc": "tsc"
   },
   "browserify-shim": {
     "vega": "global:vega",

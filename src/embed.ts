@@ -1,9 +1,10 @@
-var d3 = require('d3-selection');
-var vega = require('vega');
-var vl = require('vega-lite');
-var post = require('./post');
-var versionCompare = require('compare-versions');
-var schemaParser = require('vega-schema-url-parser').default;
+import { TopLevelExtendedSpec } from 'vega-lite/build/src/spec';
+import * as d3 from 'd3-selection';
+import * as vega from 'vega';
+import * as vl from 'vega-lite';
+import { post } from './post';
+import { compareVersions } from './version';
+import schemaParser from 'vega-schema-url-parser';
 
 
 var MODES = {
@@ -62,7 +63,7 @@ function embed(el, spec, opt) {
     }
     mode = MODES[parsed.library];
 
-    if (versionCompare(parsed.version, VERSION[mode]) > 0) {
+    if (compareVersions(parsed.version, VERSION[mode]) > 0) {
       console.warn("The input spec uses \"" + mode + "\" " + parsed.version + ", "
                  + "but current version of \"" + mode + "\" is " + VERSION[mode] + ".");
     }
@@ -75,7 +76,7 @@ function embed(el, spec, opt) {
     if (vgSpec.$schema) {
       parsed = schemaParser(vgSpec.$schema);
 
-      if (versionCompare(parsed.version, VERSION['vega']) > 0) {
+      if (compareVersions(parsed.version, VERSION['vega']) > 0) {
         console.warn("The compiled spec uses \"vega\" " + parsed.version + ", "
                    + "but current version of \"vega\" is " + VERSION['vega'] + ".");
       }
@@ -137,7 +138,7 @@ function embed(el, spec, opt) {
         .attr('target', '_blank')
         .attr('download', (spec.name || 'vega') + '.' + ext)
         .on('mousedown', function() {
-          var that = this;
+          let that: any = this;
           view.toImageURL(ext).then(function(url) {
             that.href =  url;
           }).catch(function(error) { throw error; });

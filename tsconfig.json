@@ -5,7 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "preserveConstEnums": true,
     "noEmitOnError": true,
