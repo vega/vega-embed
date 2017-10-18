@@ -33,7 +33,9 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
   opt = opt || {};
   const actions  = opt.actions !== undefined ? opt.actions : true;
 
-  const loader: Loader = (opt.viewConfig && opt.viewConfig.loader) || vega.loader();
+  const loader: Loader = opt.loader || vega.loader();
+  const renderer = opt.renderer || 'canvas';
+  const logLevel = opt.logLevel || vega.Warn;
 
   // Load the visualization specification.
   if (vega.isString(spec)) {
@@ -98,9 +100,10 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
     return Promise.reject(err);
   }
 
-  const viewConfig = {logLevel: vega.Warn, renderer: 'canvas', ...(opt.viewConfig || {})};
-
-  const view = new vega.View(runtime, viewConfig)
+  const view = new vega.View(runtime)
+    .renderer(renderer)
+    .logLevel(logLevel)
+    .loader(loader)
     .initialize(el);
 
   // Vega-Lite does not need hover so we can improve perf by not activating it
@@ -129,7 +132,7 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
-      const ext = viewConfig.renderer === 'canvas' ? 'png' : 'svg';
+      const ext = renderer === 'canvas' ? 'png' : 'svg';
       ctrl.append('a')
         .text(`Export as ${ext.toUpperCase()}`)
         .attr('href', '#')
