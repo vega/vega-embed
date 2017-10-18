@@ -8,17 +8,17 @@ import { post } from './post';
 
 const NAMES = {
   'vega':      'Vega',
-  'vega-lite': 'Vega-Lite'
+  'vega-lite': 'Vega-Lite',
 };
 
 const VERSION = {
   'vega':      vega.version,
-  'vega-lite': vl ? vl.version : 'not available'
+  'vega-lite': vl ? vl.version : 'not available',
 };
 
 const PREPROCESSOR = {
   'vega':      vgjson => vgjson,
-  'vega-lite': vljson => vl.compile(vljson).spec
+  'vega-lite': vljson => vl.compile(vljson).spec,
 };
 
 /**
@@ -27,7 +27,7 @@ const PREPROCESSOR = {
  *
  * @param el        DOM element in which to place component (DOM node or CSS selector)
  * @param spec      String : A URL string from which to load the Vega specification.
-                    Object : The Vega/Vega-Lite specification as a parsed JSON object.
+ *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
 const embed: ExportFunction = (el: Element, spec: any, opt: Options) => {
@@ -40,7 +40,7 @@ const embed: ExportFunction = (el: Element, spec: any, opt: Options) => {
   // Load the visualization specification.
   if (vega.isString(spec)) {
     return loader.load(spec).then(
-      data => embed(el, JSON.parse(data), opt)
+      data => embed(el, JSON.parse(data), opt),
     ).catch(Promise.reject);
   }
 
@@ -110,13 +110,13 @@ const embed: ExportFunction = (el: Element, spec: any, opt: Options) => {
 
   if (opt) {
     if (opt.width) {
-      view.width(opt.width)
+      view.width(opt.width);
     }
     if (opt.height) {
-      view.height(opt.height)
+      view.height(opt.height);
     }
     if (opt.padding) {
-      view.padding(opt.padding)
+      view.padding(opt.padding);
     }
   }
 
@@ -156,22 +156,22 @@ const embed: ExportFunction = (el: Element, spec: any, opt: Options) => {
 
     // add 'Open in Vega Editor' action
     if (actions === true || actions.editor !== false) {
-      const editorUrl = opt.editorUrl || 'https://vega.github.io/editor/'
+      const editorUrl = opt.editorUrl || 'https://vega.github.io/editor/';
       ctrl.append('a')
         .text('Open in Vega Editor')
         .attr('href', '#')
         .on('click', () => {
           post(window, editorUrl, {
+            mode,
             spec: JSON.stringify(spec, null, 2),
-            mode: mode
           });
           d3.event.preventDefault();
         });
     }
   }
 
-  return Promise.resolve({view: view, spec: spec});
-}
+  return Promise.resolve({view, spec});
+};
 
 function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
   const header = `<html><head>${sourceHeader}</head>' + '<body><pre><code class="json">`;
@@ -186,7 +186,7 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string) 
  *
  * @param el        DOM element in which to place component (DOM node or CSS selector)
  * @param spec      String : A URL string from which to load the Vega specification.
- Object : The Vega/Vega-Lite specification as a parsed JSON object.
+ *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
 const embedMain: Export = (el: Element, spec, opt) => {
@@ -194,13 +194,13 @@ const embedMain: Export = (el: Element, spec, opt) => {
   return new Promise((accept, reject) => {
     embed(el, spec, opt).then(accept, reject);
   });
-}
+};
 
 embedMain.default = embedMain;
 
-// // expose Vega and Vega-Lite libs
-// (embedMain as any).vega = vega;
-// (embedMain as any).vl = vl;
+// expose Vega and Vega-Lite libs
+embedMain.vega = vega;
+embedMain.vl = vl;
 
 // for es6
 export = embedMain;
