@@ -16,7 +16,7 @@
     "lib": ["es6", "dom"]
   },
   "include": [
-    "typings/vega-embed.d.ts",
+    "typings/*.d.ts",
     "src/**/*.ts"
   ]
 }
