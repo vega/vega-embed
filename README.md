@@ -30,7 +30,7 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
-  vega.embed('#vis', spec).then(function(result) {
+  vegaEmbed('#vis', spec).then(function(result) {
     // access view as result.view
   }).catch(console.error);
 </script>
@@ -96,14 +96,10 @@ var opt = {
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 
-<a href="#embed.config" name="embed.config">#</a>
-vega.embed.<b>config</b>
-[<>](https://github.com/vega/vega-embed/blob/master/src/embed.js "Source")
-
 ## Build Process
 
 To build `vega-embed.js` and view the test examples, you must have [npm](https://www.npmjs.com/) installed.
 
 1. Run `npm install` in the Vega-Embed folder to install dependencies.
-2. Run `npm run build`. This will invoke [browserify](http://browserify.org/) to bundle the source files into `vega-embed.js`, and then [uglify-js](http://lisperator.net/uglifyjs/) to create the minified `vega-embed.min.js`.
+2. Run `npm run build`. This will invoke [browserify](http://browserify.org/) with [tsify](https://github.com/TypeStrong/tsify) to bundle the source files into `vega-embed.js`, and then [uglify-js](http://lisperator.net/uglifyjs/) to create the minified `vega-embed.min.js`.
 3. Run a local webserver (e.g., `python -m SimpleHTTPServer 8000`) in the Vega-Embed folder and then point your web browser at the test page (e.g., `http://localhost:8000/test.html`).
