@@ -1,8 +1,8 @@
 /**
  * Open editor url in a new window, and pass a message.
  */
-export function post(window: Window, url: string, data: object) {
-  const  editor = window.open(url);
+export function post(window: Window, url: string, data: any) {
+  const editor = window.open(url);
   const wait = 10000;
   const step = 250;
   let count = ~~(wait/step);

@@ -12,9 +12,11 @@
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "inlineSourceMap": true,
-    "typeRoots" : ["./typings", "node_modules/@types"]
+    "typeRoots" : ["./typings", "node_modules/@types"],
+    "lib": ["es6", "dom"]
   },
   "include": [
+    "typings/vega-embed.d.ts",
     "src/**/*.ts"
   ]
 }
