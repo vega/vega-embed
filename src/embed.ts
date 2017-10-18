@@ -31,10 +31,9 @@ const PREPROCESSOR = {
  */
 const embed: Export = (el: Element, spec: any, opt: Options) => {
   opt = opt || {};
-  const renderer = opt.renderer || 'canvas';
   const actions  = opt.actions !== undefined ? opt.actions : true;
 
-  const loader: Loader = opt.loader || vega.loader();
+  const loader: Loader = (opt.viewConfig && opt.viewConfig.loader) || vega.loader();
 
   // Load the visualization specification.
   if (vega.isString(spec)) {
@@ -44,8 +43,9 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
   }
 
   // Load Vega theme/configuration.
-  if (vega.isString(opt.config)) {
-    return loader.load(opt.config).then(data => {
+  const config = opt.config;
+  if (vega.isString(config)) {
+    return loader.load(config).then(data => {
       opt.config = JSON.parse(data);
       return embed(el, spec, opt);
     }).catch(Promise.reject);
@@ -91,16 +91,17 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
     vgSpec = opt.onBeforeParse(vgSpec);
   }
 
-  const runtime = vega.parse(vgSpec, opt.config); // may throw an Error if parsing fails
-
-  const viewConfig = opt.viewConfig || {};
-  if (viewConfig.logLevel === undefined) {
-    viewConfig.logLevel = vega.Warn;
+  let runtime;
+  try {
+    runtime = vega.parse(vgSpec, opt.config);  // may throw an Error if parsing fails
+  } catch (err) {
+    return Promise.reject(err);
   }
 
+  const viewConfig = {logLevel: vega.Warn, renderer: 'canvas', ...(opt.viewConfig || {})};
+
   const view = new vega.View(runtime, viewConfig)
-    .initialize(el)
-    .renderer(renderer);
+    .initialize(el);
 
   // Vega-Lite does not need hover so we can improve perf by not activating it
   if (mode !== 'vega-lite') {
@@ -128,7 +129,7 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
-      const ext = renderer === 'canvas' ? 'png' : 'svg';
+      const ext = viewConfig.renderer === 'canvas' ? 'png' : 'svg';
       ctrl.append('a')
         .text(`Export as ${ext.toUpperCase()}`)
         .attr('href', '#')
