@@ -5,7 +5,7 @@ export function post(window: Window, url: string, data: any) {
   const editor = window.open(url);
   const wait = 10000;
   const step = 250;
-  let count = ~~(wait/step);
+  let count = ~~(wait / step);
 
   function listen(evt) {
     if (evt.source === editor) {
@@ -18,10 +18,12 @@ export function post(window: Window, url: string, data: any) {
   // send message
   // periodically resend until ack received or timeout
   function send() {
-    if (count <= 0) return;
+    if (count <= 0) {
+      return;
+    }
     editor.postMessage(data, '*');
     setTimeout(send, step);
     count -= 1;
   }
   setTimeout(send, step);
-};
+}

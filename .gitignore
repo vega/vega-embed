@@ -1,10 +1,5 @@
 .DS_Store
 bower_components
 node_modules
-vega-embed-schema.json
-vega-embed.js
-vega-embed.js.map
-vega-embed.min.js
+build
 .idea/
-output
-temp

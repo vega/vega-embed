@@ -46,6 +46,7 @@
     "browserify-shim": "^3.8.14",
     "eslint": "^4.9.0",
     "tsify": "^3.0.3",
+    "tslint": "^5.7.0",
     "typescript": "^2.5.3",
     "uglify-es": "^3.1.3",
     "vega": "^3.0.0",
@@ -57,17 +58,17 @@
     "vega-lite": "^2.0.0-rc4"
   },
   "dependencies": {
-    "d3-selection": "^1.1.0",
     "compare-versions": "^3.1.0",
-    "vega-schema-url-parser": "^1.0.0-beta.2"
+    "d3-selection": "^1.1.0",
+    "vega-schema-url-parser": "^1.0.0-beta.3"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
-    "lint": "eslint src/",
     "build": "browserify src/embed.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed > build/vega-embed.js",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
     "watch": "watchify src/embed.ts -t browserify-shim -p [tsify -p site] -v -d -s vegaEmbed -o build/vega-embed.js",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "lint": "tslint -p ."
   },
   "browserify-shim": {
     "vega": "global:vega",

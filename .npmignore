@@ -1,7 +1,10 @@
 .DS_Store
 .gitignore
-.eslintrc
+.editorconfig
+tslint.json
+bower.json
+test-vg.json
+test-vl.json
 bower_components
 node_modules
 scripts
-test

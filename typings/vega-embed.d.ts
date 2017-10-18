@@ -21,7 +21,7 @@ declare type Options = {
 }
 
 declare type ExportFunction = (el: Element, spec: any, opt: Options) => Promise<{ view: any; spec: any; }>;
-declare type Export = ExportFunction & {default?: ExportFunction};
+declare type Export = ExportFunction & {default?: ExportFunction, vega?, vl?};
 
 declare module 'vega-embed' {
   export = Export;
