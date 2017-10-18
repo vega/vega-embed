@@ -22,15 +22,14 @@ const PREPROCESSOR = {
 };
 
 /**
- * Embed a Vega visualization component in a web page.
- * This function will either throw an exception, or return a promise
+ * Embed a Vega visualization component in a web page. This function returns a promise.
  *
- * @param el        DOM element in which to place component (DOM node or CSS selector)
+ * @param el        DOM element in which to place component (DOM node or CSS selector).
  * @param spec      String : A URL string from which to load the Vega specification.
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-const embed: ExportFunction = (el: Element, spec: any, opt: Options) => {
+const embed: Export = (el: Element, spec: any, opt: Options) => {
   opt = opt || {};
   const renderer = opt.renderer || 'canvas';
   const actions  = opt.actions !== undefined ? opt.actions : true;
@@ -181,26 +180,11 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string) 
   win.document.title = 'Vega JSON Source';
 }
 
-/**
- * Embed a Vega visualization component in a web page.
- *
- * @param el        DOM element in which to place component (DOM node or CSS selector)
- * @param spec      String : A URL string from which to load the Vega specification.
- *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
- * @param opt       A JavaScript object containing options for embedding.
- */
-const embedMain: Export = (el: Element, spec, opt) => {
-  // Ensure any exceptions will be properly handled
-  return new Promise((accept, reject) => {
-    embed(el, spec, opt).then(accept, reject);
-  });
-};
-
-embedMain.default = embedMain;
+embed.default = embed;
 
 // expose Vega and Vega-Lite libs
-embedMain.vega = vega;
-embedMain.vl = vl;
+embed.vega = vega;
+embed.vl = vl;
 
 // for es6
-export = embedMain;
+export = embed;
