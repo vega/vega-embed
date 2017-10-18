@@ -9,17 +9,15 @@ declare type Loader = {
 
 declare type Options = {
   actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean},
-  config?: string | any,
   mode?: Mode,
+  logLevel?: number,
+  loader?: Loader,
+  renderer?: 'canvas' | 'svg',
   onBeforeParse?: (spec: any) => void,
-  viewConfig?: {
-    logLevel?: number,
-    loader?: Loader,
-    renderer?: 'canvas' | 'svg',
-  },
   width?: number,
   height?: number,
   padding?: number | {left?: number, right?: number, top?: number, bottom?: number},
+  config?: string | any,
   sourceHeader?: string,
   sourceFooter?: string,
   editorUrl?: string
