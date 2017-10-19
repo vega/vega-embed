@@ -38,8 +38,10 @@
     }
   ],
   "license": "BSD-3-Clause",
-  "main": "src/embed.js",
-  "types": "typings/vega-embed.d.ts",
+  "main": "build/vega-embed.js",
+  "index": "build/embed",
+  "jsnext:main": "build/embed",
+  "types": "build/embed.d.ts",
   "devDependencies": {
     "@types/d3-selection": "^1.1.0",
     "browserify": "^14.4.0",
@@ -64,10 +66,10 @@
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
-    "build": "browserify src/embed.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed > build/vega-embed.js",
+    "prebuild": "tsc -p .",
+    "build": "browserify src/index.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed -o build/vega-embed.js",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
-    "watch": "watchify src/embed.ts -t browserify-shim -p [tsify -p site] -v -d -s vegaEmbed -o build/vega-embed.js",
-    "tsc": "tsc",
+    "watch": "watchify src/index.ts -t browserify-shim -p [tsify -p site] -v -d -s vegaEmbed -o build/vega-embed.js",
     "lint": "tslint -p ."
   },
   "browserify-shim": {
