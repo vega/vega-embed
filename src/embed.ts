@@ -6,6 +6,24 @@ import schemaParser from 'vega-schema-url-parser';
 
 import { post } from './post';
 
+export type Mode = 'vega' | 'vega-lite';
+
+export interface IEmbedOptions {
+  actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean};
+  mode?: Mode;
+  logLevel?: number;
+  loader?: vega.Loader;
+  renderer?: 'canvas' | 'svg';
+  onBeforeParse?: (spec: any) => void;
+  width?: number;
+  height?: number;
+  padding?: number | {left?: number, right?: number, top?: number, bottom?: number};
+  config?: string | any;
+  sourceHeader?: string;
+  sourceFooter?: string;
+  editorUrl?: string;
+}
+
 const NAMES = {
   'vega':      'Vega',
   'vega-lite': 'Vega-Lite',
@@ -29,12 +47,12 @@ const PREPROCESSOR = {
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-const embed: Export = (el: Element, spec: any, opt: Options) => {
+export default function embed(el: HTMLBaseElement | string, spec: any, opt: IEmbedOptions): Promise<{ view: vega.View; spec: any; }> {
   try {
     opt = opt || {};
     const actions  = opt.actions !== undefined ? opt.actions : true;
 
-    const loader: Loader = opt.loader || vega.loader();
+    const loader: vega.Loader = opt.loader || vega.loader();
     const renderer = opt.renderer || 'canvas';
     const logLevel = opt.logLevel || vega.Warn;
 
@@ -74,6 +92,7 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
     }
 
     let vgSpec = PREPROCESSOR[mode](spec);
+
     if (mode === 'vega-lite') {
       if (vgSpec.$schema) {
         parsed = schemaParser(vgSpec.$schema);
@@ -85,7 +104,7 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
     }
 
     // ensure container div has class 'vega-embed'
-    const div = d3.select(el)
+    const div = d3.select(el as any)  // d3.select supports elements and strings
       .classed('vega-embed', true)
       .html(''); // clear container
 
@@ -173,7 +192,7 @@ const embed: Export = (el: Element, spec: any, opt: Options) => {
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
   const header = `<html><head>${sourceHeader}</head>' + '<body><pre><code class="json">`;
@@ -182,12 +201,3 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string) 
   win.document.write(header + source + footer);
   win.document.title = 'Vega JSON Source';
 }
-
-embed.default = embed;
-
-// expose Vega and Vega-Lite libs
-embed.vega = vega;
-embed.vl = vl;
-
-// for es6
-export = embed;
