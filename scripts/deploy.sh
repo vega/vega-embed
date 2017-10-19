@@ -5,7 +5,7 @@ if [ ! -z "$(git status --porcelain)" ]; then
   echo "There are uncommitted files on master. Please commit or stash first!"
   git status
   exit 1
-fi 
+fi
 echo "All tracked files are commited. Publishing for npm & bower."
 
 # 0.2 generate build files
@@ -14,11 +14,11 @@ npm run build
 # 1. NPM PUBLISH
 npm publish
 
-# exit if npm publish failed 
+# exit if npm publish failed
 rc=$?
-if [[ $rc != 0 ]]; then 
+if [[ $rc != 0 ]]; then
   echo "npm publish failed. Publishing cancelled."
-  exit $rc; 
+  exit $rc;
 fi
 
 # 2. BOWER PUBLISH
@@ -30,7 +30,7 @@ version=$(npm list vega-embed | head -n 1 | sed 's/.*@//' | awk '{print $1}')
 git checkout head
 
 # add the compiled files, commit and tag!
-git add vega-embed* -f
+git add build/* -f
 git commit -m "Release $version $gitsha."
 git tag -am "Release v$version." "v$version"
 

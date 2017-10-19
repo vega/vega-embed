@@ -16,7 +16,10 @@
     "lib": ["es6", "dom"]
   },
   "include": [
-    "typings/*.d.ts",
+    "typings/vega.d.ts",
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
