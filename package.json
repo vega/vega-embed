@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "3.0.0-rc2",
+  "version": "3.0.0-rc3",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -38,9 +38,7 @@
     }
   ],
   "license": "BSD-3-Clause",
-  "main": "build/vega-embed.js",
-  "index": "build/embed",
-  "jsnext:main": "build/embed",
+  "main": "build/embed",
   "types": "build/embed.d.ts",
   "devDependencies": {
     "@types/d3-selection": "^1.1.0",
