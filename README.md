@@ -42,8 +42,8 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 ## API Reference
 
 <a href="#embed" name="embed">#</a>
-vega.<b>embed</b>(<i>el</i>, <i>embed_spec</i>[, <i>opt</i>])
-[<>](https://github.com/vega/vega-embed/blob/master/src/embed.js "Source")
+<b>embed</b>(<i>el</i>, <i>spec</i>[, <i>opt</i>])
+[<>](https://github.com/vega/vega-embed/blob/master/src/embed.ts "Source")
 
 Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)* that resolves to the instantiated [Vega `View` instance](https://github.com/vega/vega-view#vega-view) and a copy of the parsed JSON Vega spec. The `embed` function accepts the following arguments:
 
