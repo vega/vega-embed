@@ -1,8 +1,11 @@
 import * as versionCompare from 'compare-versions';
 import * as d3 from 'd3-selection';
-import * as vega from 'vega';
-import * as vl from 'vega-lite';
+import * as vegaImport from 'vega';
+import * as vlImport from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
+
+export const vega = vegaImport;
+export const vl = vlImport;
 
 import { post } from './post';
 
@@ -12,7 +15,7 @@ export interface IEmbedOptions {
   actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean};
   mode?: Mode;
   logLevel?: number;
-  loader?: vega.Loader;
+  loader?: vegaImport.Loader;
   renderer?: 'canvas' | 'svg';
   onBeforeParse?: (spec: any) => void;
   width?: number;
@@ -47,12 +50,12 @@ const PREPROCESSOR = {
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-export default function embed(el: HTMLBaseElement | string, spec: any, opt: IEmbedOptions): Promise<{ view: vega.View; spec: any; }> {
+export default function embed(el: HTMLBaseElement | string, spec: any, opt: IEmbedOptions): Promise<{ view: vegaImport.View; spec: any; }> {
   try {
     opt = opt || {};
     const actions  = opt.actions !== undefined ? opt.actions : true;
 
-    const loader: vega.Loader = opt.loader || vega.loader();
+    const loader: vegaImport.Loader = opt.loader || vega.loader();
     const renderer = opt.renderer || 'canvas';
     const logLevel = opt.logLevel || vega.Warn;
 
@@ -115,10 +118,7 @@ export default function embed(el: HTMLBaseElement | string, spec: any, opt: IEmb
 
     const runtime = vega.parse(vgSpec, opt.config);  // may throw an Error if parsing fails
 
-    const view = new vega.View(runtime)
-      .renderer(renderer)
-      .logLevel(logLevel)
-      .loader(loader)
+    const view = new vega.View(runtime, {loader, logLevel, renderer})
       .initialize(el);
 
     // Vega-Lite does not need hover so we can improve perf by not activating it
