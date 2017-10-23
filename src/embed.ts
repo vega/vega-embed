@@ -1,21 +1,28 @@
 import * as versionCompare from 'compare-versions';
 import * as d3 from 'd3-selection';
 import * as vegaImport from 'vega';
-import * as vlImport from 'vega-lite';
+import * as VegaLite from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 
 export const vega = vegaImport;
-export const vl = vlImport;
+export const vl = VegaLite;
 
 import { post } from './post';
 
 export type Mode = 'vega' | 'vega-lite';
 
-export interface IEmbedOptions {
+export interface Loader {
+  load: (uri: string, options?: any) => Promise<string>;
+  sanitize: (uri: string, options: any) => Promise<{href: string}>;
+  http: (uri: string, options: any) => Promise<string>;
+  file: (filename: string) => Promise<string>;
+}
+
+export interface EmbedOptions {
   actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean};
   mode?: Mode;
   logLevel?: number;
-  loader?: vegaImport.Loader;
+  loader?: Loader;
   renderer?: 'canvas' | 'svg';
   onBeforeParse?: (spec: any) => void;
   width?: number;
@@ -50,12 +57,12 @@ const PREPROCESSOR = {
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-export default function embed(el: HTMLBaseElement | string, spec: any, opt: IEmbedOptions): Promise<{ view: vegaImport.View; spec: any; }> {
+export default function embed(el: HTMLBaseElement | string, spec: any, opt: EmbedOptions): Promise<{ view: any; spec: any; }> {
   try {
     opt = opt || {};
     const actions  = opt.actions !== undefined ? opt.actions : true;
 
-    const loader: vegaImport.Loader = opt.loader || vega.loader();
+    const loader: Loader = opt.loader || vega.loader();
     const renderer = opt.renderer || 'canvas';
     const logLevel = opt.logLevel || vega.Warn;
 
