@@ -54,7 +54,7 @@
   "dependencies": {
     "compare-versions": "^3.1.0",
     "d3-selection": "^1.1.0",
-    "vega": "^3.0.6",
+    "vega": "^3.0.0",
     "vega-lite": "^2.0.0-rc5",
     "vega-schema-url-parser": "^1.0.0-beta.3"
   },
