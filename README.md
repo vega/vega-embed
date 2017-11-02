@@ -18,7 +18,7 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Import Vega 3 & Vega-Lite 2 js (does not have to be from cdn) -->
+  <!-- Import Vega 3 & Vega-Lite 2 (does not have to be from CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/[VERSION]/vega.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/[VERSION]/vega-lite.js"></script>
   <!-- Import vega-embed -->
@@ -37,6 +37,8 @@ You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](htt
 </body>
 </html>
 ```
+
+Look at an example online at [Vega-Embed Block](https://bl.ocks.org/domoritz/455e1c7872c4b38a58b90df0c3d7b1b9).
 
 
 ## API Reference
