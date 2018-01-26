@@ -39,6 +39,8 @@
   ],
   "license": "BSD-3-Clause",
   "main": "build/embed",
+  "unpkg": "build/vega-embed.min.js",
+  "jsdelivr": "build/vega-embed.min.js",
   "types": "build/embed.d.ts",
   "devDependencies": {
     "@types/d3-selection": "^1.1.0",
