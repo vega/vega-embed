@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "3.0.0-rc7",
+  "version": "3.0.0-rc8",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -43,22 +43,22 @@
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/embed.d.ts",
   "devDependencies": {
-    "@types/d3-selection": "^1.1.0",
-    "browserify": "^14.5.0",
+    "@types/d3-selection": "^1.2.0",
+    "browserify": "^15.2.0",
     "browserify-shim": "^3.8.14",
-    "eslint": "^4.9.0",
-    "tsify": "^3.0.3",
-    "tslint": "^5.8.0",
-    "typescript": "^2.5.3",
-    "uglify-es": "^3.1.5",
+    "eslint": "^4.16.0",
+    "tsify": "^3.0.4",
+    "tslint": "^5.9.1",
+    "typescript": "^2.6.2",
+    "uglify-es": "^3.3.8",
     "watchify": "^3.9.0"
   },
   "dependencies": {
     "compare-versions": "^3.1.0",
-    "d3-selection": "^1.1.0",
+    "d3-selection": "^1.2.0",
     "vega": "^3.0.0",
     "vega-lite": "^2.0.0",
-    "vega-schema-url-parser": "^1.0.0-beta.3"
+    "vega-schema-url-parser": "^1.0.0"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
