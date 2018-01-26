@@ -12,17 +12,17 @@ _As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/P
 
 ## Basic Example
 
-You can import Vega-Embed from a local copy or (as shown below) [from CDNJS](https://cdnjs.com/libraries/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://cdnjs.com/libraries/vega), [Vega-Lite](https://cdnjs.com/libraries/vega), and [Vega-Embed](https://cdnjs.com/libraries/vega-embed) versions.
+You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](hhttps://www.jsdelivr.com/package/npm/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://www.jsdelivr.com/package/npm/vega), [Vega-Lite](https://www.jsdelivr.com/package/npm/vega-lite), and [Vega-Embed](https://www.jsdelivr.com/package/npm/vega-embed) versions.
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
   <!-- Import Vega 3 & Vega-Lite 2 (does not have to be from CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/[VERSION]/vega.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/[VERSION]/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@[VERSION]"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@[VERSION]"></script>
   <!-- Import vega-embed -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/[VERSION]/vega-embed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@[VERSION]"></script>
 </head>
 <body>
 
