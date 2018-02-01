@@ -112,3 +112,7 @@ To build `vega-embed.js` and view the test examples, you must have [npm](https:/
 1. Run `npm install` in the Vega-Embed folder to install dependencies.
 2. Run `npm run build`. This will invoke [browserify](http://browserify.org/) with [tsify](https://github.com/TypeStrong/tsify) to bundle the source files into `vega-embed.js`, and then [uglify-js](http://lisperator.net/uglifyjs/) to create the minified `vega-embed.min.js`.
 3. Run a local webserver (e.g., `python -m SimpleHTTPServer 8000`) in the Vega-Embed folder and then point your web browser at the test page (e.g., `http://localhost:8000/test.html`).
+
+## Usage in Observable
+
+Check out [this example](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
