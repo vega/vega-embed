@@ -202,7 +202,7 @@ export default function embed(el: HTMLBaseElement | string, spec: any, opt: Embe
 }
 
 function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
-  const header = `<html><head>${sourceHeader}</head>' + '<body><pre><code class="json">`;
+  const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
   const footer = `</code></pre>${sourceFooter}</body></html>`;
   const win = window.open('');
   win.document.write(header + source + footer);
