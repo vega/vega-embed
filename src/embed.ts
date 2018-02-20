@@ -46,7 +46,7 @@ const VERSION = {
 
 const PREPROCESSOR = {
   'vega':      vgjson => vgjson,
-  'vega-lite': vljson => vl.compile(vljson).spec,
+  'vega-lite': (vljson, config) => vl.compile(vljson, config).spec,
 };
 
 /**
@@ -101,7 +101,7 @@ export default function embed(el: HTMLBaseElement | string, spec: any, opt: Embe
       mode = opt.mode || 'vega';
     }
 
-    let vgSpec = PREPROCESSOR[mode](spec);
+    let vgSpec = PREPROCESSOR[mode](spec, config);
 
     if (mode === 'vega-lite') {
       if (vgSpec.$schema) {
