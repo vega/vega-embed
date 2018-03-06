@@ -1,13 +1,15 @@
 import * as versionCompare from 'compare-versions';
 import * as d3 from 'd3-selection';
-import * as vegaImport from 'vega';
+import * as vegaImport from 'vega-lib';
 import * as VegaLite from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 
+import { Spec, View } from 'vega-lib';
+import { TopLevelExtendedSpec } from 'vega-lite/build/src/spec';
+import { post } from './post';
+
 export const vega = vegaImport;
 export const vl = VegaLite;
-
-import { post } from './post';
 
 export type Mode = 'vega' | 'vega-lite';
 
@@ -49,6 +51,8 @@ const PREPROCESSOR = {
   'vega-lite': vljson => vl.compile(vljson).spec,
 };
 
+export type VisualizationSpec = TopLevelExtendedSpec | Spec;
+
 /**
  * Embed a Vega visualization component in a web page. This function returns a promise.
  *
@@ -57,7 +61,7 @@ const PREPROCESSOR = {
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-export default function embed(el: HTMLBaseElement | string, spec: any, opt: EmbedOptions): Promise<{ view: any; spec: any; }> {
+export default function embed(el: HTMLBaseElement | string, spec: string | VisualizationSpec, opt: EmbedOptions): Promise<{} | { view: View; spec: VisualizationSpec }> {
   try {
     opt = opt || {};
     const actions  = opt.actions !== undefined ? opt.actions : true;
@@ -159,7 +163,7 @@ export default function embed(el: HTMLBaseElement | string, spec: any, opt: Embe
           .text(`Export as ${ext.toUpperCase()}`)
           .attr('href', '#')
           .attr('target', '_blank')
-          .attr('download', (spec.name || 'vega') + '.' + ext)
+          .attr('download', `visualization.${ext}`)
           .on('mousedown', function(this: HTMLLinkElement) {
             view.toImageURL(ext).then(url => {
               this.href =  url;

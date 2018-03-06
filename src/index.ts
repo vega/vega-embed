@@ -1,4 +1,4 @@
-import * as vega from 'vega';
+import * as vega from 'vega-lib';
 import * as vl from 'vega-lite';
 
 import embed from './embed';
