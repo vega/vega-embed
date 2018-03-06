@@ -42,7 +42,7 @@ const VERSION = {
 
 const PREPROCESSOR = {
   'vega':      (vgjson, _) => vgjson,
-  'vega-lite': (vljson, config) => vl.compile(vljson, config).spec,
+  'vega-lite': (vljson, config) => vl.compile(vljson, {config}).spec,
 };
 
 export type VisualizationSpec = VlSpec | VgSpec;
@@ -121,7 +121,9 @@ export default function embed(el: HTMLBaseElement | string, spec: string | Visua
       vgSpec = opt.onBeforeParse(vgSpec);
     }
 
-    const runtime = vega.parse(vgSpec, opt.config);  // may throw an Error if parsing fails
+    // Do not apply the config to Vega when we have already applied it to Vega-Lite.
+    // This call may throw an Error if parsing fails.
+    const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : config);
 
     const view = new vega.View(runtime, {loader, logLevel, renderer})
       .initialize(el);
