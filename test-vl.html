@@ -11,7 +11,7 @@
 <body>
 
 <div id="vis"></div>
-<script src="node_modules/vega/build/vega.js" charset="utf-8"></script>
+<script src="node_modules/vega-lib/build/vega.js" charset="utf-8"></script>
 <script src="node_modules/vega-lite/build/vega-lite.js" charset="utf-8"></script>
 <script type="text/javascript" src="build/vega-embed.js"></script>
 <script type="text/javascript">
@@ -19,6 +19,12 @@
     // default view background color
     // covers the entire view component
     background: "#efefef",
+    axis: {
+      labelFont: "serif",
+      labelFontSize: 16,
+      tickWidth: 3,
+      tickColor: "red"
+    }
   };
 
   var spec = {
@@ -35,14 +41,6 @@
     "encoding": {
       "x": {"field": "a", "type": "ordinal"},
       "y": {"field": "b", "type": "quantitative"}
-    },
-    "config": {
-      "axis": {
-        "labelFont": "serif",
-        "labelFontSize": 16,
-        "tickWidth": 3,
-        "tickColor": "red"
-      }
     }
   }
 

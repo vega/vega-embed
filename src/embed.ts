@@ -4,8 +4,9 @@ import * as vegaImport from 'vega-lib';
 import * as VegaLite from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 
-import { Spec, View } from 'vega-lib';
-import { TopLevelExtendedSpec } from 'vega-lite/build/src/spec';
+import { Config as VgConfig, Loader, Spec as VgSpec, View } from 'vega-lib';
+import { Config as VlConfig } from 'vega-lite/build/src/config';
+import { TopLevelExtendedSpec as VlSpec } from 'vega-lite/build/src/spec';
 import { post } from './post';
 
 export const vega = vegaImport;
@@ -13,24 +14,17 @@ export const vl = VegaLite;
 
 export type Mode = 'vega' | 'vega-lite';
 
-export interface Loader {
-  load: (uri: string, options?: any) => Promise<string>;
-  sanitize: (uri: string, options: any) => Promise<{href: string}>;
-  http: (uri: string, options: any) => Promise<string>;
-  file: (filename: string) => Promise<string>;
-}
-
 export interface EmbedOptions {
   actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean};
   mode?: Mode;
   logLevel?: number;
   loader?: Loader;
   renderer?: 'canvas' | 'svg';
-  onBeforeParse?: (spec: any) => void;
+  onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
   height?: number;
   padding?: number | {left?: number, right?: number, top?: number, bottom?: number};
-  config?: string | any;
+  config?: string | VlConfig | VgConfig;
   sourceHeader?: string;
   sourceFooter?: string;
   editorUrl?: string;
@@ -47,11 +41,11 @@ const VERSION = {
 };
 
 const PREPROCESSOR = {
-  'vega':      vgjson => vgjson,
-  'vega-lite': vljson => vl.compile(vljson).spec,
+  'vega':      (vgjson, _) => vgjson,
+  'vega-lite': (vljson, config) => vl.compile(vljson, config).spec,
 };
 
-export type VisualizationSpec = TopLevelExtendedSpec | Spec;
+export type VisualizationSpec = VlSpec | VgSpec;
 
 /**
  * Embed a Vega visualization component in a web page. This function returns a promise.
@@ -105,7 +99,7 @@ export default function embed(el: HTMLBaseElement | string, spec: string | Visua
       mode = opt.mode || 'vega';
     }
 
-    let vgSpec = PREPROCESSOR[mode](spec);
+    let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config);
 
     if (mode === 'vega-lite') {
       if (vgSpec.$schema) {

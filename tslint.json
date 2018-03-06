@@ -5,7 +5,7 @@
   },
   "defaultSeverity": "error",
   "extends": [
-      "tslint:recommended"
+    "tslint:recommended"
   ],
   "rules": {
     "quotemark": [true, "single"],
