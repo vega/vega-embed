@@ -5,8 +5,7 @@ import * as VegaLite from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 
 import { Config as VgConfig, Loader, Spec as VgSpec, View } from 'vega-lib';
-import { Config as VlConfig } from 'vega-lite/build/src/config';
-import { TopLevelExtendedSpec as VlSpec } from 'vega-lite/build/src/spec';
+import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import { post } from './post';
 
 export const vega = vegaImport;
@@ -47,6 +46,8 @@ const PREPROCESSOR = {
 
 export type VisualizationSpec = VlSpec | VgSpec;
 
+export type Result = Promise<{ view: View; spec: VisualizationSpec }>;
+
 /**
  * Embed a Vega visualization component in a web page. This function returns a promise.
  *
@@ -55,7 +56,7 @@ export type VisualizationSpec = VlSpec | VgSpec;
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-export default function embed(el: HTMLBaseElement | string, spec: string | VisualizationSpec, opt: EmbedOptions): Promise<{} | { view: View; spec: VisualizationSpec }> {
+export default function embed(el: HTMLBaseElement | string, spec: string | VisualizationSpec, opt: EmbedOptions): Result {
   try {
     opt = opt || {};
     const actions  = opt.actions !== undefined ? opt.actions : true;
@@ -68,16 +69,15 @@ export default function embed(el: HTMLBaseElement | string, spec: string | Visua
     if (vega.isString(spec)) {
       return loader.load(spec).then(
         data => embed(el, JSON.parse(data), opt),
-      ).catch(Promise.reject);
+      ).catch(Promise.reject) as Result;
     }
 
     // Load Vega theme/configuration.
     const config = opt.config;
     if (vega.isString(config)) {
-      return loader.load(config).then(data => {
-        opt.config = JSON.parse(data);
-        return embed(el, spec, opt);
-      }).catch(Promise.reject);
+      return loader.load(config).then(
+        data => embed(el, spec, {...opt, config: JSON.parse(data)}),
+      ).catch(Promise.reject) as Result;
     }
 
     // Decide mode

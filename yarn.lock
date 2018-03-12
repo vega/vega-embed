@@ -51,8 +51,8 @@ acorn@^4.0.3:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
 acorn@^5.2.1, acorn@^5.4.1, acorn@^5.5.0:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.0.tgz#1abb587fbf051f94e3de20e6b26ef910b1828298"
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.3.tgz#f473dd47e0277a08e28e9bec5aeeb04751f0b8c9"
 
 ajv-keywords@^2.1.0:
   version "2.1.1"
@@ -364,9 +364,9 @@ browserify-zlib@~0.2.0:
   dependencies:
     pako "~1.0.5"
 
-browserify@^16.1.0:
-  version "16.1.0"
-  resolved "https://registry.yarnpkg.com/browserify/-/browserify-16.1.0.tgz#00b86844f89482bbd0d5d1b584b324762ef3f698"
+browserify@^16.1.0, browserify@^16.1.1:
+  version "16.1.1"
+  resolved "https://registry.yarnpkg.com/browserify/-/browserify-16.1.1.tgz#7905ec07e0147c4d90f92001944050a6e1c2844e"
   dependencies:
     JSONStream "^1.0.3"
     assert "^1.4.0"
@@ -567,8 +567,8 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
     delayed-stream "~1.0.0"
 
 commander@2, commander@^2.12.1:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
 
 commander@~2.13.0:
   version "2.13.0"
@@ -1758,8 +1758,8 @@ lodash@^4.17.4, lodash@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
 lru-cache@^4.0.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.1.tgz#622e32e82488b49279114a4f9ecf45e7cd6bba55"
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.2.tgz#45234b2e6e2f2b33da125624c4664929a0224c3f"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
@@ -2796,8 +2796,8 @@ uid-number@^0.0.6:
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
 umd@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/umd/-/umd-3.0.1.tgz#8ae556e11011f63c2596708a8837259f01b3d60e"
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/umd/-/umd-3.0.2.tgz#95bdbc6d3983050df600431f44e5faeb4b7b3d45"
 
 url@~0.11.0:
   version "0.11.0"
@@ -2888,9 +2888,9 @@ vega-hierarchy@^2.1:
     vega-dataflow "3"
     vega-util "1"
 
-vega-lib@^3.0.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/vega-lib/-/vega-lib-3.2.0.tgz#9196ff176713f769d303fbb54cba38c49b62df6f"
+vega-lib@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/vega-lib/-/vega-lib-3.2.1.tgz#feca4b054a0db492f92fd555e6c20be3f3c117d0"
   dependencies:
     vega-crossfilter "2"
     vega-dataflow "3"
@@ -2914,14 +2914,15 @@ vega-lib@^3.0.0:
     vega-voronoi "2"
     vega-wordcloud "^2.1"
 
-vega-lite@^2.0.0:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-2.1.3.tgz#af31a9c003a2184a5f87fdbfab9ea4f9134178e3"
+vega-lite@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-2.3.1.tgz#a7abd16ef7d06b3f8ed8c873bca4be5c4a577369"
   dependencies:
     "@types/json-stable-stringify" "^1.0.32"
     json-stable-stringify "^1.0.1"
     tslib "^1.9.0"
     vega-event-selector "^2.0.0"
+    vega-typings "^0.2.11"
     vega-util "^1.7.0"
     yargs "^11.0.0"
 
@@ -2936,8 +2937,8 @@ vega-loader@2:
     vega-util "1"
 
 vega-parser@2, vega-parser@^2.5:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-2.6.0.tgz#d0f29bacf80a6b22331b637b48ae4f31499e60aa"
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-2.6.1.tgz#7cde99153392c7452c53cac2c9d0726aead72912"
   dependencies:
     d3-array "1"
     d3-color "1"
@@ -3005,9 +3006,9 @@ vega-transforms@^1.2:
     vega-statistics "^1.2"
     vega-util "1"
 
-vega-typings@*, vega-typings@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.2.9.tgz#e52d1ed5792eed6097807876c419831e52eea053"
+vega-typings@*, vega-typings@^0.2.11:
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.2.11.tgz#efc86024e50d69b120dc66165fb654caaa4dbbe5"
   dependencies:
     prettier "^1.10.2"
 
