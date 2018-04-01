@@ -1,9 +1,9 @@
-import { Mode } from './embed';
+import { Mode, Renderer } from './embed';
 
 /**
  * Open editor url in a new window, and pass a message.
  */
-export function post(window: Window, url: string, data: {mode: Mode, spec: string}) {
+export function post(window: Window, url: string, data: {mode: Mode, renderer: Renderer, spec: string}) {
   const editor = window.open(url);
   const wait = 10000;
   const step = 250;
