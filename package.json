@@ -23,15 +23,15 @@
       "url": "https://homes.cs.washington.edu/~jheer/"
     },
     {
+      "name": "Dominik Moritz",
+      "url": "https://www.domoritz.de"
+    },
+    {
       "name": "Arvind Satyanarayan",
       "url": "http://arvindsatya.com"
     },
     {
       "name": "Younghoon Kim"
-    },
-    {
-      "name": "Dominik Moritz",
-      "url": "https://www.domoritz.de"
     },
     {
       "name": "Yuri Astrakhan"
@@ -46,10 +46,9 @@
     "@types/d3-selection": "^1.3.0",
     "browserify": "^16.1.1",
     "browserify-shim": "^3.8.14",
-    "eslint": "^4.18.2",
     "tsify": "^3.0.4",
     "tslint": "^5.9.1",
-    "typescript": "^2.7.2",
+    "typescript": "^2.8.1",
     "uglify-es": "^3.3.9",
     "watchify": "^3.11.0"
   },
@@ -66,7 +65,8 @@
     "prebuild": "tsc -p .",
     "build": "browserify src/index.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed -o build/vega-embed.js",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
-    "lint": "tslint -p ."
+    "lint": "tslint -p .",
+    "start": "python -m http.server"
   },
   "browserify-shim": {
     "vega-lib": "global:vega",
