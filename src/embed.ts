@@ -12,13 +12,14 @@ export const vega = vegaImport;
 export const vl = VegaLite;
 
 export type Mode = 'vega' | 'vega-lite';
+export type Renderer = 'canvas' | 'svg';
 
 export interface EmbedOptions {
   actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean};
   mode?: Mode;
   logLevel?: number;
   loader?: Loader;
-  renderer?: 'canvas' | 'svg';
+  renderer?: Renderer;
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
   height?: number;
@@ -193,6 +194,7 @@ export default async function embed(el: HTMLBaseElement | string, spec: string |
         .on('click', () => {
           post(window, editorUrl, {
             mode,
+            renderer,
             spec: JSON.stringify(spec, null, 2),
           });
           d3.event.preventDefault();
