@@ -61,7 +61,7 @@ export interface Result {
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-export default async function embed(el: HTMLBaseElement | string, spec: string | VisualizationSpec, opt: EmbedOptions): Promise<Result> {
+export default async function embed(el: HTMLElement | string, spec: string | VisualizationSpec, opt: EmbedOptions): Promise<Result> {
   opt = opt || {};
   const actions  = opt.actions !== undefined ? opt.actions : true;
 
