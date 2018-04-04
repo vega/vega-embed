@@ -58,7 +58,7 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 
-### Vega Embed `opt` Specification Reference
+### Vega-Embed Options
 
 ```js
 var opt = {
