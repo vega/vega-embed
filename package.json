@@ -39,42 +39,41 @@
   ],
   "license": "BSD-3-Clause",
   "main": "build/embed.js",
+  "module": "build/index.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/embed.d.ts",
   "devDependencies": {
     "@types/d3-selection": "^1.3.0",
-    "browserify": "^16.2.0",
-    "browserify-shim": "^3.8.14",
+    "browser-sync": "^2.23.7",
+    "concurrently": "^3.5.1",
     "prettier": "^1.12.1",
-    "tsify": "^4.0.0",
+    "rollup": "^0.58.1",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.12.0",
     "typescript": "^2.8.3",
-    "uglify-es": "^3.3.9",
-    "watchify": "^3.11.0"
+    "uglify-es": "^3.3.9"
   },
   "dependencies": {
     "compare-versions": "^3.1.0",
     "d3-selection": "^1.3.0",
-    "json-stringify-pretty-compact": "^1.1.0",
-    "vega-lib": "^3.3.0",
+    "json-stringify-pretty-compact": "^1.2.0",
+    "vega-lib": "^3.3.1",
     "vega-lite": "^2.3.1",
     "vega-schema-url-parser": "^1.0.0"
   },
   "scripts": {
-    "build": "browserify src/index.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed -o build/vega-embed.js",
-    "format:check": "prettier --list-different src/*",
-    "format": "prettier --write src/*",
-    "lint": "npm run format:check && tslint -p .",
+    "build": "rollup -c",
+    "clean": "rm -rf build && mkdir build",
+    "deploy": "npm run lint && scripts/deploy.sh",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
-    "prebuild": "tsc -p .",
+    "prebuild": "npm run clean && tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
-    "start": "python -m http.server"
-  },
-  "browserify-shim": {
-    "vega-lib": "global:vega",
-    "vega-lite": "global:vl"
+    "serve": "browser-sync start --directory -s -f build *.html",
+    "start": "concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'"
   }
 }

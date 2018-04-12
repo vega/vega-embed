@@ -1,16 +1,20 @@
-import * as versionCompare from 'compare-versions';
+import versionCompare_ from 'compare-versions';
 import * as d3 from 'd3-selection';
-import * as stringify from 'json-stringify-pretty-compact';
+import * as stringify_ from 'json-stringify-pretty-compact';
 import * as vegaImport from 'vega-lib';
-import * as VegaLite from 'vega-lite';
+import * as vlImport from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 
 import { Config as VgConfig, Loader, Spec as VgSpec, View } from 'vega-lib';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import { post } from './post';
 
+// https://github.com/rollup/rollup/issues/670
+const versionCompare = versionCompare_.default || versionCompare_;
+const stringify: typeof stringify_ = (stringify_ as any).default || stringify_;
+
 export const vega = vegaImport;
-export const vl = VegaLite;
+export const vl = vlImport;
 
 export type Mode = 'vega' | 'vega-lite';
 export type Renderer = 'canvas' | 'svg';
@@ -53,6 +57,14 @@ export type VisualizationSpec = VlSpec | VgSpec;
 export interface Result {
   view: View;
   spec: VisualizationSpec;
+}
+
+function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
+  const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
+  const footer = `</code></pre>${sourceFooter}</body></html>`;
+  const win = window.open('');
+  win.document.write(header + source + footer);
+  win.document.title = 'Vega JSON Source';
 }
 
 /**
@@ -224,12 +236,4 @@ export default async function embed(
   }
 
   return { view, spec };
-}
-
-function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
-  const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
-  const footer = `</code></pre>${sourceFooter}</body></html>`;
-  const win = window.open('');
-  win.document.write(header + source + footer);
-  win.document.title = 'Vega JSON Source';
 }

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./build",
     "target": "es5",
-    "module": "commonjs",
+    "module": "ES2015",
     "moduleResolution": "node",
     "declaration": true,
     "noImplicitAny": false,
@@ -11,7 +11,8 @@
     "noEmitOnError": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
-    "inlineSourceMap": true,
+    "sourceMap": true,
+    "importHelpers": true,
     "lib": ["es6", "dom"]
   },
   "include": [
