@@ -4,9 +4,14 @@
       "files": "*.ts",
       "options": {
         "printWidth": 120,
-        "parser": "typescript",
         "singleQuote": true,
         "trailingComma": "es5"
+      }
+    },
+    {
+      "files": "*.js",
+      "options": {
+        "singleQuote": true
       }
     }
   ]

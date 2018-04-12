@@ -1,18 +1,7 @@
-import * as vega from 'vega-lib';
-import * as vl from 'vega-lite';
+import embed, { vega, vl } from './embed';
 
-import embed from './embed';
+(embed as any).vl = vl;
+(embed as any).vega = vega;
+(embed as any).default = embed;
 
-const embedModule: typeof embed & {
-  default?: typeof embed;
-  vega?;
-  vl?;
-} = embed;
-
-embedModule.default = embed;
-
-// expose Vega and Vega-Lite libs
-embedModule.vega = vega;
-embedModule.vl = vl;
-
-export = embedModule;
+export default embed;
