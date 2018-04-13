@@ -13,7 +13,6 @@ export const vl = VegaLite;
 
 export type Mode = 'vega' | 'vega-lite';
 export type Renderer = 'canvas' | 'svg';
-export type Config = string | VlConfig | VgConfig;
 
 export interface EmbedOptions {
   actions?: boolean | { export?: boolean; source?: boolean; editor?: boolean };
@@ -24,8 +23,8 @@ export interface EmbedOptions {
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
   height?: number;
-  padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
-  config?: Config;
+  padding?: number | {left?: number, right?: number, top?: number, bottom?: number};
+  config?: string | VlConfig | VgConfig;
   sourceHeader?: string;
   sourceFooter?: string;
   editorUrl?: string;
@@ -215,7 +214,7 @@ export default async function embed(
         .attr('href', '#')
         .on('click', () => {
           post(window, editorUrl, {
-            config,
+            config: mode === 'vega-lite' ? JSON.stringify(config, null, 2) : null,
             mode,
             renderer,
             spec: JSON.stringify(spec, null, 2),
