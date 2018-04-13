@@ -23,7 +23,7 @@ export interface EmbedOptions {
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
   height?: number;
-  padding?: number | {left?: number, right?: number, top?: number, bottom?: number};
+  padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
   config?: string | VlConfig | VgConfig;
   sourceHeader?: string;
   sourceFooter?: string;
@@ -214,7 +214,7 @@ export default async function embed(
         .attr('href', '#')
         .on('click', () => {
           post(window, editorUrl, {
-            config: mode === 'vega-lite' ? JSON.stringify(config, null, 2) : null,
+            config: config ? JSON.stringify(config, null, 2) : null,
             mode,
             renderer,
             spec: JSON.stringify(spec, null, 2),
