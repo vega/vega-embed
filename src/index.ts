@@ -3,7 +3,11 @@ import * as vl from 'vega-lite';
 
 import embed from './embed';
 
-const embedModule: typeof embed & {default?: typeof embed, vega?, vl?} = embed;
+const embedModule: typeof embed & {
+  default?: typeof embed;
+  vega?;
+  vl?;
+} = embed;
 
 embedModule.default = embed;
 

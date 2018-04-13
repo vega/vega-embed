@@ -15,7 +15,7 @@ export type Mode = 'vega' | 'vega-lite';
 export type Renderer = 'canvas' | 'svg';
 
 export interface EmbedOptions {
-  actions?: boolean | {export?: boolean, source?: boolean, editor?: boolean};
+  actions?: boolean | { export?: boolean; source?: boolean; editor?: boolean };
   mode?: Mode;
   logLevel?: number;
   loader?: Loader;
@@ -23,7 +23,7 @@ export interface EmbedOptions {
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
   height?: number;
-  padding?: number | {left?: number, right?: number, top?: number, bottom?: number};
+  padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
   config?: string | VlConfig | VgConfig;
   sourceHeader?: string;
   sourceFooter?: string;
@@ -32,18 +32,18 @@ export interface EmbedOptions {
 }
 
 const NAMES = {
-  'vega':      'Vega',
+  vega: 'Vega',
   'vega-lite': 'Vega-Lite',
 };
 
 const VERSION = {
-  'vega':      vega.version,
+  vega: vega.version,
   'vega-lite': vl ? vl.version : 'not available',
 };
 
 const PREPROCESSOR = {
-  'vega':      (vgjson, _) => vgjson,
-  'vega-lite': (vljson, config) => vl.compile(vljson, {config}).spec,
+  vega: (vgjson, _) => vgjson,
+  'vega-lite': (vljson, config) => vl.compile(vljson, { config }).spec,
 };
 
 export type VisualizationSpec = VlSpec | VgSpec;
@@ -61,9 +61,13 @@ export interface Result {
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
  * @param opt       A JavaScript object containing options for embedding.
  */
-export default async function embed(el: HTMLElement | string, spec: string | VisualizationSpec, opt: EmbedOptions): Promise<Result> {
+export default async function embed(
+  el: HTMLElement | string,
+  spec: string | VisualizationSpec,
+  opt: EmbedOptions
+): Promise<Result> {
   opt = opt || {};
-  const actions  = opt.actions !== undefined ? opt.actions : true;
+  const actions = opt.actions !== undefined ? opt.actions : true;
 
   const loader: Loader = opt.loader || vega.loader();
   const renderer = opt.renderer || 'canvas';
@@ -79,23 +83,29 @@ export default async function embed(el: HTMLElement | string, spec: string | Vis
   const config = opt.config;
   if (vega.isString(config)) {
     const data = await loader.load(config);
-    return embed(el, spec, {...opt, config: JSON.parse(data)});
+    return embed(el, spec, { ...opt, config: JSON.parse(data) });
   }
 
   // Decide mode
-  let parsed: {library: string, version: string};
+  let parsed: { library: string; version: string };
   let mode: Mode;
 
   if (spec.$schema) {
     parsed = schemaParser(spec.$schema);
     if (opt.mode && opt.mode !== parsed.library) {
-      console.warn(`The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[opt.mode]}.`);
+      console.warn(
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
+          NAMES[opt.mode]
+        }.`
+      );
     }
 
     mode = parsed.library as Mode;
 
     if (versionCompare(parsed.version, VERSION[mode]) > 0) {
-      console.warn(`The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`);
+      console.warn(
+        `The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`
+      );
     }
   } else {
     mode = opt.mode || 'vega';
@@ -114,7 +124,8 @@ export default async function embed(el: HTMLElement | string, spec: string | Vis
   }
 
   // ensure container div has class 'vega-embed'
-  const div = d3.select(el as any)  // d3.select supports elements and strings
+  const div = d3
+    .select(el as any) // d3.select supports elements and strings
     .classed('vega-embed', true)
     .html(''); // clear container
 
@@ -127,8 +138,11 @@ export default async function embed(el: HTMLElement | string, spec: string | Vis
   // This call may throw an Error if parsing fails.
   const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : config);
 
-  const view = new vega.View(runtime, {loader, logLevel, renderer})
-    .initialize(el);
+  const view = new vega.View(runtime, {
+    loader,
+    logLevel,
+    renderer,
+  }).initialize(el);
 
   // Vega-Lite does not need hover so we can improve perf by not activating it
   if (mode !== 'vega-lite') {
@@ -155,28 +169,34 @@ export default async function embed(el: HTMLElement | string, spec: string | Vis
 
   if (actions !== false) {
     // add child div to house action links
-    const ctrl = div.append('div')
-      .attr('class', 'vega-actions');
+    const ctrl = div.append('div').attr('class', 'vega-actions');
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
       const ext = renderer === 'canvas' ? 'png' : 'svg';
-      ctrl.append('a')
+      ctrl
+        .append('a')
         .text(`Export as ${ext.toUpperCase()}`)
         .attr('href', '#')
         .attr('target', '_blank')
         .attr('download', `visualization.${ext}`)
         .on('mousedown', function(this: HTMLLinkElement) {
-          view.toImageURL(ext).then(url => {
-            this.href =  url;
-          }).catch(error => { throw error; });
+          view
+            .toImageURL(ext)
+            .then(url => {
+              this.href = url;
+            })
+            .catch(error => {
+              throw error;
+            });
           d3.event.preventDefault();
         });
     }
 
     // add 'View Source' action
     if (actions === true || actions.source !== false) {
-      ctrl.append('a')
+      ctrl
+        .append('a')
         .text('View Source')
         .attr('href', '#')
         .on('click', () => {
@@ -188,7 +208,8 @@ export default async function embed(el: HTMLElement | string, spec: string | Vis
     // add 'Open in Vega Editor' action
     if (actions === true || actions.editor !== false) {
       const editorUrl = opt.editorUrl || 'https://vega.github.io/editor/';
-      ctrl.append('a')
+      ctrl
+        .append('a')
         .text('Open in Vega Editor')
         .attr('href', '#')
         .on('click', () => {
@@ -202,7 +223,7 @@ export default async function embed(el: HTMLElement | string, spec: string | Vis
     }
   }
 
-  return {view, spec};
+  return { view, spec };
 }
 
 function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
