@@ -323,7 +323,7 @@ browserify-zlib@~0.2.0:
   dependencies:
     pako "~1.0.5"
 
-browserify@^16.1.0, browserify@^16.1.1:
+browserify@^16.1.0:
   version "16.1.1"
   resolved "https://registry.yarnpkg.com/browserify/-/browserify-16.1.1.tgz#7905ec07e0147c4d90f92001944050a6e1c2844e"
   dependencies:
@@ -374,6 +374,59 @@ browserify@^16.1.0, browserify@^16.1.1:
     url "~0.11.0"
     util "~0.10.1"
     vm-browserify "~0.0.1"
+    xtend "^4.0.0"
+
+browserify@^16.2.0:
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/browserify/-/browserify-16.2.0.tgz#04ba47c4150555532978453818160666aa3bd8a7"
+  dependencies:
+    JSONStream "^1.0.3"
+    assert "^1.4.0"
+    browser-pack "^6.0.1"
+    browser-resolve "^1.11.0"
+    browserify-zlib "~0.2.0"
+    buffer "^5.0.2"
+    cached-path-relative "^1.0.0"
+    concat-stream "^1.6.0"
+    console-browserify "^1.1.0"
+    constants-browserify "~1.0.0"
+    crypto-browserify "^3.0.0"
+    defined "^1.0.0"
+    deps-sort "^2.0.0"
+    domain-browser "^1.2.0"
+    duplexer2 "~0.1.2"
+    events "^2.0.0"
+    glob "^7.1.0"
+    has "^1.0.0"
+    htmlescape "^1.1.0"
+    https-browserify "^1.0.0"
+    inherits "~2.0.1"
+    insert-module-globals "^7.0.0"
+    labeled-stream-splicer "^2.0.0"
+    mkdirp "^0.5.0"
+    module-deps "^6.0.0"
+    os-browserify "~0.3.0"
+    parents "^1.0.1"
+    path-browserify "~0.0.0"
+    process "~0.11.0"
+    punycode "^1.3.2"
+    querystring-es3 "~0.2.0"
+    read-only-stream "^2.0.0"
+    readable-stream "^2.0.2"
+    resolve "^1.1.4"
+    shasum "^1.0.0"
+    shell-quote "^1.6.1"
+    stream-browserify "^2.0.0"
+    stream-http "^2.0.0"
+    string_decoder "^1.1.1"
+    subarg "^1.0.0"
+    syntax-error "^1.1.1"
+    through2 "^2.0.0"
+    timers-browserify "^1.0.1"
+    tty-browserify "0.0.1"
+    url "~0.11.0"
+    util "~0.10.1"
+    vm-browserify "^1.0.0"
     xtend "^4.0.0"
 
 buffer-from@^1.0.0:
@@ -2133,6 +2186,12 @@ string-width@^2.0.0, string-width@^2.1.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
+string_decoder@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
+  dependencies:
+    safe-buffer "~5.1.0"
+
 string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
@@ -2275,9 +2334,9 @@ tsconfig@^5.0.3:
     strip-bom "^2.0.0"
     strip-json-comments "^2.0.0"
 
-tsify@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/tsify/-/tsify-3.0.4.tgz#3c862c934aeeff705290de9ad2af8d197ac5bb03"
+tsify@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/tsify/-/tsify-4.0.0.tgz#61f7e43cd1f1a6c79cae14428ec13d0cd283ccf8"
   dependencies:
     convert-source-map "^1.1.0"
     fs.realpath "^1.0.0"
@@ -2561,7 +2620,7 @@ vega-transforms@^1.2:
     vega-statistics "^1.2"
     vega-util "1"
 
-vega-typings@*, vega-typings@^0.2.11:
+vega-typings@*, vega-typings@^0.2.11, vega-typings@^0.2.13:
   version "0.2.13"
   resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.2.13.tgz#809077cb8737bb6383cf5b6d71f86f85e108218c"
 
@@ -2613,6 +2672,10 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vm-browserify@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.0.1.tgz#a15d7762c4c48fa6bf9f3309a21340f00ed23063"
 
 vm-browserify@~0.0.1:
   version "0.0.4"
