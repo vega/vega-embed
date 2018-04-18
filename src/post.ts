@@ -6,7 +6,7 @@ import { Config, Mode, Renderer } from './embed';
 export function post(
   window: Window,
   url: string,
-  data: { config: Config; mode: Mode; renderer: Renderer; spec: string }
+  data: { config?: Config; mode: Mode; renderer?: Renderer; spec: string }
 ) {
   const editor = window.open(url);
   const wait = 10000;
