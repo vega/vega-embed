@@ -58,10 +58,9 @@
     "compare-versions": "^3.1.0",
     "d3-selection": "^1.3.0",
     "json-stringify-pretty-compact": "^1.1.0",
-    "vega-lib": "^3.2.1",
+    "vega-lib": "^3.3.0",
     "vega-lite": "^2.3.1",
-    "vega-schema-url-parser": "^1.0.0",
-    "vega-typings": "^0.2.13"
+    "vega-schema-url-parser": "^1.0.0"
   },
   "scripts": {
     "deploy": "npm run lint && scripts/deploy.sh",
