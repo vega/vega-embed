@@ -1,5 +1,6 @@
 import * as versionCompare from 'compare-versions';
 import * as d3 from 'd3-selection';
+import * as stringify from 'json-stringify-pretty-compact';
 import * as vegaImport from 'vega-lib';
 import * as VegaLite from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -201,7 +202,7 @@ export default async function embed(
         .text('View Source')
         .attr('href', '#')
         .on('click', () => {
-          viewSource(JSON.stringify(spec, null, 2), opt.sourceHeader || '', opt.sourceFooter || '');
+          viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '');
           d3.event.preventDefault();
         });
     }
@@ -218,7 +219,7 @@ export default async function embed(
             config: config || null,
             mode,
             renderer,
-            spec: JSON.stringify(spec, null, 2),
+            spec: stringify(spec),
           });
           d3.event.preventDefault();
         });
