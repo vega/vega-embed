@@ -15,8 +15,7 @@
     "lib": ["es6", "dom"]
   },
   "include": [
-    "src/**/*.ts",
-    "typings/*.d.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
