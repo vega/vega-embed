@@ -46,11 +46,11 @@
     "@types/d3-selection": "^1.3.0",
     "browserify": "^16.2.0",
     "browserify-shim": "^3.8.14",
-    "prettier": "^1.12.0",
+    "prettier": "^1.12.1",
     "tsify": "^4.0.0",
     "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.10.0",
-    "typescript": "^2.8.1",
+    "tslint-config-prettier": "^1.12.0",
+    "typescript": "^2.8.3",
     "uglify-es": "^3.3.9",
     "watchify": "^3.11.0"
   },
@@ -67,8 +67,9 @@
     "prebuild": "tsc -p .",
     "build": "browserify src/index.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed -o build/vega-embed.js",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
-    "prettier": "prettier --write src/*",
-    "lint": "npm run prettier -- --list-different && tslint -p .",
+    "format": "prettier --write src/*",
+    "format:check": "prettier --list-different src/*",
+    "lint": "npm run format:check && tslint -p .",
     "start": "python -m http.server"
   },
   "browserify-shim": {
