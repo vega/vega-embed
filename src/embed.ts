@@ -144,7 +144,9 @@ export default async function embed(
     loader,
     logLevel,
     renderer,
-  }).initialize(el).hover();
+  })
+    .initialize(el)
+    .hover();
 
   if (opt) {
     if (opt.width) {
