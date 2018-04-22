@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/vega-embed.svg)](https://www.npmjs.com/package/vega-embed)
 [![](https://data.jsdelivr.com/v1/package/npm/vega-embed/badge)](https://www.jsdelivr.com/package/npm/vega-embed)
+[![Build Status](https://travis-ci.org/vega/vega-embed.svg?branch=master)](https://travis-ci.org/vega/vega-embed)
 
 The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced support for embedding interactive Vega views into web pages. Current version supports only Vega 3 / Vega-Lite 2. The primary features include:
 
