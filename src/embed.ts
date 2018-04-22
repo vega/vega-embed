@@ -144,12 +144,7 @@ export default async function embed(
     loader,
     logLevel,
     renderer,
-  }).initialize(el);
-
-  // Vega-Lite does not need hover so we can improve perf by not activating it
-  if (mode !== 'vega-lite') {
-    view.hover();
-  }
+  }).initialize(el).hover();
 
   if (opt) {
     if (opt.width) {
