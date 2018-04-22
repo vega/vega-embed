@@ -63,13 +63,14 @@
     "vega-schema-url-parser": "^1.0.0"
   },
   "scripts": {
-    "deploy": "npm run lint && scripts/deploy.sh",
-    "prebuild": "tsc -p .",
     "build": "browserify src/index.ts -t browserify-shim -p [tsify -p site] -d -s vegaEmbed -o build/vega-embed.js",
-    "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
-    "format": "prettier --write src/*",
     "format:check": "prettier --list-different src/*",
+    "format": "prettier --write src/*",
     "lint": "npm run format:check && tslint -p .",
+    "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
+    "prebuild": "tsc -p .",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run lint",
     "start": "python -m http.server"
   },
   "browserify-shim": {
