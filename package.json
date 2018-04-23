@@ -45,6 +45,7 @@
   "types": "build/embed.d.ts",
   "devDependencies": {
     "@types/d3-selection": "^1.3.0",
+    "@types/semver": "^5.5.0",
     "browser-sync": "^2.23.7",
     "concurrently": "^3.5.1",
     "prettier": "^1.12.1",
@@ -58,9 +59,9 @@
     "uglify-es": "^3.3.9"
   },
   "dependencies": {
-    "compare-versions": "^3.1.0",
     "d3-selection": "^1.3.0",
     "json-stringify-pretty-compact": "^1.2.0",
+    "semver": "^5.5.0",
     "vega-lib": "^3.3.1",
     "vega-lite": "^2.3.1",
     "vega-schema-url-parser": "^1.0.0"
@@ -69,6 +70,7 @@
     "build": "rollup -c",
     "clean": "rm -rf build && mkdir build",
     "deploy": "npm run lint && scripts/deploy.sh",
+    "lint": "tslint -p .",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
     "prebuild": "npm run clean && tsc",
     "prepublishOnly": "npm run build",

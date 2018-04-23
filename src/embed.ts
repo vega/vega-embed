@@ -1,6 +1,6 @@
-import versionCompare_ from 'compare-versions';
 import * as d3 from 'd3-selection';
 import * as stringify_ from 'json-stringify-pretty-compact';
+import {clean, gt, satisfies} from 'semver';
 import * as vegaImport from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -10,7 +10,6 @@ import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import { post } from './post';
 
 // https://github.com/rollup/rollup/issues/670
-const versionCompare = versionCompare_.default || versionCompare_;
 const stringify: typeof stringify_ = (stringify_ as any).default || stringify_;
 
 export const vega = vegaImport;
@@ -47,9 +46,9 @@ const VERSION = {
   'vega-lite': vl ? vl.version : 'not available',
 };
 
-const PREPROCESSOR = {
-  vega: (vgjson, _) => vgjson,
-  'vega-lite': (vljson, config) => vl.compile(vljson, { config }).spec,
+const PREPROCESSOR: {[mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec} = {
+  vega: (vgjson: VgSpec, _) => vgjson,
+  'vega-lite': (vljson: VlSpec, config: VlConfig) => vl.compile(vljson, { config }).spec,
 };
 
 export type VisualizationSpec = VlSpec | VgSpec;
@@ -116,7 +115,7 @@ export default async function embed(
 
     mode = parsed.library as Mode;
 
-    if (versionCompare(parsed.version, VERSION[mode]) > 0) {
+    if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
       console.warn(
         `The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`
       );
@@ -131,7 +130,7 @@ export default async function embed(
     if (vgSpec.$schema) {
       parsed = schemaParser(vgSpec.$schema);
 
-      if (versionCompare(parsed.version, VERSION.vega) > 0) {
+      if (!satisfies(VERSION.vega, `^${parsed.version.slice(1)}`)) {
         console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is ${VERSION.vega}.`);
       }
     }

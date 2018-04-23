@@ -5,7 +5,7 @@
     "module": "ES2015",
     "moduleResolution": "node",
     "declaration": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "preserveConstEnums": true,
     "noEmitOnError": true,
