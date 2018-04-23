@@ -45,11 +45,12 @@
       "mark": "bar",
       "encoding": {
         "x": { "field": "a", "type": "ordinal" },
-        "y": { "field": "b", "type": "quantitative" }
+        "y": { "field": "b", "type": "quantitative" },
+        "tooltip": { "field": "b", "type": "quantitative" }
       }
     }
 
-    vegaEmbed('#vis', spec, { config: config, actions: true }).then(function (result) {
+    vegaEmbed('#vis', spec, { config: config, actions: true, tooltip: {theme: 'dark'} }).then(function (result) {
       console.log(result);
     }).catch(console.error);
   </script>

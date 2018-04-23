@@ -4,8 +4,10 @@ import {clean, gt, satisfies} from 'semver';
 import * as vegaImport from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
+import {Handler, Options as TooltipOptions} from 'vega-tooltip';
 
-import { Config as VgConfig, Loader, Spec as VgSpec, View } from 'vega-lib';
+import { isFunction } from 'util';
+import { Config as VgConfig, Loader, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import { post } from './post';
 
@@ -25,6 +27,7 @@ export interface EmbedOptions {
   logLevel?: number;
   loader?: Loader;
   renderer?: Renderer;
+  tooltip?: TooltipHandler | TooltipOptions | boolean;
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
   height?: number;
@@ -33,6 +36,7 @@ export interface EmbedOptions {
   sourceHeader?: string;
   sourceFooter?: string;
   editorUrl?: string;
+  hover?: boolean;
   runAsync?: boolean;
 }
 
@@ -56,6 +60,10 @@ export type VisualizationSpec = VlSpec | VgSpec;
 export interface Result {
   view: View;
   spec: VisualizationSpec;
+}
+
+function isTooltipHandler(h: boolean | TooltipOptions | TooltipHandler): h is TooltipHandler {
+  return typeof h === 'function';
 }
 
 function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
@@ -156,8 +164,24 @@ export default async function embed(
     logLevel,
     renderer,
   })
-    .initialize(el)
-    .hover();
+    .initialize(el);
+
+  if (opt.tooltip !== false) {
+    let handler: TooltipHandler;
+    if (isTooltipHandler(opt.tooltip)) {
+      handler = opt.tooltip;
+    } else {
+      // user provided boolean true or tooltip options
+      handler = new Handler(opt.tooltip === true ? {} : opt.tooltip).call;
+    }
+
+    view.tooltip(handler);
+  }
+
+  // do not automatically enable hover for Vega-Lite.
+  if (opt.hover === undefined ? mode !== 'vega-lite' : opt.hover) {
+    view.hover();
+  }
 
   if (opt) {
     if (opt.width) {
