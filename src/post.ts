@@ -13,7 +13,7 @@ export function post(
   const step = 250;
   let count = ~~(wait / step);
 
-  function listen(evt) {
+  function listen(evt: MessageEvent) {
     if (evt.source === editor) {
       count = 0;
       window.removeEventListener('message', listen, false);
