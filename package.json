@@ -38,7 +38,7 @@
     }
   ],
   "license": "BSD-3-Clause",
-  "main": "build/embed.js",
+  "main": "build/vega-embed.js",
   "module": "build/embed.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
