@@ -1878,9 +1878,9 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
 
-rollup@^0.58.1:
-  version "0.58.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.58.1.tgz#5e2e05ceb103f770868b12c4048c22d3903fa2dd"
+rollup@^0.58.2:
+  version "0.58.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.58.2.tgz#2feddea8c0c022f3e74b35c48e3c21b3433803ce"
   dependencies:
     "@types/estree" "0.0.38"
     "@types/node" "*"
@@ -2480,9 +2480,9 @@ vega-statistics@^1.2:
   dependencies:
     d3-array "1"
 
-vega-tooltip@^0.9.10:
-  version "0.9.10"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.9.10.tgz#795a01d8a726cb020402109fa4eb81edde3a85fc"
+vega-tooltip@^0.9.12:
+  version "0.9.12"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.9.12.tgz#bf0de41cab4ecf9b161c9ea54b2f8ff4bbee1c94"
   dependencies:
     json-stringify-safe "^5.0.1"
     vega-util "^1.7.0"
