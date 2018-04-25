@@ -2397,15 +2397,15 @@ vega-lib@^3.3.1:
     vega-voronoi "2"
     vega-wordcloud "^2.1"
 
-vega-lite@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-2.3.1.tgz#a7abd16ef7d06b3f8ed8c873bca4be5c4a577369"
+vega-lite@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-2.4.0.tgz#e2bd0eabf5288c470a698377a10d4118f4f610e1"
   dependencies:
     "@types/json-stable-stringify" "^1.0.32"
     json-stable-stringify "^1.0.1"
     tslib "^1.9.0"
     vega-event-selector "^2.0.0"
-    vega-typings "^0.2.11"
+    vega-typings "^0.2.15"
     vega-util "^1.7.0"
     yargs "^11.0.0"
 
@@ -2480,9 +2480,9 @@ vega-statistics@^1.2:
   dependencies:
     d3-array "1"
 
-vega-tooltip@^0.9.12:
-  version "0.9.12"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.9.12.tgz#bf0de41cab4ecf9b161c9ea54b2f8ff4bbee1c94"
+vega-tooltip@^0.9.14:
+  version "0.9.14"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.9.14.tgz#c10bcacf69bf60a02c598ec46b905f94f28c54ac"
   dependencies:
     json-stringify-safe "^5.0.1"
     vega-util "^1.7.0"
@@ -2496,7 +2496,7 @@ vega-transforms@^1.2:
     vega-statistics "^1.2"
     vega-util "1"
 
-vega-typings@*, vega-typings@^0.2.11:
+vega-typings@*, vega-typings@^0.2.15:
   version "0.2.15"
   resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.2.15.tgz#7c973f7f342efe82fb9c4ad96833431c11cd5911"
 
