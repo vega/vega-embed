@@ -187,7 +187,19 @@ function embed(el, spec, opt) {
           d3.event.preventDefault();
         });
     }
-  }
+
+    // add 'View Compiled Source' action
+    if (actions.compiled !== false && mode === MODES['vega-lite']) {
+      ctrl.append('a')
+        .text('View Compiled Source')
+        .attr('href', '#')
+        .on('click', function() {
+          viewSource(JSON.stringify(PREPROCESSOR[mode](spec), null, 2));
+          d3.event.preventDefault();
+        });
+    }
+ 
+ }
 
 
   return Promise.resolve({view: view, spec: spec});
