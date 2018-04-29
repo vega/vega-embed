@@ -9,6 +9,7 @@ The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced sup
 - Load Vega/Vega-Lite specs from source text, parsed JSON, or URLs.
 - Add action links such as "View Source" and "Open in Vega Editor".
 - Includes [Vega Tooltip](https://github.com/vega/vega-tooltip).
+- Includes [Vega Themes](https://github.com/vega/vega-themes). **Experimental: themes are not stable yet**
 
 ![Screenshot](screenshot.png)
 
@@ -107,7 +108,7 @@ var opt = {
 | Property | Type             | Description    |
 | :------- | :--------------- | :------------- |
 | `mode`        | String        | If specified, tells Vega-Embed to parse the spec as `vega` or `vega-lite`. Vega-Embed will parse the [`$schema` url](https://github.com/vega/schema) if the mode is not specified. Vega-Embed will default to `vega` if neither `mode`, nor `$schema` are specified. |
-| `theme`       | String        | If specified, tells Vega-Embed use the theme from [Vega Themes](https://github.com/vega/vega-themes). |
+| `theme`       | String        | If specified, tells Vega-Embed use the theme from [Vega Themes](https://github.com/vega/vega-themes). **Experimental: we may update themes with minor version updates of Vega-Embed.** |
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. |
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip`     | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
