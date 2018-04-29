@@ -50,7 +50,7 @@
       }
     }
 
-    vegaEmbed('#vis', spec, { config: config, actions: true, tooltip: {theme: 'dark'} }).then(function (result) {
+    vegaEmbed('#vis', spec, { config: config, tooltip: {theme: 'dark'} }).then(function (result) {
       console.log(result);
     }).catch(console.error);
   </script>

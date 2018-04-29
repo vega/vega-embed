@@ -1,10 +1,10 @@
 import * as d3 from 'd3-selection';
 import * as stringify_ from 'json-stringify-pretty-compact';
-import {clean, gt, satisfies} from 'semver';
+import { clean, gt, satisfies } from 'semver';
 import * as vegaImport from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
-import {Handler, Options as TooltipOptions} from 'vega-tooltip';
+import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 
 import { isFunction } from 'util';
 import { Config as VgConfig, Loader, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
@@ -22,7 +22,7 @@ export type Renderer = 'canvas' | 'svg';
 export type Config = VlConfig | VgConfig;
 
 export interface EmbedOptions {
-  actions?: boolean | { export?: boolean; source?: boolean; editor?: boolean };
+  actions?: boolean | { export?: boolean; source?: boolean; compiled?: boolean; editor?: boolean };
   mode?: Mode;
   logLevel?: number;
   loader?: Loader;
@@ -50,7 +50,7 @@ const VERSION = {
   'vega-lite': vl ? vl.version : 'not available',
 };
 
-const PREPROCESSOR: {[mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec} = {
+const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
   vega: (vgjson: VgSpec, _) => vgjson,
   'vega-lite': (vljson: VlSpec, config: VlConfig) => vl.compile(vljson, { config }).spec,
 };
@@ -66,12 +66,12 @@ function isTooltipHandler(h: boolean | TooltipOptions | TooltipHandler): h is To
   return typeof h === 'function';
 }
 
-function viewSource(source: string, sourceHeader: string, sourceFooter: string) {
+function viewSource(source: string, sourceHeader: string, sourceFooter: string, mode: Mode) {
   const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
   const footer = `</code></pre>${sourceFooter}</body></html>`;
   const win = window.open('');
   win.document.write(header + source + footer);
-  win.document.title = 'Vega JSON Source';
+  win.document.title = `${NAMES[mode]} JSON Source`;
 }
 
 /**
@@ -88,7 +88,10 @@ export default async function embed(
   opt: EmbedOptions
 ): Promise<Result> {
   opt = opt || {};
-  const actions = opt.actions !== undefined ? opt.actions : true;
+  const actions =
+    opt.actions === true || opt.actions === false
+      ? opt.actions
+      : { export: true, source: true, compiled: false, editor: true, ...(opt.actions || {}) };
 
   const loader: Loader = opt.loader || vega.loader();
   const renderer = opt.renderer || 'canvas';
@@ -163,8 +166,7 @@ export default async function embed(
     loader,
     logLevel,
     renderer,
-  })
-    .initialize(el);
+  }).initialize(el);
 
   if (opt.tooltip !== false) {
     let handler: TooltipHandler;
@@ -234,7 +236,19 @@ export default async function embed(
         .text('View Source')
         .attr('href', '#')
         .on('click', () => {
-          viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '');
+          viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '', mode);
+          d3.event.preventDefault();
+        });
+    }
+
+    // add 'View Compiled' action
+    if (mode === 'vega-lite' && (actions === true || actions.compiled !== false)) {
+      ctrl
+        .append('a')
+        .text('View Vega')
+        .attr('href', '#')
+        .on('click', () => {
+          viewSource(stringify(vgSpec), opt.sourceHeader || '', opt.sourceFooter || '', 'vega');
           d3.event.preventDefault();
         });
     }
