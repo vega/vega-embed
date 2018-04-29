@@ -12,7 +12,7 @@ The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced sup
 
 ![Screenshot](screenshot.png)
 
-Try a live demo on [Observable](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
+Try Vega-Themes in our [Observable Demo](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
 
 ## Basic Example
 
