@@ -63,8 +63,9 @@
     "json-stringify-pretty-compact": "^1.2.0",
     "semver": "^5.5.0",
     "vega-lib": "^3.3.1",
-    "vega-lite": "^2.4.0",
+    "vega-lite": "^2.4.1",
     "vega-schema-url-parser": "^1.0.0",
+    "vega-themes": "^2.0.0",
     "vega-tooltip": "^0.9.14"
   },
   "scripts": {
@@ -78,6 +79,6 @@
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint",
     "serve": "browser-sync start --directory -s -f build *.html",
-    "start": "concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'"
+    "start": "npm run build && concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'"
   }
 }

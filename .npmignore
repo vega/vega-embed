@@ -2,9 +2,7 @@
 .gitignore
 .editorconfig
 tslint.json
-bower.json
 test-vg.json
 test-vl.json
-bower_components
 node_modules
 scripts

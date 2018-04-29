@@ -4,12 +4,14 @@ import { clean, gt, satisfies } from 'semver';
 import * as vegaImport from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
+import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 
 import { isFunction } from 'util';
 import { Config as VgConfig, Loader, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import { post } from './post';
+import { mergeDeep } from './util';
 
 // https://github.com/rollup/rollup/issues/670
 const stringify: typeof stringify_ = (stringify_ as any).default || stringify_;
@@ -24,6 +26,7 @@ export type Config = VlConfig | VgConfig;
 export interface EmbedOptions {
   actions?: boolean | { export?: boolean; source?: boolean; compiled?: boolean; editor?: boolean };
   mode?: Mode;
+  theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
   logLevel?: number;
   loader?: Loader;
   renderer?: Renderer;
@@ -104,10 +107,14 @@ export default async function embed(
   }
 
   // Load Vega theme/configuration.
-  const config = opt.config;
+  let config = opt.config || {};
   if (vega.isString(config)) {
     const data = await loader.load(config);
     return embed(el, spec, { ...opt, config: JSON.parse(data) });
+  }
+
+  if (opt.theme) {
+    config = mergeDeep<Config>({}, themes[opt.theme], config);
   }
 
   // Decide mode
@@ -262,7 +269,7 @@ export default async function embed(
         .attr('href', '#')
         .on('click', () => {
           post(window, editorUrl, {
-            config: config || null,
+            config: config as Config,
             mode,
             renderer,
             spec: stringify(spec),
