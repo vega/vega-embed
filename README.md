@@ -12,6 +12,8 @@ The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced sup
 
 ![Screenshot](screenshot.png)
 
+Try a live demo on [Observable](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
+
 ## Basic Example
 
 You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](hhttps://www.jsdelivr.com/package/npm/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://www.jsdelivr.com/package/npm/vega), [Vega-Lite](https://www.jsdelivr.com/package/npm/vega-lite), and [Vega-Embed](https://www.jsdelivr.com/package/npm/vega-embed) versions. We recommend that you specify the major versions (`vega@3`, `vega-lite@2`, `vega-embed@3`).
