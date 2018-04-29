@@ -8,9 +8,9 @@ The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced sup
 
 - Load Vega/Vega-Lite specs from source text, parsed JSON, or URLs.
 - Add action links such as "View Source" and "Open in Vega Editor".
-- Include [Vega Tooltip](https://github.com/vega/vega-tooltip).
+- Includes [Vega Tooltip](https://github.com/vega/vega-tooltip).
 
-_As Vega 3's `signal` supports [bind](https://github.com/vega/vega/blob/master/PORTING_GUIDE.md#scales), the `parameter` property from the [older version of Vega-Embed](https://github.com/vega/vega-embed/releases/tag/v2.2.0) is now deprecated._
+![Screenshot](screenshot.png)
 
 ## Basic Example
 
