@@ -11,7 +11,7 @@ The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced sup
 - Includes [Vega Tooltip](https://github.com/vega/vega-tooltip).
 - Includes [Vega Themes](https://github.com/vega/vega-themes). **Experimental: themes are not stable yet**
 
-![Screenshot](screenshot.png)
+<img src="screenshot.png" width="500">
 
 Try Vega-Themes in our [Observable Demo](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
 
