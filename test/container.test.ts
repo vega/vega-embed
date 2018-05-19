@@ -1,0 +1,24 @@
+import { TopLevelSpec } from 'vega-lite';
+import { container } from '../src/container';
+
+const vlSpec: TopLevelSpec = {
+  data: { values: [1, 2, 3] },
+  encoding: {},
+  mark: 'point',
+};
+
+test('returns a promise', () => {
+  const result = container(vlSpec);
+  expect(result.then).toBeDefined();
+});
+
+test('view is added as value is added to div element', async () => {
+  const div = await container(vlSpec);
+  expect(div.value).toBeDefined();
+  expect(div.value.run).toBeDefined();
+});
+
+test('element is div', async () => {
+  const div = await container(vlSpec);
+  expect(div.tagName).toBe('DIV');
+});

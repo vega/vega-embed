@@ -1,15 +1,14 @@
 import * as d3 from 'd3-selection';
 import * as stringify_ from 'json-stringify-pretty-compact';
-import { clean, gt, satisfies } from 'semver';
+import { satisfies } from 'semver';
 import * as vegaImport from 'vega-lib';
+import { Config as VgConfig, Loader, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
 import * as vlImport from 'vega-lite';
+import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
-
-import { isFunction } from 'util';
-import { Config as VgConfig, Loader, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
-import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
+import embedStyle from '../vega-embed.css';
 import { post } from './post';
 import { mergeDeep } from './util';
 
@@ -27,6 +26,7 @@ export interface EmbedOptions {
   actions?: boolean | { export?: boolean; source?: boolean; compiled?: boolean; editor?: boolean };
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
+  defaultStyle?: boolean;
   logLevel?: number;
   loader?: Loader;
   renderer?: Renderer;
@@ -89,7 +89,7 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
 export default async function embed(
   el: HTMLElement | string,
   spec: string | VisualizationSpec,
-  opt: EmbedOptions
+  opt: EmbedOptions = {}
 ): Promise<Result> {
   opt = opt || {};
   const actions =
@@ -112,6 +112,17 @@ export default async function embed(
   if (vega.isString(config)) {
     const data = await loader.load(config);
     return embed(el, spec, { ...opt, config: JSON.parse(data) });
+  }
+
+  if (opt.defaultStyle) {
+    // Add a default stylesheet to the head of the document.
+    const ID = 'vega-embed-style';
+    if (!document.getElementById(ID)) {
+      const style = document.createElement('style');
+      style.id = ID;
+      style.innerHTML = embedStyle;
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
   }
 
   if (opt.theme) {
