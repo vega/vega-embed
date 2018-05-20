@@ -79,6 +79,55 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
 }
 
 /**
+ * Try to guess the type of spec.
+ *
+ * @param spec Vega or Vega-Lite spec.
+ */
+export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode | undefined {
+  // Decide mode
+  let parsed: { library: string; version: string };
+
+  if (spec.$schema) {
+    parsed = schemaParser(spec.$schema);
+    if (providedMode && providedMode !== parsed.library) {
+      console.warn(
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
+          NAMES[providedMode]
+        }.`
+      );
+    }
+
+    const mode = parsed.library as Mode;
+
+    if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
+      console.warn(
+        `The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`
+      );
+    }
+
+    return mode;
+  } else {
+    // try to guess from the provided spec
+    if (
+      'mark' in spec ||
+      'encoding' in spec ||
+      'layer' in spec ||
+      'hconcat' in spec ||
+      'vconcat' in spec ||
+      'facet' in spec ||
+      'repeat' in spec
+    ) {
+      return 'vega-lite';
+    }
+
+    if ('marks' in spec || 'signals' in spec || 'scales' in spec || 'axes' in spec) {
+      return 'vega';
+    }
+  }
+  return providedMode || 'vega';
+}
+
+/**
  * Embed a Vega visualization component in a web page. This function returns a promise.
  *
  * @param el        DOM element in which to place component (DOM node or CSS selector).
@@ -129,36 +178,13 @@ export default async function embed(
     config = mergeDeep<Config>({}, themes[opt.theme], config);
   }
 
-  // Decide mode
-  let parsed: { library: string; version: string };
-  let mode: Mode;
-
-  if (spec.$schema) {
-    parsed = schemaParser(spec.$schema);
-    if (opt.mode && opt.mode !== parsed.library) {
-      console.warn(
-        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
-          NAMES[opt.mode]
-        }.`
-      );
-    }
-
-    mode = parsed.library as Mode;
-
-    if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
-      console.warn(
-        `The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`
-      );
-    }
-  } else {
-    mode = opt.mode || 'vega';
-  }
+  const mode = guessMode(spec, opt.mode);
 
   let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config);
 
   if (mode === 'vega-lite') {
     if (vgSpec.$schema) {
-      parsed = schemaParser(vgSpec.$schema);
+      const parsed = schemaParser(vgSpec.$schema);
 
       if (!satisfies(VERSION.vega, `^${parsed.version.slice(1)}`)) {
         console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is ${VERSION.vega}.`);
