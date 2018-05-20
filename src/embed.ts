@@ -35,6 +35,7 @@ export interface EmbedOptions {
   width?: number;
   height?: number;
   padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
+  scaleFactor?: number;
   config?: string | Config;
   sourceHeader?: string;
   sourceFooter?: string;
@@ -99,6 +100,7 @@ export default async function embed(
   const loader: Loader = opt.loader || vega.loader();
   const renderer = opt.renderer || 'canvas';
   const logLevel = opt.logLevel || vega.Warn;
+  const scaleFactor = opt.scaleFactor || 1;
 
   // Load the visualization specification.
   if (vega.isString(spec)) {
@@ -225,7 +227,7 @@ export default async function embed(
         .attr('download', `visualization.${ext}`)
         .on('mousedown', function(this: HTMLLinkElement) {
           view
-            .toImageURL(ext)
+            .toImageURL(ext, scaleFactor)
             .then(url => {
               this.href = url;
             })
