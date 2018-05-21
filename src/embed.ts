@@ -35,6 +35,7 @@ export interface EmbedOptions {
   width?: number;
   height?: number;
   padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
+  scaleFactor?: number;
   config?: string | Config;
   sourceHeader?: string;
   sourceFooter?: string;
@@ -225,7 +226,7 @@ export default async function embed(
         .attr('download', `visualization.${ext}`)
         .on('mousedown', function(this: HTMLLinkElement) {
           view
-            .toImageURL(ext)
+            .toImageURL(ext, opt.scaleFactor)
             .then(url => {
               this.href = url;
             })

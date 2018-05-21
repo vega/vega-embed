@@ -2275,8 +2275,8 @@ vega-transforms@^1.2:
     vega-util "1"
 
 vega-typings@*, vega-typings@^0.2.15:
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.2.15.tgz#7c973f7f342efe82fb9c4ad96833431c11cd5911"
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.2.17.tgz#9f26775173b3d234d68dfe4c482037743786b8d2"
 
 vega-util@1, vega-util@^1.7, vega-util@^1.7.0:
   version "1.7.0"
