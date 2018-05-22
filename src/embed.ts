@@ -26,7 +26,7 @@ export interface EmbedOptions {
   actions?: boolean | { export?: boolean; source?: boolean; compiled?: boolean; editor?: boolean };
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
-  defaultStyle?: boolean;
+  defaultStyle?: boolean | string;
   logLevel?: number;
   loader?: Loader;
   renderer?: Renderer;
@@ -42,6 +42,8 @@ export interface EmbedOptions {
   editorUrl?: string;
   hover?: boolean;
   runAsync?: boolean;
+
+  _actionsWrapperContent?: string;
 }
 
 const NAMES = {
@@ -169,7 +171,7 @@ export default async function embed(
     if (!document.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
-      style.innerHTML = embedStyle;
+      style.innerText = opt.defaultStyle === true ? embedStyle : opt.defaultStyle;
       document.getElementsByTagName('head')[0].appendChild(style);
     }
   }
@@ -250,7 +252,9 @@ export default async function embed(
 
   if (actions !== false) {
     // add child div to house action links
-    const ctrl = div.append('div').attr('class', 'vega-actions');
+    const wrapper = div.append('div').attr('class', 'vega-actions-wrapper');
+    wrapper.html(opt._actionsWrapperContent);
+    const ctrl = wrapper.insert('div').attr('class', 'vega-actions');
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
