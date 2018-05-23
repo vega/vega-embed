@@ -14,7 +14,7 @@
 
 **Vega-Lite works well with [Observable](https://beta.observablehq.com/). Learn how to use it in [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed).**
 
-<img src="screenshot.png" width="500">
+<img src="embed.gif" width="500">
 
 ## Basic Example
 

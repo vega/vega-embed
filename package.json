@@ -86,6 +86,7 @@
     "serve": "browser-sync start --directory -s -f build *.html",
     "start": "npm run build && concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'",
     "test": "jest",
+    "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
     "watch:test": "jest --watch"
   },
   "jest": {

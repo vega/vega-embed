@@ -22,8 +22,15 @@ export type Mode = 'vega' | 'vega-lite';
 export type Renderer = 'canvas' | 'svg';
 export type Config = VlConfig | VgConfig;
 
+export interface Actions {
+  export?: boolean | { svg?: boolean; png?: boolean };
+  source?: boolean;
+  compiled?: boolean;
+  editor?: boolean;
+}
+
 export interface EmbedOptions {
-  actions?: boolean | { export?: boolean; source?: boolean; compiled?: boolean; editor?: boolean };
+  actions?: boolean | Actions;
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
   defaultStyle?: boolean | string;
@@ -42,8 +49,6 @@ export interface EmbedOptions {
   editorUrl?: string;
   hover?: boolean;
   runAsync?: boolean;
-
-  _actionsWrapperContent?: string;
 }
 
 const NAMES = {
@@ -60,6 +65,13 @@ const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) 
   vega: (vgjson: VgSpec, _) => vgjson,
   'vega-lite': (vljson: VlSpec, config: VlConfig) => vl.compile(vljson, { config }).spec,
 };
+
+const SVG_CIRCLES = `
+<svg viewBox="0 0 16 16" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+  <circle r="2" cy="8" cx="2"></circle>
+  <circle r="2" cy="8" cx="8"></circle>
+  <circle r="2" cy="8" cx="14"></circle>
+</svg>`;
 
 export type VisualizationSpec = VlSpec | VgSpec;
 
@@ -146,7 +158,11 @@ export default async function embed(
   const actions =
     opt.actions === true || opt.actions === false
       ? opt.actions
-      : { export: true, source: true, compiled: false, editor: true, ...(opt.actions || {}) };
+      : mergeDeep<Actions>(
+          {},
+          { export: { svg: true, png: true }, source: true, compiled: false, editor: true },
+          opt.actions || {}
+        );
 
   const loader: Loader = opt.loader || vega.loader();
   const renderer = opt.renderer || 'canvas';
@@ -253,29 +269,34 @@ export default async function embed(
   if (actions !== false) {
     // add child div to house action links
     const wrapper = div.append('div').attr('class', 'vega-actions-wrapper');
-    wrapper.html(opt._actionsWrapperContent);
+    if (opt.defaultStyle === true) {
+      wrapper.html(SVG_CIRCLES);
+    }
     const ctrl = wrapper.insert('div').attr('class', 'vega-actions');
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
-      const ext = renderer === 'canvas' ? 'png' : 'svg';
-      ctrl
-        .append('a')
-        .text(`Export as ${ext.toUpperCase()}`)
-        .attr('href', '#')
-        .attr('target', '_blank')
-        .attr('download', `visualization.${ext}`)
-        .on('mousedown', function(this: HTMLLinkElement) {
-          view
-            .toImageURL(ext, opt.scaleFactor)
-            .then(url => {
-              this.href = url;
-            })
-            .catch(error => {
-              throw error;
+      for (const ext of ['svg', 'png']) {
+        if (actions === true || actions.export === true || actions.export[ext]) {
+          ctrl
+            .append('a')
+            .text(`Export as ${ext.toUpperCase()}`)
+            .attr('href', '#')
+            .attr('target', '_blank')
+            .attr('download', `visualization.${ext}`)
+            .on('mousedown', function(this: HTMLLinkElement) {
+              view
+                .toImageURL(ext, opt.scaleFactor)
+                .then(url => {
+                  this.href = url;
+                })
+                .catch(error => {
+                  throw error;
+                });
+              d3.event.preventDefault();
             });
-          d3.event.preventDefault();
-        });
+        }
+      }
     }
 
     // add 'View Source' action
