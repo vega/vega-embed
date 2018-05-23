@@ -139,7 +139,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode | 
  */
 export default async function embed(
   el: HTMLElement | string,
-  spec: string | VisualizationSpec,
+  spec: VisualizationSpec | string,
   opt: EmbedOptions = {}
 ): Promise<Result> {
   opt = opt || {};

@@ -1,7 +1,8 @@
 import * as d3 from 'd3-selection';
 import { isString } from 'vega-util';
 import { container } from './container';
-import embed, { EmbedOptions, Result, vega, VisualizationSpec, vl } from './embed';
+import embed, { vega, vl } from './embed';
+import { isURL } from './util';
 
 /**
  * Returns true of the object is an HTML element.
@@ -15,7 +16,7 @@ function isElement(obj: any): obj is HTMLElement {
 export type Wrapper = typeof embed | typeof container;
 
 const wrapper: Wrapper = (...args: any[]): any => {
-  if (args.length > 1 && (isString(args[0]) || isElement(args[0]) || args.length === 3)) {
+  if (args.length > 1 && (isString(args[0]) && !isURL(args[0]) || isElement(args[0]) || args.length === 3)) {
     return embed(args[0], args[1], args[2]);
   }
 

@@ -16,7 +16,7 @@ const SVG_CIRCLES = `
  *
  * The main use case is in [Observable](https://observablehq.com/).
  */
-export async function container(spec: VisualizationSpec, opt: EmbedOptions = {}) {
+export async function container(spec: VisualizationSpec | string, opt: EmbedOptions = {}) {
   const div = document.createElement('div') as HTMLDivElement & { value: View };
 
   const actions =

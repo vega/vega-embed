@@ -32,3 +32,7 @@ function deepMerge_(dest: any, src: any) {
   }
   return dest;
 }
+
+export function isURL(s: string): boolean {
+  return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');
+}

@@ -5,16 +5,16 @@
 [![Build Status](https://travis-ci.org/vega/vega-embed.svg?branch=master)](https://travis-ci.org/vega/vega-embed)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=rounded)](https://github.com/prettier/prettier)
 
-The [Vega-Embed](http://github.com/vega/vega-embed) module provides advanced support for embedding interactive Vega views into web pages. Current version supports only [Vega](https://vega.github.io/vega) 3 / [Vega-Lite](https://vega.github.io/vega-lite) 2. The primary features include:
+[Vega-Embed](http://github.com/vega/vega-embed) makes it easy to embed interactive [Vega](https://vega.github.io/vega) and [Vega-Lite](https://vega.github.io/vega-lite) views into web pages. With Vega Embed, you can:
 
 - Load Vega/Vega-Lite specs from source text, parsed JSON, or URLs.
 - Add action links such as "View Source" and "Open in Vega Editor".
 - Includes [Vega Tooltip](https://github.com/vega/vega-tooltip).
 - Includes [Vega Themes](https://github.com/vega/vega-themes). **Experimental: themes are not stable yet**
 
-<img src="screenshot.png" width="500">
+**Vega-Lite works well with [Observable](https://beta.observablehq.com/). Learn how to use it in [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed).**
 
-Try Vega-Embed in our [Observable Demo](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
+<img src="screenshot.png" width="500">
 
 ## Basic Example
 
@@ -75,7 +75,7 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 | Property| Type       | Description    |
 | :------ | :--------- | :------------- |
-| `spec`    | Object | _Object_ : The Vega/Vega-Lite specification as a parsed JSON object. |
+| `spec`    | String / Object | _String_ : A URL string** from which to load the Vega specification. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
 | `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
 
 ### Options
@@ -145,10 +145,6 @@ var opt = {
 | `runAsync`     | Boolean  | Use [`runAsync`](https://vega.github.io/vega/docs/api/view/#view_runAsync) instead of [`run`](https://vega.github.io/vega/docs/api/view/#view_run). |
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
-
-## Usage in Observable
-
-Check out [this example](https://beta.observablehq.com/@domoritz/hello-vega-embed).
 
 ## Build Process
 
