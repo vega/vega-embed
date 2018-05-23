@@ -82,7 +82,7 @@
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
     "prebuild": "npm run clean && tsc",
     "prepublishOnly": "npm run build",
-    "preversion": "npm run lint",
+    "preversion": "npm run lint && npm run test",
     "serve": "browser-sync start --directory -s -f build *.html",
     "start": "npm run build && concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'",
     "test": "jest",

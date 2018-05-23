@@ -187,7 +187,7 @@ export default async function embed(
     if (!document.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
-      style.innerText = opt.defaultStyle === true ? embedStyle.toString() : opt.defaultStyle;
+      style.innerText = opt.defaultStyle === true ? (embedStyle || '').toString() : opt.defaultStyle;
       document.getElementsByTagName('head')[0].appendChild(style);
     }
   }

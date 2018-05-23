@@ -12,7 +12,7 @@ test('returns a promise', () => {
   expect(result.then).toBeDefined();
 });
 
-test('view is added as value is added to div element', async () => {
+test('view is added as value and added to div element', async () => {
   const div = await container(vlSpec);
   expect(div.value).toBeDefined();
   expect(div.value.run).toBeDefined();
