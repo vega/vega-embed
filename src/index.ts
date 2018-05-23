@@ -16,7 +16,7 @@ function isElement(obj: any): obj is HTMLElement {
 export type Wrapper = typeof embed | typeof container;
 
 const wrapper: Wrapper = (...args: any[]): any => {
-  if (args.length > 1 && (isString(args[0]) && !isURL(args[0]) || isElement(args[0]) || args.length === 3)) {
+  if (args.length > 1 && ((isString(args[0]) && !isURL(args[0])) || isElement(args[0]) || args.length === 3)) {
     return embed(args[0], args[1], args[2]);
   }
 
