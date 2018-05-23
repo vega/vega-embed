@@ -1,6 +1,8 @@
 language: node_js
 node_js:
-- '8'
+- '4'
+- '9'
+- '10'
 script:
 - yarn lint
 - yarn build
@@ -14,4 +16,4 @@ deploy:
   on:
     tags: true
     repo: vega/vega-embed
-    node: '8'
+    node: '10'
