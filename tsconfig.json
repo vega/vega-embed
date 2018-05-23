@@ -15,10 +15,11 @@
     "importHelpers": true,
     "lib": ["es6", "dom"]
   },
-  "include": [
-    "src/**/*.ts"
+  "files": [
+    "src/index.ts"
   ],
-  "exclude": [
-    "node_modules"
+  "include": [
+    "node_modules/vega-lite/typings/*.d.ts",
+    "typings/*.d.ts"
   ]
 }

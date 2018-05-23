@@ -49,6 +49,8 @@ Look at an example online at [Vega-Embed Block](https://bl.ocks.org/domoritz/455
 
 ## API Reference
 
+The default export of Vega-Embed is a wrapper function that automatically chooses between [`embed`](#embed) and [`container`](#container) based on the provided arguments.
+
 <a href="#embed" name="embed">#</a>
 <b>embed</b>(<i>el</i>, <i>spec</i>[, <i>opt</i>])
 [<>](https://github.com/vega/vega-embed/blob/master/src/embed.ts "Source")
@@ -65,6 +67,17 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 
+<a href="#container" name="container">#</a>
+<b>container</b>(<i>spec</i>[, <i>opt</i>])
+[<>](https://github.com/vega/vega-embed/blob/master/src/container.ts "Source")
+
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)* that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. The function is designed to work with [Observable](https://observablehq.com/). The `container` function accepts the following arguments:
+
+| Property| Type       | Description    |
+| :------ | :--------- | :------------- |
+| `spec`    | Object | _Object_ : The Vega/Vega-Lite specification as a parsed JSON object. |
+| `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
+
 ### Options
 
 ```js
@@ -72,6 +85,7 @@ var opt = {
   "mode": ...,
 
   "theme": ...,
+  "defaultStyle": ...,
 
   // view config options
   "renderer" : ...,
@@ -112,6 +126,7 @@ var opt = {
 | :------- | :--------------- | :------------- |
 | `mode`        | String        | If specified, tells Vega-Embed to parse the spec as `vega` or `vega-lite`. Vega-Embed will parse the [`$schema` url](https://github.com/vega/schema) if the mode is not specified. Vega-Embed will default to `vega` if neither `mode`, nor `$schema` are specified. |
 | `theme`       | String        | If specified, tells Vega-Embed use the theme from [Vega Themes](https://github.com/vega/vega-themes). **Experimental: we may update themes with minor version updates of Vega-Embed.** |
+| `defaultStyle` | Boolean or String | Add default stylesheet for embed actions. |
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. |
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip`     | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
