@@ -148,8 +148,7 @@ var opt = {
 
 ## Usage in Observable
 
-Check out [this example](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
-
+Check out [this example](https://beta.observablehq.com/@domoritz/hello-vega-embed).
 
 ## Build Process
 
