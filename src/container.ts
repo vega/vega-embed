@@ -22,7 +22,7 @@ export async function container(spec: VisualizationSpec, opt: EmbedOptions = {})
   const actions =
     opt.actions === true || opt.actions === false
       ? opt.actions
-      : { export: true, source: false, compiled: false, editor: true, ...(opt.actions || {}) };
+      : { export: true, source: false, compiled: true, editor: true, ...(opt.actions || {}) };
 
   return embed(div, spec, {
     _actionsWrapperContent: SVG_CIRCLES,
