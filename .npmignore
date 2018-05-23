@@ -3,6 +3,7 @@
 .gitignore
 .prettierrc.json
 .travis.yml
+.vscode
 node_modules
 screenshot.png
 test-*.html
