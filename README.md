@@ -131,14 +131,19 @@ var opt = {
 
 **_This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself._
 
+## Usage in Observable
+
+Check out [this example](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
+
+
 ## Build Process
 
 To build `vega-embed.js` and view the test examples, you must have [yarn](https://yarnpkg.com/en/) installed.
 
 1. Run `yarn` in the Vega-Embed folder to install dependencies.
-2. Run `yarn build`. This will invoke [browserify](http://browserify.org/) with [tsify](https://github.com/TypeStrong/tsify) to bundle the source files into `vega-embed.js`, and then [uglify-js](http://lisperator.net/uglifyjs/) to create the minified `vega-embed.min.js`.
-3. Run a local webserver (e.g., `python -m SimpleHTTPServer 8000`) in the Vega-Embed folder and then point your web browser at the test page (e.g., `http://localhost:8000/test-vg.html`(Vega) or `http://localhost:8000/test-vl.html`(Vega-Lite)).
+2. Run `yarn build`. This will create `vega-embed.js` and the minified `vega-embed.min.js`.
+3. Run a local webserver with `yarn start` then point your web browser at the test page (e.g., `http://localhost:8000/test-vg.html`(Vega) or `http://localhost:8000/test-vl.html`(Vega-Lite)).
 
-## Usage in Observable
+## Release Process
 
-Check out [this example](https://beta.observablehq.com/@domoritz/vega-lite-demo-with-vega-embed).
+To release a new version, make sure that everything works. Then run `yarn version` and bump the version number. Lastly, push to GitHub (with the release tag). [Travis](https://travis-ci.org/vega/vega-embed/builds) will build a bundle and make the [npm release](https://www.npmjs.com/package/vega-embed) automatically.
