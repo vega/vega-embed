@@ -3,18 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Vega-Embed test</title>
+  <title>Vega-Embed for Vega-Lite</title>
 
   <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
   <script src="build/vega-embed.js"></script>
-
-  <style>
-    body {
-      font-family: sans-serif;
-    }
-  </style>
-  <link rel="stylesheet" href="vega-embed.css" />
 </head>
 
 <body>
@@ -50,7 +43,7 @@
       }
     }
 
-    vegaEmbed('#vis', spec, { config: config, tooltip: {theme: 'dark'} }).then(function (result) {
+    vegaEmbed('#vis', spec, { config: config, tooltip: {theme: 'dark'}, defaultStyle: true }).then(function (result) {
       console.log(result);
     }).catch(console.error);
   </script>

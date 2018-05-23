@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Vega-Embed test</title>
+  <title>Vega-Embed for Vega</title>
 
   <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
   <script src="build/vega-embed.js"></script>
@@ -13,13 +13,12 @@
       font-family: sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="vega-embed.css" />
 </head>
 
 <body>
   <div id="vis"></div>
   <script type="text/javascript">
-    vegaEmbed('#vis', 'https://vega.github.io/vega/examples/bar-chart.vg.json', { theme: 'dark' }).then(function (result) {
+    vegaEmbed('#vis', 'https://vega.github.io/vega/examples/bar-chart.vg.json', { theme: 'dark', defaultStyle: true }).then(function (result) {
       console.log(result);
     }).catch(console.error);
   </script>
