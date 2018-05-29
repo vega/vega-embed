@@ -76,18 +76,18 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "clean": "rm -rf build && mkdir build",
+    "clean": "rm -rf build && rm -f src/style.ts && mkdir build",
     "format": "tslint -p . --fix && prettier --write '{src,test}/**/*.ts'",
     "lint": "tslint -p . && prettier --list-different '{src,test}/**/*.ts'",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
-    "prebuild": "npm run clean && tsc",
+    "prebuild": "npm run clean && ./build-style.sh && tsc",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint && npm run test",
     "serve": "browser-sync start --directory -s -f build *.html",
     "start": "npm run build && concurrently --kill-others -n Server,Typescript,Rollup 'npm run serve' 'tsc -w' 'rollup -c -w'",
+    "pretest": "./build-style.sh",
     "test": "jest",
-    "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
-    "watch:test": "jest --watch"
+    "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand"
   },
   "jest": {
     "setupFiles": [

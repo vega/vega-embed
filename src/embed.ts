@@ -8,8 +8,8 @@ import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
-import embedStyle from '../vega-embed.css';
 import { post } from './post';
+import embedStyle from './style';
 import { mergeDeep } from './util';
 
 // https://github.com/rollup/rollup/issues/670
