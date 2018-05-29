@@ -10,6 +10,7 @@
   top: 0;
   right: 0;
   padding: 6px;
+  z-index: 1000;
 
   opacity: 0.2;
   background: white;
