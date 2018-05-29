@@ -69,8 +69,8 @@
     "vega-lib": "^4.0.0-rc.2 || ^3.3.0",
     "vega-lite": "^2.4.3",
     "vega-schema-url-parser": "^1.0.0",
-    "vega-themes": "^2.0.0",
-    "vega-tooltip": "^0.10.4"
+    "vega-themes": "^2.1.0",
+    "vega-tooltip": "^0.11.0"
   },
   "scripts": {
     "build": "rollup -c",
