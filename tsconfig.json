@@ -4,22 +4,17 @@
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "declaration": true,
-    "noImplicitAny": true,
+    "strict": true,
     "suppressImplicitAnyIndexErrors": true,
     "preserveConstEnums": true,
     "noEmitOnError": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
     "sourceMap": true,
     "importHelpers": true,
     "lib": ["es6", "dom"]
   },
-  "files": [
-    "src/index.ts"
-  ],
-  "include": [
-    "node_modules/vega-lite/typings/*.d.ts",
-    "typings/*.d.ts"
-  ]
+  "files": ["src/index.ts"],
+  "include": ["node_modules/vega-lite/typings/*.d.ts", "typings/*.d.ts"]
 }

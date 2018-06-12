@@ -128,7 +128,7 @@ var opt = {
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. |
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip`     | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
-| `loader`      | Loader        | Sets a custom Vega loader. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
+| `loader`      | Loader / Object | Sets a custom Vega loader or pass in loader options. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
 |`onBeforeParse`| Function      | A callback function that can modify an input specification before it is parsed.|
 |  `width`      | Number        | Sets the view width in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_width) for details. Note that Vega-Lite overrides this option. |
 | `height`      | Number        | Sets the view height in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_height) for details. Note that Vega-Lite overrides this option. |

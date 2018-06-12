@@ -18,7 +18,7 @@
 <body>
   <div id="vis"></div>
   <script type="text/javascript">
-    vegaEmbed('#vis', 'https://vega.github.io/vega/examples/bar-chart.vg.json', { theme: 'dark', defaultStyle: true }).then(function (result) {
+    vegaEmbed('#vis', 'bar-chart.vg.json', { theme: 'dark', defaultStyle: true, loader: { baseURL: 'https://vega.github.io/vega/examples/' } }).then(function (result) {
       console.log(result);
     }).catch(console.error);
   </script>

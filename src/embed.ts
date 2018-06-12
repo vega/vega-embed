@@ -1,8 +1,8 @@
 import * as d3 from 'd3-selection';
-import * as stringify_ from 'json-stringify-pretty-compact';
+import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega-lib';
-import { Config as VgConfig, Loader, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
+import { Config as VgConfig, Loader, LoaderOptions, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -11,9 +11,6 @@ import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 import { post } from './post';
 import embedStyle from './style';
 import { mergeDeep } from './util';
-
-// https://github.com/rollup/rollup/issues/670
-const stringify: typeof stringify_ = (stringify_ as any).default || stringify_;
 
 export const vega = vegaImport;
 export const vl = vlImport;
@@ -35,7 +32,7 @@ export interface EmbedOptions {
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
   defaultStyle?: boolean | string;
   logLevel?: number;
-  loader?: Loader;
+  loader?: Loader | LoaderOptions;
   renderer?: Renderer;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
@@ -51,7 +48,7 @@ export interface EmbedOptions {
   runAsync?: boolean;
 }
 
-const NAMES = {
+const NAMES: { [key in Mode]: string } = {
   vega: 'Vega',
   'vega-lite': 'Vega-Lite',
 };
@@ -62,8 +59,8 @@ const VERSION = {
 };
 
 const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
-  vega: (vgjson: VgSpec, _) => vgjson,
-  'vega-lite': (vljson: VlSpec, config: VlConfig) => vl.compile(vljson, { config }).spec,
+  vega: (vgjson, _) => vgjson,
+  'vega-lite': (vljson, config) => vl.compile(vljson as VlSpec, { config: config as VlConfig }).spec,
 };
 
 const SVG_CIRCLES = `
@@ -80,14 +77,14 @@ export interface Result {
   spec: VisualizationSpec;
 }
 
-function isTooltipHandler(h: boolean | TooltipOptions | TooltipHandler): h is TooltipHandler {
+function isTooltipHandler(h?: boolean | TooltipOptions | TooltipHandler): h is TooltipHandler {
   return typeof h === 'function';
 }
 
 function viewSource(source: string, sourceHeader: string, sourceFooter: string, mode: Mode) {
   const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
   const footer = `</code></pre>${sourceFooter}</body></html>`;
-  const win = window.open('');
+  const win = window.open('')!;
   win.document.write(header + source + footer);
   win.document.title = `${NAMES[mode]} JSON Source`;
 }
@@ -97,12 +94,10 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
  *
  * @param spec Vega or Vega-Lite spec.
  */
-export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode | undefined {
+export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
   // Decide mode
-  let parsed: { library: string; version: string };
-
   if (spec.$schema) {
-    parsed = schemaParser(spec.$schema);
+    const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
       console.warn(
         `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
@@ -141,6 +136,10 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode | 
   return providedMode || 'vega';
 }
 
+function isLoader(o?: LoaderOptions | Loader): o is Loader {
+  return !!(o && 'load' in o);
+}
+
 /**
  * Embed a Vega visualization component in a web page. This function returns a promise.
  *
@@ -164,7 +163,7 @@ export default async function embed(
           opt.actions || {}
         );
 
-  const loader: Loader = opt.loader || vega.loader();
+  const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
   const renderer = opt.renderer || 'canvas';
   const logLevel = opt.logLevel || vega.Warn;
 
@@ -277,14 +276,14 @@ export default async function embed(
     // add 'Export' action
     if (actions === true || actions.export !== false) {
       for (const ext of ['svg', 'png']) {
-        if (actions === true || actions.export === true || actions.export[ext]) {
+        if (actions === true || actions.export === true || actions.export![ext]) {
           ctrl
-            .append('a')
+            .append<HTMLLinkElement>('a')
             .text(`Export as ${ext.toUpperCase()}`)
             .attr('href', '#')
             .attr('target', '_blank')
             .attr('download', `visualization.${ext}`)
-            .on('mousedown', function(this: HTMLLinkElement) {
+            .on('mousedown', function(this) {
               view
                 .toImageURL(ext, opt.scaleFactor)
                 .then(url => {

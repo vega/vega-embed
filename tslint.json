@@ -4,10 +4,7 @@
     "typeCheck": true
   },
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
   "rules": {
     "quotemark": [true, "single"],
     "arrow-parens": [true, "ban-single-arg-parens"],

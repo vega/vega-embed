@@ -8,7 +8,7 @@ export function post(
   url: string,
   data: { config?: Config; mode: Mode; renderer?: Renderer; spec: string }
 ) {
-  const editor = window.open(url);
+  const editor = window.open(url)!;
   const wait = 10000;
   const step = 250;
   let count = ~~(wait / step);

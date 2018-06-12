@@ -1,5 +1,4 @@
 import { View } from 'vega';
-import { isObject } from 'vega-util';
 import embed, { EmbedOptions, VisualizationSpec } from './embed';
 
 /**
