@@ -181,8 +181,6 @@ export default async function embed(
         );
   const i18n = {...I18N, ...opt.i18n};
 
-  const val = i18n.EDITOR_ACTION;
-
   const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
   const renderer = opt.renderer || 'canvas';
   const logLevel = opt.logLevel || vega.Warn;
