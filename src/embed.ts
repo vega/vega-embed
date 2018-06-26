@@ -179,7 +179,7 @@ export default async function embed(
           { export: { svg: true, png: true }, source: true, compiled: false, editor: true },
           opt.actions || {}
         );
-  const i18n = mergeDeep<I18n>({}, I18N, opt.i18n || {});
+  const i18n = {...I18N, ...opt.i18n};
 
   const val = i18n.EDITOR_ACTION;
 
@@ -323,7 +323,7 @@ export default async function embed(
     if (actions === true || actions.source !== false) {
       ctrl
         .append('a')
-        .text(i18n.SOURCE_ACTION as string)
+        .text(i18n.SOURCE_ACTION)
         .attr('href', '#')
         .on('click', () => {
           viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '', mode);
@@ -335,7 +335,7 @@ export default async function embed(
     if (mode === 'vega-lite' && (actions === true || actions.compiled !== false)) {
       ctrl
         .append('a')
-        .text(i18n.COMPILED_ACTION as string)
+        .text(i18n.COMPILED_ACTION)
         .attr('href', '#')
         .on('click', () => {
           viewSource(stringify(vgSpec), opt.sourceHeader || '', opt.sourceFooter || '', 'vega');
@@ -348,7 +348,7 @@ export default async function embed(
       const editorUrl = opt.editorUrl || 'https://vega.github.io/editor/';
       ctrl
         .append('a')
-        .text(i18n.EDITOR_ACTION as string)
+        .text(i18n.EDITOR_ACTION)
         .attr('href', '#')
         .on('click', () => {
           post(window, editorUrl, {

@@ -95,20 +95,18 @@ test('guessMode from Vega spec', () => {
 });
 
 test('can change i18n strings', async () => {
-  const i18n = {COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux'};
-  const { COMPILED_ACTION, EDITOR_ACTION, PNG_ACTION, SOURCE_ACTION, SVG_ACTION } = i18n;
   const el = document.createElement('div');
   let ctrl;
   let ctrlChildren;
-  await embed(el, vlSpec, {actions: true, i18n});
+  await embed(el, vlSpec, {actions: true, i18n: {COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux'}});
 
   ctrl = el.children[2].children[0];
   ctrlChildren = ctrl.children;
 
   expect(ctrl.childElementCount).toBe(5);
-  expect(ctrlChildren[0].textContent).toBe(SVG_ACTION);
-  expect(ctrlChildren[1].textContent).toBe(PNG_ACTION);
-  expect(ctrlChildren[2].textContent).toBe(SOURCE_ACTION);
-  expect(ctrlChildren[3].textContent).toBe(COMPILED_ACTION);
-  expect(ctrlChildren[4].textContent).toBe(EDITOR_ACTION);
+  expect(ctrlChildren[0].textContent).toBe('quux');
+  expect(ctrlChildren[1].textContent).toBe('baz');
+  expect(ctrlChildren[2].textContent).toBe('qux');
+  expect(ctrlChildren[3].textContent).toBe('foo');
+  expect(ctrlChildren[4].textContent).toBe('bar');
 });
