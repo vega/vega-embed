@@ -26,6 +26,14 @@ export interface Actions {
   editor?: boolean;
 }
 
+export interface I18n {
+  COMPILED_ACTION?: string;
+  EDITOR_ACTION?: string;
+  PNG_ACTION?: string;
+  SOURCE_ACTION?: string;
+  SVG_ACTION?: string;
+}
+
 export interface EmbedOptions {
   actions?: boolean | Actions;
   mode?: Mode;
@@ -46,6 +54,7 @@ export interface EmbedOptions {
   editorUrl?: string;
   hover?: boolean;
   runAsync?: boolean;
+  i18n?: I18n;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -69,6 +78,14 @@ const SVG_CIRCLES = `
   <circle r="2" cy="8" cx="8"></circle>
   <circle r="2" cy="8" cx="14"></circle>
 </svg>`;
+
+const I18N = {
+  COMPILED_ACTION: 'View Vega',
+  EDITOR_ACTION: 'Open in Vega Editor',
+  PNG_ACTION: 'Save as PNG',
+  SOURCE_ACTION: 'View Source',
+  SVG_ACTION: 'Save as SVG'
+};
 
 export type VisualizationSpec = VlSpec | VgSpec;
 
@@ -162,6 +179,9 @@ export default async function embed(
           { export: { svg: true, png: true }, source: true, compiled: false, editor: true },
           opt.actions || {}
         );
+  const i18n = mergeDeep<I18n>({}, I18N, opt.i18n || {});
+
+  const val = i18n.EDITOR_ACTION;
 
   const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
   const renderer = opt.renderer || 'canvas';
@@ -277,9 +297,10 @@ export default async function embed(
     if (actions === true || actions.export !== false) {
       for (const ext of ['svg', 'png']) {
         if (actions === true || actions.export === true || actions.export![ext]) {
+          const i18nExportAction = i18n[`${ext.toUpperCase()}_ACTION`];
           ctrl
             .append<HTMLLinkElement>('a')
-            .text(`Export as ${ext.toUpperCase()}`)
+            .text(i18nExportAction)
             .attr('href', '#')
             .attr('target', '_blank')
             .attr('download', `visualization.${ext}`)
@@ -302,7 +323,7 @@ export default async function embed(
     if (actions === true || actions.source !== false) {
       ctrl
         .append('a')
-        .text('View Source')
+        .text(i18n.SOURCE_ACTION as string)
         .attr('href', '#')
         .on('click', () => {
           viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '', mode);
@@ -314,7 +335,7 @@ export default async function embed(
     if (mode === 'vega-lite' && (actions === true || actions.compiled !== false)) {
       ctrl
         .append('a')
-        .text('View Vega')
+        .text(i18n.COMPILED_ACTION as string)
         .attr('href', '#')
         .on('click', () => {
           viewSource(stringify(vgSpec), opt.sourceHeader || '', opt.sourceFooter || '', 'vega');
@@ -327,7 +348,7 @@ export default async function embed(
       const editorUrl = opt.editorUrl || 'https://vega.github.io/editor/';
       ctrl
         .append('a')
-        .text('Open in Vega Editor')
+        .text(i18n.EDITOR_ACTION as string)
         .attr('href', '#')
         .on('click', () => {
           post(window, editorUrl, {
