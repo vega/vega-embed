@@ -84,7 +84,7 @@ const I18N = {
   EDITOR_ACTION: 'Open in Vega Editor',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
-  SVG_ACTION: 'Save as SVG'
+  SVG_ACTION: 'Save as SVG',
 };
 
 export type VisualizationSpec = VlSpec | VgSpec;
@@ -179,7 +179,7 @@ export default async function embed(
           { export: { svg: true, png: true }, source: true, compiled: false, editor: true },
           opt.actions || {}
         );
-  const i18n = {...I18N, ...opt.i18n};
+  const i18n = { ...I18N, ...opt.i18n };
 
   const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
   const renderer = opt.renderer || 'canvas';
