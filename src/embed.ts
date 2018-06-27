@@ -54,7 +54,7 @@ export interface EmbedOptions {
   editorUrl?: string;
   hover?: boolean;
   runAsync?: boolean;
-  i18n?: I18n;
+  i18n?: Partial<typeof I18N>;
 }
 
 const NAMES: { [key in Mode]: string } = {
