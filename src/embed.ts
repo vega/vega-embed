@@ -26,14 +26,6 @@ export interface Actions {
   editor?: boolean;
 }
 
-export interface I18n {
-  COMPILED_ACTION?: string;
-  EDITOR_ACTION?: string;
-  PNG_ACTION?: string;
-  SOURCE_ACTION?: string;
-  SVG_ACTION?: string;
-}
-
 export interface EmbedOptions {
   actions?: boolean | Actions;
   mode?: Mode;
