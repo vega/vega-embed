@@ -93,3 +93,23 @@ test('guessMode from Vega-Lite spec', () => {
 test('guessMode from Vega spec', () => {
   expect(guessMode({ marks: [] }, 'invalid' as Mode)).toBe('vega');
 });
+
+test('can change i18n strings', async () => {
+  const el = document.createElement('div');
+  let ctrl;
+  let ctrlChildren;
+  await embed(el, vlSpec, {
+    actions: true,
+    i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' },
+  });
+
+  ctrl = el.children[2].children[0];
+  ctrlChildren = ctrl.children;
+
+  expect(ctrl.childElementCount).toBe(5);
+  expect(ctrlChildren[0].textContent).toBe('quux');
+  expect(ctrlChildren[1].textContent).toBe('baz');
+  expect(ctrlChildren[2].textContent).toBe('qux');
+  expect(ctrlChildren[3].textContent).toBe('foo');
+  expect(ctrlChildren[4].textContent).toBe('bar');
+});
