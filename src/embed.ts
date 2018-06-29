@@ -2,7 +2,7 @@ import * as d3 from 'd3-selection';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega-lib';
-import { Config as VgConfig, Loader, LoaderOptions, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
+import { Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -10,14 +10,11 @@ import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 import { post } from './post';
 import embedStyle from './style';
+import { Config, Mode } from './types';
 import { mergeDeep } from './util';
 
 export const vega = vegaImport;
 export const vl = vlImport;
-
-export type Mode = 'vega' | 'vega-lite';
-export type Renderer = 'canvas' | 'svg';
-export type Config = VlConfig | VgConfig;
 
 export interface Actions {
   export?: boolean | { svg?: boolean; png?: boolean };
@@ -33,7 +30,7 @@ export interface EmbedOptions {
   defaultStyle?: boolean | string;
   logLevel?: number;
   loader?: Loader | LoaderOptions;
-  renderer?: Renderer;
+  renderer?: Renderers;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
   onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
   width?: number;
