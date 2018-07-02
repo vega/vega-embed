@@ -13,6 +13,8 @@ import embedStyle from './style';
 import { Config, Mode } from './types';
 import { mergeDeep } from './util';
 
+export * from './types';
+
 export const vega = vegaImport;
 export const vl = vlImport;
 
