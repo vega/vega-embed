@@ -37,7 +37,7 @@ You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](
 <script type="text/javascript">
   var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
   vegaEmbed('#vis', spec).then(function(result) {
-    // access view as result.view
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
 </body>
