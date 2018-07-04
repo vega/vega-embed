@@ -75,8 +75,8 @@
   "scripts": {
     "build": "rollup -c",
     "clean": "rm -rf build && rm -f src/style.ts && mkdir build",
-    "format": "tslint -p . --fix && prettier --write '{src,test}/**/*.ts'",
-    "lint": "tslint -p . && prettier --list-different '{src,test}/**/*.ts'",
+    "format": "tslint -p . -e 'package.json' --fix && prettier --write '{src,test}/**/*.ts'",
+    "lint": "tslint -p . -e 'package.json' && prettier --list-different '{src,test}/**/*.ts'",
     "postbuild": "uglifyjs build/vega-embed.js -cm > build/vega-embed.min.js",
     "prebuild": "npm run clean && ./build-style.sh && tsc",
     "prepublishOnly": "npm run build",
