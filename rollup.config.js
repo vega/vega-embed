@@ -3,7 +3,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
 export default {
-  input: 'build/index.js',
+  input: 'build/src/index.js',
   output: {
     file: 'build/vega-embed.js',
     format: 'umd',
@@ -15,10 +15,6 @@ export default {
       'vega-lite': 'vl'
     }
   },
-  plugins: [
-    nodeResolve(),
-    json(),
-    commonjs()
-  ],
+  plugins: [nodeResolve(), json(), commonjs()],
   external: ['vega', 'vega-lib', 'vega-lite']
 };

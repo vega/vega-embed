@@ -1,5 +1,6 @@
 import * as d3 from 'd3-selection';
 import { isString } from 'vega-util';
+import pkg from '../package.json';
 import { container } from './container';
 import embed, { vega, vl } from './embed';
 import { isURL } from './util';
@@ -28,5 +29,7 @@ const wrapper: Wrapper = (...args: any[]): any => {
 (wrapper as any).embed = embed;
 (wrapper as any).vega = vega;
 (wrapper as any).default = embed;
+
+export const version = pkg.version;
 
 export default wrapper;

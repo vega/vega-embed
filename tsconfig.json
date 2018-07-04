@@ -13,6 +13,7 @@
     "noEmitOnError": true,
     "sourceMap": true,
     "importHelpers": true,
+    "resolveJsonModule": true,
     "lib": ["es6", "dom"]
   },
   "files": ["src/index.ts"],
