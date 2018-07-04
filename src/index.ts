@@ -29,7 +29,6 @@ const wrapper: Wrapper = (...args: any[]): any => {
 (wrapper as any).embed = embed;
 (wrapper as any).vega = vega;
 (wrapper as any).default = embed;
-
-export const version = pkg.version;
+(wrapper as any).version = pkg.version;
 
 export default wrapper;
