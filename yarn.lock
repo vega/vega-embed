@@ -2043,9 +2043,9 @@ istanbul-reports@^1.3.0:
   dependencies:
     handlebars "^4.0.3"
 
-jest-canvas-mock@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-1.0.3.tgz#38473f21eea1ffd37218efefdf26c19d4a532702"
+jest-canvas-mock@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-1.1.0.tgz#f6ed0998b6be3ae2b7e095d7173441ae62cc831e"
 
 jest-changed-files@^23.2.0:
   version "23.2.0"
@@ -4164,7 +4164,7 @@ vega-dataflow@^4.0.0, vega-dataflow@^4.0.3:
     vega-loader "^3.0.1"
     vega-util "^1.7.0"
 
-vega-encode@^3.1.0:
+vega-encode@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/vega-encode/-/vega-encode-3.1.1.tgz#0e9efc737819acae5487be2c22c2b586af7204e4"
   dependencies:
@@ -4193,7 +4193,7 @@ vega-force@^3.0.0:
     vega-dataflow "^4.0.0"
     vega-util "^1.7.0"
 
-vega-geo@^3.0.0:
+vega-geo@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/vega-geo/-/vega-geo-3.1.0.tgz#2022f0dc612199585b10d2274967fee94d7505b4"
   dependencies:
@@ -4204,38 +4204,38 @@ vega-geo@^3.0.0:
     vega-projection "^1.2.0"
     vega-util "^1.7.0"
 
-vega-hierarchy@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/vega-hierarchy/-/vega-hierarchy-3.0.1.tgz#8c4b4a49397a82f677000ae83854380089d1ee0a"
+vega-hierarchy@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vega-hierarchy/-/vega-hierarchy-3.0.2.tgz#84cd30ca0611f751f95c7b953ca041df23c142d6"
   dependencies:
     d3-collection "^1.0.4"
     d3-hierarchy "^1.1.6"
     vega-dataflow "^4.0.3"
     vega-util "^1.7.0"
 
-"vega-lib@^4.0.0-rc.3 || ^3.3.0":
-  version "4.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/vega-lib/-/vega-lib-4.0.0-rc.3.tgz#d263e0e2271c1d09b022afde0a21e6284e28b3f7"
+"vega-lib@^4.0.0 || ^3.3.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vega-lib/-/vega-lib-4.0.0.tgz#17a462ab3ab01e37e733149675f39ceb1a9b323e"
   dependencies:
     vega-crossfilter "^3.0.0"
     vega-dataflow "^4.0.3"
-    vega-encode "^3.1.0"
+    vega-encode "^3.1.1"
     vega-event-selector "^2.0.0"
     vega-expression "^2.3.1"
     vega-force "^3.0.0"
-    vega-geo "^3.0.0"
-    vega-hierarchy "^3.0.1"
+    vega-geo "^3.1.0"
+    vega-hierarchy "^3.0.2"
     vega-loader "^3.0.1"
-    vega-parser "^3.2.0"
+    vega-parser "^3.5.0"
     vega-projection "^1.2.0"
-    vega-runtime "^3.0.1"
+    vega-runtime "^3.0.3"
     vega-scale "^2.4.0"
     vega-scenegraph "^3.2.1"
     vega-statistics "^1.2.1"
-    vega-transforms "^2.0.0"
+    vega-transforms "^2.1.0"
     vega-typings "*"
     vega-util "^1.7.0"
-    vega-view "^3.2.2"
+    vega-view "^3.3.2"
     vega-view-transforms "^2.0.1"
     vega-voronoi "^3.0.0"
     vega-wordcloud "^3.0.0"
@@ -4262,7 +4262,7 @@ vega-loader@^3.0.1:
     topojson-client "^3.0.0"
     vega-util "^1.7.0"
 
-vega-parser@^3.2.0, vega-parser@^3.5.0:
+vega-parser@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-3.5.0.tgz#eeb1e323e1535479cd40587352e08dbbccd24eed"
   dependencies:
@@ -4285,7 +4285,7 @@ vega-projection@^1.2.0:
   dependencies:
     d3-geo "^1.10.0"
 
-vega-runtime@^3.0.1, vega-runtime@^3.0.3:
+vega-runtime@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/vega-runtime/-/vega-runtime-3.0.3.tgz#f4595dd1487a5d56d842a7f07b7db5ce1f772f97"
   dependencies:
@@ -4335,7 +4335,7 @@ vega-tooltip@^0.12.0:
   dependencies:
     vega-util "^1.7.0"
 
-vega-transforms@^2.0.0:
+vega-transforms@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vega-transforms/-/vega-transforms-2.1.0.tgz#314f3effe98db50e76d820cd89fbd8acc1fc50f3"
   dependencies:
@@ -4362,7 +4362,7 @@ vega-view-transforms@^2.0.1:
     vega-scenegraph "^3.2.1"
     vega-util "^1.7.0"
 
-vega-view@^3.2.2:
+vega-view@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/vega-view/-/vega-view-3.3.2.tgz#f0bfd5aa0a6947c912aa94dcc77a46c20e44b675"
   dependencies:
