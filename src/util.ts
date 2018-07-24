@@ -33,6 +33,13 @@ function deepMerge_(dest: any, src: any) {
   return dest;
 }
 
+// polyfill for IE
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function(search, pos) {
+    return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
+  };
+}
+
 export function isURL(s: string): boolean {
   return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');
 }
