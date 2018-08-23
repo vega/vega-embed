@@ -1,7 +1,7 @@
 import { isArray } from 'vega-util';
 
 /**
- * From vega-lite
+ * From Vega-Lite
  */
 export function mergeDeep<T>(dest: T, ...src: Array<Partial<T>>): T {
   for (const s of src) {

@@ -69,7 +69,7 @@ test('guessMode from Vega schema', () => {
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/v2.json' }, 'invalid' as Mode)).toBe(
+  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/v3.json' }, 'invalid' as Mode)).toBe(
     'vega-lite'
   );
 });
