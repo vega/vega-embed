@@ -108,9 +108,9 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
       console.warn(
-        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
-          NAMES[providedMode]
-        }.`
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[
+          providedMode
+        ] || providedMode}.`
       );
     }
 
