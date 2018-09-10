@@ -8,6 +8,7 @@ import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
+import { EncodeEntryName } from 'vega-typings';
 import { post } from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
@@ -23,6 +24,11 @@ export interface Actions {
   source?: boolean;
   compiled?: boolean;
   editor?: boolean;
+}
+
+export interface Hover {
+  hoverSet?: EncodeEntryName;
+  leaveSet?: EncodeEntryName;
 }
 
 export interface EmbedOptions {
@@ -43,7 +49,7 @@ export interface EmbedOptions {
   sourceHeader?: string;
   sourceFooter?: string;
   editorUrl?: string;
-  hover?: boolean;
+  hover?: boolean | Hover;
   runAsync?: boolean;
   i18n?: Partial<typeof I18N>;
 }
@@ -251,9 +257,17 @@ export default async function embed(
     view.tooltip(handler);
   }
 
+  const hover = opt.hover;
+
   // do not automatically enable hover for Vega-Lite.
-  if (opt.hover === undefined ? mode !== 'vega-lite' : opt.hover) {
-    view.hover();
+  if (hover === undefined ? mode !== 'vega-lite' : hover) {
+    if (typeof hover === 'boolean') {
+      view.hover();
+    } else {
+      const { hoverSet, leaveSet } = hover as Hover;
+
+      view.hover(hoverSet, leaveSet);
+    }
   }
 
   if (opt) {
