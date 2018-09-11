@@ -257,17 +257,20 @@ export default async function embed(
     view.tooltip(handler);
   }
 
-  const hover = opt.hover;
+  let hover = opt.hover;
 
   // do not automatically enable hover for Vega-Lite.
-  if (hover === undefined ? mode !== 'vega-lite' : hover) {
-    if (typeof hover === 'boolean') {
-      view.hover();
-    } else {
-      const { hoverSet, leaveSet } = hover as Hover;
+  if (hover === undefined) {
+    hover = mode !== 'vega-lite';
+  }
 
-      view.hover(hoverSet, leaveSet);
-    }
+  if (hover) {
+    const {
+      hoverSet,
+      leaveSet
+    } = (typeof hover === 'boolean' ? {} : hover) as Hover;
+
+    view.hover(hoverSet, leaveSet);
   }
 
   if (opt) {
