@@ -1,7 +1,7 @@
+import { View } from 'vega-lib';
 import { TopLevelSpec } from 'vega-lite';
 import { compile } from 'vega-lite';
 import embed, { guessMode, Mode } from '../src/embed';
-import { View } from 'vega-lib';
 
 const vlSpec: TopLevelSpec = {
   data: { values: [1, 2, 3] },
@@ -126,7 +126,7 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   await embed(el, vlSpec, {
-    hover: true
+    hover: true,
   });
   expect(hoverSpy).toHaveBeenCalledWith(undefined, undefined);
   hoverSpy.mockReset();
@@ -137,23 +137,23 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
-    hover: false
+    hover: false,
   });
   expect(hoverSpy).not.toHaveBeenCalled();
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
     hover: {
-      hoverSet: 'enter'
-    }
+      hoverSet: 'enter',
+    },
   });
   expect(hoverSpy).toHaveBeenCalledWith('enter', undefined);
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
     hover: {
-      leaveSet: 'leave'
-    }
+      leaveSet: 'leave',
+    },
   });
   expect(hoverSpy).toHaveBeenCalledWith(undefined, 'leave');
   hoverSpy.mockReset();
