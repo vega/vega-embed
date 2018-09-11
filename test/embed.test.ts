@@ -1,6 +1,7 @@
 import { TopLevelSpec } from 'vega-lite';
 import { compile } from 'vega-lite';
 import embed, { guessMode, Mode } from '../src/embed';
+import { View } from 'vega-lib';
 
 const vlSpec: TopLevelSpec = {
   data: { values: [1, 2, 3] },
@@ -112,4 +113,50 @@ test('can change i18n strings', async () => {
   expect(ctrlChildren[2].textContent).toBe('qux');
   expect(ctrlChildren[3].textContent).toBe('foo');
   expect(ctrlChildren[4].textContent).toBe('bar');
+});
+
+test('can set hover arguments', async () => {
+  const hoverSpy = jest.spyOn(View.prototype, 'hover');
+
+  const el = document.createElement('div');
+
+  // Hover disabled by default
+  await embed(el, vlSpec, {});
+  expect(hoverSpy).not.toHaveBeenCalled();
+  hoverSpy.mockReset();
+
+  await embed(el, vlSpec, {
+    hover: true
+  });
+  expect(hoverSpy).toHaveBeenCalledWith(undefined, undefined);
+  hoverSpy.mockReset();
+
+  // Hover enabled by default
+  await embed(el, vgSpec, {});
+  expect(hoverSpy).toHaveBeenCalledWith(undefined, undefined);
+  hoverSpy.mockReset();
+
+  await embed(el, vgSpec, {
+    hover: false
+  });
+  expect(hoverSpy).not.toHaveBeenCalled();
+  hoverSpy.mockReset();
+
+  await embed(el, vgSpec, {
+    hover: {
+      hoverSet: 'enter'
+    }
+  });
+  expect(hoverSpy).toHaveBeenCalledWith('enter', undefined);
+  hoverSpy.mockReset();
+
+  await embed(el, vgSpec, {
+    hover: {
+      leaveSet: 'leave'
+    }
+  });
+  expect(hoverSpy).toHaveBeenCalledWith(undefined, 'leave');
+  hoverSpy.mockReset();
+
+  hoverSpy.mockRestore();
 });
