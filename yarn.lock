@@ -4246,17 +4246,17 @@ vega-lib@^4.2.0:
     vega-voronoi "^3.0.0"
     vega-wordcloud "^3.0.0"
 
-"vega-lite@^3.0.0-rc5 || ^2.6.0":
-  version "3.0.0-rc5"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-3.0.0-rc5.tgz#ba0b7e98f46665c986e38e2feb71c311598995ca"
+"vega-lite@^3.0.0-rc6 || ^2.6.0":
+  version "3.0.0-rc6"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-3.0.0-rc6.tgz#0880f0c362f0a1eb1b09d6e436ebc0d117c1fafc"
   dependencies:
     json-stable-stringify "^1.0.1"
     json-stringify-pretty-compact "^1.2.0"
     tslib "^1.9.3"
     vega-event-selector "^2.0.0"
-    vega-typings "^0.3.40"
+    vega-typings "0.3.45"
     vega-util "^1.7.0"
-    yargs "^12.0.1"
+    yargs "^12.0.2"
 
 vega-loader@^3.0.1:
   version "3.0.1"
@@ -4350,7 +4350,7 @@ vega-transforms@^2.2.0:
     vega-statistics "^1.2.1"
     vega-util "^1.7.0"
 
-vega-typings@*, vega-typings@^0.3.40:
+vega-typings@*, vega-typings@0.3.45:
   version "0.3.45"
   resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.3.45.tgz#ca55b394ff47a5e37a37b52d992d6fcbf3867cea"
   dependencies:
@@ -4638,7 +4638,7 @@ yargs@^11.0.0:
     y18n "^3.2.1"
     yargs-parser "^9.0.2"
 
-yargs@^12.0.1:
+yargs@^12.0.2:
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.2.tgz#fe58234369392af33ecbef53819171eff0f5aadc"
   dependencies:
