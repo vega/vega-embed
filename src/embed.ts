@@ -265,10 +265,7 @@ export default async function embed(
   }
 
   if (hover) {
-    const {
-      hoverSet,
-      leaveSet
-    } = (typeof hover === 'boolean' ? {} : hover) as Hover;
+    const { hoverSet, leaveSet } = (typeof hover === 'boolean' ? {} : hover) as Hover;
 
     view.hover(hoverSet, leaveSet);
   }
