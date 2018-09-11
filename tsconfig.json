@@ -13,7 +13,8 @@
     "noEmitOnError": true,
     "sourceMap": true,
     "importHelpers": true,
-    "lib": ["es6", "dom"]
+    "lib": ["es6", "dom"],
+    "resolveJsonModule": true
   },
   "files": ["src/index.ts"],
   "include": ["node_modules/vega-lite/typings/*.d.ts"]
