@@ -2,7 +2,7 @@ import * as d3 from 'd3-selection';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega-lib';
-import { Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
+import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
 import * as vlImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -25,6 +25,11 @@ export interface Actions {
   editor?: boolean;
 }
 
+export interface Hover {
+  hoverSet?: EncodeEntryName;
+  updateSet?: EncodeEntryName;
+}
+
 export interface EmbedOptions {
   actions?: boolean | Actions;
   mode?: Mode;
@@ -43,7 +48,7 @@ export interface EmbedOptions {
   sourceHeader?: string;
   sourceFooter?: string;
   editorUrl?: string;
-  hover?: boolean;
+  hover?: boolean | Hover;
   runAsync?: boolean;
   i18n?: Partial<typeof I18N>;
 }
@@ -251,9 +256,17 @@ export default async function embed(
     view.tooltip(handler);
   }
 
-  // do not automatically enable hover for Vega-Lite.
-  if (opt.hover === undefined ? mode !== 'vega-lite' : opt.hover) {
-    view.hover();
+  let hover = opt.hover;
+
+  // Enable hover for Vega by default.
+  if (hover === undefined) {
+    hover = mode !== 'vega-lite';
+  }
+
+  if (hover) {
+    const { hoverSet, updateSet } = (typeof hover === 'boolean' ? {} : hover) as Hover;
+
+    view.hover(hoverSet, updateSet);
   }
 
   if (opt) {

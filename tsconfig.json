@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./build/src",
+    "outDir": "./build",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
@@ -13,6 +13,7 @@
     "noEmitOnError": true,
     "sourceMap": true,
     "importHelpers": true,
+    "resolveJsonModule": true,
     "lib": ["es6", "dom"]
   },
   "files": ["src/index.ts"],
