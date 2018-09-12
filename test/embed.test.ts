@@ -152,10 +152,10 @@ test('can set hover arguments', async () => {
 
   await embed(el, vgSpec, {
     hover: {
-      updateSet: 'leave',
+      updateSet: 'exit',
     },
   });
-  expect(hoverSpy).toHaveBeenCalledWith(undefined, 'leave');
+  expect(hoverSpy).toHaveBeenCalledWith(undefined, 'exit');
   hoverSpy.mockReset();
 
   hoverSpy.mockRestore();
