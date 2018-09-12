@@ -28,7 +28,7 @@ export interface Actions {
 
 export interface Hover {
   hoverSet?: EncodeEntryName;
-  leaveSet?: EncodeEntryName;
+  updateSet?: EncodeEntryName;
 }
 
 export interface EmbedOptions {
@@ -265,9 +265,9 @@ export default async function embed(
   }
 
   if (hover) {
-    const { hoverSet, leaveSet } = (typeof hover === 'boolean' ? {} : hover) as Hover;
+    const { hoverSet, updateSet } = (typeof hover === 'boolean' ? {} : hover) as Hover;
 
-    view.hover(hoverSet, leaveSet);
+    view.hover(hoverSet, updateSet);
   }
 
   if (opt) {
