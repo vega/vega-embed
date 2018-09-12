@@ -116,7 +116,7 @@ var opt = {
 
   "hover" : {
     hoverSet: ...,
-    leaveSet: ...,
+    updateSet: ...,
   },
 
   "runAsync": ...,
