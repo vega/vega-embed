@@ -90,7 +90,7 @@ var opt = {
   "loader" : ...,
   "logLevel" : ...,
 
-  "tooltip": : ...,
+  "tooltip": ...,
 
   "onBeforeParse" : ...,
 
