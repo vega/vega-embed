@@ -4903,10 +4903,10 @@ vega-lib@^4.3.0:
     vega-voronoi "^3.0.0"
     vega-wordcloud "^3.0.0"
 
-"vega-lite@^3.0.0-rc7 || ^2.6.0":
-  version "3.0.0-rc7"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-3.0.0-rc7.tgz#67c9b16c3388c13a70f9f7b24c62b330fab70a87"
-  integrity sha512-U/BD5PwWrDztEM6o8nIyv8DYSyDE9X3kuuVEBhc/GSAsyKoVCq9y/3cMewB9+sYxQMsYPNTreBYeLlFKk3bz8g==
+"vega-lite@^3.0.0-rc8 || ^2.6.0":
+  version "3.0.0-rc8"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-3.0.0-rc8.tgz#84cb71da1a7d91829279b5ea37f3677c72a7fb1e"
+  integrity sha512-lvD3KAyBI4OFi4EGauRLEuy+XO55klyFAuRcyrCcNfIkvLZjQtVQw//tg7bytDX5IfY//Pwv8zdlFH25Yx2R3A==
   dependencies:
     fast-deep-equal "^2.0.1"
     json-stable-stringify "^1.0.1"
