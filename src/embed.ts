@@ -76,7 +76,7 @@ const SVG_CIRCLES = `
 </svg>`;
 
 const I18N = {
-  CLICK_TO_OPEN_ACTIONS: 'Click to open actions',
+  CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
   COMPILED_ACTION: 'View Vega',
   EDITOR_ACTION: 'Open in Vega Editor',
   PNG_ACTION: 'Save as PNG',
@@ -294,7 +294,7 @@ export default async function embed(
       .append('div')
       .attr('class', 'vega-actions-wrapper')
       .attr('tabindex', '1')
-      .attr('title', I18N.CLICK_TO_OPEN_ACTIONS);
+      .attr('title', I18N.CLICK_TO_VIEW_ACTIONS);
     if (opt.defaultStyle === true) {
       wrapper.html(SVG_CIRCLES);
     }
