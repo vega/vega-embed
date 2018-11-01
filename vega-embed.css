@@ -19,17 +19,21 @@
   border: 1px solid #aaa;
   border-radius: 999px;
   transition: opacity 0.4s ease-in;
+
+  outline: none;
+  cursor: pointer;
 }
 
-.vega-embed:hover .vega-actions-wrapper {
+.vega-embed:hover .vega-actions-wrapper,
+.vega-embed .vega-actions-wrapper:focus {
   transition: opacity 0.2s ease;
   opacity: 1;
 }
 
 .vega-embed .vega-actions {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 34px;
+  right: -9px;
   display: none;
   flex-direction: column;
 
@@ -41,14 +45,7 @@
   background: white;
 }
 
-.vega-embed .vega-actions-wrapper:hover {
-  background: transparent;
-  color: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.vega-embed .vega-actions-wrapper:hover .vega-actions {
+.vega-embed .vega-actions-wrapper:focus .vega-actions {
   display: flex;
 }
 
@@ -65,4 +62,32 @@
 .vega-embed .vega-actions a:hover {
   background-color: #f7f7f9;
   color: #1b1e23;
+}
+
+.vega-embed .vega-actions-wrapper:focus::before,
+.vega-embed .vega-actions-wrapper:focus::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 34px;
+  right: 10px;
+  box-sizing: border-box;
+
+  border: 6px solid black;
+
+  transform-origin: 0 0;
+  transform: rotate(-45deg);
+}
+
+.vega-embed .vega-actions-wrapper:focus::before {
+  border-color: #d9d9d9;
+
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.vega-embed .vega-actions-wrapper:focus::after {
+  top: 35px;
+
+  border-color: white white transparent transparent;
 }
