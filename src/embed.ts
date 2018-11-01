@@ -332,7 +332,7 @@ export default async function embed(
         .append('a')
         .text(i18n.SOURCE_ACTION)
         .attr('href', '#')
-        .on('click', () => {
+        .on('mousedown', () => {
           viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '', mode);
           d3.event.preventDefault();
         });
@@ -344,7 +344,7 @@ export default async function embed(
         .append('a')
         .text(i18n.COMPILED_ACTION)
         .attr('href', '#')
-        .on('click', () => {
+        .on('mousedown', () => {
           viewSource(stringify(vgSpec), opt.sourceHeader || '', opt.sourceFooter || '', 'vega');
           d3.event.preventDefault();
         });
@@ -357,7 +357,7 @@ export default async function embed(
         .append('a')
         .text(i18n.EDITOR_ACTION)
         .attr('href', '#')
-        .on('click', () => {
+        .on('mousedown', () => {
           post(window, editorUrl, {
             config: config as Config,
             mode,
