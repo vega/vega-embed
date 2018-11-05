@@ -92,7 +92,7 @@ var opt = {
 
   "tooltip": ...,
 
-  "onBeforeParse" : ...,
+  "patch" : ...,
 
   "width" : ...,
   "height" : ...,
