@@ -3,7 +3,13 @@ import { isArray } from 'vega-util';
 /**
  * From Vega-Lite
  */
-export function mergeDeep<T>(dest: T, ...src: Array<Partial<T>>): T {
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer V> ? ReadonlyArray<DeepPartial<V>> : DeepPartial<T[P]>
+};
+
+export function mergeDeep<T>(dest: T, ...src: Array<DeepPartial<T>>): T {
   for (const s of src) {
     dest = deepMerge_(dest, s);
   }

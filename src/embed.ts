@@ -11,7 +11,7 @@ import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 import { post } from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
-import { mergeDeep } from './util';
+import { DeepPartial, mergeDeep } from './util';
 
 export * from './types';
 
@@ -30,6 +30,8 @@ export interface Hover {
   updateSet?: EncodeEntryName;
 }
 
+export type PatchFunc = (spec: VgSpec) => VgSpec;
+
 export interface EmbedOptions {
   actions?: boolean | Actions;
   mode?: Mode;
@@ -39,7 +41,8 @@ export interface EmbedOptions {
   loader?: Loader | LoaderOptions;
   renderer?: Renderers;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
-  onBeforeParse?: (spec: VisualizationSpec) => VisualizationSpec;
+  patch?: PatchFunc | DeepPartial<VgSpec>;
+  onBeforeParse?: PatchFunc; // for backwards compatibility
   width?: number;
   height?: number;
   padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
@@ -87,8 +90,12 @@ const I18N = {
 export type VisualizationSpec = VlSpec | VgSpec;
 
 export interface Result {
+  /** The Vega view. */
   view: View;
+  /** The inut specification. */
   spec: VisualizationSpec;
+  /** The compiled and patched Vega specification. */
+  vgSpec: VgSpec;
 }
 
 function isTooltipHandler(h?: boolean | TooltipOptions | TooltipHandler): h is TooltipHandler {
@@ -168,6 +175,9 @@ export default async function embed(
   opt: EmbedOptions = {}
 ): Promise<Result> {
   opt = opt || {};
+
+  const patch = opt.patch || opt.onBeforeParse;
+
   const actions =
     opt.actions === true || opt.actions === false
       ? opt.actions
@@ -230,9 +240,12 @@ export default async function embed(
     .classed('vega-embed', true)
     .html(''); // clear container
 
-  if (opt.onBeforeParse) {
-    // Allow Vega spec to be modified before being used
-    vgSpec = opt.onBeforeParse(vgSpec);
+  if (patch) {
+    if (patch instanceof Function) {
+      vgSpec = patch(vgSpec);
+    } else {
+      vgSpec = mergeDeep(vgSpec, patch);
+    }
   }
 
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.
@@ -369,5 +382,5 @@ export default async function embed(
     }
   }
 
-  return { view, spec };
+  return { view, spec, vgSpec };
 }

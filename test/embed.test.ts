@@ -1,6 +1,5 @@
 import { View } from 'vega-lib';
-import { TopLevelSpec } from 'vega-lite';
-import { compile } from 'vega-lite';
+import { compile, TopLevelSpec } from 'vega-lite';
 import embed, { guessMode, Mode } from '../src/embed';
 
 const vlSpec: TopLevelSpec = {
@@ -63,6 +62,21 @@ test('creates default actions for Vega', async () => {
   expect(el.children[2].classList[0]).toBe('vega-actions-wrapper');
   expect(el.children[2].children[0].classList[0]).toBe('vega-actions');
   expect(el.children[2].children[0].childElementCount).toBe(4);
+});
+
+test('can access compiled Vega', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec);
+  expect(result.spec).toEqual(vlSpec);
+  expect(result.vgSpec).toEqual(compile(vlSpec).spec);
+});
+
+test('can patch compiled Vega', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec, { patch: { description: 'Hello World!' } });
+  expect(result.spec).toEqual(vlSpec);
+  expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
+  expect(result.vgSpec.description).toBe('Hello World!');
 });
 
 test('guessMode from Vega schema', () => {
