@@ -49,7 +49,7 @@ Look at an example online at [Vega-Embed Block](https://bl.ocks.org/domoritz/455
 
 ## API Reference
 
-The default export of Vega-Embed is a wrapper function that automatically chooses between [`embed`](#embed) and [`container`](#container) based on the provided arguments.
+When using a `script` tag, the default export of Vega-Embed is a wrapper function that automatically chooses between [`embed`](#embed) and [`container`](#container) based on the provided arguments. Vega-Embed provides this convenience for imports in interactive environments like [Observable](https://www.observablehq.com/). When using the Vega-Embed npm package, the default export is the [`embed`](#embed) function.
 
 <a href="#embed" name="embed">#</a>
 <b>embed</b>(<i>el</i>, <i>spec</i>[, <i>opt</i>])
