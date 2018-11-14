@@ -76,6 +76,7 @@
   "scripts": {
     "prebuild": "npm run clean && ./build-style.sh && tsc && cp package.json build/",
     "build": "rollup -c",
+    "quickbuild": "./build-style.sh && tsc && rollup -c",
     "clean": "rm -rf build && rm -f src/style.ts && mkdir build",
     "format": "tslint -p . -e 'package.json' --fix && prettier --write '{src,test}/**/*.ts'",
     "lint": "tslint -p . -e 'package.json' && prettier --list-different '{src,test}/**/*.ts'",

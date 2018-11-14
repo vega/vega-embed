@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Vega-Embed for Vega</title>
 
-<head>
-  <meta charset="utf-8">
-  <title>Vega-Embed for Vega</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="build/vega-embed.js"></script>
+  </head>
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="build/vega-embed.js"></script>
-</head>
-
-<body>
-  <div id="vis"></div>
-  <script type="text/javascript">
-    vegaEmbed('#vis', 'bar-chart.vg.json', { theme: 'dark', defaultStyle: true, loader: { baseURL: 'https://vega.github.io/vega/examples/' } }).then(function (result) {
-      console.log(result);
-    }).catch(console.error);
-  </script>
-</body>
-
+  <body>
+    <div id="vis"></div>
+    <script type="text/javascript">
+      vegaEmbed("#vis", "bar-chart.vg.json", {
+        theme: "dark",
+        defaultStyle: true,
+        loader: { baseURL: "https://vega.github.io/vega/examples/" }
+      })
+        .then(function(result) {
+          console.log(result);
+        })
+        .catch(console.error);
+    </script>
+  </body>
 </html>

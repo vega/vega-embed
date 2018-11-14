@@ -302,15 +302,22 @@ export default async function embed(
   }
 
   if (actions !== false) {
-    // add child div to house action links
-    const wrapper = div
-      .append('div')
-      .attr('class', 'vega-actions-wrapper')
-      .attr('tabindex', '1')
-      .attr('title', I18N.CLICK_TO_VIEW_ACTIONS);
+    let wrapper = div;
+
     if (opt.defaultStyle === true) {
-      wrapper.html(SVG_CIRCLES);
+      const details = (wrapper = div.append('details').attr('title', I18N.CLICK_TO_VIEW_ACTIONS));
+      const summary = details.insert('summary');
+
+      summary.html(SVG_CIRCLES);
+
+      const dn = details.node() as HTMLDetailsElement;
+      document.addEventListener('click', evt => {
+        if (!dn.contains(evt.target as any)) {
+          dn.removeAttribute('open');
+        }
+      });
     }
+
     const ctrl = wrapper.insert('div').attr('class', 'vega-actions');
 
     // add 'Export' action

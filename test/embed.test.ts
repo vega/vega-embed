@@ -27,15 +27,14 @@ test('can change renderer to SVG', async () => {
 test('creates default actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec);
-  expect(el.children[2].classList[0]).toBe('vega-actions-wrapper');
-  expect(el.children[2].children[0].classList[0]).toBe('vega-actions');
-  expect(el.children[2].children[0].childElementCount).toBe(4);
+  expect(el.children[2].classList[0]).toBe('vega-actions');
+  expect(el.children[2].childElementCount).toBe(4);
 });
 
 test('creates all actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: true });
-  expect(el.children[2].children[0].childElementCount).toBe(5);
+  expect(el.children[2].childElementCount).toBe(5);
 });
 
 test('can disable actions', async () => {
@@ -47,21 +46,20 @@ test('can disable actions', async () => {
 test('can disable actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: false } });
-  expect(el.children[2].children[0].childElementCount).toBe(2);
+  expect(el.children[2].childElementCount).toBe(2);
 });
 
 test('can disable export actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: { svg: false } } });
-  expect(el.children[2].children[0].childElementCount).toBe(3);
+  expect(el.children[2].childElementCount).toBe(3);
 });
 
 test('creates default actions for Vega', async () => {
   const el = document.createElement('div');
   await embed(el, vgSpec);
-  expect(el.children[2].classList[0]).toBe('vega-actions-wrapper');
-  expect(el.children[2].children[0].classList[0]).toBe('vega-actions');
-  expect(el.children[2].children[0].childElementCount).toBe(4);
+  expect(el.children[2].classList[0]).toBe('vega-actions');
+  expect(el.children[2].childElementCount).toBe(4);
 });
 
 test('can access compiled Vega', async () => {
@@ -118,7 +116,7 @@ test('can change i18n strings', async () => {
     i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' },
   });
 
-  ctrl = el.children[2].children[0];
+  ctrl = el.children[2];
   ctrlChildren = ctrl.children;
 
   expect(ctrl.childElementCount).toBe(5);

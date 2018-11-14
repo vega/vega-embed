@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Vega-Embed test</title>
 
-<head>
-  <meta charset="utf-8">
-  <title>Vega-Embed test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="build/vega-embed.js"></script>
+  </head>
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="build/vega-embed.js"></script>
-</head>
-
-<body>
-  <div id="wrapper"></div>
-  <script type="text/javascript">
-    vegaEmbed('https://vega.github.io/vega/examples/bar-chart.vg.json')
-      .then((function (div) {
-        document.getElementById('wrapper').appendChild(div);
-      }));
-  </script>
-</body>
-
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/javascript">
+      vegaEmbed("https://vega.github.io/vega/examples/bar-chart.vg.json").then(
+        function(div) {
+          document.getElementById("wrapper").appendChild(div);
+        }
+      );
+    </script>
+  </body>
 </html>

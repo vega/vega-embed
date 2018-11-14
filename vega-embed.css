@@ -4,37 +4,53 @@
   padding-right: 38px;
 }
 
-.vega-embed .vega-actions-wrapper {
-  display: inline-flex;
+.vega-embed details:not([open]) > :not(summary) {
+  display: none !important;
+}
+
+.vega-embed summary {
+  list-style: none;
+  display: flex;
+
   position: absolute;
   top: 0;
   right: 0;
   padding: 6px;
   z-index: 1000;
 
-  opacity: 0.2;
   background: white;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   color: #1b1e23;
   border: 1px solid #aaa;
   border-radius: 999px;
+
+  opacity: 0.2;
   transition: opacity 0.4s ease-in;
 
   outline: none;
   cursor: pointer;
 }
 
-.vega-embed:hover .vega-actions-wrapper,
-.vega-embed .vega-actions-wrapper:focus {
+.vega-embed summary::-webkit-details-marker {
+  display: none;
+}
+
+.vega-embed details[open] summary {
+  opacity: 0.7;
+}
+
+.vega-embed:hover summary,
+.vega-embed:focus summary {
+  opacity: 1 !important;
   transition: opacity 0.2s ease;
-  opacity: 1;
 }
 
 .vega-embed .vega-actions {
   position: absolute;
-  top: 34px;
+  top: 35px;
   right: -9px;
-  display: none;
+
+  display: flex;
   flex-direction: column;
 
   padding-bottom: 8px;
@@ -43,10 +59,10 @@
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #d9d9d9;
   background: white;
-}
 
-.vega-embed .vega-actions-wrapper:focus .vega-actions {
-  display: flex;
+  animation-duration: 0.15s;
+  animation-name: scale-in;
+  animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
 }
 
 .vega-embed .vega-actions a {
@@ -61,33 +77,42 @@
 
 .vega-embed .vega-actions a:hover {
   background-color: #f7f7f9;
-  color: #1b1e23;
+  color: black;
 }
 
-.vega-embed .vega-actions-wrapper:focus::before,
-.vega-embed .vega-actions-wrapper:focus::after {
+.vega-embed .vega-actions::before,
+.vega-embed .vega-actions::after {
   content: "";
+  display: inline-block;
   position: absolute;
-  width: 0;
-  height: 0;
-  top: 34px;
-  right: 10px;
-  box-sizing: border-box;
-
-  border: 6px solid black;
-
-  transform-origin: 0 0;
-  transform: rotate(-45deg);
 }
 
-.vega-embed .vega-actions-wrapper:focus::before {
-  border-color: #d9d9d9;
+.vega-embed .vega-actions::before {
+  left: auto;
+  right: 14px;
+  top: -16px;
 
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 8px solid #0000;
+  border-bottom-color: #d9d9d9;
 }
 
-.vega-embed .vega-actions-wrapper:focus::after {
-  top: 35px;
+.vega-embed .vega-actions::after {
+  left: auto;
+  right: 15px;
+  top: -14px;
 
-  border-color: white white transparent transparent;
+  border: 7px solid #0000;
+  border-bottom-color: #fff;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
