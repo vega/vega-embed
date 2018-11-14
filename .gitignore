@@ -1,10 +1,10 @@
 .DS_Store
+.rpt2_cache
 bower_components
-node_modules
 build
-package-lock.json
+node_modules
 npm-debug.log*
+package-lock.json
+src/style.ts
 yarn-debug.log*
 yarn-error.log*
-.rpt2_cache
-src/style.ts
