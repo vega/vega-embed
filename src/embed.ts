@@ -305,7 +305,7 @@ export default async function embed(
     let wrapper = div;
 
     if (opt.defaultStyle === true) {
-      const details = (wrapper = div.append('details').attr('title', I18N.CLICK_TO_VIEW_ACTIONS));
+      const details = (wrapper = div.append('details').attr('title', i18n.CLICK_TO_VIEW_ACTIONS));
       const summary = details.insert('summary');
 
       summary.html(SVG_CIRCLES);
