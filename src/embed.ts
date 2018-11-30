@@ -80,7 +80,7 @@ const SVG_CIRCLES = `
 
 const I18N = {
   CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
-  COMPILED_ACTION: 'View Vega',
+  COMPILED_ACTION: 'View Vega Source',
   EDITOR_ACTION: 'Open in Vega Editor',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
