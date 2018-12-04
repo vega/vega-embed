@@ -205,13 +205,14 @@ export default async function embed(
     return embed(el, spec, { ...opt, config: JSON.parse(data) });
   }
 
-  if (opt.defaultStyle) {
+  if (opt.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
     if (!document.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
-      style.innerText = opt.defaultStyle === true ? (embedStyle || '').toString() : opt.defaultStyle;
+      style.innerText =
+        opt.defaultStyle === undefined || opt.defaultStyle === true ? (embedStyle || '').toString() : opt.defaultStyle;
       document.getElementsByTagName('head')[0].appendChild(style);
     }
   }
@@ -304,7 +305,7 @@ export default async function embed(
   if (actions !== false) {
     let wrapper = div;
 
-    if (opt.defaultStyle === true) {
+    if (opt.defaultStyle !== false) {
       const details = (wrapper = div.append('details').attr('title', i18n.CLICK_TO_VIEW_ACTIONS));
       const summary = details.insert('summary');
 
