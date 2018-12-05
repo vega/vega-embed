@@ -17,7 +17,6 @@ export async function container(spec: VisualizationSpec | string, opt: EmbedOpti
 
   return embed(div, spec, {
     actions,
-    defaultStyle: true,
     runAsync: true,
     ...(opt || {}),
   }).then(result => {
