@@ -61,7 +61,7 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 | :------ | :--------- | :------------- |
 | `el`      |  String  | A DOM element or CSS selector indicating the element on the page in which to add the embedded view. |
 | `spec`    | String / Object | _String_ : A URL string from which to load the Vega specification. This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
-| `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
+| `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
 
 _Note: Internet Explorer does not support [the ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) feature. To make it work correctly, please follow [the instructions on the Vega website](https://vega.github.io/vega/usage/#ie)._
 
@@ -74,7 +74,7 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 | Property| Type       | Description    |
 | :------ | :--------- | :------------- |
 | `spec`    | String / Object | _String_ : A URL string from which to load the Vega specification. This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. <br> _Object_ :  The Vega/Vega-Lite specification as a parsed JSON object. |
-| `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
+| `opt`     | Object   | _(Optional)_ A JavaScript object containing options for embedding. |
 
 ### Options
 
@@ -140,7 +140,7 @@ var opt = {
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip`     | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
 | `loader`      | Loader / Object | _Loader_ : Sets a custom Vega loader. _Object_ : Vega loader options for a loader that will be created. <br> See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
-| `patch`       | Function / Object | A function to modify the Vega specification before it is parsed. Alternatively, an object that is used to patch the Vega specification. If you use Vega-Lite, the compiled Vega will be patched. |
+| `patch`       | Function / Object / String | A function to modify the Vega specification before it is parsed. Alternatively, an object that is used to patch the Vega specification. If you use Vega-Lite, the compiled Vega will be patched. Alternatively to the function or the object, a URL string from which to load the patch can be provided. This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. |
 | `width`       | Number        | Sets the view width in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_width) for details. Note that Vega-Lite overrides this option. |
 | `height`      | Number        | Sets the view height in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_height) for details. Note that Vega-Lite overrides this option. |
 | `padding`     | Object        | Sets the view padding in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_padding) for details. |
