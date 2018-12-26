@@ -41,7 +41,7 @@ export interface EmbedOptions {
   loader?: Loader | LoaderOptions;
   renderer?: Renderers;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
-  patch?: PatchFunc | DeepPartial<VgSpec>;
+  patch?: string | PatchFunc | DeepPartial<VgSpec>;
   onBeforeParse?: PatchFunc; // for backwards compatibility
   width?: number;
   height?: number;
@@ -244,6 +244,9 @@ export default async function embed(
   if (patch) {
     if (patch instanceof Function) {
       vgSpec = patch(vgSpec);
+    } else if (vega.isString(patch)) {
+      const patchString = await loader.load(patch);
+      vgSpec = mergeDeep(vgSpec, JSON.parse(patchString));
     } else {
       vgSpec = mergeDeep(vgSpec, patch);
     }
