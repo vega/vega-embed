@@ -84,6 +84,19 @@ test('can patch compiled Vega', async () => {
   expect(result.vgSpec.description).toBe('Hello World!');
 });
 
+test('can patch compiled Vega with a function', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec, {
+    patch: spec => {
+      spec.description = 'Hello World!';
+      return spec;
+    }
+  });
+  expect(result.spec).toEqual(vlSpec);
+  expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
+  expect(result.vgSpec.description).toBe('Hello World!');
+});
+
 test('guessMode from Vega schema', () => {
   expect(guessMode({ $schema: 'https://vega.github.io/schema/vega/v4.json' }, 'invalid' as Mode)).toBe('vega');
 });
