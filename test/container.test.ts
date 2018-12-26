@@ -22,3 +22,8 @@ test('element is div', async () => {
   const div = await container(vlSpec);
   expect(div.tagName).toBe('DIV');
 });
+
+test('element is wrapper', async () => {
+  const div = await container(vlSpec);
+  expect(div.classList).toContain('vega-embed-wrapper');
+});
