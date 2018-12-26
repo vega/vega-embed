@@ -213,7 +213,8 @@ export default async function embed(
       style.id = ID;
       style.innerText =
         opt.defaultStyle === undefined || opt.defaultStyle === true ? (embedStyle || '').toString() : opt.defaultStyle;
-      document.getElementsByTagName('head')[0].appendChild(style);
+
+      document.head.appendChild(style);
     }
   }
 
