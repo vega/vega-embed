@@ -9,7 +9,7 @@
       }
     },
     {
-      "files": "*.css",
+      "files": "*.scss",
       "options": {
         "singleQuote": false
       }

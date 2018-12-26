@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-style=$(cat vega-embed.css)
-
-printf "// generated with build-style.sh\nexport default \`${style}\`" > src/style.ts
+printf "// generated with build-style.sh\nexport default \`" > src/style.ts
+node-sass vega-embed.scss >> src/style.ts
+echo "\`" >> src/style.ts

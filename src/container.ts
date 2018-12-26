@@ -8,19 +8,23 @@ import embed, { EmbedOptions, VisualizationSpec } from './embed';
  * The main use case is in [Observable](https://observablehq.com/).
  */
 export async function container(spec: VisualizationSpec | string, opt: EmbedOptions = {}) {
-  const div = document.createElement('div') as HTMLDivElement & { value: View };
+  const wrapper = document.createElement('div') as HTMLDivElement & { value: View };
+  wrapper.classList.add('vega-embed-wrapper');
+
+  const div = document.createElement('div');
+  wrapper.appendChild(div);
 
   const actions =
     opt.actions === true || opt.actions === false
       ? opt.actions
       : { export: true, source: false, compiled: true, editor: true, ...(opt.actions || {}) };
 
-  return embed(div, spec, {
+  const result = await embed(div, spec, {
     actions,
     runAsync: true,
     ...(opt || {})
-  }).then(result => {
-    div.value = result.view;
-    return div;
   });
+
+  wrapper.value = result.view;
+  return wrapper;
 }
