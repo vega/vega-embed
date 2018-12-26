@@ -58,17 +58,17 @@ export interface EmbedOptions {
 
 const NAMES: { [key in Mode]: string } = {
   vega: 'Vega',
-  'vega-lite': 'Vega-Lite',
+  'vega-lite': 'Vega-Lite'
 };
 
 const VERSION = {
   vega: vega.version,
-  'vega-lite': vl ? vl.version : 'not available',
+  'vega-lite': vl ? vl.version : 'not available'
 };
 
 const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
   vega: (vgjson, _) => vgjson,
-  'vega-lite': (vljson, config) => vl.compile(vljson as VlSpec, { config: config as VlConfig }).spec,
+  'vega-lite': (vljson, config) => vl.compile(vljson as VlSpec, { config: config as VlConfig }).spec
 };
 
 const SVG_CIRCLES = `
@@ -84,7 +84,7 @@ const I18N = {
   EDITOR_ACTION: 'Open in Vega Editor',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
-  SVG_ACTION: 'Save as SVG',
+  SVG_ACTION: 'Save as SVG'
 };
 
 export type VisualizationSpec = VlSpec | VgSpec;
@@ -259,7 +259,7 @@ export default async function embed(
   const view = new vega.View(runtime, {
     loader,
     logLevel,
-    renderer,
+    renderer
   }).initialize(el);
 
   if (opt.tooltip !== false) {
@@ -386,7 +386,7 @@ export default async function embed(
             config: config as Config,
             mode,
             renderer,
-            spec: stringify(spec),
+            spec: stringify(spec)
           });
           d3.event.preventDefault();
         });

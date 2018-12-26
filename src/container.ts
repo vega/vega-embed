@@ -18,7 +18,7 @@ export async function container(spec: VisualizationSpec | string, opt: EmbedOpti
   return embed(div, spec, {
     actions,
     runAsync: true,
-    ...(opt || {}),
+    ...(opt || {})
   }).then(result => {
     div.value = result.view;
     return div;

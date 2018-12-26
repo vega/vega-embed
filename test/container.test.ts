@@ -4,7 +4,7 @@ import { container } from '../src/container';
 const vlSpec: TopLevelSpec = {
   data: { values: [1, 2, 3] },
   encoding: {},
-  mark: 'point',
+  mark: 'point'
 };
 
 test('returns a promise', () => {

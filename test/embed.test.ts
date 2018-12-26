@@ -5,7 +5,7 @@ import embed, { guessMode, Mode } from '../src/embed';
 const vlSpec: TopLevelSpec = {
   data: { values: [1, 2, 3] },
   encoding: {},
-  mark: 'point',
+  mark: 'point'
 };
 
 const vgSpec = compile(vlSpec).spec;
@@ -102,7 +102,7 @@ test('guessMode from Vega-Lite spec', () => {
     { repeat: {}, spec: unitSpec },
     { data: { values: [] }, facet: { row: { field: 'foo', type: 'nominal' } }, spec: { mark: 'bar', encoding: {} } },
     { vconcat: [] },
-    { hconcat: [] },
+    { hconcat: [] }
   ];
 
   for (const spec of specs) {
@@ -120,7 +120,7 @@ test('can change i18n strings', async () => {
   let ctrlChildren;
   await embed(el, vlSpec, {
     actions: true,
-    i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' },
+    i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' }
   });
 
   ctrl = el.children[2].children[1];
@@ -145,7 +145,7 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   await embed(el, vlSpec, {
-    hover: true,
+    hover: true
   });
   expect(hoverSpy).toHaveBeenCalledWith(undefined, undefined);
   hoverSpy.mockReset();
@@ -156,23 +156,23 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
-    hover: false,
+    hover: false
   });
   expect(hoverSpy).not.toHaveBeenCalled();
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
     hover: {
-      hoverSet: 'enter',
-    },
+      hoverSet: 'enter'
+    }
   });
   expect(hoverSpy).toHaveBeenCalledWith('enter', undefined);
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
     hover: {
-      updateSet: 'exit',
-    },
+      updateSet: 'exit'
+    }
   });
   expect(hoverSpy).toHaveBeenCalledWith(undefined, 'exit');
   hoverSpy.mockReset();
