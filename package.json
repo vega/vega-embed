@@ -72,7 +72,7 @@
     "vega-lite": "^3.0.0-rc10 || ^2.6.0",
     "vega-schema-url-parser": "^1.1.0",
     "vega-themes": "^2.2.0",
-    "vega-tooltip": "^0.14.0"
+    "vega-tooltip": "^0.15.0"
   },
   "scripts": {
     "prebuild": "npm run clean && ./build-style.sh && tsc && cp package.json build/",
