@@ -17,5 +17,5 @@
     "lib": ["es6", "dom"]
   },
   "files": ["src/index.ts"],
-  "include": ["node_modules/vega-lite/typings/*.d.ts"]
+  "include": ["node_modules/vega-lite/typings/**/*.d.ts"]
 }
