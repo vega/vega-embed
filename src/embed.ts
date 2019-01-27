@@ -111,6 +111,33 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
 }
 
 /**
+ * Return a new spec that combines any changes to 'data' or 'signals' onto the original spec
+ *
+ * @param spec Vega spec.
+ * @param view Vega view instance.
+ */
+export function getUpdatedVegaSpec(spec: VgSpec, view: View): VgSpec {
+  const clonedSpec = JSON.parse(JSON.stringify(spec));
+  const { data, signals } = view.getState();
+  clonedSpec.data = Object.keys(data).map(k => ({
+    name: k,
+    values: data[k].map((value: any) => {
+      const filteredValue = mergeDeep({}, value);
+      delete filteredValue['Symbol(vega_id)'];
+      return filteredValue;
+    })
+  }));
+
+  clonedSpec.signals = signals;
+  return clonedSpec;
+}
+
+// TODO needs implementation
+function getUpdatedVegaLiteSpec(spec: VlSpec, view: View): VlSpec {
+  return spec;
+}
+
+/**
  * Try to guess the type of spec.
  *
  * @param spec Vega or Vega-Lite spec.
@@ -358,7 +385,12 @@ export default async function embed(
         .text(i18n.SOURCE_ACTION)
         .attr('href', '#')
         .on('mousedown', () => {
-          viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '', mode);
+          viewSource(
+            mode === 'vega' ? stringify(getUpdatedVegaSpec(spec, view)) : stringify(spec),
+            opt.sourceHeader || '',
+            opt.sourceFooter || '',
+            mode
+          );
           d3.event.preventDefault();
         });
     }
@@ -370,7 +402,12 @@ export default async function embed(
         .text(i18n.COMPILED_ACTION)
         .attr('href', '#')
         .on('mousedown', () => {
-          viewSource(stringify(vgSpec), opt.sourceHeader || '', opt.sourceFooter || '', 'vega');
+          viewSource(
+            stringify(getUpdatedVegaSpec(vgSpec, view)),
+            opt.sourceHeader || '',
+            opt.sourceFooter || '',
+            'vega'
+          );
           d3.event.preventDefault();
         });
     }
@@ -387,7 +424,7 @@ export default async function embed(
             config: config as Config,
             mode,
             renderer,
-            spec: stringify(spec)
+            spec: mode === 'vega' ? stringify(getUpdatedVegaSpec(spec, view)) : stringify(spec)
           });
           d3.event.preventDefault();
         });

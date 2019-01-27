@@ -1,6 +1,6 @@
-import { View } from 'vega-lib';
+import { changeset, Spec, View } from 'vega-lib';
 import { compile, TopLevelSpec } from 'vega-lite';
-import embed, { guessMode, Mode } from '../src/embed';
+import embed, { getUpdatedVegaSpec, guessMode, Mode } from '../src/embed';
 
 const vlSpec: TopLevelSpec = {
   data: { values: [1, 2, 3] },
@@ -191,4 +191,29 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   hoverSpy.mockRestore();
+});
+
+test('changes to data are included when generating output vega spec', async () => {
+  const el = document.createElement('div');
+  const testSpec: Spec = { data: [{ name: 'testData', values: [1, 2, 3] }] };
+  const result = await embed(el, testSpec);
+  result.view.change('testData', changeset().insert([4, 5])).run();
+
+  expect(getUpdatedVegaSpec(testSpec, result.view).data).toEqual([
+    { name: 'testData', values: [{ data: 1 }, { data: 2 }, { data: 3 }, { data: 4 }, { data: 5 }] }
+  ]);
+});
+
+test('changes to signals are included when generating output vega spec', async () => {
+  const el = document.createElement('div');
+  const testSpec: Spec = { signals: [{ name: 'boolSignal', value: false }] };
+  const result = await embed(el, testSpec);
+  result.view.signal('boolSignal', true).run();
+
+  const updatedSpec = getUpdatedVegaSpec(testSpec, result.view) as Spec;
+  if (!updatedSpec.signals || !updatedSpec.signals['boolSignal']) {
+    fail('boolSignal not found');
+  } else {
+    expect(updatedSpec.signals['boolSignal']).toBe(true);
+  }
 });
