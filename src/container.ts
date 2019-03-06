@@ -21,7 +21,6 @@ export async function container(spec: VisualizationSpec | string, opt: EmbedOpti
 
   const result = await embed(div, spec, {
     actions,
-    runAsync: true,
     ...(opt || {})
   });
 

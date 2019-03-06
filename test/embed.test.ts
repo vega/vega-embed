@@ -98,7 +98,7 @@ test('can patch compiled Vega with a function', async () => {
 });
 
 test('guessMode from Vega schema', () => {
-  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega/v4.json' }, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega/v5.json' }, 'invalid' as Mode)).toBe('vega');
 });
 
 test('guessMode from Vega-Lite schema', () => {

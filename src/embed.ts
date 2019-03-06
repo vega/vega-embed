@@ -52,7 +52,6 @@ export interface EmbedOptions {
   sourceFooter?: string;
   editorUrl?: string;
   hover?: boolean | Hover;
-  runAsync?: boolean;
   i18n?: Partial<typeof I18N>;
 }
 
@@ -300,14 +299,7 @@ export default async function embed(
     }
   }
 
-  // Initialize view after setup is done. 
-  view.initialize(el);
-
-  if (opt.runAsync) {
-    await view.runAsync();
-  } else {
-    view.run();
-  }
+  await view.initialize(el).runAsync();
 
   if (actions !== false) {
     let wrapper = div;
