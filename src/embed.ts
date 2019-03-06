@@ -261,7 +261,7 @@ export default async function embed(
     loader,
     logLevel,
     renderer
-  }).initialize(el);
+  });
 
   if (opt.tooltip !== false) {
     let handler: TooltipHandler;
@@ -299,6 +299,9 @@ export default async function embed(
       view.padding(opt.padding);
     }
   }
+
+  // Initialize view after setup is done. 
+  view.initialize(el);
 
   if (opt.runAsync) {
     await view.runAsync();
