@@ -1,8 +1,8 @@
 import * as d3 from 'd3-selection';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
-import * as vegaImport from 'vega-lib';
-import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega-lib';
+import * as vegaImport from 'vega';
+import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega';
 import * as vlImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';

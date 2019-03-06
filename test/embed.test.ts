@@ -1,4 +1,4 @@
-import { View } from 'vega-lib';
+import { View } from 'vega';
 import { compile, TopLevelSpec } from 'vega-lite';
 import embed, { guessMode, Mode } from '../src/embed';
 

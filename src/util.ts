@@ -1,4 +1,4 @@
-import { isArray } from 'vega-util';
+import { isArray } from 'vega';
 
 /**
  * From Vega-Lite
