@@ -5253,7 +5253,7 @@ vega-lib@^4.4.0:
     vega-voronoi "^3.0.0"
     vega-wordcloud "^3.0.0"
 
-"vega-lite@^3.0.0-rc12 || ^2.6.0":
+"vega-lite@3.0.0-rc12 || ^2.6.0":
   version "3.0.0-rc12"
   resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-3.0.0-rc12.tgz#48a1a8dc6b499ed3efdcff8b9807e6df4214de70"
   integrity sha512-/J7pyYFzL6rod+fBRZ9k6EQBMr7VXRmhQ/DqKPm2wGgtzqxDorBrvwZ0sqi2zWZ1o1vHIehbfl+/JMotuIoEeg==
