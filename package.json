@@ -50,7 +50,7 @@
     "@types/semver": "^5.5.0",
     "browser-sync": "^2.26.3",
     "concurrently": "^4.1.0",
-    "jest": "^24.3.1",
+    "jest": "^24.4.0",
     "jest-canvas-mock": "^2.0.0-beta.1",
     "node-sass": "^4.11.0",
     "prettier": "^1.16.4",
