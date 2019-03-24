@@ -64,7 +64,7 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.4000",
     "vega": "^5.1.0",
-    "vega-lite": "^3.0.0-rc15"
+    "vega-lite": "^3.0.0"
   },
   "peerDependencies": {
     "vega": "*",
