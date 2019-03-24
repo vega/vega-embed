@@ -35,7 +35,7 @@ test('creates default actions for Vega-Lite', async () => {
   await embed(el, vlSpec);
   expect(el.children[2].tagName).toBe('DETAILS');
   expect(el.children[2].children[1].classList[0]).toBe('vega-actions');
-  expect(el.children[2].children[1].childElementCount).toBe(4);
+  expect(el.children[2].children[1].childElementCount).toBe(5);
 });
 
 test('creates all actions for Vega-Lite', async () => {
@@ -53,13 +53,13 @@ test('can disable actions', async () => {
 test('can disable actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: false } });
-  expect(el.children[2].children[1].childElementCount).toBe(2);
+  expect(el.children[2].children[1].childElementCount).toBe(3);
 });
 
 test('can disable export actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: { svg: false } } });
-  expect(el.children[2].children[1].childElementCount).toBe(3);
+  expect(el.children[2].children[1].childElementCount).toBe(4);
 });
 
 test('creates default actions for Vega', async () => {
