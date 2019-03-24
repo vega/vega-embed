@@ -85,7 +85,7 @@
     "clean": "rm -rf build && rm -f src/style.ts && mkdir build",
     "prettierbase": "prettier '{src,test}/**/*.ts' '*.scss' '*.html' '*.js'",
     "format": "tslint -p . -e 'package.json' --fix && npm run prettierbase -- --write",
-    "lint": "tslint -p . -e 'package.json' && npm run prettierbase -- --list-different",
+    "lint": "tslint -p . -e 'package.json' && npm run prettierbase -- --check",
     "postbuild": "terser build/vega-embed.js -cm > build/vega-embed.min.js",
     "prepublishOnly": "npm run build",
     "preversion": "npm run lint && npm run test",
