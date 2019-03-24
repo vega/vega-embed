@@ -79,7 +79,7 @@ const SVG_CIRCLES = `
 
 const I18N = {
   CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
-  COMPILED_ACTION: 'View Vega Source',
+  COMPILED_ACTION: 'View Compiled Vega',
   EDITOR_ACTION: 'Open in Vega Editor',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
@@ -182,7 +182,7 @@ export default async function embed(
       ? opt.actions
       : mergeDeep<Actions>(
           {},
-          { export: { svg: true, png: true }, source: true, compiled: false, editor: true },
+          { export: { svg: true, png: true }, source: true, compiled: true, editor: true },
           opt.actions || {}
         );
   const i18n = { ...I18N, ...opt.i18n };
