@@ -54,7 +54,7 @@
     "jest-canvas-mock": "^2.0.0-beta.1",
     "node-sass": "^4.11.0",
     "prettier": "^1.16.4",
-    "rollup": "^1.7.3",
+    "rollup": "^1.7.4",
     "rollup-plugin-commonjs": "^9.2.2",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^4.0.1",
@@ -62,7 +62,7 @@
     "ts-jest": "^24.0.0",
     "tslint": "^5.14.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.3.4000",
+    "typescript": "^3.4.1",
     "vega": "^5.1.0",
     "vega-lite": "^3.0.0"
   },
