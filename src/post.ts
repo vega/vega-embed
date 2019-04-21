@@ -4,7 +4,7 @@ import { Config, Mode } from './types';
 /**
  * Open editor url in a new window, and pass a message.
  */
-export function post(
+export default function(
   window: Window,
   url: string,
   data: { config?: Config; mode: Mode; renderer?: Renderers; spec: string }
@@ -12,6 +12,7 @@ export function post(
   const editor = window.open(url)!;
   const wait = 10000;
   const step = 250;
+  // eslint-disable-next-line no-bitwise
   let count = ~~(wait / step);
 
   function listen(evt: MessageEvent) {

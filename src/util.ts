@@ -5,13 +5,7 @@ import { isArray } from 'vega';
  */
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
-export function mergeDeep<T>(dest: T, ...src: DeepPartial<T>[]): T {
-  for (const s of src) {
-    dest = deepMerge_(dest, s);
-  }
-  return dest;
-}
-
+/* eslint-disable */
 function deepMerge_(dest: any, src: any) {
   if (typeof src !== 'object' || src === null) {
     return dest;
@@ -34,9 +28,19 @@ function deepMerge_(dest: any, src: any) {
   }
   return dest;
 }
+/* eslint-enable */
+
+export function mergeDeep<T>(dest: T, ...src: DeepPartial<T>[]): T {
+  for (const s of src) {
+    // eslint-disable-next-line no-param-reassign
+    dest = deepMerge_(dest, s);
+  }
+  return dest;
+}
 
 // polyfill for IE
 if (!String.prototype.startsWith) {
+  // eslint-disable-next-line no-extend-native,func-names
   String.prototype.startsWith = function(search, pos) {
     return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search;
   };

@@ -8,7 +8,7 @@ import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
-import { post } from './post';
+import post from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
 import { DeepPartial, mergeDeep } from './util';
@@ -31,6 +31,15 @@ export interface Hover {
 }
 
 export type PatchFunc = (spec: VgSpec) => VgSpec;
+
+const I18N = {
+  CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
+  COMPILED_ACTION: 'View Compiled Vega',
+  EDITOR_ACTION: 'Open in Vega Editor',
+  PNG_ACTION: 'Save as PNG',
+  SOURCE_ACTION: 'View Source',
+  SVG_ACTION: 'Save as SVG'
+};
 
 export interface EmbedOptions {
   actions?: boolean | Actions;
@@ -76,15 +85,6 @@ const SVG_CIRCLES = `
   <circle r="2" cy="8" cx="8"></circle>
   <circle r="2" cy="8" cx="14"></circle>
 </svg>`;
-
-const I18N = {
-  CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
-  COMPILED_ACTION: 'View Compiled Vega',
-  EDITOR_ACTION: 'Open in Vega Editor',
-  PNG_ACTION: 'Save as PNG',
-  SOURCE_ACTION: 'View Source',
-  SVG_ACTION: 'Save as SVG'
-};
 
 export type VisualizationSpec = VlSpec | VgSpec;
 
@@ -135,24 +135,25 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     }
 
     return mode;
-  } else {
-    // try to guess from the provided spec
-    if (
-      'mark' in spec ||
-      'encoding' in spec ||
-      'layer' in spec ||
-      'hconcat' in spec ||
-      'vconcat' in spec ||
-      'facet' in spec ||
-      'repeat' in spec
-    ) {
-      return 'vega-lite';
-    }
-
-    if ('marks' in spec || 'signals' in spec || 'scales' in spec || 'axes' in spec) {
-      return 'vega';
-    }
   }
+
+  // try to guess from the provided spec
+  if (
+    'mark' in spec ||
+    'encoding' in spec ||
+    'layer' in spec ||
+    'hconcat' in spec ||
+    'vconcat' in spec ||
+    'facet' in spec ||
+    'repeat' in spec
+  ) {
+    return 'vega-lite';
+  }
+
+  if ('marks' in spec || 'signals' in spec || 'scales' in spec || 'axes' in spec) {
+    return 'vega';
+  }
+
   return providedMode || 'vega';
 }
 
@@ -173,8 +174,6 @@ export default async function embed(
   spec: VisualizationSpec | string,
   opt: EmbedOptions = {}
 ): Promise<Result> {
-  opt = opt || {};
-
   const patch = opt.patch || opt.onBeforeParse;
 
   const actions =
@@ -274,7 +273,7 @@ export default async function embed(
     view.tooltip(handler);
   }
 
-  let hover = opt.hover;
+  let { hover } = opt;
 
   // Enable hover for Vega by default.
   if (hover === undefined) {
@@ -305,7 +304,8 @@ export default async function embed(
     let wrapper = div;
 
     if (opt.defaultStyle !== false) {
-      const details = (wrapper = div.append('details').attr('title', i18n.CLICK_TO_VIEW_ACTIONS));
+      const details = div.append('details').attr('title', i18n.CLICK_TO_VIEW_ACTIONS);
+      wrapper = details;
       const summary = details.insert('summary');
 
       summary.html(SVG_CIRCLES);
@@ -331,6 +331,7 @@ export default async function embed(
             .attr('href', '#')
             .attr('target', '_blank')
             .attr('download', `visualization.${ext}`)
+            // eslint-disable-next-line func-names
             .on('mousedown', function(this) {
               view
                 .toImageURL(ext, opt.scaleFactor)

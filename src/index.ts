@@ -1,7 +1,7 @@
 import * as d3 from 'd3-selection';
 import { isString } from 'vega';
 import pkg from '../package.json';
-import { container } from './container';
+import container from './container';
 import embed, { vega, vl } from './embed';
 import { isURL } from './util';
 
