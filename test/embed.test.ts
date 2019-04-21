@@ -87,10 +87,7 @@ test('can patch compiled Vega', async () => {
 test('can patch compiled Vega with a function', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {
-    patch: spec => {
-      spec.description = 'Hello World!';
-      return spec;
-    }
+    patch: spec => ({ ...spec, description: 'Hello World!' })
   });
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);

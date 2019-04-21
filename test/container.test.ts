@@ -1,5 +1,5 @@
 import { TopLevelSpec } from 'vega-lite';
-import { container } from '../src/container';
+import container from '../src/container';
 
 const vlSpec: TopLevelSpec = {
   data: { values: [1, 2, 3] },
