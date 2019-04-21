@@ -66,7 +66,7 @@ const VERSION = {
 };
 
 const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
-  vega: (vgjson, _) => vgjson,
+  vega: vgjson => vgjson,
   'vega-lite': (vljson, config) => vl.compile(vljson as VlSpec, { config: config as VlConfig }).spec
 };
 
