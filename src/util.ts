@@ -5,7 +5,7 @@ import { isArray } from 'vega';
  */
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 
-export function mergeDeep<T>(dest: T, ...src: Array<DeepPartial<T>>): T {
+export function mergeDeep<T>(dest: T, ...src: DeepPartial<T>[]): T {
   for (const s of src) {
     dest = deepMerge_(dest, s);
   }

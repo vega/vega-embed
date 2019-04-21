@@ -129,15 +129,13 @@ test('guessMode from Vega spec', () => {
 
 test('can change i18n strings', async () => {
   const el = document.createElement('div');
-  let ctrl;
-  let ctrlChildren;
   await embed(el, vlSpec, {
     actions: true,
     i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' }
   });
 
-  ctrl = el.children[2].children[1];
-  ctrlChildren = ctrl.children;
+  const ctrl = el.children[2].children[1];
+  const ctrlChildren = ctrl.children;
 
   expect(ctrl.childElementCount).toBe(5);
   expect(ctrlChildren[0].textContent).toBe('quux');
