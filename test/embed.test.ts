@@ -94,6 +94,36 @@ test('can patch compiled Vega with a function', async () => {
   expect(result.vgSpec.description).toBe('Hello World!');
 });
 
+test('can add additional link to actions', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, { actions: { customOptions: { 'Go to Google': 'http://www.google.com' } } });
+  expect(el.children[2].children[1].childElementCount).toBe(6);
+});
+
+test('can add additional links to actions', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, {
+    actions: {
+      customOptions: { 'Go to Google': 'http://www.google.com', 'Stack Overflow': 'https://stackoverflow.com/' }
+    }
+  });
+  expect(el.children[2].children[1].childElementCount).toBe(7);
+});
+
+test('can manage all links in customOptions', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, {
+    actions: {
+      export: { svg: false, png: false },
+      source: false,
+      compiled: false,
+      editor: false,
+      customOptions: { 'Go to Google': 'http://www.google.com', 'Stack Overflow': 'https://stackoverflow.com/' }
+    }
+  });
+  expect(el.children[2].children[1].childElementCount).toBe(2);
+});
+
 test('guessMode from Vega schema', () => {
   expect(guessMode({ $schema: 'https://vega.github.io/schema/vega/v5.json' }, 'invalid' as Mode)).toBe('vega');
 });

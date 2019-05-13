@@ -23,6 +23,7 @@ export interface Actions {
   source?: boolean;
   compiled?: boolean;
   editor?: boolean;
+  customOptions?: { [key: string]: string };
 }
 
 export interface Hover {
@@ -181,7 +182,7 @@ export default async function embed(
       ? opt.actions
       : mergeDeep<Actions>(
           {},
-          { export: { svg: true, png: true }, source: true, compiled: true, editor: true },
+          { export: { svg: true, png: true }, source: true, compiled: true, editor: true, customOptions: {} },
           opt.actions || {}
         );
   const i18n = { ...I18N, ...opt.i18n };
@@ -387,6 +388,18 @@ export default async function embed(
           });
           d3.event.preventDefault();
         });
+    }
+
+    if (typeof actions === 'object') {
+      for (const name in actions.customOptions) {
+        if (Object.prototype.hasOwnProperty.call(actions.customOptions, name)) {
+          const link = actions.customOptions[name];
+          ctrl
+            .append<HTMLLinkElement>('a')
+            .text(name)
+            .attr('href', link);
+        }
+      }
     }
   }
 
