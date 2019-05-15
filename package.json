@@ -64,7 +64,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.17.0",
     "rollup": "^1.11.3",
-    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^4.2.4",
     "terser": "^3.17.0",
