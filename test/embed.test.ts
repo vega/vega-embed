@@ -70,19 +70,19 @@ test('creates default download filename for svg', async () => {
 
 test('create default download filename for png', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: true });
+  await embed(el, vlSpec);
   expect(el.children[2].children[1].children[1].getAttribute('download')).toBe('visualization.png');
 });
 
 test('can use custom download filename for svg', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: true, downloadFileName: 'your_chart' });
+  await embed(el, vlSpec, { downloadFileName: 'your_chart' });
   expect(el.children[2].children[1].children[0].getAttribute('download')).toBe('your_chart.svg');
 });
 
 test('can use custom download filename for png', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: true, downloadFileName: 'my_chart' });
+  await embed(el, vlSpec, { downloadFileName: 'my_chart' });
   expect(el.children[2].children[1].children[1].getAttribute('download')).toBe('my_chart.png');
 });
 
