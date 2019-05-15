@@ -62,6 +62,7 @@ export interface EmbedOptions {
   editorUrl?: string;
   hover?: boolean | Hover;
   i18n?: Partial<typeof I18N>;
+  downloadFileName?: string;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -189,6 +190,7 @@ export default async function embed(
   const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
   const renderer = opt.renderer || 'canvas';
   const logLevel = opt.logLevel || vega.Warn;
+  const downloadFileName = opt.downloadFileName || 'visualization';
 
   // Load the visualization specification.
   if (vega.isString(spec)) {
@@ -330,7 +332,7 @@ export default async function embed(
             .text(i18nExportAction)
             .attr('href', '#')
             .attr('target', '_blank')
-            .attr('download', `visualization.${ext}`)
+            .attr('download', `${downloadFileName}.${ext}`)
             // eslint-disable-next-line func-names
             .on('mousedown', function(this) {
               view
