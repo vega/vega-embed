@@ -183,8 +183,8 @@ export default async function embed(
     return embed(el, JSON.parse(data), opt);
   }
 
-  // eslint-disable-next-line no-param-reassign
-  opt = mergeDeep(opt, spec.usermeta && spec.usermeta.embedOptions);
+  // eslint-disable-next-line no-param-reassign, dot-notation
+  opt = mergeDeep(opt, spec.usermeta && spec.usermeta['embedOptions']);
 
   const patch = opt.patch || opt.onBeforeParse;
 
