@@ -85,53 +85,53 @@ You can cunfigure Vega Embed with an options object. You can pass options as an 
 
 ```js
 var opt = {
-  "mode": ...,
+  mode: ...,
 
-  "theme": ...,
-  "defaultStyle": ...,
+  theme: ...,
+  defaultStyle: ...,
 
   // view config options
-  "renderer" : ...,
-  "loader" : ...,
-  "logLevel" : ...,
+  renderer : ...,
+  loader : ...,
+  logLevel : ...,
 
-  "tooltip": ...,
+  tooltip: ...,
 
-  "patch" : ...,
+  patch : ...,
 
-  "width" : ...,
-  "height" : ...,
-  "padding" : ...,
+  width : ...,
+  height : ...,
+  padding : ...,
 
-  "actions" : {
-    "export": ...,
-    "source": ...,
-    "compiled": ...,
-    "editor": ...
+  actions : {
+    export: ...,
+    source: ...,
+    compiled: ...,
+    editor: ...
   },
 
-  "scaleFactor": ...,
+  scaleFactor: ...,
 
-  "config"  : ...,
+  config  : ...,
 
-  "editorUrl": ...,
+  editorUrl: ...,
 
-  "sourceHeader" : ...,
-  "sourceFooter": ...,
+  sourceHeader : ...,
+  sourceFooter: ...,
 
-  "hover" : {
-    "hoverSet": ...,
-    "updateSet": ...,
+  hover : {
+    hoverSet: ...,
+    updateSet: ...,
   },
 
-  "downloadFileName" : ...,
+  downloadFileName : ...,
 
-  "i18n": {
-    "COMPILED_ACTION": ...,
-    "EDITOR_ACTION": ...,
-    "PNG_ACTION": ...,
-    "SOURCE_ACTION": ...,
-    "SVG_ACTION": ...
+  i18n: {
+    COMPILED_ACTION: ...,
+    EDITOR_ACTION: ...,
+    PNG_ACTION: ...,
+    SOURCE_ACTION: ...,
+    SVG_ACTION: ...
   }
 }
 ```
