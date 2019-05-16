@@ -81,6 +81,8 @@ Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### Options
 
+You can cunfigure Vega Embed with an options object. You can pass options as an argument to the [embed function](#api-reference) or as `usermeta.embedOptions` as part of the Vega or Vega-Lite specification.
+
 ```js
 var opt = {
   "mode": ...,
@@ -118,8 +120,8 @@ var opt = {
   "sourceFooter": ...,
 
   "hover" : {
-    hoverSet: ...,
-    updateSet: ...,
+    "hoverSet": ...,
+    "updateSet": ...,
   },
 
   "downloadFileName" : ...,
