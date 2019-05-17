@@ -62,6 +62,30 @@ test('can disable export actions', async () => {
   expect(el.children[2].children[1].childElementCount).toBe(4);
 });
 
+test('creates default download filename for svg', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, { actions: true });
+  expect(el.children[2].children[1].children[0].getAttribute('download')).toBe('visualization.svg');
+});
+
+test('create default download filename for png', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec);
+  expect(el.children[2].children[1].children[1].getAttribute('download')).toBe('visualization.png');
+});
+
+test('can use custom download filename for svg', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, { downloadFileName: 'your_chart' });
+  expect(el.children[2].children[1].children[0].getAttribute('download')).toBe('your_chart.svg');
+});
+
+test('can use custom download filename for png', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, { downloadFileName: 'my_chart' });
+  expect(el.children[2].children[1].children[1].getAttribute('download')).toBe('my_chart.png');
+});
+
 test('creates default actions for Vega', async () => {
   const el = document.createElement('div');
   await embed(el, vgSpec);

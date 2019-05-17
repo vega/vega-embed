@@ -63,6 +63,7 @@ export interface EmbedOptions {
   editorUrl?: string;
   hover?: boolean | Hover;
   i18n?: Partial<typeof I18N>;
+  downloadFileName?: string;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -175,6 +176,17 @@ export default async function embed(
   spec: VisualizationSpec | string,
   opt: EmbedOptions = {}
 ): Promise<Result> {
+  const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
+
+  // Load the visualization specification.
+  if (vega.isString(spec)) {
+    const data = await loader.load(spec);
+    return embed(el, JSON.parse(data), opt);
+  }
+
+  // eslint-disable-next-line no-param-reassign, dot-notation
+  opt = mergeDeep(opt, spec.usermeta && spec.usermeta['embedOptions']);
+
   const patch = opt.patch || opt.onBeforeParse;
 
   const actions =
@@ -187,15 +199,9 @@ export default async function embed(
         );
   const i18n = { ...I18N, ...opt.i18n };
 
-  const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
   const renderer = opt.renderer || 'canvas';
   const logLevel = opt.logLevel || vega.Warn;
-
-  // Load the visualization specification.
-  if (vega.isString(spec)) {
-    const data = await loader.load(spec);
-    return embed(el, JSON.parse(data), opt);
-  }
+  const downloadFileName = opt.downloadFileName || 'visualization';
 
   // Load Vega theme/configuration.
   let config = opt.config || {};
@@ -331,7 +337,7 @@ export default async function embed(
             .text(i18nExportAction)
             .attr('href', '#')
             .attr('target', '_blank')
-            .attr('download', `visualization.${ext}`)
+            .attr('download', `${downloadFileName}.${ext}`)
             // eslint-disable-next-line func-names
             .on('mousedown', function(this) {
               view
