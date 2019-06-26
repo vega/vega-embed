@@ -1,4 +1,6 @@
+import * as vega from 'vega';
 import { View } from 'vega';
+import * as vl from 'vega-lite';
 import { compile, TopLevelSpec } from 'vega-lite';
 import embed, { guessMode, Mode } from '../src/embed';
 
@@ -210,4 +212,36 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   hoverSpy.mockRestore();
+});
+
+test('Should warn about incompatible Vega and  Vega-Lite versions', async () => {
+  const el = document.createElement('div');
+
+  const spy = jest.spyOn(console, 'warn').mockImplementation();
+
+  await embed(
+    el,
+    {
+      $schema: 'https://vega.github.io/schema/vega-lite/v2.json',
+      mark: 'bar',
+      encoding: {}
+    },
+    {}
+  );
+
+  await embed(
+    el,
+    {
+      $schema: 'https://vega.github.io/schema/vega/v4.json'
+    },
+    {}
+  );
+
+  expect(spy).toHaveBeenCalledTimes(2);
+  expect(spy.mock.calls).toEqual([
+    [`The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
+    [`The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`]
+  ]);
+
+  spy.mockRestore();
 });

@@ -131,7 +131,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
 
     if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
       console.warn(
-        `The input spec uses ${mode} ${parsed.version}, but the current version of ${NAMES[mode]} is ${VERSION[mode]}.`
+        `The input spec uses ${NAMES[mode]} ${parsed.version}, but the current version of ${NAMES[mode]} is v${VERSION[mode]}.`
       );
     }
 
@@ -235,7 +235,7 @@ export default async function embed(
       const parsed = schemaParser(vgSpec.$schema);
 
       if (!satisfies(VERSION.vega, `^${parsed.version.slice(1)}`)) {
-        console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is ${VERSION.vega}.`);
+        console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is v${VERSION.vega}.`);
       }
     }
   }
