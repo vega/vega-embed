@@ -85,10 +85,10 @@ You can cunfigure Vega Embed with an options object. You can pass options as an 
 
 ```js
 var opt = {
-  mode: ...,
+  mode : ...,
 
-  theme: ...,
-  defaultStyle: ...,
+  theme : ...,
+  defaultStyle : ...,
 
   // view config options
   renderer : ...,
@@ -114,24 +114,24 @@ var opt = {
 
   config  : ...,
 
-  editorUrl: ...,
+  editorUrl : ...,
 
   sourceHeader : ...,
-  sourceFooter: ...,
+  sourceFooter : ...,
 
   hover : {
-    hoverSet: ...,
-    updateSet: ...,
+    hoverSet : ...,
+    updateSet : ...,
   },
 
   downloadFileName : ...,
 
-  i18n: {
-    COMPILED_ACTION: ...,
-    EDITOR_ACTION: ...,
-    PNG_ACTION: ...,
-    SOURCE_ACTION: ...,
-    SVG_ACTION: ...
+  i18n : {
+    COMPILED_ACTION : ...,
+    EDITOR_ACTION : ...,
+    PNG_ACTION : ...,
+    SOURCE_ACTION : ...,
+    SVG_ACTION : ...
   }
 }
 ```
