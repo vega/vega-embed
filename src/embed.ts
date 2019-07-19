@@ -281,9 +281,8 @@ export default async function embed(
 
   let { hover } = opt;
 
-  // Enable hover for Vega by default.
   if (hover === undefined) {
-    hover = mode !== 'vega-lite';
+    hover = mode === 'vega';
   }
 
   if (hover) {
