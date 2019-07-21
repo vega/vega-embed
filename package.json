@@ -52,10 +52,10 @@
     "@typescript-eslint/parser": "^1.12.0",
     "browser-sync": "^2.26.7",
     "concurrently": "^4.1.1",
-    "eslint": "^6.0.1",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
@@ -82,7 +82,7 @@
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^6.2.0",
     "vega-schema-url-parser": "^1.1.0",
-    "vega-themes": "^2.3.1",
+    "vega-themes": "^2.3.2",
     "vega-tooltip": "^0.17.2"
   },
   "scripts": {
