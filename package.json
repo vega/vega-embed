@@ -83,7 +83,7 @@
     "semver": "^6.2.0",
     "vega-schema-url-parser": "^1.1.0",
     "vega-themes": "^2.3.2",
-    "vega-tooltip": "^0.17.2"
+    "vega-tooltip": "^0.18.0"
   },
   "scripts": {
     "prebuild": "npm run clean && ./build-style.sh && tsc && cp package.json build/",
