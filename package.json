@@ -45,7 +45,7 @@
   "types": "build/src/embed.d.ts",
   "devDependencies": {
     "@types/d3-selection": "^1.4.1",
-    "@types/jest": "^24.0.15",
+    "@types/jest": "^24.0.16",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/semver": "^6.0.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
@@ -53,12 +53,11 @@
     "browser-sync": "^2.26.7",
     "concurrently": "^4.1.1",
     "eslint": "^6.1.0",
-    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-airbnb-base": "^13.2.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.3",
     "jest": "^24.8.0",
     "jest-canvas-mock": "^2.1.0",
     "node-sass": "^4.12.0",
@@ -70,8 +69,8 @@
     "terser": "^4.1.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3",
-    "vega": "^5.1.0",
-    "vega-lite": "^3.0.0"
+    "vega": "^5.4.0",
+    "vega-lite": "^3.4.0"
   },
   "peerDependencies": {
     "vega": "*",
