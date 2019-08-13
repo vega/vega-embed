@@ -184,7 +184,7 @@ export default async function embed(
   }
 
   // eslint-disable-next-line no-param-reassign, dot-notation
-  opt = mergeDeep(opt, spec.usermeta && spec.usermeta['embedOptions']);
+  opt = mergeDeep(opt, spec.usermeta && (spec.usermeta as { [key: string]: any })['embedOptions']);
 
   const patch = opt.patch || opt.onBeforeParse;
 
@@ -327,9 +327,9 @@ export default async function embed(
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
-      for (const ext of ['svg', 'png']) {
-        if (actions === true || actions.export === true || actions.export![ext]) {
-          const i18nExportAction = i18n[`${ext.toUpperCase()}_ACTION`];
+      for (const ext of ['svg', 'png'] as const) {
+        if (actions === true || actions.export === true || (actions.export as { svg?: boolean; png?: boolean })[ext]) {
+          const i18nExportAction = (i18n as { [key: string]: string })[`${ext.toUpperCase()}_ACTION`];
           ctrl
             .append<HTMLLinkElement>('a')
             .text(i18nExportAction)

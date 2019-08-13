@@ -12,7 +12,7 @@ module.exports = {
     browser: true
   },
   parserOptions: {
-    project: "tsconfig.json",
+    project: ["tsconfig.json", "test/tsconfig.json"],
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: "module" // Allows for the use of imports
   },
