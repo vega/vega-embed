@@ -2939,9 +2939,9 @@ istanbul-reports@^2.1.1:
     handlebars "^4.1.2"
 
 jest-canvas-mock@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-2.1.0.tgz#6aa129f200d448056515d43d4b34027e6bb2fb36"
-  integrity sha512-1yWLNr6xcmhmADLc5ITOYjXnNl2EWUDlXYpplYqgGdATgZaP8IBp241ihVIfrORM8AhuZW8PXRPdzWBEQOpjBQ==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-2.1.1.tgz#fc59b16b093620345c7865f34ef1a16940eec784"
+  integrity sha512-FK/xAFYJmMwyY8IpVrpoHq8Od/99Jmc3g6pnmkhFkYQJoq1Y0ZtEZjs80cREKlxjQxcTMvPpoyGLOmt8KLjlSQ==
   dependencies:
     cssfontparser "^1.2.1"
     parse-color "^1.0.0"
