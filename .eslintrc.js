@@ -17,7 +17,7 @@ module.exports = {
     sourceType: "module" // Allows for the use of imports
   },
   rules: {
-    "prettier/prettier": "warn",
+    "prettier/prettier": "error",
 
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
     "@typescript-eslint/no-non-null-assertion": "off", //this is useful for DOM manipulation

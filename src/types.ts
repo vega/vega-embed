@@ -5,9 +5,9 @@ export type Mode = 'vega' | 'vega-lite';
 export type Config = VlConfig | VgConfig;
 
 export interface MessageData {
-    spec: string;
-    file?: unknown;
-    config?: Config;
-    mode: Mode;
-    renderer?: Renderers;
+  spec: string;
+  file?: unknown;
+  config?: Config;
+  mode: Mode;
+  renderer?: Renderers;
 }
