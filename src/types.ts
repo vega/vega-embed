@@ -6,8 +6,8 @@ export type Config = VlConfig | VgConfig;
 
 export interface MessageData {
     spec: string;
-    file: unknown;
-    config: Config;
+    file?: unknown;
+    config?: Config;
     mode: Mode;
-    renderer: Renderers;
+    renderer?: Renderers;
 }
