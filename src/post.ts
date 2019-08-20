@@ -1,13 +1,12 @@
-import { Renderers } from 'vega';
-import { Config, Mode } from './types';
+import { MessageData } from './types';
 
 /**
  * Open editor url in a new window, and pass a message.
  */
-export default function(
+export default function (
   window: Window,
   url: string,
-  data: { config?: Config; mode: Mode; renderer?: Renderers; spec: string }
+  data: MessageData
 ) {
   const editor = window.open(url)!;
   const wait = 10000;
