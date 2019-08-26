@@ -1,38 +1,64 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "prettier"],
-  extends: [
-    "airbnb-base",
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
-  env: {
-    browser: true
+  "env": {
+    "browser": true,
+    "node": true
   },
-  parserOptions: {
-    project: ["tsconfig.json", "test/tsconfig.json"],
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module" // Allows for the use of imports
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
-  rules: {
-    "prettier/prettier": "error",
-
-    // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
-    "@typescript-eslint/no-non-null-assertion": "off", //this is useful for DOM manipulation
-    "@typescript-eslint/explicit-function-return-type": "off", // this is just annoying to have
+  "rules": {
+    "prettier/prettier": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
-
+    "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-require-imports": "error",
-
-    // https://eslint.org/docs/rules/
-    "no-console": ["error", { allow: ["warn"] }],
-    "no-restricted-syntax": "off", // I disagree with the rule, for..of is better
-    "no-undef": "off", // TS takes care of this
-    "import/no-unresolved": "off", // TS takes care of this
-    "import/no-duplicates": "off" // we sometimes import * as individual things
+    "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-irregular-whitespace": [
+      "error",
+      {
+        "skipComments": true
+      }
+    ],
+    "no-alert": "error",
+    "prefer-const": "error",
+    "no-return-assign": "error",
+    "no-useless-call": "error",
+    "no-shadow": "error",
+    "no-useless-concat": "error",
+    "no-console": "off",
+    "no-undef": "off",
+    "no-unreachable": "off"
   }
 };

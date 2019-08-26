@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "target": "es6",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "declaration": true,
+    "strict": true,
+    "preserveConstEnums": true,
+    "noEmitOnError": true,
+    "sourceMap": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "lib": ["es6", "dom"],
+    "typeRoots": ["./node_modules/@types", "./node_modules/vega-lite/typings"],
+    "incremental": true
+  },
+  "files": ["src/index.ts"]
+}
