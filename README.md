@@ -8,6 +8,7 @@
 [Vega-Embed](http://github.com/vega/vega-embed) makes it easy to embed interactive [Vega](https://vega.github.io/vega) and [Vega-Lite](https://vega.github.io/vega-lite) views into web pages. With Vega Embed, you can:
 
 - Load Vega/Vega-Lite specs from source text, parsed JSON, or URLs.
+- Patch Vega specs (even ones generated from Vega-Lite) to add additional functionality; for example, see [Rotating Earth](https://observablehq.com/@domoritz/rotating-earth).
 - Add action links such as "View Source" and "Open in Vega Editor".
 - Includes [Vega Tooltip](https://github.com/vega/vega-tooltip).
 - Includes [Vega Themes](https://github.com/vega/vega-themes). **Experimental: themes are not stable yet**
