@@ -102,6 +102,15 @@ test('can access compiled Vega', async () => {
   expect(result.vgSpec).toEqual(compile(vlSpec).spec);
 });
 
+test('can patch Vega', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vgSpec, { patch: { description: 'Hello World!' } });
+  expect(vgSpec.description).toBeUndefined();
+  expect(result.spec).toEqual(vgSpec);
+  expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
+  expect(result.vgSpec.description).toBe('Hello World!');
+});
+
 test('can patch compiled Vega', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, { patch: { description: 'Hello World!' } });

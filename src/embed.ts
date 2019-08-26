@@ -251,9 +251,10 @@ export default async function embed(
       vgSpec = patch(vgSpec);
     } else if (vega.isString(patch)) {
       const patchString = await loader.load(patch);
-      vgSpec = mergeDeep(vgSpec, JSON.parse(patchString));
+      // eslint-disable-next-line require-atomic-updates
+      vgSpec = mergeDeep({}, vgSpec, JSON.parse(patchString));
     } else {
-      vgSpec = mergeDeep(vgSpec, patch);
+      vgSpec = mergeDeep({}, vgSpec, patch);
     }
   }
 
