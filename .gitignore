@@ -13,3 +13,4 @@ prettier.config.js
 src/style.ts
 yarn-debug.log*
 yarn-error.log*
+beemo-error.log
