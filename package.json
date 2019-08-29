@@ -45,8 +45,8 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "terser": "^4.2.1",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.6.2",
-    "vega": "^5.4.0",
+    "typescript": "~3.5.0",
+    "vega": "~5.4.0",
     "vega-lite": "^4.0.0-beta.1",
     "vega-lite-dev-config": "^0.2.5"
   },
@@ -59,8 +59,8 @@
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^6.3.0",
     "vega-schema-url-parser": "^1.1.0",
-    "vega-themes": "^2.3.2",
-    "vega-tooltip": "^0.19.0"
+    "vega-themes": "^2.4.0",
+    "vega-tooltip": "^0.19.1"
   },
   "scripts": {
     "tsc:src": "tsc -p tsconfig.src.json",

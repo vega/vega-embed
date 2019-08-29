@@ -7,6 +7,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "strict": true,
+    "strictNullChecks": false,
     "preserveConstEnums": true,
     "noEmitOnError": true,
     "sourceMap": true,

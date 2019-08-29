@@ -76,8 +76,8 @@ const VERSION = {
 };
 
 const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
-  vega: vgjson => vgjson,
-  'vega-lite': (vljson, config) => vl.compile(vljson as VlSpec, { config: config as VlConfig }).spec
+  vega: vgSpec => vgSpec,
+  'vega-lite': (vlSpec, config) => vl.compile(vlSpec as VlSpec, { config: config as VlConfig }).spec
 };
 
 const SVG_CIRCLES = `
