@@ -19,22 +19,8 @@
   },
   "contributors": [
     {
-      "name": "Jeffrey Heer",
-      "url": "https://homes.cs.washington.edu/~jheer/"
-    },
-    {
       "name": "Dominik Moritz",
       "url": "https://www.domoritz.de"
-    },
-    {
-      "name": "Arvind Satyanarayan",
-      "url": "http://arvindsatya.com"
-    },
-    {
-      "name": "Younghoon Kim"
-    },
-    {
-      "name": "Yuri Astrakhan"
     }
   ],
   "license": "BSD-3-Clause",
@@ -53,20 +39,20 @@
     "jest": "^24.9.0",
     "jest-canvas-mock": "^2.1.1",
     "node-sass": "^4.12.0",
-    "rollup": "^1.20.1",
-    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup": "^1.20.3",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "terser": "^4.2.1",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3",
+    "typescript": "^3.6.2",
     "vega": "^5.4.0",
-    "vega-lite": "^3.4.0",
+    "vega-lite": "^4.0.0-beta.1",
     "vega-lite-dev-config": "^0.2.5"
   },
   "peerDependencies": {
     "vega": "*",
-    "vega-lite": "2 || 3"
+    "vega-lite": "4.0.0-beta.1"
   },
   "dependencies": {
     "d3-selection": "^1.4.0",
