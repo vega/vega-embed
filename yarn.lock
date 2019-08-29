@@ -7298,12 +7298,12 @@ vega-themes@^2.3.2:
   resolved "https://registry.yarnpkg.com/vega-themes/-/vega-themes-2.3.2.tgz#a04ed6a5544ba91682168888858497db07151a46"
   integrity sha512-+Yc7JyViAeLxMf97bZTctVtFWRuLE8JGHi3qNLXx+/8XPawORVHz67lp5bqehrvphPKN7yF6fnyfnUqufpVm5g==
 
-vega-tooltip@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.18.1.tgz#2599b99c8faec8eaae13c55f540e3cbdf8e19432"
-  integrity sha512-g/i69QLTVhGeHNT8k646Qr8SFss9kbnt6XmU9ujjqgaW5B/p1FPUrMzFh/88rMF704EHYyBH7Aj3t0ds1cCHbQ==
+vega-tooltip@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.19.0.tgz#9838934f8aded4d81133d1ebdc730e9b4f9edd49"
+  integrity sha512-zWRM3GPmVniWk9JS2wyb9E6GDKIqWRKmuWPB7k4BBvNtVibsfAwxDkKKMfzThFhO1gb/vxkj91hrxlsGzgx1tQ==
   dependencies:
-    vega-util "^1.10.0"
+    vega-util "^1.11.0"
 
 vega-transforms@^4.2.0:
   version "4.2.0"
