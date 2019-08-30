@@ -51,7 +51,6 @@ export interface EmbedOptions {
   renderer?: Renderers;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
   patch?: string | PatchFunc | DeepPartial<VgSpec>;
-  onBeforeParse?: PatchFunc; // for backwards compatibility
   width?: number;
   height?: number;
   padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
