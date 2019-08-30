@@ -1,8 +1,18 @@
 import * as d3 from 'd3-selection';
+import deepmerge from 'deepmerge';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega';
-import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega';
+import {
+  EncodeEntryName,
+  Loader,
+  LoaderOptions,
+  Renderers,
+  Spec as VgSpec,
+  TooltipHandler,
+  View,
+  isBoolean
+} from 'vega';
 import * as vlImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -11,7 +21,7 @@ import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 import post from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
-import { DeepPartial, mergeDeep } from './util';
+import { DeepPartial } from './util';
 
 export * from './types';
 
@@ -182,24 +192,7 @@ export default async function embed(
     return embed(el, JSON.parse(data), opt);
   }
 
-  // eslint-disable-next-line no-param-reassign, dot-notation
-  opt = mergeDeep(opt, spec.usermeta && (spec.usermeta as { [key: string]: any })['embedOptions']);
-
-  const patch = opt.patch || opt.onBeforeParse;
-
-  const actions =
-    opt.actions === true || opt.actions === false
-      ? opt.actions
-      : mergeDeep<Actions>(
-          {},
-          { export: { svg: true, png: true }, source: true, compiled: true, editor: true },
-          opt.actions || {}
-        );
-  const i18n = { ...I18N, ...opt.i18n };
-
-  const renderer = opt.renderer || 'canvas';
-  const logLevel = opt.logLevel || vega.Warn;
-  const downloadFileName = opt.downloadFileName || 'visualization';
+  opt = deepmerge(opt, (spec.usermeta && (spec.usermeta as any)['embedOptions']) || {});
 
   // Load Vega theme/configuration.
   let config = opt.config || {};
@@ -207,6 +200,18 @@ export default async function embed(
     const data = await loader.load(config);
     return embed(el, spec, { ...opt, config: JSON.parse(data) });
   }
+
+  const actions = isBoolean(opt.actions)
+    ? opt.actions
+    : deepmerge<Actions>(
+        { export: { svg: true, png: true }, source: true, compiled: true, editor: true },
+        opt.actions || {}
+      );
+  const i18n = { ...I18N, ...opt.i18n };
+
+  const renderer = opt.renderer || 'canvas';
+  const logLevel = opt.logLevel || vega.Warn;
+  const downloadFileName = opt.downloadFileName || 'visualization';
 
   if (opt.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
@@ -222,7 +227,7 @@ export default async function embed(
   }
 
   if (opt.theme) {
-    config = mergeDeep<Config>({}, themes[opt.theme], config);
+    config = deepmerge<Config>(themes[opt.theme], config);
   }
 
   const mode = guessMode(spec, opt.mode);
@@ -245,15 +250,16 @@ export default async function embed(
     .classed('vega-embed', true)
     .html(''); // clear container
 
+  const patch = opt.patch;
   if (patch) {
     if (patch instanceof Function) {
       vgSpec = patch(vgSpec);
     } else if (vega.isString(patch)) {
       const patchString = await loader.load(patch);
       // eslint-disable-next-line require-atomic-updates
-      vgSpec = mergeDeep({}, vgSpec, JSON.parse(patchString));
+      vgSpec = deepmerge(vgSpec, JSON.parse(patchString));
     } else {
-      vgSpec = mergeDeep({}, vgSpec, patch);
+      vgSpec = deepmerge(vgSpec, patch);
     }
   }
 
