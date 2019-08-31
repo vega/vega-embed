@@ -11,15 +11,16 @@
 
   <body>
     <div id="vis"></div>
-    <script type="text/javascript">
-      vegaEmbed("#vis", "bar-chart.vg.json", {
-        theme: "dark",
-        loader: { baseURL: "https://vega.github.io/vega/examples/" }
-      })
-        .then(function(result) {
-          console.log(result);
-        })
-        .catch(console.error);
+    <script>
+      async function run() {
+        const result = await vegaEmbed("#vis", "bar-chart.vg.json", {
+          theme: "dark",
+          loader: { baseURL: "https://vega.github.io/vega/examples/" }
+        });
+
+        console.log(result);
+      }
+      run();
     </script>
   </body>
 </html>

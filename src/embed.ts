@@ -13,7 +13,7 @@ import {
   View,
   isBoolean
 } from 'vega';
-import * as vlImport from 'vega-lite';
+import * as vegaLiteImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
@@ -26,7 +26,13 @@ import { DeepPartial } from './util';
 export * from './types';
 
 export const vega = vegaImport;
-export const vl = vlImport;
+export let vegaLite = vegaLiteImport;
+
+// For backwards compatibility with Vega-Lite before v4.
+const w = window as any;
+if (vegaLite === undefined && w['vl'] && w['vl'].compile) {
+  vegaLite = w['vl'];
+}
 
 export interface Actions {
   export?: boolean | { svg?: boolean; png?: boolean };
@@ -81,12 +87,12 @@ const NAMES: { [key in Mode]: string } = {
 
 const VERSION = {
   vega: vega.version,
-  'vega-lite': vl ? vl.version : 'not available'
+  'vega-lite': vegaLite ? vegaLite.version : 'not available'
 };
 
 const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
   vega: vgSpec => vgSpec,
-  'vega-lite': (vlSpec, config) => vl.compile(vlSpec as VlSpec, { config: config as VlConfig }).spec
+  'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec as VlSpec, { config: config as VlConfig }).spec
 };
 
 const SVG_CIRCLES = `

@@ -2,11 +2,11 @@ import * as d3 from 'd3-selection';
 import { isString } from 'vega';
 import pkg from '../package.json';
 import container from './container';
-import embed, { vega, vl } from './embed';
+import embed, { vega, vegaLite } from './embed';
 import { isURL } from './util';
 
 /**
- * Returns true of the object is an HTML element.
+ * Returns true if the object is an HTML element.
  */
 function isElement(obj: any): obj is HTMLElement {
   return obj instanceof d3.selection || typeof HTMLElement === 'object'
@@ -24,7 +24,8 @@ const wrapper: Wrapper = (...args: any[]): any => {
   return container(args[0], args[1]);
 };
 
-(wrapper as any).vl = vl;
+(wrapper as any).vegaLite = vegaLite;
+(wrapper as any).vl = vegaLite; // backwards compatbility
 (wrapper as any).container = container;
 (wrapper as any).embed = embed;
 (wrapper as any).vega = vega;
