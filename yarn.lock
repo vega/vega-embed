@@ -1142,9 +1142,9 @@
     "@types/braces" "*"
 
 "@types/node@*", "@types/node@^12.7.1", "@types/node@^12.7.2":
-  version "12.7.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
-  integrity sha512-dyYO+f6ihZEtNPDcWNR1fkoTDf3zAK3lAABDze3mz6POyIercH0lEUawUFXlG8xaQZmm1yEBON/4TsYv/laDYg==
+  version "12.7.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.3.tgz#27b3f40addaf2f580459fdb405222685542f907a"
+  integrity sha512-3SiLAIBkDWDg6vFo0+5YJyHPWU9uwu40Qe+v+0MH8wRKYBimHvvAOyk3EzMrD/TrIlLYfXrqDqrg913PynrMJQ==
 
 "@types/pluralize@^0.0.29":
   version "0.0.29"
@@ -1732,13 +1732,13 @@ browser-sync@^2.26.7:
     yargs "6.4.0"
 
 browserslist@^4.6.0, browserslist@^4.6.6:
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.6.tgz#6e4bf467cde520bc9dbdf3747dafa03531cec453"
-  integrity sha512-D2Nk3W9JL9Fp/gIcWei8LrERCS+eXu9AM5cfXA8WEZ84lFks+ARnZ0q/R69m2SV3Wjma83QDDPxsNKXUwdIsyA==
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.7.0.tgz#9ee89225ffc07db03409f2fee524dc8227458a17"
+  integrity sha512-9rGNDtnj+HaahxiVV38Gn8n8Lr8REKsel68v1sPFfIGEK6uSXTY3h9acgiT1dZVtOOUtifo/Dn8daDQ5dUgVsA==
   dependencies:
-    caniuse-lite "^1.0.30000984"
-    electron-to-chromium "^1.3.191"
-    node-releases "^1.1.25"
+    caniuse-lite "^1.0.30000989"
+    electron-to-chromium "^1.3.247"
+    node-releases "^1.1.29"
 
 bs-logger@0.x:
   version "0.2.6"
@@ -1840,7 +1840,7 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-caniuse-lite@^1.0.30000984:
+caniuse-lite@^1.0.30000989:
   version "1.0.30000989"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000989.tgz#b9193e293ccf7e4426c5245134b8f2a56c0ac4b9"
   integrity sha512-vrMcvSuMz16YY6GSVZ0dWDTJP8jqk3iFQ/Aq5iqblPwxSVVZI+zxDyTX0VPqtQsDnfdrBDcsmhgTEOh5R8Lbpw==
@@ -2220,9 +2220,9 @@ d3-contour@^1.3.2:
     d3-array "^1.1.1"
 
 d3-delaunay@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/d3-delaunay/-/d3-delaunay-5.1.3.tgz#7b383da0c5d8565640b1e4fdec98c1d5755746fd"
-  integrity sha512-7CGeikb+VGHdX9NHLM4GOqJ64earIbuXgsKml/iQFTR7s3rZCzfVMSO6iH+nZnhkpgWuz3OWpN4M9cawe+sasQ==
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/d3-delaunay/-/d3-delaunay-5.1.4.tgz#ae4a706f73210ceee7b3069019ee832ca954a26f"
+  integrity sha512-I31cUy4zZ+lhj36z+y371P7WTeh9c090wGW9SfXHaNMUc5chrLaXtYyWIWrK9xoWSckrLDT6loLLEHLByiYPSw==
   dependencies:
     delaunator "4"
 
@@ -2427,9 +2427,9 @@ define-property@^2.0.2:
     isobject "^3.0.1"
 
 delaunator@4:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/delaunator/-/delaunator-4.0.0.tgz#3630f477b4923f472f534c62a028aeca6fe22d96"
-  integrity sha512-KzVgOHix5xaIVzZSfbv3Uzw9aI7mQNDet4Yd2p+tBNkfNHMFJbjbVa3q0nC7q7TjWZLX49QbzcT+pXazXX3Qmg==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/delaunator/-/delaunator-4.0.1.tgz#3d779687f57919a7a418f8ab947d3bddb6846957"
+  integrity sha512-WNPWi1IRKZfCt/qIDMfERkDp93+iZEmOxN2yy4Jg+Xhv8SLk2UTqqbe1sfiipn0and9QrE914/ihdx82Y/Giag==
 
 delayed-stream@~1.0.0:
   version "1.0.0"
@@ -2531,10 +2531,10 @@ ejs@^2.6.1:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.2.tgz#3a32c63d1cd16d11266cd4703b14fec4e74ab4f6"
   integrity sha512-PcW2a0tyTuPHz3tWyYqtK6r1fZ3gp+3Sop8Ph+ZYN81Ob5rwmbHEzaqs10N3BEsaGTkh/ooniXK+WwszGlc2+Q==
 
-electron-to-chromium@^1.3.191:
-  version "1.3.244"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.244.tgz#7ba5461fa320ab16540a31b1d0defb7ec29b16e4"
-  integrity sha512-nEfPd2EKnFeLuZ/+JsRG3KixRQwWf2SPpp09ftNt5ouGhg408N759+oXvdXy57+TcM34ykfJYj2JMkc1O3R0lQ==
+electron-to-chromium@^1.3.247:
+  version "1.3.248"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.248.tgz#1f5f950797e192e9a951b8a44fc08974b609adcb"
+  integrity sha512-+hQe6xqpODLw9Nr80KoT0/S+YarjNbI9wgZchkOopJLBLPgAsniK184P0IGVs/0NsoZf4lBnQhOsjen9a47Hrg==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -2738,9 +2738,9 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
 eslint@^6.2.2:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.2.2.tgz#03298280e7750d81fcd31431f3d333e43d93f24f"
-  integrity sha512-mf0elOkxHbdyGX1IJEUsNBzCDdyoUgljF3rRlgfyYh0pwGnreLc0jjD6ZuleOibjmnUWZLY2eXwSooeOgGJ2jw==
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.3.0.tgz#1f1a902f67bfd4c354e7288b81e40654d927eb6a"
+  integrity sha512-ZvZTKaqDue+N8Y9g0kp6UPZtS4FSY3qARxBs7p4f0H0iof381XHduqVerFWtK8DPtKmemqbqCFENWSQgPR/Gow==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.10.0"
@@ -4950,10 +4950,10 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.25:
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.28.tgz#503c3c70d0e4732b84e7aaa2925fbdde10482d4a"
-  integrity sha512-AQw4emh6iSXnCpDiFe0phYcThiccmkNWMZnFZ+lDJjAP8J0m2fVd59duvUUyuTirQOhIAajTFkzG6FHCLBO59g==
+node-releases@^1.1.29:
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.29.tgz#86a57c6587a30ecd6726449e5d293466b0a0bb86"
+  integrity sha512-R5bDhzh6I+tpi/9i2hrrvGJ3yKPYzlVOORDkXhnZuwi5D3q1I5w4vYy24PJXTcLk9Q0kws9TO77T75bcK8/ysQ==
   dependencies:
     semver "^5.3.0"
 
@@ -5778,9 +5778,9 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     safe-regex "^1.1.0"
 
 regexp-tree@^0.1.6:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/regexp-tree/-/regexp-tree-0.1.12.tgz#28eaaa6e66eeb3527c15108a3ff740d9e574e420"
-  integrity sha512-TsXZ8+cv2uxMEkLfgwO0E068gsNMLfuYwMMhiUxf0Kw2Vcgzq93vgl6wIlIYuPmfMqMjfQ9zAporiozqCnwLuQ==
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/regexp-tree/-/regexp-tree-0.1.13.tgz#5b19ab9377edc68bc3679256840bb29afc158d7f"
+  integrity sha512-hwdV/GQY5F8ReLZWO+W1SRoN5YfpOKY6852+tBFcma72DKBIcHjPRIlIvQN35bCOljuAfP2G2iB0FC/w236mUw==
 
 regexpp@^2.0.1:
   version "2.0.1"
@@ -7088,24 +7088,24 @@ vega-crossfilter@^4.0.1:
     vega-dataflow "^5.1.0"
     vega-util "^1.8.0"
 
-vega-dataflow@^5.1.0, vega-dataflow@^5.1.1, vega-dataflow@^5.2.1, vega-dataflow@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/vega-dataflow/-/vega-dataflow-5.3.0.tgz#bf74927807b4d882bcf6e1d8c09cb025898ff1e0"
-  integrity sha512-GC2phvp3LgaaxDmrlwMnRVvSseozukHFwR3Hc6jlmzkxLIYjfB1CRo9jd2X95C3qmmnDSgbq76JkZXrg5PspOA==
+vega-dataflow@^5.1.0, vega-dataflow@^5.1.1, vega-dataflow@^5.2.1, vega-dataflow@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/vega-dataflow/-/vega-dataflow-5.4.0.tgz#5ae39bb7e487b97c49289da2ee3d99a66e5df458"
+  integrity sha512-F+bZyoJDeYUf8zz4YJoRsEHUPwP0wXY19VzFUXYxFEh11AQ8YnBHKsPcs07Dd5vzOfiSze6qm4my0ADfISrz8Q==
   dependencies:
     vega-loader "^4.0.0"
     vega-util "^1.11.0"
 
 vega-encode@^4.3.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/vega-encode/-/vega-encode-4.3.1.tgz#002dd6aef99204d06c9d9bd922a6fdf52f3adea4"
-  integrity sha512-XTfUJf7yIAL61OK6/E58qjPcyPtsYk1BIIymt3BDrTsE2BC+mkj1PVKsxeIhSOPV7RYTIA9SiX/dk4mxVFXfNw==
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/vega-encode/-/vega-encode-4.3.2.tgz#b395f83c0a35e0138855695e83e18754dee9dd80"
+  integrity sha512-JcwfN2wigvhQTrPQiZ2oh27YftlM3Exk7Tg1zrRCBCOm+VXSLvBj9ByK6WRkm37Z/+/LdWV8v+TRemM+nKHXxQ==
   dependencies:
     d3-array "^2.3.1"
     d3-format "^1.3.2"
     d3-interpolate "^1.3.2"
     d3-time-format "^2.1.3"
-    vega-dataflow "^5.1.1"
+    vega-dataflow "^5.4.0"
     vega-scale "^4.1.1"
     vega-util "^1.11.0"
 
@@ -7161,12 +7161,12 @@ vega-geo@^4.0.3:
     vega-util "^1.11.0"
 
 vega-hierarchy@^4.0.1:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/vega-hierarchy/-/vega-hierarchy-4.0.2.tgz#1f6fbd343399235452997f5c3dd0514671191d5e"
-  integrity sha512-GPaDoA2AqNHIlIZDwa+8AxkQVYhd1UgUiRhho9wkM8qBMuaK5My/Vup5hEx8tYCDxn2/OhTccH9rvs1X97grjw==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/vega-hierarchy/-/vega-hierarchy-4.0.3.tgz#0d36bc29ad6f369fa844e3e2ce5faec983f8b047"
+  integrity sha512-9wNe+KyKqZW1S4++jCC38HuAhZbqNhfY7gOvwiMLjsp65tMtRETrtvYfHkULClm3UokUIX54etAXREAGW7znbw==
   dependencies:
     d3-hierarchy "^1.1.8"
-    vega-dataflow "^5.1.1"
+    vega-dataflow "^5.4.0"
     vega-util "^1.11.0"
 
 vega-lite-dev-config@^0.2.5:
@@ -7226,11 +7226,11 @@ vega-loader@^4.0.0, vega-loader@^4.1.0, vega-loader@^4.1.1:
     vega-util "^1.11.0"
 
 vega-parser@^5.7.0:
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-5.8.1.tgz#fef4ff83648309778210c64b45c641f42c2439b2"
-  integrity sha512-AjuoaBVlf0cXs8hb5araAGt+3j+WibKMtzpRBvM3XyLjNsyYfii2E1TzLAllt2hI+5v3tMQOiQhrxxcqxYH/Kg==
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-5.8.2.tgz#722b792abc103d3bfcfde544da719c559104e2cd"
+  integrity sha512-ywoGcx9HhOfFTeEjaDamx6kz6fF0f6nxOMOzsuVP/169RwuiVpraqNZgiuZbzZUFhb2uFN8H+7RdsjmnleZgcA==
   dependencies:
-    vega-dataflow "^5.2.1"
+    vega-dataflow "^5.4.0"
     vega-event-selector "^2.0.1"
     vega-expression "^2.6.1"
     vega-functions "^5.3.1"
@@ -7317,12 +7317,12 @@ vega-tooltip@^0.19.1:
     vega-util "^1.11.1"
 
 vega-transforms@^4.1.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/vega-transforms/-/vega-transforms-4.2.0.tgz#491807e737c520d448e1497076dee8d3e691a71b"
-  integrity sha512-TxN2eyIlvSWH2rFUuWyahLNbg7sVJKyt0aao6UfMPHGRwp7h4PgjAVfYtke0fuD7bHMq/+JUB1+K360E4HAU8A==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/vega-transforms/-/vega-transforms-4.2.1.tgz#4d4d43836d0d75a3aded4e6e2d4a5ec2c217e081"
+  integrity sha512-qnEWgH0o6YNTTeL1QJCXWQQOY7sSUj7YraSwXtZ0vaj5+Af3/OsbpKOulc6TOQGyIFqa+/VWrd9zpnGFHJPWTg==
   dependencies:
     d3-array "^2.3.1"
-    vega-dataflow "^5.3.0"
+    vega-dataflow "^5.4.0"
     vega-statistics "^1.4.0"
     vega-util "^1.11.0"
 

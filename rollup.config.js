@@ -11,7 +11,7 @@ export default {
     name: "vegaEmbed",
     globals: {
       vega: "vega",
-      "vega-lite": "vl"
+      "vega-lite": "vegaLite"
     }
   },
   plugins: [nodeResolve(), json(), commonjs()],
