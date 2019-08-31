@@ -1,5 +1,7 @@
 .DS_Store
 .editorconfig
+.eslintignore
+.eslintrc.js
 .gitignore
 .prettierignore
 .prettierrc.json
@@ -8,8 +10,8 @@
 build-style.sh
 embed.gif
 node_modules
+prettier.config.js
 rollup.config.js
 screenshot.png
 test
 test-*.html
-.eslintrc.js
