@@ -9,12 +9,10 @@
 
   summary {
     list-style: none;
-    display: flex;
     position: absolute;
     top: 0;
     right: 0;
     padding: 6px;
-    height: 14px; // needed for Safari
     z-index: 1000;
     background: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -25,9 +23,19 @@
     transition: opacity 0.4s ease-in;
     outline: none;
     cursor: pointer;
+    line-height: 0px; // For Safari
 
     &::-webkit-details-marker {
       display: none;
+    }
+
+    &:active {
+      box-shadow: #aaa 0px 0px 0px 1px inset;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
     }
   }
 

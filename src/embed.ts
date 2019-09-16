@@ -96,7 +96,7 @@ const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) 
 };
 
 const SVG_CIRCLES = `
-<svg viewBox="0 0 16 16" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+<svg viewBox="0 0 16 16" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
   <circle r="2" cy="8" cx="2"></circle>
   <circle r="2" cy="8" cx="8"></circle>
   <circle r="2" cy="8" cx="14"></circle>
