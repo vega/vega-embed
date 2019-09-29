@@ -33,6 +33,13 @@ test('creates simple actions for Vega-Lite', async () => {
   expect(el.children[2].classList[0]).toBe('vega-actions');
 });
 
+test('does not set classes if actions are not specified', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, { actions: false });
+  expect(el.querySelector('.vega-actions')).toBe(null);
+  expect(el.querySelector('.vega-embed')).toBe(null);
+});
+
 test('creates default actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec);
