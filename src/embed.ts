@@ -250,12 +250,11 @@ export default async function embed(
     }
   }
 
-  // ensure container div has class 'vega-embed'
   const div = d3
     .select(el as any) // d3.select supports elements and strings
     .html(''); // clear container
 
-  // Should only apply class if actions are going to be set
+  // Should only apply class if actions are set
   if (actions !== false) {
     div.classed('vega-embed', true);
   }
