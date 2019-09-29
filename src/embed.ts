@@ -253,8 +253,12 @@ export default async function embed(
   // ensure container div has class 'vega-embed'
   const div = d3
     .select(el as any) // d3.select supports elements and strings
-    .classed('vega-embed', true)
     .html(''); // clear container
+
+  // Should only apply class if actions are going to be set
+  if (actions !== false) {
+    div.classed('vega-embed', true);
+  }
 
   const patch = opt.patch;
   if (patch) {
@@ -335,7 +339,10 @@ export default async function embed(
       });
     }
 
-    const ctrl = wrapper.insert('div').attr('class', 'vega-actions');
+    const ctrl = wrapper.insert('div');
+    if (actions !== false) {
+      ctrl.attr('class', 'vega-actions');
+    }
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
