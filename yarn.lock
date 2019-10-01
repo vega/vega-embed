@@ -7228,9 +7228,9 @@ vega-lite-dev-config@^0.2.5:
     ts-jest "^24.0.2"
 
 vega-lite@^4.0.0-beta.2:
-  version "4.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.8.tgz#fa5cdc313c04d89704243429037b4886cad6dbe9"
-  integrity sha512-9ZD0C9h7VxegTC7qwFXomrpemHmmFHszM2XRoyuO9b3j0/rJFpO/3bGd4mat6uSLhqW563DlwqPxZPHg/Zru0w==
+  version "4.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.9.tgz#e9d9529892d667761cd74797e17881423c18823c"
+  integrity sha512-vs79Fx+R2aqmrG6xxTV4Sv1gu/V+ZjdWXS+EOSBaHHhdrhTURsry33VLjRsTuCDohGtme8hJMVOh0AFv+g2law==
   dependencies:
     "@types/clone" "~0.1.30"
     "@types/fast-json-stable-stringify" "^2.0.0"
@@ -7242,7 +7242,7 @@ vega-lite@^4.0.0-beta.2:
     tslib "~1.10.0"
     vega-event-selector "~2.0.1"
     vega-expression "~2.6.1"
-    vega-typings "~0.9.0"
+    vega-typings "~0.10.0"
     vega-util "~1.11.2"
     yargs "~14.0.0"
 
@@ -7365,10 +7365,10 @@ vega-typings@^0.7.0:
   dependencies:
     vega-util "^1.10.0"
 
-vega-typings@~0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.9.0.tgz#c12779e50c2fe075e51fec8f530a344a566e75a1"
-  integrity sha512-auHUUKq/18jk+NGUfR4m/0eil1ufN7sFaYjPOTFu4xhGlULAMriyGQHFaFqPuucNfDCpXMLAQhm31fj67ZPabw==
+vega-typings@~0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.10.0.tgz#59545610aa6310b7468829c23563ba3e033b5c1d"
+  integrity sha512-hrhv871TpPklR8Kq1ooeydUFmbJ+DItJ4va2sEx56w44VpNKTUuWS8IRubCrTHPm1GqZ0VMO4n+u+XM2t2b60g==
   dependencies:
     vega-util "^1.11.0"
 
