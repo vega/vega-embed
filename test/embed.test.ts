@@ -1,4 +1,3 @@
-import deepmerge from 'deepmerge';
 import * as vega from 'vega';
 import { View } from 'vega';
 import * as vl from 'vega-lite';
@@ -114,7 +113,7 @@ test('can access compiled Vega', async () => {
 
 test('can patch Vega', async () => {
   const el = document.createElement('div');
-  const result = await embed(el, vgSpec, { patch: { description: 'Hello World!' } });
+  const result = await embed(el, vgSpec, { patch: [{ op: 'add', path: '/description', value: 'Hello World!' }] });
   expect(vgSpec.description).toBeUndefined();
   expect(result.spec).toEqual(vgSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
@@ -123,7 +122,7 @@ test('can patch Vega', async () => {
 
 test('can patch compiled Vega', async () => {
   const el = document.createElement('div');
-  const result = await embed(el, vlSpec, { patch: { description: 'Hello World!' } });
+  const result = await embed(el, vlSpec, { patch: [{ op: 'add', path: '/description', value: 'Hello World!' }] });
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
   expect(result.vgSpec.description).toBe('Hello World!');
@@ -131,7 +130,7 @@ test('can patch compiled Vega', async () => {
 
 test('can patch compiled Vega signals', async () => {
   const el = document.createElement('div');
-  const result = await embed(el, vlSpec, { patch: { signals: [{ name: 'mySignal' }] } });
+  const result = await embed(el, vlSpec, { patch: [{ op: 'add', path: '/signals', value: [{ name: 'mySignal' }] }] });
   const compiledVgSpec = compile(vlSpec).spec;
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compiledVgSpec);
@@ -146,12 +145,6 @@ test('can patch compiled Vega with a function', async () => {
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
   expect(result.vgSpec.description).toBe('Hello World!');
-});
-
-test('deepmerge merges correctly', () => {
-  expect(deepmerge({ a: 1, b: 2 }, { b: 3, c: 4 })).toEqual({ a: 1, b: 3, c: 4 });
-  expect(deepmerge([1, 2], [3])).toEqual([1, 2, 3]);
-  expect(deepmerge({ a: [1, 2] }, { a: [3], b: 12 })).toEqual({ a: [1, 2, 3], b: 12 });
 });
 
 test('guessMode from Vega schema', () => {

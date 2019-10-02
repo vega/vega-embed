@@ -1,17 +1,18 @@
 import * as d3 from 'd3-selection';
 import deepmerge from 'deepmerge';
+import { applyPatch, Operation } from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega';
 import {
   EncodeEntryName,
+  isBoolean,
   Loader,
   LoaderOptions,
   Renderers,
   Spec as VgSpec,
   TooltipHandler,
-  View,
-  isBoolean
+  View
 } from 'vega';
 import * as vegaLiteImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
@@ -21,7 +22,6 @@ import { Handler, Options as TooltipOptions } from 'vega-tooltip';
 import post from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
-import { DeepPartial } from './util';
 
 export * from './types';
 
@@ -66,7 +66,7 @@ export interface EmbedOptions {
   loader?: Loader | LoaderOptions;
   renderer?: Renderers;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
-  patch?: string | PatchFunc | DeepPartial<VgSpec>;
+  patch?: string | PatchFunc | Operation[];
   width?: number;
   height?: number;
   padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
@@ -263,9 +263,9 @@ export default async function embed(
     } else if (vega.isString(patch)) {
       const patchString = await loader.load(patch);
       // eslint-disable-next-line require-atomic-updates
-      vgSpec = deepmerge(vgSpec, JSON.parse(patchString));
+      vgSpec = applyPatch(vgSpec, JSON.parse(patchString), true, false).newDocument;
     } else {
-      vgSpec = deepmerge(vgSpec, patch);
+      vgSpec = applyPatch(vgSpec, patch, true, false).newDocument;
     }
   }
 

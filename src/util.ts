@@ -1,5 +1,3 @@
-export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
-
 // polyfill for IE
 if (!String.prototype.startsWith) {
   // eslint-disable-next-line no-extend-native,func-names
