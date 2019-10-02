@@ -90,8 +90,8 @@ const VERSION = {
   'vega-lite': vegaLite ? vegaLite.version : 'not available'
 };
 
-const PREPROCESSOR: { [mode in Mode]: (spec: VisualizationSpec, config: Config) => VgSpec } = {
-  vega: vgSpec => vgSpec,
+const PREPROCESSOR: { [mode in Mode]: (spec: any, config?: Config) => VgSpec } = {
+  vega: (vgSpec: VgSpec) => vgSpec,
   'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec as VlSpec, { config: config as VlConfig }).spec
 };
 
