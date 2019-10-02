@@ -1,7 +1,10 @@
 .vega-embed {
   position: relative;
   display: inline-block;
-  padding-right: 38px;
+
+  &.has-actions {
+    padding-right: 38px;
+  }
 
   details:not([open]) > :not(summary) {
     display: none !important;

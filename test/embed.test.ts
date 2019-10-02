@@ -92,8 +92,17 @@ test('can use custom download filename for png', async () => {
 test('creates default actions for Vega', async () => {
   const el = document.createElement('div');
   await embed(el, vgSpec);
+  expect(el.classList[0]).toBe('vega-embed');
+  expect(el.classList[1]).toBe('has-actions');
   expect(el.children[2].children[1].classList[0]).toBe('vega-actions');
   expect(el.children[2].children[1].childElementCount).toBe(4);
+});
+
+test('does not set has-actions if actions are not specified', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, { actions: false });
+  expect(el.classList).toHaveLength(1);
+  expect(el.querySelector('.has-actions')).toBe(null);
 });
 
 test('can access compiled Vega', async () => {
@@ -150,9 +159,7 @@ test('guessMode from Vega schema', () => {
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/v3.json' }, 'invalid' as Mode)).toBe(
-    'vega-lite'
-  );
+  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/4.json' }, 'invalid' as Mode)).toBe('vega-lite');
 });
 
 test('guessMode from Vega-Lite spec', () => {
