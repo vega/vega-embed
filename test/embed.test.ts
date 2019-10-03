@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge';
 import * as vega from 'vega';
 import { View } from 'vega';
 import * as vl from 'vega-lite';
@@ -145,6 +146,12 @@ test('can patch compiled Vega with a function', async () => {
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
   expect(result.vgSpec.description).toBe('Hello World!');
+});
+
+test('deepmerge merges correctly', () => {
+  expect(deepmerge({ a: 1, b: 2 }, { b: 3, c: 4 })).toEqual({ a: 1, b: 3, c: 4 });
+  expect(deepmerge([1, 2], [3])).toEqual([1, 2, 3]);
+  expect(deepmerge({ a: [1, 2] }, { a: [3], b: 12 })).toEqual({ a: [1, 2, 3], b: 12 });
 });
 
 test('guessMode from Vega schema', () => {
