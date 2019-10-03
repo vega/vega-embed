@@ -1,9 +1,9 @@
 .DS_Store
 .eslintignore
 .eslintrc.js
-.eslintrc.js
 .prettierignore
 .rpt2_cache
+beemo-error.log
 bower_components
 build
 node_modules
@@ -13,4 +13,3 @@ prettier.config.js
 src/style.ts
 yarn-debug.log*
 yarn-error.log*
-beemo-error.log
