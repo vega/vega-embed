@@ -1,24 +1,15 @@
 import * as d3 from 'd3-selection';
-import deepmerge from 'deepmerge';
 import { applyPatch, Operation } from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega';
-import {
-  EncodeEntryName,
-  isBoolean,
-  Loader,
-  LoaderOptions,
-  Renderers,
-  Spec as VgSpec,
-  TooltipHandler,
-  View
-} from 'vega';
+import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega';
 import * as vegaLiteImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
+import { isBoolean, isString, mergeConfig, mergeDeep } from 'vega-util';
 import post from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
@@ -57,7 +48,7 @@ const I18N = {
   SVG_ACTION: 'Save as SVG'
 };
 
-export interface EmbedOptions {
+export interface EmbedOptions<S = string> {
   actions?: boolean | Actions;
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
@@ -66,12 +57,12 @@ export interface EmbedOptions {
   loader?: Loader | LoaderOptions;
   renderer?: Renderers;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
-  patch?: string | PatchFunc | Operation[];
+  patch?: S | PatchFunc | Operation[];
   width?: number;
   height?: number;
   padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
   scaleFactor?: number;
-  config?: string | Config;
+  config?: S | Config;
   sourceHeader?: string;
   sourceFooter?: string;
   editorUrl?: string;
@@ -183,60 +174,78 @@ function isLoader(o?: LoaderOptions | Loader): o is Loader {
  * @param el        DOM element in which to place component (DOM node or CSS selector).
  * @param spec      String : A URL string from which to load the Vega specification.
  *                  Object : The Vega/Vega-Lite specification as a parsed JSON object.
- * @param opt       A JavaScript object containing options for embedding.
+ * @param opts       A JavaScript object containing options for embedding.
  */
 export default async function embed(
   el: HTMLElement | string,
   spec: VisualizationSpec | string,
-  opt: EmbedOptions = {}
+  opts: EmbedOptions = {}
 ): Promise<Result> {
-  const loader: Loader = isLoader(opt.loader) ? opt.loader : vega.loader(opt.loader);
+  const loader: Loader = isLoader(opts.loader) ? opts.loader : vega.loader(opts.loader);
 
-  // Load the visualization specification.
-  if (vega.isString(spec)) {
-    const data = await loader.load(spec);
-    return embed(el, JSON.parse(data), opt);
-  }
+  // load spec, config, and patch that are references by URLs
+  const parsedSpec = isString(spec) ? JSON.parse(await loader.load(spec)) : spec;
 
-  opt = deepmerge(opt, (spec.usermeta && (spec.usermeta as any)['embedOptions']) || {});
+  const usermetaOpts = await loadOpts(
+    (parsedSpec.usermeta && (parsedSpec.usermeta as any)['embedOptions']) || {},
+    loader
+  );
+  const parsedOpts = await loadOpts(opts, loader);
 
-  // Load Vega theme/configuration.
-  let config = opt.config || {};
-  if (vega.isString(config)) {
-    const data = await loader.load(config);
-    return embed(el, spec, { ...opt, config: JSON.parse(data) });
-  }
+  const mergedOpts = {
+    ...mergeDeep(parsedOpts, usermetaOpts),
+    config: mergeConfig(parsedOpts.config, usermetaOpts.config)
+  };
 
-  const actions = isBoolean(opt.actions)
-    ? opt.actions
-    : deepmerge<Actions>(
+  return await _embed(el, parsedSpec, mergedOpts, loader);
+}
+
+async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions<never>> {
+  const config: Config = isString(opt.config) ? JSON.parse(await loader.load(opt.config)) : opt.config || {};
+  const patch: PatchFunc | Operation[] = isString(opt.patch) ? JSON.parse(await loader.load(opt.patch)) : opt.patch;
+  return {
+    ...(opt as any),
+    ...(patch ? { patch } : {}),
+    ...(config ? { config } : {})
+  };
+}
+
+async function _embed(
+  el: HTMLElement | string,
+  spec: VisualizationSpec,
+  opts: EmbedOptions<never> = {},
+  loader: Loader
+): Promise<Result> {
+  const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config) : opts.config;
+
+  const actions = isBoolean(opts.actions)
+    ? opts.actions
+    : mergeDeep<Actions>(
         { export: { svg: true, png: true }, source: true, compiled: true, editor: true },
-        opt.actions || {}
+        opts.actions || {}
       );
-  const i18n = { ...I18N, ...opt.i18n };
+  const i18n = { ...I18N, ...opts.i18n };
 
-  const renderer = opt.renderer || 'canvas';
-  const logLevel = opt.logLevel || vega.Warn;
-  const downloadFileName = opt.downloadFileName || 'visualization';
+  const renderer = opts.renderer || 'canvas';
+  const logLevel = opts.logLevel || vega.Warn;
+  const downloadFileName = opts.downloadFileName || 'visualization';
 
-  if (opt.defaultStyle !== false) {
+  if (opts.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
     if (!document.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
       style.innerText =
-        opt.defaultStyle === undefined || opt.defaultStyle === true ? (embedStyle || '').toString() : opt.defaultStyle;
+        opts.defaultStyle === undefined || opts.defaultStyle === true
+          ? (embedStyle || '').toString()
+          : opts.defaultStyle;
 
       document.head.appendChild(style);
     }
   }
 
-  if (opt.theme) {
-    config = deepmerge<Config>(themes[opt.theme], config);
-  }
-
-  const mode = guessMode(spec, opt.mode);
+  const mode = guessMode(spec, opts.mode);
 
   let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config);
 
@@ -256,14 +265,10 @@ export default async function embed(
     .classed('has-actions', actions !== false)
     .html(''); // clear container
 
-  const patch = opt.patch;
+  const patch = opts.patch;
   if (patch) {
     if (patch instanceof Function) {
       vgSpec = patch(vgSpec);
-    } else if (vega.isString(patch)) {
-      const patchString = await loader.load(patch);
-      // eslint-disable-next-line require-atomic-updates
-      vgSpec = applyPatch(vgSpec, JSON.parse(patchString), true, false).newDocument;
     } else {
       vgSpec = applyPatch(vgSpec, patch, true, false).newDocument;
     }
@@ -279,19 +284,19 @@ export default async function embed(
     renderer
   });
 
-  if (opt.tooltip !== false) {
+  if (opts.tooltip !== false) {
     let handler: TooltipHandler;
-    if (isTooltipHandler(opt.tooltip)) {
-      handler = opt.tooltip;
+    if (isTooltipHandler(opts.tooltip)) {
+      handler = opts.tooltip;
     } else {
       // user provided boolean true or tooltip options
-      handler = new Handler(opt.tooltip === true ? {} : opt.tooltip).call;
+      handler = new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
     }
 
     view.tooltip(handler);
   }
 
-  let { hover } = opt;
+  let { hover } = opts;
 
   if (hover === undefined) {
     hover = mode === 'vega';
@@ -303,15 +308,15 @@ export default async function embed(
     view.hover(hoverSet, updateSet);
   }
 
-  if (opt) {
-    if (opt.width) {
-      view.width(opt.width);
+  if (opts) {
+    if (opts.width) {
+      view.width(opts.width);
     }
-    if (opt.height) {
-      view.height(opt.height);
+    if (opts.height) {
+      view.height(opts.height);
     }
-    if (opt.padding) {
-      view.padding(opt.padding);
+    if (opts.padding) {
+      view.padding(opts.padding);
     }
   }
 
@@ -320,7 +325,7 @@ export default async function embed(
   if (actions !== false) {
     let wrapper = div;
 
-    if (opt.defaultStyle !== false) {
+    if (opts.defaultStyle !== false) {
       const details = div.append('details').attr('title', i18n.CLICK_TO_VIEW_ACTIONS);
       wrapper = details;
       const summary = details.insert('summary');
@@ -351,7 +356,7 @@ export default async function embed(
             // eslint-disable-next-line func-names
             .on('mousedown', function(this) {
               view
-                .toImageURL(ext, opt.scaleFactor)
+                .toImageURL(ext, opts.scaleFactor)
                 .then(url => {
                   this.href = url;
                 })
@@ -371,7 +376,7 @@ export default async function embed(
         .text(i18n.SOURCE_ACTION)
         .attr('href', '#')
         .on('mousedown', () => {
-          viewSource(stringify(spec), opt.sourceHeader || '', opt.sourceFooter || '', mode);
+          viewSource(stringify(spec), opts.sourceHeader || '', opts.sourceFooter || '', mode);
           d3.event.preventDefault();
         });
     }
@@ -383,14 +388,14 @@ export default async function embed(
         .text(i18n.COMPILED_ACTION)
         .attr('href', '#')
         .on('mousedown', () => {
-          viewSource(stringify(vgSpec), opt.sourceHeader || '', opt.sourceFooter || '', 'vega');
+          viewSource(stringify(vgSpec), opts.sourceHeader || '', opts.sourceFooter || '', 'vega');
           d3.event.preventDefault();
         });
     }
 
     // add 'Open in Vega Editor' action
     if (actions === true || actions.editor !== false) {
-      const editorUrl = opt.editorUrl || 'https://vega.github.io/editor/';
+      const editorUrl = opts.editorUrl || 'https://vega.github.io/editor/';
       ctrl
         .append('a')
         .text(i18n.EDITOR_ACTION)
