@@ -39,11 +39,11 @@
     "jest": "^24.9.0",
     "jest-canvas-mock": "^2.1.1",
     "node-sass": "^4.12.0",
-    "rollup": "^1.22.0",
+    "rollup": "^1.23.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "terser": "^4.3.4",
+    "terser": "^4.3.6",
     "ts-jest": "^24.1.0",
     "typescript": "~3.6.3",
     "vega": "~5.7.0",
@@ -60,7 +60,7 @@
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^6.3.0",
     "vega-schema-url-parser": "^1.1.0",
-    "vega-themes": "^2.4.0",
+    "vega-themes": "^2.5.0",
     "vega-tooltip": "^0.19.1"
   },
   "scripts": {
