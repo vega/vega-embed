@@ -9,10 +9,11 @@ import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import { Handler, Options as TooltipOptions } from 'vega-tooltip';
-import { isBoolean, isString, mergeConfig, mergeDeep } from 'vega-util';
+import { isBoolean, isString, mergeConfig } from 'vega-util';
 import post from './post';
 import embedStyle from './style';
 import { Config, Mode } from './types';
+import { mergeDeep } from './util';
 
 export * from './types';
 
@@ -31,6 +32,8 @@ export interface Actions {
   compiled?: boolean;
   editor?: boolean;
 }
+
+export const DEFAULT_ACTIONS = { export: { svg: true, png: true }, source: true, compiled: true, editor: true };
 
 export interface Hover {
   hoverSet?: EncodeEntryName;
@@ -218,12 +221,7 @@ async function _embed(
 ): Promise<Result> {
   const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config) : opts.config;
 
-  const actions = isBoolean(opts.actions)
-    ? opts.actions
-    : mergeDeep<Actions>(
-        { export: { svg: true, png: true }, source: true, compiled: true, editor: true },
-        opts.actions || {}
-      );
+  const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions || {});
   const i18n = { ...I18N, ...opts.i18n };
 
   const renderer = opts.renderer || 'canvas';
