@@ -30,7 +30,6 @@
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
   "devDependencies": {
-    "@types/d3-selection": "^1.4.1",
     "@types/jest": "^24.0.18",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/semver": "^6.0.2",
@@ -55,7 +54,6 @@
     "vega-lite": "*"
   },
   "dependencies": {
-    "d3-selection": "^1.4.0",
     "fast-json-patch": "^3.0.0-1",
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^6.3.0",

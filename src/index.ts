@@ -1,4 +1,3 @@
-import * as d3 from 'd3-selection';
 import { isString } from 'vega';
 import pkg from '../package.json';
 import container from './container';
@@ -9,9 +8,7 @@ import { isURL } from './util';
  * Returns true if the object is an HTML element.
  */
 function isElement(obj: any): obj is HTMLElement {
-  return obj instanceof d3.selection || typeof HTMLElement === 'object'
-    ? obj instanceof HTMLElement // DOM2
-    : obj && typeof obj === 'object' && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === 'string';
+  return obj instanceof HTMLElement;
 }
 
 export type Wrapper = typeof embed | typeof container;

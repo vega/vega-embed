@@ -1,4 +1,3 @@
-import * as d3 from 'd3-selection';
 import { applyPatch, Operation } from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
@@ -257,11 +256,12 @@ async function _embed(
     }
   }
 
-  const div = d3
-    .select(el as any) // d3.select supports elements and strings
-    .classed('vega-embed', true)
-    .classed('has-actions', actions !== false)
-    .html(''); // clear container
+  const div = typeof el === 'string' ? document.querySelector(el) : el; // either string or element
+  div.classList.add('vega-embed');
+  if (actions) {
+    div.classList.add('has-actions');
+  }
+  div.innerHTML = ''; // clear container
 
   const patch = opts.patch;
   if (patch) {
@@ -324,89 +324,101 @@ async function _embed(
     let wrapper = div;
 
     if (opts.defaultStyle !== false) {
-      const details = div.append('details').attr('title', i18n.CLICK_TO_VIEW_ACTIONS);
+      const details = document.createElement('details');
+      details.title = i18n.CLICK_TO_VIEW_ACTIONS;
+      div.append(details);
+
       wrapper = details;
-      const summary = details.insert('summary');
+      const summary = document.createElement('summary');
+      summary.innerHTML = SVG_CIRCLES;
 
-      summary.html(SVG_CIRCLES);
+      details.append(summary);
 
-      const dn = details.node() as HTMLDetailsElement;
       document.addEventListener('click', evt => {
-        if (!dn.contains(evt.target as any)) {
-          dn.removeAttribute('open');
+        if (!details.contains(evt.target as any)) {
+          details.removeAttribute('open');
         }
       });
     }
 
-    const ctrl = wrapper.insert('div').attr('class', 'vega-actions');
+    const ctrl = document.createElement('div');
+    wrapper.append(ctrl);
+    ctrl.classList.add('vega-actions');
 
     // add 'Export' action
     if (actions === true || actions.export !== false) {
       for (const ext of ['svg', 'png'] as const) {
         if (actions === true || actions.export === true || (actions.export as { svg?: boolean; png?: boolean })[ext]) {
           const i18nExportAction = (i18n as { [key: string]: string })[`${ext.toUpperCase()}_ACTION`];
-          ctrl
-            .append<HTMLLinkElement>('a')
-            .text(i18nExportAction)
-            .attr('href', '#')
-            .attr('target', '_blank')
-            .attr('download', `${downloadFileName}.${ext}`)
-            // eslint-disable-next-line func-names
-            .on('mousedown', function(this) {
-              view
-                .toImageURL(ext, opts.scaleFactor)
-                .then(url => {
-                  this.href = url;
-                })
-                .catch(error => {
-                  throw error;
-                });
-              d3.event.preventDefault();
-            });
+          const exportLink = document.createElement('a');
+
+          exportLink.text = i18nExportAction;
+          exportLink.href = '#';
+          exportLink.target = '_blank';
+          exportLink.download = `${downloadFileName}.${ext}`;
+          exportLink.addEventListener('mousedown', function(this, e) {
+            view
+              .toImageURL(ext, opts.scaleFactor)
+              .then(url => {
+                this.href = url;
+              })
+              .catch(error => {
+                throw error;
+              });
+            e.preventDefault();
+          });
+
+          ctrl.append(exportLink);
         }
       }
     }
 
     // add 'View Source' action
     if (actions === true || actions.source !== false) {
-      ctrl
-        .append('a')
-        .text(i18n.SOURCE_ACTION)
-        .attr('href', '#')
-        .on('mousedown', () => {
-          viewSource(stringify(spec), opts.sourceHeader || '', opts.sourceFooter || '', mode);
-          d3.event.preventDefault();
-        });
+      const viewSourceLink = document.createElement('a');
+
+      viewSourceLink.text = i18n.SOURCE_ACTION;
+      viewSourceLink.href = '#';
+      viewSourceLink.addEventListener('mousedown', function(this, e) {
+        viewSource(stringify(spec), opts.sourceHeader || '', opts.sourceFooter || '', mode);
+        e.preventDefault();
+      });
+
+      ctrl.append(viewSourceLink);
     }
 
     // add 'View Compiled' action
     if (mode === 'vega-lite' && (actions === true || actions.compiled !== false)) {
-      ctrl
-        .append('a')
-        .text(i18n.COMPILED_ACTION)
-        .attr('href', '#')
-        .on('mousedown', () => {
-          viewSource(stringify(vgSpec), opts.sourceHeader || '', opts.sourceFooter || '', 'vega');
-          d3.event.preventDefault();
-        });
+      const compileLink = document.createElement('a');
+
+      compileLink.text = i18n.COMPILED_ACTION;
+      compileLink.href = '#';
+      compileLink.addEventListener('mousedown', function(this, e) {
+        viewSource(stringify(vgSpec), opts.sourceHeader || '', opts.sourceFooter || '', 'vega');
+        e.preventDefault();
+      });
+
+      ctrl.append(compileLink);
     }
 
     // add 'Open in Vega Editor' action
     if (actions === true || actions.editor !== false) {
       const editorUrl = opts.editorUrl || 'https://vega.github.io/editor/';
-      ctrl
-        .append('a')
-        .text(i18n.EDITOR_ACTION)
-        .attr('href', '#')
-        .on('mousedown', () => {
-          post(window, editorUrl, {
-            config: config as Config,
-            mode,
-            renderer,
-            spec: stringify(spec)
-          });
-          d3.event.preventDefault();
+      const editorLink = document.createElement('a');
+
+      editorLink.text = i18n.EDITOR_ACTION;
+      editorLink.href = '#';
+      editorLink.addEventListener('mousedown', function(this, e) {
+        post(window, editorUrl, {
+          config: config as Config,
+          mode,
+          renderer,
+          spec: stringify(spec)
         });
+        e.preventDefault();
+      });
+
+      ctrl.append(editorLink);
     }
   }
 
