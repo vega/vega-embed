@@ -256,7 +256,7 @@ async function _embed(
     }
   }
 
-  const div = typeof el === 'string' ? document.querySelector(el) : el; // either string or element
+  const div = typeof el === 'string' ? document.querySelector(el) : el;
   div.classList.add('vega-embed');
   if (actions) {
     div.classList.add('has-actions');
