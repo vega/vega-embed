@@ -7217,9 +7217,9 @@ vega-lite-dev-config@^0.3.0:
     ts-jest "^24.1.0"
 
 vega-lite@^4.0.0-beta.9:
-  version "4.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.9.tgz#e9d9529892d667761cd74797e17881423c18823c"
-  integrity sha512-vs79Fx+R2aqmrG6xxTV4Sv1gu/V+ZjdWXS+EOSBaHHhdrhTURsry33VLjRsTuCDohGtme8hJMVOh0AFv+g2law==
+  version "4.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.10.tgz#13cf1b1d7707aeba961f018a55d1929d5a044f55"
+  integrity sha512-oT8a1lS/fPAI3JdFWN94vHdtqEYYvjhUSz1mWiGSnYBFEctv4Rlbf3qlWDs22H7Tlhx2JdrtkvI/bYYVt0UBMA==
   dependencies:
     "@types/clone" "~0.1.30"
     "@types/fast-json-stable-stringify" "^2.0.0"
@@ -7231,9 +7231,9 @@ vega-lite@^4.0.0-beta.9:
     tslib "~1.10.0"
     vega-event-selector "~2.0.1"
     vega-expression "~2.6.1"
-    vega-typings "~0.10.0"
+    vega-typings "~0.10.1"
     vega-util "~1.11.2"
-    yargs "~14.0.0"
+    yargs "~14.2.0"
 
 vega-loader@^4.0.0, vega-loader@^4.1.2:
   version "4.1.2"
@@ -7347,10 +7347,10 @@ vega-transforms@^4.4.1:
     vega-statistics "^1.6.0"
     vega-util "^1.11.2"
 
-vega-typings@^0.10.0, vega-typings@~0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.10.0.tgz#59545610aa6310b7468829c23563ba3e033b5c1d"
-  integrity sha512-hrhv871TpPklR8Kq1ooeydUFmbJ+DItJ4va2sEx56w44VpNKTUuWS8IRubCrTHPm1GqZ0VMO4n+u+XM2t2b60g==
+vega-typings@^0.10.0, vega-typings@~0.10.1:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.10.2.tgz#4155bbc72a536a7f503ce61af592502d69b917d5"
+  integrity sha512-W/V6oyoBizlXt0FJnuY5/Y46/dsmfcPTxRaUCtFBf0nyoWBsmO66EYj24xCHJ6pgfHEEbBRLPfrfrvlKiRPaMQ==
   dependencies:
     vega-util "^1.11.0"
 
@@ -7759,7 +7759,7 @@ yargs@^13.3.0:
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
 
-yargs@^14.0.0:
+yargs@^14.0.0, yargs@~14.2.0:
   version "14.2.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.0.tgz#f116a9242c4ed8668790b40759b4906c276e76c3"
   integrity sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==
@@ -7794,23 +7794,6 @@ yargs@^7.0.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
-
-yargs@~14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.0.0.tgz#ba4cacc802b3c0b3e36a9e791723763d57a85066"
-  integrity sha512-ssa5JuRjMeZEUjg7bEL99AwpitxU/zWGAGpdj0di41pOEmJti8NR6kyUIJBkR78DTYNPZOU08luUo0GTHuB+ow==
-  dependencies:
-    cliui "^5.0.0"
-    decamelize "^1.2.0"
-    find-up "^3.0.0"
-    get-caller-file "^2.0.1"
-    require-directory "^2.1.1"
-    require-main-filename "^2.0.0"
-    set-blocking "^2.0.0"
-    string-width "^3.0.0"
-    which-module "^2.0.0"
-    y18n "^4.0.0"
-    yargs-parser "^13.1.1"
 
 yeast@0.1.2:
   version "0.1.2"
