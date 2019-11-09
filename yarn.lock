@@ -7135,7 +7135,7 @@ vega-event-selector@^2.0.1, vega-event-selector@~2.0.1:
   resolved "https://registry.yarnpkg.com/vega-event-selector/-/vega-event-selector-2.0.1.tgz#8f8680872f5e80148928ea67aa8c7fb238e8a046"
   integrity sha512-FGU1PefYhW9An6zVs6TE5f/XGYsIispxFErG/p9KThxL22IC90WVZzMQXKN9M8OcARq5OyWjHg3qa9Qp/Z6OJw==
 
-vega-expression@^2.6.1, vega-expression@^2.6.2, vega-expression@~2.6.1:
+vega-expression@^2.6.1, vega-expression@^2.6.2, vega-expression@~2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/vega-expression/-/vega-expression-2.6.2.tgz#cb3025310f9007fcd9910311ed66fa8f19a2c211"
   integrity sha512-vh8GVkAL/KtsgcdrdKdEnysZn/InIuRrkF7U+CG1eAmupMucPY/Rpu0nCdYb4CLC/xNRHx/NMFidLztQUjZJQg==
@@ -7217,9 +7217,9 @@ vega-lite-dev-config@^0.3.0:
     ts-jest "^24.1.0"
 
 vega-lite@^4.0.0-beta.9:
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.10.tgz#13cf1b1d7707aeba961f018a55d1929d5a044f55"
-  integrity sha512-oT8a1lS/fPAI3JdFWN94vHdtqEYYvjhUSz1mWiGSnYBFEctv4Rlbf3qlWDs22H7Tlhx2JdrtkvI/bYYVt0UBMA==
+  version "4.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.11.tgz#316275e0224b34e90cdb84a875bedc9f25dcc609"
+  integrity sha512-l2+QCPw0u/EVdTcGndSG23zj5K7W67e6LAtcS72iexrwzmiSE3CI12K7yh1XJC/hcFHP1352OPZ3Xj+xD7IcdA==
   dependencies:
     "@types/clone" "~0.1.30"
     "@types/fast-json-stable-stringify" "^2.0.0"
@@ -7230,9 +7230,9 @@ vega-lite@^4.0.0-beta.9:
     json-stringify-pretty-compact "~2.0.0"
     tslib "~1.10.0"
     vega-event-selector "~2.0.1"
-    vega-expression "~2.6.1"
-    vega-typings "~0.10.1"
-    vega-util "~1.11.2"
+    vega-expression "~2.6.2"
+    vega-typings "~0.10.2"
+    vega-util "~1.12.0"
     yargs "~14.2.0"
 
 vega-loader@^4.0.0, vega-loader@^4.1.2:
@@ -7347,22 +7347,17 @@ vega-transforms@^4.4.3:
     vega-statistics "^1.6.1"
     vega-util "^1.12.0"
 
-vega-typings@^0.10.2, vega-typings@~0.10.1:
+vega-typings@^0.10.2, vega-typings@~0.10.2:
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.10.2.tgz#4155bbc72a536a7f503ce61af592502d69b917d5"
   integrity sha512-W/V6oyoBizlXt0FJnuY5/Y46/dsmfcPTxRaUCtFBf0nyoWBsmO66EYj24xCHJ6pgfHEEbBRLPfrfrvlKiRPaMQ==
   dependencies:
     vega-util "^1.11.0"
 
-vega-util@^1.11.0, vega-util@^1.11.1, vega-util@^1.11.2, vega-util@^1.12.0, vega-util@^1.8.0:
+vega-util@^1.11.0, vega-util@^1.11.1, vega-util@^1.11.2, vega-util@^1.12.0, vega-util@^1.8.0, vega-util@~1.12.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/vega-util/-/vega-util-1.12.0.tgz#fe46198b5294a68d32bedddcc539bb2522de3cba"
   integrity sha512-eN1PAQVDyEOcwild2Fk1gbkzkqgDHNujG2/akYRtBzkhtz2EttrVIDwBkWqV/Q+VvEINEksb7TI3Wv7qVQFR5g==
-
-vega-util@~1.11.2:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/vega-util/-/vega-util-1.11.2.tgz#0a96da3207c54ab73b0da45ec5a4e88d32355881"
-  integrity sha512-E/9zhO026xOSrjOmgCchKKI14fAcik5uNp1/wt9XfCkKjUCibvLCZOX2UVCVAFgF/frby2H1jU34o8mrTSsOxg==
 
 vega-view-transforms@^4.4.1:
   version "4.4.1"
