@@ -20,7 +20,9 @@ test('mergeDeep', () => {
   expect(mergeDeep({ a: { b: { c: 12 } } }, { a: { b: { c: 42 } } })).toEqual({ a: { b: { c: 42 } } });
   expect(mergeDeep<object>({ a: { b: 12 } }, { a: { b: { c: 42 } } })).toEqual({ a: { b: { c: 42 } } });
   expect(mergeDeep({}, DEFAULT_ACTIONS, {})).toEqual(DEFAULT_ACTIONS);
-  expect(mergeDeep<Actions>({}, DEFAULT_ACTIONS, { export: { svg: false } })).toEqual({
+  expect(
+    mergeDeep<Actions>({}, DEFAULT_ACTIONS, { export: { svg: false } })
+  ).toEqual({
     export: { svg: false, png: true },
     source: true,
     compiled: true,
