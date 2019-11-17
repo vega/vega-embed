@@ -127,6 +127,9 @@ var opt = {
 
   downloadFileName: ...,
 
+  formatLocale: ...,
+  timeFormatLocale: ...,
+
   i18n: {
     COMPILED_ACTION: ...,
     EDITOR_ACTION: ...,
@@ -159,6 +162,8 @@ var opt = {
 | `hover`       | Boolean or Object  | Enable [hover event processing](https://vega.github.io/vega/docs/api/view/#view_hover). Hover event processing is enabled on Vega by default.<br> _Boolean_: Enables/disables hover event processing.<br> _Object_: Optional keys (`hoverSet`, `updateSet`) to specify which named encoding sets to invoke upon mouseover and mouseout. |
 | `i18n`         | Object   | This property maps keys (`COMPILED_ACTION`, `EDITOR_ACTION`, `PNG_ACTION`, `SOURCE_ACTION`, `SVG_ACTION`) to string values for the action's text. By default, the text is in English. |
 | `downloadFileName` | String   | Sets the file name (default: `visualization`) for charts downloaded using the `png` or `svg` action. |
+| `formatLocale` | Object   | Sets the default locale definition for number formatting. See the [d3-format locale collection](https://github.com/d3/d3-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
+| `timeFormatLocale` | Object   | Sets the default locale definition for date/time formatting. See the [d3-time-format locale collection](https://github.com/d3/d3-time-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 
 ## Common questions
 

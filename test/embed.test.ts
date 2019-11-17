@@ -175,6 +175,16 @@ test('guessMode from Vega spec', () => {
   expect(guessMode({ marks: [] }, 'invalid' as Mode)).toBe('vega');
 });
 
+test('can set locale', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, {
+    formatLocale: {
+      decimal: ',',
+      thousands: '.'
+    }
+  });
+});
+
 test('can change i18n strings', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, {

@@ -71,6 +71,8 @@ export interface EmbedOptions<S = string> {
   hover?: boolean | Hover;
   i18n?: Partial<typeof I18N>;
   downloadFileName?: string;
+  formatLocale?: object;
+  timeFormatLocale?: object;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -270,6 +272,15 @@ async function _embed(
     } else {
       vgSpec = applyPatch(vgSpec, patch, true, false).newDocument;
     }
+  }
+
+  // Set locale. Note that this is a global setting.
+  if (opts.formatLocale) {
+    vega.formatLocale(opts.formatLocale);
+  }
+
+  if (opts.timeFormatLocale) {
+    vega.timeFormatLocale(opts.timeFormatLocale);
   }
 
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.

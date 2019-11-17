@@ -30,19 +30,19 @@
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
   "devDependencies": {
-    "@types/jest": "^24.0.18",
+    "@types/jest": "^24.0.23",
     "@types/json-stable-stringify": "^1.0.32",
-    "@types/semver": "^6.0.2",
+    "@types/semver": "^6.2.0",
     "browser-sync": "^2.26.7",
     "concurrently": "^5.0.0",
     "jest": "^24.9.0",
-    "jest-canvas-mock": "^2.1.1",
-    "node-sass": "^4.12.0",
-    "rollup": "^1.23.1",
+    "jest-canvas-mock": "^2.2.0",
+    "node-sass": "^4.13.0",
+    "rollup": "^1.27.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "terser": "^4.3.8",
+    "terser": "^4.4.0",
     "ts-jest": "^24.1.0",
     "typescript": "~3.7.2",
     "vega": "~5.8.0",
@@ -50,7 +50,7 @@
     "vega-lite-dev-config": "^0.3.0"
   },
   "peerDependencies": {
-    "vega": "^5.7.1",
+    "vega": "^5.8.0",
     "vega-lite": "*"
   },
   "dependencies": {
