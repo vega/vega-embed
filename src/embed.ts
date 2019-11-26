@@ -335,7 +335,7 @@ async function _embed(
 
   await view.initialize(el).runAsync();
 
-  let documentClickHandler: ((evt: Event) => void) | undefined;
+  let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
     let wrapper = div;
@@ -351,8 +351,8 @@ async function _embed(
 
       details.append(summary);
 
-      documentClickHandler = (evt: Event) => {
-        if (!details.contains(evt.target as any)) {
+      documentClickHandler = (ev: MouseEvent) => {
+        if (!details.contains(ev.target as any)) {
           details.removeAttribute('open');
         }
       };
