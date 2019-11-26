@@ -442,7 +442,7 @@ async function _embed(
 
   // Wrap view.finalize to also remove event listeners from Vega-Embed.
   if (documentClickHandler) {
-    const originalFinalize = view.finalize;
+    const originalFinalize = view.finalize.bind(view);
     view.finalize = () => {
       document.removeEventListener('click', documentClickHandler!);
 
