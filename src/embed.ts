@@ -198,7 +198,7 @@ export default async function embed(
 
   const mergedOpts = {
     ...mergeDeep(parsedOpts, usermetaOpts),
-    config: mergeConfig(parsedOpts.config, usermetaOpts.config)
+    config: mergeConfig(parsedOpts.config ?? {}, usermetaOpts.config ?? {})
   };
 
   return await _embed(el, parsedSpec, mergedOpts, loader);
@@ -220,7 +220,7 @@ async function _embed(
   opts: EmbedOptions<never> = {},
   loader: Loader
 ): Promise<Result> {
-  const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config) : opts.config;
+  const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config ?? {}) : opts.config;
 
   const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions ?? {});
   const i18n = { ...I18N, ...opts.i18n };
@@ -259,6 +259,10 @@ async function _embed(
   }
 
   const div = typeof el === 'string' ? document.querySelector(el) : el;
+  if (!div) {
+    throw Error('${el} does not exist');
+  }
+
   div.classList.add('vega-embed');
   if (actions) {
     div.classList.add('has-actions');

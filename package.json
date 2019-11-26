@@ -45,12 +45,12 @@
     "terser": "^4.4.0",
     "ts-jest": "^24.2.0",
     "typescript": "~3.7.2",
-    "vega": "~5.8.0",
-    "vega-lite": "^4.0.0-beta.9",
+    "vega": "~5.8.1",
+    "vega-lite": "^4.0.0-beta.12",
     "vega-lite-dev-config": "^0.3.0"
   },
   "peerDependencies": {
-    "vega": "^5.8.1",
+    "vega": "^5.8.0",
     "vega-lite": "*"
   },
   "dependencies": {
