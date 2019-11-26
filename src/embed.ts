@@ -335,6 +335,8 @@ async function _embed(
 
   await view.initialize(el).runAsync();
 
+  let documentClickHandler: ((evt: Event) => void) | undefined;
+
   if (actions !== false) {
     let wrapper = div;
 
@@ -349,11 +351,12 @@ async function _embed(
 
       details.append(summary);
 
-      document.addEventListener('click', evt => {
+      documentClickHandler = (evt: Event) => {
         if (!details.contains(evt.target as any)) {
           details.removeAttribute('open');
         }
-      });
+      };
+      document.addEventListener('click', documentClickHandler);
     }
 
     const ctrl = document.createElement('div');
@@ -435,6 +438,16 @@ async function _embed(
 
       ctrl.append(editorLink);
     }
+  }
+
+  // Wrap view.finalize to also remove event listeners from Vega-Embed.
+  if (documentClickHandler) {
+    const originalFinalize = view.finalize;
+    view.finalize = () => {
+      document.removeEventListener('click', documentClickHandler!);
+
+      originalFinalize();
+    };
   }
 
   return { view, spec, vgSpec };
