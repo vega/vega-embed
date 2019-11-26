@@ -133,7 +133,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
       console.warn(
         `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[
           providedMode
-        ] || providedMode}.`
+        ] ?? providedMode}.`
       );
     }
 
@@ -165,7 +165,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     return 'vega';
   }
 
-  return providedMode || 'vega';
+  return providedMode ?? 'vega';
 }
 
 function isLoader(o?: LoaderOptions | Loader): o is Loader {
@@ -191,7 +191,7 @@ export default async function embed(
   const parsedSpec = isString(spec) ? JSON.parse(await loader.load(spec)) : spec;
 
   const usermetaOpts = await loadOpts(
-    (parsedSpec.usermeta && (parsedSpec.usermeta as any)['embedOptions']) || {},
+    (parsedSpec.usermeta && (parsedSpec.usermeta as any)['embedOptions']) ?? {},
     loader
   );
   const parsedOpts = await loadOpts(opts, loader);
@@ -205,7 +205,7 @@ export default async function embed(
 }
 
 async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions<never>> {
-  const config: Config = isString(opt.config) ? JSON.parse(await loader.load(opt.config)) : opt.config || {};
+  const config: Config = isString(opt.config) ? JSON.parse(await loader.load(opt.config)) : opt.config ?? {};
   const patch: PatchFunc | Operation[] = isString(opt.patch) ? JSON.parse(await loader.load(opt.patch)) : opt.patch;
   return {
     ...(opt as any),
@@ -222,12 +222,12 @@ async function _embed(
 ): Promise<Result> {
   const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config) : opts.config;
 
-  const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions || {});
+  const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions ?? {});
   const i18n = { ...I18N, ...opts.i18n };
 
-  const renderer = opts.renderer || 'canvas';
-  const logLevel = opts.logLevel || vega.Warn;
-  const downloadFileName = opts.downloadFileName || 'visualization';
+  const renderer = opts.renderer ?? 'canvas';
+  const logLevel = opts.logLevel ?? vega.Warn;
+  const downloadFileName = opts.downloadFileName ?? 'visualization';
 
   if (opts.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
@@ -237,7 +237,7 @@ async function _embed(
       style.id = ID;
       style.innerText =
         opts.defaultStyle === undefined || opts.defaultStyle === true
-          ? (embedStyle || '').toString()
+          ? (embedStyle ?? '').toString()
           : opts.defaultStyle;
 
       document.head.appendChild(style);
@@ -391,7 +391,7 @@ async function _embed(
       viewSourceLink.text = i18n.SOURCE_ACTION;
       viewSourceLink.href = '#';
       viewSourceLink.addEventListener('mousedown', function(this, e) {
-        viewSource(stringify(spec), opts.sourceHeader || '', opts.sourceFooter || '', mode);
+        viewSource(stringify(spec), opts.sourceHeader ?? '', opts.sourceFooter ?? '', mode);
         e.preventDefault();
       });
 
@@ -405,7 +405,7 @@ async function _embed(
       compileLink.text = i18n.COMPILED_ACTION;
       compileLink.href = '#';
       compileLink.addEventListener('mousedown', function(this, e) {
-        viewSource(stringify(vgSpec), opts.sourceHeader || '', opts.sourceFooter || '', 'vega');
+        viewSource(stringify(vgSpec), opts.sourceHeader ?? '', opts.sourceFooter ?? '', 'vega');
         e.preventDefault();
       });
 
@@ -414,7 +414,7 @@ async function _embed(
 
     // add 'Open in Vega Editor' action
     if (actions === true || actions.editor !== false) {
-      const editorUrl = opts.editorUrl || 'https://vega.github.io/editor/';
+      const editorUrl = opts.editorUrl ?? 'https://vega.github.io/editor/';
       const editorLink = document.createElement('a');
 
       editorLink.text = i18n.EDITOR_ACTION;

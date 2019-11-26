@@ -134,7 +134,7 @@ test('can patch compiled Vega signals', async () => {
   const compiledVgSpec = compile(vlSpec).spec;
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compiledVgSpec);
-  expect(result.vgSpec.signals).toEqual((compiledVgSpec.signals || []).concat({ name: 'mySignal' }));
+  expect(result.vgSpec.signals).toEqual((compiledVgSpec.signals ?? []).concat({ name: 'mySignal' }));
 });
 
 test('can patch compiled Vega with a function', async () => {
