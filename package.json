@@ -38,19 +38,19 @@
     "jest": "^24.9.0",
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.13.0",
-    "rollup": "^1.27.0",
+    "rollup": "^1.27.5",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "terser": "^4.4.0",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^24.2.0",
     "typescript": "~3.7.2",
     "vega": "~5.8.0",
     "vega-lite": "^4.0.0-beta.9",
     "vega-lite-dev-config": "^0.3.0"
   },
   "peerDependencies": {
-    "vega": "^5.8.0",
+    "vega": "^5.8.1",
     "vega-lite": "*"
   },
   "dependencies": {
