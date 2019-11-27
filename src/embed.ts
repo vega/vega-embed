@@ -106,6 +106,8 @@ export interface Result {
   spec: VisualizationSpec;
   /** The compiled and patched Vega specification. */
   vgSpec: VgSpec;
+  /** Removes references to unwanted behaviors and memory leaks. Calls Vega's `view.finalize`.  */
+  finalize: () => void;
 }
 
 function isTooltipHandler(h?: boolean | TooltipOptions | TooltipHandler): h is TooltipHandler {
@@ -440,15 +442,12 @@ async function _embed(
     }
   }
 
-  // Wrap view.finalize to also remove event listeners from Vega-Embed.
-  if (documentClickHandler) {
-    const originalFinalize = view.finalize.bind(view);
-    view.finalize = () => {
-      document.removeEventListener('click', documentClickHandler!);
-
-      originalFinalize();
-    };
+  function finalize() {
+    if (documentClickHandler) {
+      document.removeEventListener('click', documentClickHandler);
+    }
+    view.finalize();
   }
 
-  return { view, spec, vgSpec };
+  return { view, spec, vgSpec, finalize };
 }

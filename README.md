@@ -59,7 +59,16 @@ When using a `script` tag, the default export of Vega-Embed is a wrapper functio
 <b>embed</b>(<i>el</i>, <i>spec</i>[, <i>opt</i>])
 [<>](https://github.com/vega/vega-embed/blob/master/src/embed.ts "Source")
 
-Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to the instantiated [Vega `View` instance](https://github.com/vega/vega-view#vega-view) and a copy of the parsed JSON Vega spec. The `embed` function accepts the following arguments:
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to a result object. The result object contains:
+
+| Property| Type        | Description    |
+| :------ | :---------- | :------------- |
+| `view`  |  String     | The instantiated [Vega `View` instance](https://github.com/vega/vega-view#vega-view). |
+| `spec`  | Object      | A copy of the parsed JSON Vega or Vega-Lite spec. |
+| `vgSpec` | Object     | The compiled Vega spec. |
+| `finalize` | Function | A method to prepare embed to be removed. To prevent unwanted behaviors and memory leaks, this method unregisters any timers and removes any event listeners the visualization has registered on external DOM elements. Applications should invoke this method when a Embed or the View instance is no longer needed. This method calls [`view.finalize`](https://vega.github.io/vega/docs/api/view/#view_finalize). |
+
+The `embed` function accepts the following arguments:
 
 | Property| Type       | Description    |
 | :------ | :--------- | :------------- |

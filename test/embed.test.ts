@@ -17,7 +17,9 @@ test('embed returns result', async () => {
   const result = await embed(el, vlSpec);
   expect(result).toBeDefined();
   expect(result.spec).toBeDefined();
+  expect(result.vgSpec).toBeDefined();
   expect(result.view).toBeDefined();
+  expect(result.finalize).toBeDefined();
 });
 
 test('can change renderer to SVG', async () => {
