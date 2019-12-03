@@ -6032,9 +6032,9 @@ rollup-pluginutils@^2.5.0, rollup-pluginutils@^2.8.1:
     estree-walker "^0.6.1"
 
 rollup@^1.27.5:
-  version "1.27.5"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.27.5.tgz#d100fb0ffd8353575cb2057152547b9abfddfe59"
-  integrity sha512-8rfVdzuTg2kt8ObD9LNJpEwUN7B6lsl3sHc5fddtgICpLjpYeSf4m2+RftBzcCaBTMi1iYX3Ez8zFT4Gj2nJjg==
+  version "1.27.8"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.27.8.tgz#94288a957af9f4c2380b73a17494d87705997d0f"
+  integrity sha512-EVoEV5rAWl+5clnGznt1KY8PeVkzVQh/R0d2s3gHEkN7gfoyC4JmvIVuCtPbYE8NM5Ep/g+nAmvKXBjzaqTsHA==
   dependencies:
     "@types/estree" "*"
     "@types/node" "*"
@@ -7257,7 +7257,7 @@ vega-lite-dev-config@^0.3.0:
     prettier "^1.18.2"
     ts-jest "^24.1.0"
 
-vega-lite@^4.0.0-beta.9:
+vega-lite@^4.0.0-beta.12:
   version "4.0.0-beta.12"
   resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.12.tgz#0426c1439fc7228caf3770dab0fc35223a0dcbcc"
   integrity sha512-a99NDXs+orRc3IXC0cHTt+dngh8zly5xjsILQgoCKw0NSDHjKVrUG6zuziwceq00ulk/umyxMAAAUpb+UdVhhQ==
@@ -7452,7 +7452,7 @@ vega-wordcloud@4.0.3:
     vega-statistics "^1.6.2"
     vega-util "^1.12.0"
 
-vega@~5.8.0:
+vega@~5.8.1:
   version "5.8.1"
   resolved "https://registry.yarnpkg.com/vega/-/vega-5.8.1.tgz#86234c657958a2e229fbb1c47f82e9e07866ad18"
   integrity sha512-+3FN66ROsZdjg5e8ktyoXfdhxsQSCcGgr8vVTbJydqqkt5Qqp9gTDA5j7qutBk0d5/i5rIzN89XYGLRvBXYU0A==
