@@ -6782,9 +6782,9 @@ term-size@^2.1.0:
   integrity sha512-I42EWhJ+2aeNQawGx1VtpO0DFI9YcfuvAMNIdKyf/6sRbHJ4P+ZQ/zIT87tE+ln1ymAGcCJds4dolfSAS0AcNg==
 
 terser@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.4.0.tgz#22c46b4817cf4c9565434bfe6ad47336af259ac3"
-  integrity sha512-oDG16n2WKm27JO8h4y/w3iqBGAOSCtq7k8dRmrn4Wf9NouL0b2WpMHGChFGZq4nFAQy1FsNJrVQHfurXOSTmOA==
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.4.2.tgz#448fffad0245f4c8a277ce89788b458bfd7706e8"
+  integrity sha512-Uufrsvhj9O1ikwgITGsZ5EZS6qPokUOkCegS7fYOdGTv+OA90vndUbU6PEjr5ePqHfNUbGyMO7xyIZv2MhsALQ==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
@@ -7257,7 +7257,7 @@ vega-lite-dev-config@^0.3.0:
     prettier "^1.18.2"
     ts-jest "^24.1.0"
 
-vega-lite@^4.0.0-beta.9:
+vega-lite@^4.0.0-beta.12:
   version "4.0.0-beta.12"
   resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.0.0-beta.12.tgz#0426c1439fc7228caf3770dab0fc35223a0dcbcc"
   integrity sha512-a99NDXs+orRc3IXC0cHTt+dngh8zly5xjsILQgoCKw0NSDHjKVrUG6zuziwceq00ulk/umyxMAAAUpb+UdVhhQ==
@@ -7452,7 +7452,7 @@ vega-wordcloud@4.0.3:
     vega-statistics "^1.6.2"
     vega-util "^1.12.0"
 
-vega@~5.8.0:
+vega@~5.8.1:
   version "5.8.1"
   resolved "https://registry.yarnpkg.com/vega/-/vega-5.8.1.tgz#86234c657958a2e229fbb1c47f82e9e07866ad18"
   integrity sha512-+3FN66ROsZdjg5e8ktyoXfdhxsQSCcGgr8vVTbJydqqkt5Qqp9gTDA5j7qutBk0d5/i5rIzN89XYGLRvBXYU0A==
