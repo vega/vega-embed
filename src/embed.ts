@@ -376,16 +376,10 @@ async function _embed(
           exportLink.href = '#';
           exportLink.target = '_blank';
           exportLink.download = `${downloadFileName}.${ext}`;
-          exportLink.addEventListener('mousedown', function(this, e) {
-            view
-              .toImageURL(ext, opts.scaleFactor)
-              .then(url => {
-                this.href = url;
-              })
-              .catch(error => {
-                throw error;
-              });
+          exportLink.addEventListener('mousedown', async function(this, e) {
             e.preventDefault();
+            const url = await view.toImageURL(ext, opts.scaleFactor);
+            this.href = url;
           });
 
           ctrl.append(exportLink);
