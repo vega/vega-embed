@@ -21,7 +21,7 @@ export let vegaLite = vegaLiteImport;
 
 // For backwards compatibility with Vega-Lite before v4.
 const w = (typeof window !== 'undefined' ? window : undefined) as any;
-if (vegaLite === undefined && w !== undefined && w['vl'] && w['vl'].compile) {
+if (vegaLite === undefined && w.?['vl'].?compile) {
   vegaLite = w['vl'];
 }
 
