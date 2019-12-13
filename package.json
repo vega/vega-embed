@@ -34,11 +34,11 @@
     "@types/json-stable-stringify": "^1.0.32",
     "@types/semver": "^6.2.0",
     "browser-sync": "^2.26.7",
-    "concurrently": "^5.0.0",
+    "concurrently": "^5.0.1",
     "jest": "^24.9.0",
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.13.0",
-    "rollup": "^1.27.8",
+    "rollup": "^1.27.12",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
@@ -58,7 +58,7 @@
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^6.3.0",
     "vega-schema-url-parser": "^1.1.0",
-    "vega-themes": "^2.5.0",
+    "vega-themes": "^2.6.0",
     "vega-tooltip": "^0.20.0"
   },
   "scripts": {
