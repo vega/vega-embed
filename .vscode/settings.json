@@ -7,6 +7,8 @@
   "files.insertFinalNewline": true,
   "typescript.referencesCodeLens.enabled": true,
   "eslint.validate": ["typescript", "typescriptreact"],
-  "eslint.autoFixOnSave": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
