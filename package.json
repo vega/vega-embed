@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "6.2.1",
+  "version": "6.2.2",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
@@ -38,16 +38,16 @@
     "@types/semver": "^6.2.0",
     "browser-sync": "^2.26.7",
     "concurrently": "^5.0.2",
-    "jest-canvas-mock": "^2.2.0",
     "jest": "^24.9.0",
+    "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.13.1",
     "rollup": "^1.29.1",
     "terser": "^4.6.3",
     "ts-jest": "^24.3.0",
     "typescript": "~3.7.5",
-    "vega-lite-dev-config": "^0.3.1",
+    "vega": "^5.9.0",
     "vega-lite": "^4.0.0",
-    "vega": "^5.9.0"
+    "vega-lite-dev-config": "^0.3.1"
   },
   "peerDependencies": {
     "vega": "^5.8.0",
