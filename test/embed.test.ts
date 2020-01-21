@@ -154,7 +154,9 @@ test('guessMode from Vega schema', () => {
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/4.json' }, 'invalid' as Mode)).toBe('vega-lite');
+  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/v4.json' }, 'invalid' as Mode)).toBe(
+    'vega-lite'
+  );
 });
 
 test('guessMode from Vega-Lite spec', () => {
