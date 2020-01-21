@@ -262,7 +262,7 @@ async function _embed(
 
   const div = typeof el === 'string' ? document.querySelector(el) : el;
   if (!div) {
-    throw Error('${el} does not exist');
+    throw Error(`${el} does not exist`);
   }
 
   div.classList.add('vega-embed');
