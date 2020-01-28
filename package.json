@@ -33,7 +33,7 @@
     "@rollup/plugin-commonjs": "11.0.1",
     "@rollup/plugin-json": "^4.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^25.1.0",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/semver": "^6.2.0",
     "browser-sync": "^2.26.7",
