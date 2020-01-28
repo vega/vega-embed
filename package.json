@@ -35,7 +35,7 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@types/jest": "^25.1.0",
     "@types/json-stable-stringify": "^1.0.32",
-    "@types/semver": "^6.2.0",
+    "@types/semver": "^7.1.0",
     "browser-sync": "^2.26.7",
     "concurrently": "^5.0.2",
     "jest": "^25.1.0",
