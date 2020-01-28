@@ -56,7 +56,7 @@
   "dependencies": {
     "fast-json-patch": "^3.0.0-1",
     "json-stringify-pretty-compact": "^2.0.0",
-    "semver": "^6.3.0",
+    "semver": "^7.1.1",
     "vega-schema-url-parser": "^1.1.0",
     "vega-themes": "^2.6.0",
     "vega-tooltip": "^0.20.0"
