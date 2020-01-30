@@ -1,6 +1,6 @@
 import { applyPatch, Operation } from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
-import { satisfies } from 'semver';
+import { satisfies } from 'semver/preload';
 import * as vegaImport from 'vega';
 import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega';
 import * as vegaLiteImport from 'vega-lite';
