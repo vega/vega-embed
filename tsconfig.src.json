@@ -13,7 +13,6 @@
     "importHelpers": true,
     "resolveJsonModule": true,
     "lib": ["es6", "dom"],
-    "typeRoots": ["./node_modules/@types", "./node_modules/vega-lite/typings"],
     "incremental": true
   },
   "files": ["src/index.ts"]
