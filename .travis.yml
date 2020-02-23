@@ -10,7 +10,7 @@ script:
 cache: yarn
 deploy:
   provider: npm
-  skip_cleanup: true
+  edge: true
   email: domoritz@gmail.com
   on:
     tags: true
