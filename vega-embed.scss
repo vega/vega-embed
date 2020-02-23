@@ -54,6 +54,7 @@
 
   .vega-actions {
     position: absolute;
+    z-index: 1001;
     top: 35px;
     right: -9px;
     display: flex;
@@ -67,6 +68,7 @@
     animation-duration: 0.15s;
     animation-name: scale-in;
     animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
+    text-align: left; // only to make sure this is not a a different value
 
     a {
       padding: 8px 16px;
