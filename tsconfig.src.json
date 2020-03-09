@@ -4,12 +4,15 @@
     "target": "es6",
     "module": "es2015",
     "moduleResolution": "node",
-    "esModuleInterop": true,
+
     "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    "esModuleInterop": true,
     "strict": true,
     "preserveConstEnums": true,
     "noEmitOnError": true,
-    "sourceMap": true,
     "importHelpers": true,
     "resolveJsonModule": true,
     "lib": ["es6", "dom"],

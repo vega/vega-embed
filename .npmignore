@@ -3,8 +3,7 @@
 .eslintignore
 .eslintrc.js
 .gitignore
-.prettierignore
-.prettierrc.json
+.prettier*
 .travis.yml
 .vscode
 *.tsbuildinfo
@@ -16,3 +15,5 @@ rollup.config.js
 screenshot.png
 test
 test-*.html
+tsconfig.json
+tsconfig.src.json
