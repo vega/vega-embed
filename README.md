@@ -19,13 +19,13 @@
 
 ## Basic Example
 
-You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](https://www.jsdelivr.com/package/npm/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://www.jsdelivr.com/package/npm/vega), [Vega-Lite](https://www.jsdelivr.com/package/npm/vega-lite), and [Vega-Embed](https://www.jsdelivr.com/package/npm/vega-embed) versions. We recommend that you specify the major versions (`vega@5`, `vega-lite@3`, `vega-embed@4`).
+You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](https://www.jsdelivr.com/package/npm/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://www.jsdelivr.com/package/npm/vega), [Vega-Lite](https://www.jsdelivr.com/package/npm/vega-lite), and [Vega-Embed](https://www.jsdelivr.com/package/npm/vega-embed) versions. We recommend that you specify the major versions (`vega@5`, `vega-lite@4`, `vega-embed@4`).
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+  <!-- Import Vega 5 & Vega-Lite 4 (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@[VERSION]"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@[VERSION]"></script>
   <!-- Import vega-embed -->
