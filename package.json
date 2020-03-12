@@ -46,7 +46,7 @@
     "ts-jest": "^25.2.1",
     "typescript": "~3.8.2",
     "vega": "^5.9.0",
-    "vega-lite": "4.1.1",
+    "vega-lite": "4.6.0",
     "vega-lite-dev-config": "^0.4.3"
   },
   "peerDependencies": {
