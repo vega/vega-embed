@@ -330,7 +330,7 @@ async function _embed(
     if (opts.height) {
       view.height(opts.height);
     }
-    if (opts.padding) {
+    if (opts.padding || opts.padding === 0) {
       view.padding(opts.padding);
     }
   }
