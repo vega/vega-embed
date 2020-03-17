@@ -6797,10 +6797,10 @@ terminal-link@^2.0.0:
     ansi-escapes "^4.2.1"
     supports-hyperlinks "^2.0.0"
 
-terser@^4.6.6:
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.6.6.tgz#da2382e6cafbdf86205e82fb9a115bd664d54863"
-  integrity sha512-4lYPyeNmstjIIESr/ysHg2vUPRGf2tzF9z2yYwnowXVuVzLEamPN1Gfrz7f8I9uEPuHcbFlW4PLIAsJoxXyJ1g==
+terser@^4.6.7:
+  version "4.6.7"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.6.7.tgz#478d7f9394ec1907f0e488c5f6a6a9a2bad55e72"
+  integrity sha512-fmr7M1f7DBly5cX2+rFDvmGBAaaZyPrHYK4mMdHEDAdNTqXSZgSOfqsfGq2HqPGT/1V0foZZuCZFx8CHKgAk3g==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
@@ -7309,7 +7309,7 @@ vega-lite-dev-config@^0.4.3:
     prettier "^1.19.1"
     ts-jest "^25.2.0"
 
-vega-lite@4.7.0:
+vega-lite@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.7.0.tgz#a5afbdcef8ef6662f1464f2f6fef1aed0fdcd6c4"
   integrity sha512-vKWVP5tgRpdUzQYulqJbNBBF6zn0H1f6bCyVIJA9MLVBFqSLLS8mq7tpC5gXorShJz/yTgZhwWHu6knuz15E8g==
@@ -7433,10 +7433,10 @@ vega-time@^1.0.0, vega-time@~1.0.0:
     d3-time-format "^2.2.1"
     vega-util "^1.12.0"
 
-vega-tooltip@^0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.21.0.tgz#04bf26a7f0495f6f391dc5c75cafe309c6288108"
-  integrity sha512-PQBc/kHVd/6KRuOFn3ZndWEpeXysgYNgrS4x6+4XS12laIhcy1np+sz0U3POyuQld8DnC/MTok8pKH96S9x1hQ==
+vega-tooltip@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.22.0.tgz#b87175f6942d6fe8ac083359db0dc1fe30c8afc8"
+  integrity sha512-H5rK3wpjmMU2jsRqcSfVsqD9PDQkbwQp1daAmr7lBVzb33dgw3vGZAgOTCI9OwNSi2xV2Ylv0QRlUq2f7ojFVQ==
   dependencies:
     vega-util "^1.13.0"
 
@@ -7505,7 +7505,7 @@ vega-wordcloud@~4.0.4:
     vega-statistics "^1.7.1"
     vega-util "^1.12.1"
 
-vega@^5.9.0:
+vega@^5.10.0:
   version "5.10.0"
   resolved "https://registry.yarnpkg.com/vega/-/vega-5.10.0.tgz#9b5a823158a8a3b6339c72a028b79e899acb1865"
   integrity sha512-DGmw+9GRIbdM5xQK8Sjt87GARNh7mJWrM+O3dpZ7bUkYA47ieaZb/IWPnQH9GMSbPY2+QRU0fiXIm7o92im5Vw==

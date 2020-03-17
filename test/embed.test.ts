@@ -189,6 +189,15 @@ test('can set locale', async () => {
   });
 });
 
+test('can set tooltip theme', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, {
+    tooltip: {
+      theme: 'dark'
+    }
+  });
+});
+
 test('can change i18n strings', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, {
@@ -213,7 +222,7 @@ test('can set hover arguments', async () => {
   const el = document.createElement('div');
 
   // Hover disabled by default
-  await embed(el, vlSpec, {});
+  await embed(el, vlSpec);
   expect(hoverSpy).not.toHaveBeenCalled();
   hoverSpy.mockReset();
 
@@ -224,7 +233,7 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   // Hover enabled by default
-  await embed(el, vgSpec, {});
+  await embed(el, vgSpec);
   expect(hoverSpy).toHaveBeenCalledWith(undefined, undefined);
   hoverSpy.mockReset();
 
