@@ -324,13 +324,13 @@ async function _embed(
   }
 
   if (opts) {
-    if (opts.width) {
+    if (opts.width != null) {
       view.width(opts.width);
     }
-    if (opts.height) {
+    if (opts.height != null) {
       view.height(opts.height);
     }
-    if (opts.padding) {
+    if (opts.padding != null) {
       view.padding(opts.padding);
     }
   }
