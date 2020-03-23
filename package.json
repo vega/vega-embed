@@ -41,13 +41,13 @@
     "jest": "^25.1.0",
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.13.1",
-    "rollup": "^2.0.6",
+    "rollup": "^2.1.0",
     "terser": "^4.6.7",
     "ts-jest": "^25.2.1",
     "typescript": "~3.8.3",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.4.3"
+    "vega-lite-dev-config": "^0.5.0"
   },
   "peerDependencies": {
     "vega": "^5.8.0",
