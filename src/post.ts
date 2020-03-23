@@ -3,7 +3,7 @@ import { MessageData } from './types';
 /**
  * Open editor url in a new window, and pass a message.
  */
-export default function(window: Window, url: string, data: MessageData) {
+export default function (window: Window, url: string, data: MessageData) {
   const editor = window.open(url)!;
   const wait = 10000;
   const step = 250;

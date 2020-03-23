@@ -133,9 +133,9 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
       console.warn(
-        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[
-          providedMode
-        ] ?? providedMode}.`
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
+          NAMES[providedMode] ?? providedMode
+        }.`
       );
     }
 
@@ -376,7 +376,7 @@ async function _embed(
           exportLink.href = '#';
           exportLink.target = '_blank';
           exportLink.download = `${downloadFileName}.${ext}`;
-          exportLink.addEventListener('mousedown', async function(this, e) {
+          exportLink.addEventListener('mousedown', async function (this, e) {
             e.preventDefault();
             const url = await view.toImageURL(ext, opts.scaleFactor);
             this.href = url;
@@ -393,7 +393,7 @@ async function _embed(
 
       viewSourceLink.text = i18n.SOURCE_ACTION;
       viewSourceLink.href = '#';
-      viewSourceLink.addEventListener('mousedown', function(this, e) {
+      viewSourceLink.addEventListener('mousedown', function (this, e) {
         viewSource(stringify(spec), opts.sourceHeader ?? '', opts.sourceFooter ?? '', mode);
         e.preventDefault();
       });
@@ -407,7 +407,7 @@ async function _embed(
 
       compileLink.text = i18n.COMPILED_ACTION;
       compileLink.href = '#';
-      compileLink.addEventListener('mousedown', function(this, e) {
+      compileLink.addEventListener('mousedown', function (this, e) {
         viewSource(stringify(vgSpec), opts.sourceHeader ?? '', opts.sourceFooter ?? '', 'vega');
         e.preventDefault();
       });
@@ -422,7 +422,7 @@ async function _embed(
 
       editorLink.text = i18n.EDITOR_ACTION;
       editorLink.href = '#';
-      editorLink.addEventListener('mousedown', function(this, e) {
+      editorLink.addEventListener('mousedown', function (this, e) {
         post(window, editorUrl, {
           config: config as Config,
           mode,
