@@ -7460,9 +7460,9 @@ vega-lite-dev-config@^0.5.0:
     ts-jest "^25.3.0"
 
 vega-lite@^4.7.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.9.0.tgz#6f485b2b336c889dee2f9a92a1a4cea6be2c44bc"
-  integrity sha512-a448bm78St9lg4WS8ZChVMUKLd/tppsxh1sLFKDbBTfRSrx0PjJukPOjRuabaFBn9i17EBwlIlX/RAVtE1quJg==
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-4.10.1.tgz#18717daa263937f434cd0b6fd82f14d829c34c17"
+  integrity sha512-drEThXhlIQZBIWhM2X5Yqh59LdZktn+62NDcO+dUDe/RgkvggmzBLF4cmv+L+vhmDnQ9rVIAd/ryLcny8Ipjhw==
   dependencies:
     "@types/clone" "~0.1.30"
     "@types/fast-json-stable-stringify" "^2.0.0"
