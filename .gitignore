@@ -3,9 +3,11 @@
 .eslintrc.js
 .prettierignore
 .rpt2_cache
+babel.config.js
 beemo-error.log
 bower_components
 build
+build-es5
 node_modules
 npm-debug.log*
 package-lock.json
