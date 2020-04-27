@@ -22,7 +22,7 @@ const wrapper: Wrapper = (...args: any[]): any => {
 };
 
 (wrapper as any).vegaLite = vegaLite;
-(wrapper as any).vl = vegaLite; // backwards compatbility
+(wrapper as any).vl = vegaLite; // backwards compatibility
 (wrapper as any).container = container;
 (wrapper as any).embed = embed;
 (wrapper as any).vega = vega;
