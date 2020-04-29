@@ -24,7 +24,7 @@ export default function (window: Window, url: string, data: MessageData) {
     if (count <= 0) {
       return;
     }
-    editor.postMessage(data, '*');
+    editor.postMessage(data, editor.origin);
     setTimeout(send, step);
     count -= 1;
   }
