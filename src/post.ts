@@ -7,6 +7,7 @@ export default function (window: Window, url: string, data: MessageData) {
   const editor = window.open(url)!;
   const wait = 10000;
   const step = 250;
+  const { origin } = new URL(url);
   // eslint-disable-next-line no-bitwise
   let count = ~~(wait / step);
 
@@ -24,7 +25,7 @@ export default function (window: Window, url: string, data: MessageData) {
     if (count <= 0) {
       return;
     }
-    editor.postMessage(data, '*');
+    editor.postMessage(data, origin);
     setTimeout(send, step);
     count -= 1;
   }
