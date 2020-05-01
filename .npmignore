@@ -2,9 +2,9 @@
 .editorconfig
 .eslintignore
 .eslintrc.js
+.github
 .gitignore
 .prettier*
-.travis.yml
 .vscode
 *.tsbuildinfo
 babel.config.js
