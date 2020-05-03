@@ -376,7 +376,8 @@ async function _embed(
           exportLink.href = '#';
           exportLink.target = '_blank';
           exportLink.download = `${downloadFileName}.${ext}`;
-          exportLink.addEventListener('click', async function (this, e) {
+          // add link on mousedown so that it's correct when the click happens
+          exportLink.addEventListener('mousedown', async function (this, e) {
             e.preventDefault();
             const url = await view.toImageURL(ext, opts.scaleFactor);
             this.href = url;
