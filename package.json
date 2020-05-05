@@ -37,16 +37,16 @@
     "@types/semver": "^7.1.0",
     "browser-sync": "^2.26.7",
     "concurrently": "^5.2.0",
-    "jest": "^25.5.1",
+    "jest": "^26.0.1",
     "jest-canvas-mock": "^2.2.0",
-    "node-sass": "^4.14.0",
-    "rollup": "^2.7.5",
-    "terser": "^4.6.12",
+    "node-sass": "^4.14.1",
+    "rollup": "^2.7.6",
+    "terser": "^4.6.13",
     "ts-jest": "^25.4.0",
     "typescript": "~3.8.3",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.7.1"
+    "vega-lite-dev-config": "^0.8.0"
   },
   "peerDependencies": {
     "vega": "^5.8.0",

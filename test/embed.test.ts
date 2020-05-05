@@ -54,7 +54,7 @@ test('can disable actions', async () => {
   expect(el.childElementCount).toBe(2);
 });
 
-test('can disable actions', async () => {
+test('can disable specific actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: false } });
   expect(el.children[2].children[1].childElementCount).toBe(3);
@@ -103,7 +103,7 @@ test('does not set has-actions if actions are not specified', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: false });
   expect(el.classList).toHaveLength(1);
-  expect(el.querySelector('.has-actions')).toBe(null);
+  expect(el.querySelector('.has-actions')).toBeNull();
 });
 
 test('can access compiled Vega', async () => {
@@ -181,21 +181,23 @@ test('guessMode from Vega spec', () => {
 
 test('can set locale', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, {
+  const result = await embed(el, vlSpec, {
     formatLocale: {
       decimal: ',',
       thousands: '.'
     }
   });
+  expect(result).toBeTruthy();
 });
 
 test('can set tooltip theme', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, {
+  const result = await embed(el, vlSpec, {
     tooltip: {
       theme: 'dark'
     }
   });
+  expect(result).toBeTruthy();
 });
 
 test('can change i18n strings', async () => {

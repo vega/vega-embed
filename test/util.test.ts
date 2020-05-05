@@ -3,11 +3,11 @@ import { isURL } from '../src/util';
 import { mergeDeep } from '../src/util';
 
 test('isURL detects URL', () => {
-  expect(isURL('https://vega.github.io/vega/examples/global-development.vg.json'));
-  expect(isURL('https://vega.github.io/vega/examples/global-development.vg.json'));
-  expect(isURL('//vega.github.io/vega/examples/global-development.vg.json'));
+  expect(isURL('https://vega.github.io/vega/examples/global-development.vg.json')).toBeTruthy();
+  expect(isURL('https://vega.github.io/vega/examples/global-development.vg.json')).toBeTruthy();
+  expect(isURL('//vega.github.io/vega/examples/global-development.vg.json')).toBeTruthy();
 
-  expect(!isURL('#vis'));
+  expect(isURL('#vis')).toBeFalsy();
 });
 
 test('mergeDeep', () => {
