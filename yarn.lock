@@ -7598,9 +7598,9 @@ vega-hierarchy@~4.0.5:
     vega-util "^1.13.2"
 
 vega-lite-dev-config@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.10.0.tgz#6a5883ba8a94f6733831298499e3f37b3d9b4083"
-  integrity sha512-Z2q7qKzaqhehvcM6EGA6kjwyNj4tsgvZnr57jhWUgO1wCt2UfwBv9x5cx6ue7apLV0NnNzFSbI7DUeydV7srMA==
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.10.3.tgz#083ba99b6d0d8c66ed7d29b0fb6a0240d122d488"
+  integrity sha512-N+cu3tDFW/85CYHKCu+ibVeXXrG7H7T4+vJxwkqefLT0CFPzZEyvNta5H/WL6JJo4o/Hy4dUjl2pFG+W54/atg==
   dependencies:
     "@babel/cli" "^7.8.4"
     "@babel/core" "^7.9.6"
