@@ -1,6 +1,6 @@
 {
   "name": "vega-embed",
-  "version": "6.7.1",
+  "version": "6.8.0",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
     "vega",
