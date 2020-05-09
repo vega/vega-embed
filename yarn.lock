@@ -7751,12 +7751,12 @@ vega-time@^1.1.0, vega-time@~1.1.0:
     d3-time-format "^2.2.3"
     vega-util "^1.13.2"
 
-vega-tooltip@^0.22.1:
-  version "0.22.1"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.22.1.tgz#231d6c8a105b6ac531bf8275cd0950c30373e558"
-  integrity sha512-mPmzxwvi6+2ZgbZ/+mNC7XbSu5I6Ckon8zdgUfH9neb+vV7CKlV/FYypMdVN/9iDMFUqGzybYdqNOiSPPIxFEQ==
+vega-tooltip@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.23.0.tgz#16f7cd4ff25190ffcab611d95a6b4402f6cc8e80"
+  integrity sha512-DuwwV1qgvvSbM/Zj+SQ627PW7paOdrfEFHlZ8ntH8xjcbnclDol1Lnviu/U7ImaGrLMEx78MeY1XLnuKTjVbdQ==
   dependencies:
-    vega-util "^1.13.1"
+    vega-util "^1.13.2"
 
 vega-transforms@~4.7.2:
   version "4.7.2"
