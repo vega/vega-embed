@@ -36,7 +36,12 @@ jobs:
         run: yarn --frozen-lockfile
 
       - run: yarn lint
-      - run: npm test
-        env:
-          CI: true
       - run: yarn build
+
+      - name: Test coverage
+        run: yarn jest test/ --collectCoverage=true
+
+      - name: Upload coverage to Codecov
+        run: yarn codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
