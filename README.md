@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/vega-embed.svg)](https://www.npmjs.com/package/vega-embed)
 [![](https://data.jsdelivr.com/v1/package/npm/vega-embed/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vega-embed)
 [![Build Status](https://github.com/vega/vega-embed/workflows/Test/badge.svg)](https://github.com/vega/vega-embed/actions)
+[![codecov](https://codecov.io/gh/vega/vega-embed/branch/master/graph/badge.svg)](https://codecov.io/gh/vega/vega-embed)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=rounded)](https://github.com/prettier/prettier)
 
 [Vega-Embed](http://github.com/vega/vega-embed) makes it easy to embed interactive [Vega](https://vega.github.io/vega) and [Vega-Lite](https://vega.github.io/vega-lite) views into web pages. With Vega Embed, you can:
