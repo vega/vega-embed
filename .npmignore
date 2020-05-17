@@ -9,6 +9,7 @@
 *.tsbuildinfo
 babel.config.js
 build-style.sh
+coverage/
 embed.gif
 node_modules
 prettier.config.js

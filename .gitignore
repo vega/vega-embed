@@ -1,3 +1,4 @@
+
 .DS_Store
 .eslintignore
 .eslintrc.js
@@ -8,6 +9,7 @@ beemo-error.log
 bower_components
 build
 build-es5
+coverage/
 node_modules
 npm-debug.log*
 package-lock.json
