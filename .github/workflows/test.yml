@@ -27,16 +27,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Setup Node ${{ matrix.node-version }}
+      - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
 
       - name: Install Node dependencies
         run: yarn --frozen-lockfile
 
       - run: yarn lint
-      - run: npm test
-        env:
-          CI: true
       - run: yarn build
+
+      - name: Test coverage
+        run: yarn jest test/ --collectCoverage=true
+
+      - name: Upload coverage to Codecov
+        run: yarn codecov
+        if: ${{ matrix.node == 14 }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
