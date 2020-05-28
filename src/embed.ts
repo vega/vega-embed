@@ -2,7 +2,16 @@ import { applyPatch, Operation } from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega';
-import { EncodeEntryName, Loader, LoaderOptions, Renderers, Spec as VgSpec, TooltipHandler, View } from 'vega';
+import {
+  EncodeEntryName,
+  Loader,
+  LoaderOptions,
+  Renderers,
+  Spec as VgSpec,
+  TooltipHandler,
+  View,
+  Config as VgConfig
+} from 'vega';
 import * as vegaLiteImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -71,8 +80,8 @@ export interface EmbedOptions<S = string> {
   hover?: boolean | Hover;
   i18n?: Partial<typeof I18N>;
   downloadFileName?: string;
-  formatLocale?: object;
-  timeFormatLocale?: object;
+  formatLocale?: Record<string, unknown>;
+  timeFormatLocale?: Record<string, unknown>;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -291,7 +300,7 @@ async function _embed(
 
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.
   // This call may throw an Error if parsing fails.
-  const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : config);
+  const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : (config as VgConfig));
 
   const view = new vega.View(runtime, {
     loader,
