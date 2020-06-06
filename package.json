@@ -30,7 +30,7 @@
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "12.0.0",
+    "@rollup/plugin-commonjs": "13.0.0",
     "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@types/jest": "^25.2.3",
