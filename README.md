@@ -18,7 +18,9 @@
 
 <img src="embed.gif" width="500">
 
-## Basic Example
+## Basic Examples
+
+### Directly in the Browser
 
 You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](https://www.jsdelivr.com/package/npm/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://www.jsdelivr.com/package/npm/vega), [Vega-Lite](https://www.jsdelivr.com/package/npm/vega-lite), and [Vega-Embed](https://www.jsdelivr.com/package/npm/vega-embed) versions. We recommend that you specify the major versions (`vega@5`, `vega-lite@4`, `vega-embed@6`).
 
@@ -46,11 +48,27 @@ You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](
 </html>
 ```
 
-Look at an example online at [Vega-Embed Block](https://bl.ocks.org/domoritz/455e1c7872c4b38a58b90df0c3d7b1b9).
+Look at the example online in the [Vega-Embed Block](https://bl.ocks.org/domoritz/455e1c7872c4b38a58b90df0c3d7b1b9).
 
-## Use Vega-Embed in Observable
+### JavaScript or TypeScript
 
-You can require embed with `embed = require('vega-embed@4')` and then embed a chart with `viewof view = embed(...)`. Check the [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed) for more details.
+The basic example below needs to be transpiled and bundled (using rollup, webpack, etc..) before it can be loaded in a browser.
+
+```ts
+import embed from 'vega-embed';
+
+const spec = {
+  ...
+}
+
+const result = await embed('#vis', spec);
+
+console.log(result.view);
+```
+
+### In Observable
+
+You can require embed with `embed = require('vega-embed@6')` and then embed a chart with `viewof view = embed(...)`. Check the [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed) for more details.
 
 ## API Reference
 
@@ -98,7 +116,9 @@ You can configure Vega Embed with an options object. You can pass options as an 
 var opt = {
   mode: ...,
 
+  config: ...,
   theme: ...,
+
   defaultStyle: ...,
 
   // view config options
@@ -123,8 +143,6 @@ var opt = {
 
   scaleFactor: ...,
 
-  config: ...,
-
   editorUrl: ...,
 
   sourceHeader: ...,
@@ -140,6 +158,8 @@ var opt = {
   formatLocale: ...,
   timeFormatLocale: ...,
 
+  ast: ...,
+
   i18n: {
     COMPILED_ACTION: ...,
     EDITOR_ACTION: ...,
@@ -153,6 +173,7 @@ var opt = {
 | Property | Type             | Description    |
 | :------- | :--------------- | :------------- |
 | `mode`        | String        | If specified, tells Vega-Embed to parse the spec as `vega` or `vega-lite`. Vega-Embed will parse the [`$schema` url](https://github.com/vega/schema) if the mode is not specified. Vega-Embed will default to `vega` if neither `mode`, nor `$schema` are specified. |
+| `config`      | String / Object | _String_ : A URL string from which to load a [Vega](https://vega.github.io/vega/docs/config/)/[Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) or [Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) configuration file. This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. <br> _Object_ : A Vega/Vega-Lite configuration as a parsed JSON object to override the default configuration options. |
 | `theme`       | String        | If specified, tells Vega-Embed use the theme from [Vega Themes](https://github.com/vega/vega-themes). **Experimental: we may update themes with minor version updates of Vega-Embed.** |
 | `defaultStyle` | Boolean or String | If set to `true` (default), the embed actions are shown in a menu. Set to `false` to use simple links. Provide a string to set the style sheet. |
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. |
@@ -165,7 +186,6 @@ var opt = {
 | `padding`     | Object        | Sets the view padding in pixels. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_padding) for details. |
 | `actions`     | Boolean / Object | Determines if action links ("Export as PNG/SVG", "View Source", "View Vega" (only for Vega-Lite), "Open in Vega Editor") are included with the embedded view. If the value is `true`, all action links will be shown and none if the value is `false`.  This property can take a key-value mapping object that maps keys (`export`, `source`, `compiled`, `editor`) to boolean values for determining if each action link should be shown.  By default, `export`, `source`, and `editor` are true and `compiled` is false. These defaults can be overridden: for example, if `actions` is `{export: false, source: true}`, the embedded visualization will have two links – "View Source" and "Open in Vega Editor".  The `export` property can take a key-value mapping object that maps keys (svg, png) to boolean values for determining if each export action link should be shown. By default, `svg` and `png` are true. |
 | `scaleFactor` | Number        | The number by which to multiply the width and height (default `1`) of an exported PNG or SVG image. |
-| `config`      | String / Object | _String_ : A URL string from which to load a [Vega](https://vega.github.io/vega/docs/config/)/[Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) or [Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) configuration file. This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. <br> _Object_ : A Vega/Vega-Lite configuration as a parsed JSON object to override the default configuration options. |
 | `editorUrl`    | String   | The URL at which to open embedded Vega specs in a Vega editor. Defaults to `"http://vega.github.io/editor/"`. Internally, Vega-Embed uses [HTML5 postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to pass the specification information to the editor. |
 | `sourceHeader` | String   | HTML to inject into the `head` tag of the page generated by the "View Source" and "View Vega" action link. For example, this can be used to add code for [syntax highlighting](https://highlightjs.org/). |
 | `sourceFooter` | String   | HTML to inject into the end of the page generated by the "View Source" and "View Vega" action link. The text will be added immediately before the closing `body` tag. |
@@ -174,6 +194,7 @@ var opt = {
 | `downloadFileName` | String   | Sets the file name (default: `visualization`) for charts downloaded using the `png` or `svg` action. |
 | `formatLocale` | Object   | Sets the default locale definition for number formatting. See the [d3-format locale collection](https://github.com/d3/d3-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 | `timeFormatLocale` | Object   | Sets the default locale definition for date/time formatting. See the [d3-time-format locale collection](https://github.com/d3/d3-time-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
+| `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. In addition to enabling the `ast` option, you need to load the Vega interpreter module before loading Vega. See https://github.com/vega/vega/pull/2658 for details. |
 
 ## Common questions
 
