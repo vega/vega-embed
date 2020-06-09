@@ -200,6 +200,14 @@ test('can set tooltip theme', async () => {
   expect(result).toBeTruthy();
 });
 
+test('can set ast option', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec, {
+    ast: true
+  });
+  expect(result).toBeTruthy();
+});
+
 test('can change i18n strings', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, {

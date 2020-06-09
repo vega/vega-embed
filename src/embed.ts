@@ -82,6 +82,7 @@ export interface EmbedOptions<S = string> {
   downloadFileName?: string;
   formatLocale?: Record<string, unknown>;
   timeFormatLocale?: Record<string, unknown>;
+  ast?: boolean;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -111,10 +112,13 @@ export type VisualizationSpec = VlSpec | VgSpec;
 export interface Result {
   /** The Vega view. */
   view: View;
-  /** The inut specification. */
+
+  /** The input specification. */
   spec: VisualizationSpec;
+
   /** The compiled and patched Vega specification. */
   vgSpec: VgSpec;
+
   /** Removes references to unwanted behaviors and memory leaks. Calls Vega's `view.finalize`.  */
   finalize: () => void;
 }
@@ -298,14 +302,17 @@ async function _embed(
     vega.timeFormatLocale(opts.timeFormatLocale);
   }
 
+  const { ast } = opts;
+
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.
   // This call may throw an Error if parsing fails.
-  const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : (config as VgConfig));
+  const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : (config as VgConfig), { ast });
 
   const view = new vega.View(runtime, {
     loader,
     logLevel,
-    renderer
+    renderer,
+    ...(ast ? { expr: (vega as any).expressionInterpreter } : {})
   });
 
   if (opts.tooltip !== false) {
