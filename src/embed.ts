@@ -84,6 +84,7 @@ export interface EmbedOptions<S = string> {
   formatLocale?: Record<string, unknown>;
   timeFormatLocale?: Record<string, unknown>;
   ast?: boolean;
+  expr?: typeof expressionInterpreter;
 }
 
 const NAMES: { [key in Mode]: string } = {
@@ -303,7 +304,7 @@ async function _embed(
     vega.timeFormatLocale(opts.timeFormatLocale);
   }
 
-  const { ast } = opts;
+  const ast = opts.ast ?? !!opts.expr;
 
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.
   // This call may throw an Error if parsing fails.
@@ -313,7 +314,7 @@ async function _embed(
     loader,
     logLevel,
     renderer,
-    ...(ast ? { expr: expressionInterpreter } : {})
+    ...(ast ? { expr: opts.expr || expressionInterpreter } : {})
   });
 
   if (opts.tooltip !== false) {

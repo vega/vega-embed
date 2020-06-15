@@ -1,5 +1,6 @@
 import * as vega from 'vega';
 import { View } from 'vega';
+import { expressionInterpreter } from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import { compile, TopLevelSpec } from 'vega-lite';
 import embed, { guessMode, Mode } from '../src/embed';
@@ -204,6 +205,14 @@ test('can set ast option', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {
     ast: true
+  });
+  expect(result).toBeTruthy();
+});
+
+test('can set expr option', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec, {
+    expr: expressionInterpreter
   });
   expect(result).toBeTruthy();
 });
