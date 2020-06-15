@@ -15,8 +15,7 @@
     "noEmitOnError": true,
     "importHelpers": true,
     "resolveJsonModule": true,
-    "lib": ["es6", "dom"],
-    "incremental": true
+    "lib": ["es6", "dom"]
   },
   "files": ["src/index.ts"]
 }

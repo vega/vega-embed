@@ -7769,6 +7769,11 @@ vega-hierarchy@~4.0.6:
     vega-dataflow "^5.5.1"
     vega-util "^1.13.2"
 
+vega-interpreter@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vega-interpreter/-/vega-interpreter-1.0.1.tgz#7eabbfcf2669445b0e3ad0f597132c99c430c4f0"
+  integrity sha512-jGKFP4aJxZ1IM0VM81QgxRqtVWqP5ftvz8QgYZShtg7/nqou370P/YqOgjT0xEtJtvubqPKcIPrClQqxqnRzEw==
+
 vega-lite-dev-config@^0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.11.5.tgz#c9ff2adc4d4c72e78be1e50a9cb714c6354c4363"

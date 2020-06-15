@@ -3,15 +3,16 @@ import stringify from 'json-stringify-pretty-compact';
 import { satisfies } from 'semver';
 import * as vegaImport from 'vega';
 import {
+  Config as VgConfig,
   EncodeEntryName,
   Loader,
   LoaderOptions,
   Renderers,
   Spec as VgSpec,
   TooltipHandler,
-  View,
-  Config as VgConfig
+  View
 } from 'vega';
+import { expressionInterpreter } from 'vega-interpreter';
 import * as vegaLiteImport from 'vega-lite';
 import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -312,7 +313,7 @@ async function _embed(
     loader,
     logLevel,
     renderer,
-    ...(ast ? { expr: (vega as any).expressionInterpreter } : {})
+    ...(ast ? { expr: expressionInterpreter } : {})
   });
 
   if (opts.tooltip !== false) {
