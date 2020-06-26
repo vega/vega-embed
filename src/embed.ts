@@ -107,6 +107,8 @@ const SVG_CIRCLES = `
   <circle r="2" cy="8" cx="14"></circle>
 </svg>`;
 
+const CHART_WRAPPER_CLASS = 'chart-wrapper';
+
 export type VisualizationSpec = VlSpec | VgSpec;
 
 export interface Result {
@@ -293,6 +295,10 @@ async function _embed(
   }
   div.innerHTML = ''; // clear container
 
+  const chartWrapper = document.createElement('div') as Element;
+  chartWrapper.classList.add(CHART_WRAPPER_CLASS);
+  div.appendChild(chartWrapper);
+
   const patch = opts.patch;
   if (patch) {
     if (patch instanceof Function) {
@@ -360,17 +366,17 @@ async function _embed(
     }
   }
 
-  await view.initialize(el).runAsync();
+  await view.initialize(chartWrapper).runAsync();
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
-    let wrapper = div;
+    let wrapper = chartWrapper;
 
     if (opts.defaultStyle !== false) {
       const details = document.createElement('details');
       details.title = i18n.CLICK_TO_VIEW_ACTIONS;
-      div.append(details);
+      chartWrapper.append(details);
 
       wrapper = details;
       const summary = document.createElement('summary');

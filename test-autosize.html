@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vega-Embed for Vega-Lite</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="build/vega-embed.js"></script>
+  </head>
+
+  <body>
+    <div id="vis" style="width: 400px; height: 500px;"></div>
+    <script>
+      async function run() {
+        const config = {
+          // default view background color
+          // covers the entire view component
+          background: "#efefef",
+          axis: {
+            labelFont: "serif",
+            labelFontSize: 16,
+            tickWidth: 3,
+            tickColor: "red"
+          }
+        };
+
+        const spec = {
+          $schema: "https://vega.github.io/schema/vega-lite/v4.json",
+          description: "A simple bar chart with embedded data.",
+          width: "container",
+          height: "container",
+          data: {
+            values: [
+              { a: "A", b: 28 },
+              { a: "B", b: 55 },
+              { a: "C", b: 43 },
+              { a: "D", b: 91 },
+              { a: "E", b: 81 },
+              { a: "F", b: 53 },
+              { a: "G", b: 19 },
+              { a: "H", b: 87 },
+              { a: "I", b: 52 }
+            ]
+          },
+          mark: "bar",
+          encoding: {
+            x: { field: "a", type: "ordinal" },
+            y: { field: "b", type: "quantitative" },
+            tooltip: { field: "b", type: "quantitative" }
+          }
+        };
+
+        const result = await vegaEmbed("#vis", spec, {
+          config: config,
+          tooltip: { theme: "dark" }
+        });
+
+        console.log(result);
+      }
+
+      run();
+    </script>
+  </body>
+</html>

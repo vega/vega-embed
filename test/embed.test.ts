@@ -25,69 +25,69 @@ test('embed returns result', async () => {
 test('can change renderer to SVG', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { renderer: 'svg' });
-  expect(el.children[0].tagName).toBe('svg');
+  expect(el.children[0].children[0].tagName).toBe('svg');
 });
 
 test('creates simple actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { defaultStyle: false });
-  expect(el.children[2].classList[0]).toBe('vega-actions');
+  expect(el.children[0].children[2].classList[0]).toBe('vega-actions');
 });
 
 test('creates default actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec);
-  expect(el.children[2].tagName).toBe('DETAILS');
-  expect(el.children[2].children[1].classList[0]).toBe('vega-actions');
-  expect(el.children[2].children[1].childElementCount).toBe(5);
+  expect(el.children[0].children[2].tagName).toBe('DETAILS');
+  expect(el.children[0].children[2].children[1].classList[0]).toBe('vega-actions');
+  expect(el.children[0].children[2].children[1].childElementCount).toBe(5);
 });
 
 test('creates all actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: true });
-  expect(el.children[2].children[1].childElementCount).toBe(5);
+  expect(el.children[0].children[2].children[1].childElementCount).toBe(5);
 });
 
 test('can disable actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: false });
-  expect(el.childElementCount).toBe(2);
+  expect(el.children[0].childElementCount).toBe(2);
 });
 
 test('can disable specific actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: false } });
-  expect(el.children[2].children[1].childElementCount).toBe(3);
+  expect(el.children[0].children[2].children[1].childElementCount).toBe(3);
 });
 
 test('can disable export actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: { export: { svg: false } } });
-  expect(el.children[2].children[1].childElementCount).toBe(4);
+  expect(el.children[0].children[2].children[1].childElementCount).toBe(4);
 });
 
 test('creates default download filename for svg', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: true });
-  expect(el.children[2].children[1].children[0].getAttribute('download')).toBe('visualization.svg');
+  expect(el.children[0].children[2].children[1].children[0].getAttribute('download')).toBe('visualization.svg');
 });
 
 test('create default download filename for png', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec);
-  expect(el.children[2].children[1].children[1].getAttribute('download')).toBe('visualization.png');
+  expect(el.children[0].children[2].children[1].children[1].getAttribute('download')).toBe('visualization.png');
 });
 
 test('can use custom download filename for svg', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { downloadFileName: 'your_chart' });
-  expect(el.children[2].children[1].children[0].getAttribute('download')).toBe('your_chart.svg');
+  expect(el.children[0].children[2].children[1].children[0].getAttribute('download')).toBe('your_chart.svg');
 });
 
 test('can use custom download filename for png', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { downloadFileName: 'my_chart' });
-  expect(el.children[2].children[1].children[1].getAttribute('download')).toBe('my_chart.png');
+  expect(el.children[0].children[2].children[1].children[1].getAttribute('download')).toBe('my_chart.png');
 });
 
 test('creates default actions for Vega', async () => {
@@ -95,8 +95,8 @@ test('creates default actions for Vega', async () => {
   await embed(el, vgSpec);
   expect(el.classList[0]).toBe('vega-embed');
   expect(el.classList[1]).toBe('has-actions');
-  expect(el.children[2].children[1].classList[0]).toBe('vega-actions');
-  expect(el.children[2].children[1].childElementCount).toBe(4);
+  expect(el.children[0].children[2].children[1].classList[0]).toBe('vega-actions');
+  expect(el.children[0].children[2].children[1].childElementCount).toBe(4);
 });
 
 test('does not set has-actions if actions are not specified', async () => {
@@ -215,7 +215,7 @@ test('can change i18n strings', async () => {
     i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' }
   });
 
-  const ctrl = el.children[2].children[1];
+  const ctrl = el.children[0].children[2].children[1];
   const ctrlChildren = ctrl.children;
 
   expect(ctrl.childElementCount).toBe(5);
