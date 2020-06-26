@@ -51,7 +51,7 @@ test('creates all actions for Vega-Lite', async () => {
 test('can disable actions', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, { actions: false });
-  expect(el.children[0].childElementCount).toBe(2);
+  expect(el.childElementCount).toBe(2);
 });
 
 test('can disable specific actions', async () => {

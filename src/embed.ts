@@ -295,9 +295,13 @@ async function _embed(
   }
   div.innerHTML = ''; // clear container
 
-  const chartWrapper = document.createElement('div');
-  chartWrapper.classList.add(CHART_WRAPPER_CLASS);
-  div.appendChild(chartWrapper);
+  let target = div;
+  if (actions) {
+    const chartWrapper = document.createElement('div');
+    chartWrapper.classList.add(CHART_WRAPPER_CLASS);
+    div.appendChild(chartWrapper);
+    target = chartWrapper
+  }
 
   const patch = opts.patch;
   if (patch) {
@@ -366,17 +370,17 @@ async function _embed(
     }
   }
 
-  await view.initialize(chartWrapper).runAsync();
+  await view.initialize(target).runAsync();
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
-    let wrapper: Element = chartWrapper;
+    let wrapper: Element = target;
 
     if (opts.defaultStyle !== false) {
       const details = document.createElement('details');
       details.title = i18n.CLICK_TO_VIEW_ACTIONS;
-      chartWrapper.append(details);
+      target.append(details);
 
       wrapper = details;
       const summary = document.createElement('summary');
