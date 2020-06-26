@@ -53,8 +53,8 @@
         };
 
         const result = await vegaEmbed("#vis", spec, {
-          config: config,
-          tooltip: { theme: "dark" }
+          actions: false,
+          config: config
         });
 
         console.log(result);
