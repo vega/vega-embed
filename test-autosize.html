@@ -8,27 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
     <script src="build/vega-embed.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+      #vis {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="vis" style="width: 400px; height: 500px;"></div>
+    <div id="vis"></div>
     <script>
       async function run() {
-        const config = {
-          // default view background color
-          // covers the entire view component
-          background: "#efefef",
-          axis: {
-            labelFont: "serif",
-            labelFontSize: 16,
-            tickWidth: 3,
-            tickColor: "red"
-          }
-        };
-
         const spec = {
           $schema: "https://vega.github.io/schema/vega-lite/v4.json",
-          description: "A simple bar chart with embedded data.",
           width: "container",
           height: "container",
           data: {
@@ -46,15 +42,14 @@
           },
           mark: "bar",
           encoding: {
-            x: { field: "a", type: "ordinal" },
+            x: { field: "a", type: "nominal" },
             y: { field: "b", type: "quantitative" },
             tooltip: { field: "b", type: "quantitative" }
           }
         };
 
         const result = await vegaEmbed("#vis", spec, {
-          actions: true,
-          config: config
+          actions: true
         });
 
         console.log(result);

@@ -28,7 +28,6 @@
 
         const spec = {
           $schema: "https://vega.github.io/schema/vega-lite/v4.json",
-          description: "A simple bar chart with embedded data.",
           data: {
             values: [
               { a: "A", b: 28 },
@@ -44,7 +43,7 @@
           },
           mark: "bar",
           encoding: {
-            x: { field: "a", type: "ordinal" },
+            x: { field: "a", type: "nominal" },
             y: { field: "b", type: "quantitative" },
             tooltip: { field: "b", type: "quantitative" }
           }
