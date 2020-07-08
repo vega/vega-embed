@@ -33,7 +33,7 @@
     "@rollup/plugin-commonjs": "13.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^26.0.4",
     "@types/semver": "^7.3.1",
     "browser-sync": "^2.26.7",
     "codecov": "^3.7.0",
@@ -41,12 +41,12 @@
     "jest": "^26.1.0",
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.14.1",
-    "rollup": "^2.18.0",
+    "rollup": "^2.21.0",
     "terser": "^4.8.0",
-    "typescript": "~3.9.5",
+    "typescript": "~3.9.6",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.11.7"
+    "vega-lite-dev-config": "^0.11.8"
   },
   "peerDependencies": {
     "vega": "^5.13.0",
@@ -57,8 +57,8 @@
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^7.3.2",
     "vega-schema-url-parser": "^1.1.0",
-    "vega-themes": "^2.8.3",
-    "vega-tooltip": "^0.23.0"
+    "vega-themes": "^2.8.4",
+    "vega-tooltip": "^0.23.1"
   },
   "scripts": {
     "tsc:src": "tsc -p tsconfig.src.json",
