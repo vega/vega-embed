@@ -7827,10 +7827,10 @@ vega-statistics@^1.7.4, vega-statistics@^1.7.5, vega-statistics@~1.7.6:
   dependencies:
     d3-array "^2.4.0"
 
-vega-themes@^2.8.3:
-  version "2.8.3"
-  resolved "https://registry.yarnpkg.com/vega-themes/-/vega-themes-2.8.3.tgz#3f42a9d29b7274bf963d9d4e1c30ac0d5841d4fa"
-  integrity sha512-BzV/gC2ZAhnv20qpQVtyQW6CYXAGQKjArSdxky1UB1RnR5WMRzPsC+g8ak4k0txTwqhkvMAlDXUMaBgDMTOhQg==
+vega-themes@^2.8.4:
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/vega-themes/-/vega-themes-2.8.4.tgz#cdda40687d88c309a581514d7ff4b53086824ffc"
+  integrity sha512-Abt5XdontUdXGGymm/GrGxclBgj4D7rByHMO3idQJo+pjpm61+VX+8i3ygPGvaCdZWH+xc6uhgodNepanRPi2w==
 
 vega-time@^2.0.0, vega-time@^2.0.1, vega-time@~2.0.1:
   version "2.0.1"
@@ -7841,12 +7841,12 @@ vega-time@^2.0.0, vega-time@^2.0.1, vega-time@~2.0.1:
     d3-time "^1.1.0"
     vega-util "^1.14.0"
 
-vega-tooltip@^0.23.0:
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.23.0.tgz#16f7cd4ff25190ffcab611d95a6b4402f6cc8e80"
-  integrity sha512-DuwwV1qgvvSbM/Zj+SQ627PW7paOdrfEFHlZ8ntH8xjcbnclDol1Lnviu/U7ImaGrLMEx78MeY1XLnuKTjVbdQ==
+vega-tooltip@^0.23.1:
+  version "0.23.1"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.23.1.tgz#5c6bee0c6bf5dc017fd3aebcaaa1366634b87079"
+  integrity sha512-F0V0O7D8AvS3fyPePU56AwMGCtEmTZZ0ivIFr0JlTgE9Z7llJkXNKFfW6CL+4qm1xJE8+NN7MqY3Q9VqD3wVSA==
   dependencies:
-    vega-util "^1.13.2"
+    vega-util "^1.14.1"
 
 vega-transforms@~4.9.0:
   version "4.9.0"
@@ -7866,7 +7866,7 @@ vega-typings@~0.18.0:
   dependencies:
     vega-util "^1.14.0"
 
-vega-util@^1.13.2, vega-util@^1.14.0, vega-util@~1.14.0, vega-util@~1.14.1:
+vega-util@^1.13.2, vega-util@^1.14.0, vega-util@^1.14.1, vega-util@~1.14.0, vega-util@~1.14.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/vega-util/-/vega-util-1.14.1.tgz#0fb614277764f98738ba0b80e5cdfbe663426183"
   integrity sha512-pSKJ8OCkgfgHZDTljyj+gmGltgulceWbk1BV6LWrXqp6P3J8qPA/oZA8+a93YNApYxXZ3yzIVUDOo5O27xk0jw==
