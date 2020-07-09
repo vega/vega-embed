@@ -244,18 +244,32 @@ async function _embed(
   const logLevel = opts.logLevel ?? vega.Warn;
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
+  const div = typeof el === 'string' ? document.querySelector(el) : el;
+  if (!div) {
+    throw Error(`${el} does not exist`);
+  }
+
   if (opts.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
-    if (!document.getElementById(ID)) {
+    const possibleRoot = div.getRootNode ? div.getRootNode() : document;
+    let root: ShadowRoot | Document;
+    let rootContainer: Element | ShadowRoot;
+    if (possibleRoot instanceof ShadowRoot) {
+      root = possibleRoot;
+      rootContainer = root;
+    } else {
+      root = document;
+      rootContainer = root.head || root.body;
+    }
+    if (!root.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
       style.innerText =
         opts.defaultStyle === undefined || opts.defaultStyle === true
           ? (embedStyle ?? '').toString()
           : opts.defaultStyle;
-
-      document.head.appendChild(style);
+      rootContainer.appendChild(style);
     }
   }
 
@@ -271,11 +285,6 @@ async function _embed(
         console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is v${VERSION.vega}.`);
       }
     }
-  }
-
-  const div = typeof el === 'string' ? document.querySelector(el) : el;
-  if (!div) {
-    throw Error(`${el} does not exist`);
   }
 
   div.classList.add('vega-embed');
