@@ -229,6 +229,20 @@ async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions
   };
 }
 
+function getRoot(el: Element) {
+  const possibleRoot = div.getRootNode ? div.getRootNode() : document;
+  let root: ShadowRoot | Document;
+  let rootContainer: Element | ShadowRoot;
+  if (possibleRoot instanceof ShadowRoot) {
+    root = possibleRoot;
+    rootContainer = root;
+  } else {
+    root = document;
+    rootContainer = root.head ?? root.body;
+  }
+  return { root, rootContainer };
+}
+
 async function _embed(
   el: HTMLElement | string,
   spec: VisualizationSpec,
@@ -252,16 +266,7 @@ async function _embed(
   if (opts.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
-    const possibleRoot = div.getRootNode ? div.getRootNode() : document;
-    let root: ShadowRoot | Document;
-    let rootContainer: Element | ShadowRoot;
-    if (possibleRoot instanceof ShadowRoot) {
-      root = possibleRoot;
-      rootContainer = root;
-    } else {
-      root = document;
-      rootContainer = root.head ?? root.body;
-    }
+    const { root, rootContainer } = getRoot(div);
     if (!root.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
