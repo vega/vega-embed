@@ -260,7 +260,7 @@ async function _embed(
       rootContainer = root;
     } else {
       root = document;
-      rootContainer = root.head || root.body;
+      rootContainer = root.head ?? root.body;
     }
     if (!root.getElementById(ID)) {
       const style = document.createElement('style');
