@@ -230,7 +230,7 @@ async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions
 }
 
 function getRoot(el: Element) {
-  const possibleRoot = div.getRootNode ? div.getRootNode() : document;
+  const possibleRoot = el.getRootNode ? el.getRootNode() : document;
   let root: ShadowRoot | Document;
   let rootContainer: Element | ShadowRoot;
   if (possibleRoot instanceof ShadowRoot) {
