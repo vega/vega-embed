@@ -42,7 +42,5 @@ jobs:
         run: yarn jest test/ --collectCoverage=true
 
       - name: Upload coverage to Codecov
-        run: yarn codecov
+        uses: codecov/codecov-action@v1
         if: ${{ matrix.node == 14 }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
