@@ -37,9 +37,9 @@ test('creates simple actions for Vega-Lite', async () => {
 test('creates default actions for Vega-Lite', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec);
-  expect(el.children[0].children[2].tagName).toBe('DETAILS');
-  expect(el.children[0].children[2].children[1].classList[0]).toBe('vega-actions');
-  expect(el.children[0].children[2].children[1].childElementCount).toBe(5);
+  expect(el.children[0].children[1].tagName).toBe('DETAILS');
+  expect(el.children[0].children[1].children[1].classList[0]).toBe('vega-actions');
+  expect(el.children[0].children[1].children[1].childElementCount).toBe(5);
 });
 
 test('creates all actions for Vega-Lite', async () => {

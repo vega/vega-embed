@@ -300,7 +300,7 @@ async function _embed(
     const chartWrapper = document.createElement('div');
     chartWrapper.classList.add(CHART_WRAPPER_CLASS);
     div.appendChild(chartWrapper);
-    target = chartWrapper
+    target = chartWrapper;
   }
 
   const patch = opts.patch;
@@ -375,12 +375,12 @@ async function _embed(
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
-    let wrapper: Element = target;
+    let wrapper: Element = div;
 
     if (opts.defaultStyle !== false) {
       const details = document.createElement('details');
       details.title = i18n.CLICK_TO_VIEW_ACTIONS;
-      target.append(details);
+      div.append(details);
 
       wrapper = details;
       const summary = document.createElement('summary');

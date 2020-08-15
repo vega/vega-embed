@@ -1,6 +1,7 @@
 .vega-embed {
   position: relative;
   display: inline-block;
+  box-sizing: border-box;
 
   &.has-actions {
     padding-right: 38px;
