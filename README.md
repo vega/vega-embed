@@ -202,6 +202,10 @@ var opt = {
 
 By default, the Vega loader does not send the credentials of the current page with requests. You can override this behavior by passing `{loader: { http: { credentials: 'same-origin' }}}` as the embed option.
 
+### What CSS should I use to support `container` sizing?
+
+When using [container](https://vega.github.io/vega-lite/docs/size.html#specifying-responsive-width-and-height) sizing in Vega-Lite, make sure to set the width of the DOM element you passed to Embed.
+
 ## Build Process
 
 To build `vega-embed.js` and view the test examples, you must have [yarn](https://yarnpkg.com/en/) installed.
@@ -212,4 +216,4 @@ To build `vega-embed.js` and view the test examples, you must have [yarn](https:
 
 ## Release Process
 
-To release a new version, make sure that everything works. Then run `yarn version` and bump the version number. Lastly, push to GitHub (with the release tag). [Travis](https://travis-ci.org/vega/vega-embed/builds) will build a bundle and make the [npm release](https://www.npmjs.com/package/vega-embed) automatically.
+To release a new version, make sure that everything works. Then run `yarn version` and bump the version number. Lastly, push to GitHub (with the release tag). GitHub Actions will build a bundle and make the [npm release](https://www.npmjs.com/package/vega-embed) automatically.

@@ -1,6 +1,7 @@
 .vega-embed {
   position: relative;
   display: inline-block;
+  box-sizing: border-box;
 
   &.has-actions {
     padding-right: 38px;
@@ -107,6 +108,11 @@
       border: 7px solid #0000;
       border-bottom-color: #fff;
     }
+  }
+
+  .chart-wrapper {
+    width: 100%;
+    height: 100%;
   }
 }
 

@@ -8,26 +8,25 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
     <script src="build/vega-embed.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+      #vis {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
   </head>
 
   <body>
     <div id="vis"></div>
     <script>
       async function run() {
-        const config = {
-          // default view background color
-          // covers the entire view component
-          background: "#efefef",
-          axis: {
-            labelFont: "serif",
-            labelFontSize: 16,
-            tickWidth: 3,
-            tickColor: "red"
-          }
-        };
-
         const spec = {
           $schema: "https://vega.github.io/schema/vega-lite/v4.json",
+          width: "container",
+          height: "container",
           data: {
             values: [
               { a: "A", b: 28 },
@@ -50,8 +49,7 @@
         };
 
         const result = await vegaEmbed("#vis", spec, {
-          config: config,
-          tooltip: { theme: "dark" }
+          actions: true
         });
 
         console.log(result);
