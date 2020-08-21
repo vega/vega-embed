@@ -375,7 +375,7 @@ async function _embed(
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
-    let wrapper: Element = div;
+    let wrapper = div;
 
     if (opts.defaultStyle !== false) {
       const details = document.createElement('details');
