@@ -49,8 +49,6 @@
     "rollup": "^2.26.6",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.0",
-    "rollup-plugin-typescript2": "^0.27.2",
-    "terser": "^5.2.1",
     "typescript": "^4.0.2",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
