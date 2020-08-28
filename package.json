@@ -76,7 +76,7 @@
     "prepublishOnly": "yarn clean && yarn build",
     "preversion": "yarn lint && yarn test",
     "serve": "browser-sync start --directory -s -f build *.html",
-    "start": "yarn build && concurrently --kill-others -n Server,Typescript,Rollup 'yarn serve' 'rollup -c -w'",
+    "start": "yarn build && concurrently --kill-others -n Server,Rollup 'yarn serve' 'rollup -c -w'",
     "pretest": "yarn build:style",
     "test": "jest",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
