@@ -14,7 +14,7 @@ const plugins = (browserslist) => [
   commonjs(),
   json(),
   ts({
-    browserslist: browserslist ?? "defaults and not IE 11"
+    browserslist: browserslist || "defaults and not IE 11"
   }),
   bundleSize()
 ];
