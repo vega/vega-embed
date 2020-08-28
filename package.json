@@ -25,11 +25,12 @@
   ],
   "license": "BSD-3-Clause",
   "main": "build/vega-embed.js",
-  "module": "build/src/embed.js",
+  "module": "build/vega-embed.module.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
   "devDependencies": {
+    "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
@@ -41,8 +42,10 @@
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.14.1",
     "rollup": "^2.26.5",
+    "rollup-plugin-terser": "^7.0.0",
+    "rollup-plugin-typescript2": "^0.27.2",
     "terser": "^5.2.1",
-    "typescript": "~4.0.2",
+    "typescript": "^4.0.2",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
     "vega-lite-dev-config": "^0.12.0"
@@ -60,16 +63,14 @@
     "vega-tooltip": "^0.23.2"
   },
   "scripts": {
-    "tsc:src": "tsc -p tsconfig.src.json",
-    "prebuild": "yarn build:style && yarn tsc:src",
+    "prebuild": "rimraf build && rimraf build-es5 && yarn build:style",
     "build": "rollup -c",
     "build:style": "./build-style.sh",
-    "clean": "rm -rf build && rm -f src/style.ts && mkdir build",
-    "postbuild": "terser build/vega-embed.js -cm > build/vega-embed.min.js && beemo babel build/vega-embed.js --out-dir build-es5 --config-file ./babel.config.js",
+    "clean": "rimraf build && rimraf src/style.ts && mkdir build",
     "prepublishOnly": "yarn clean && yarn build",
     "preversion": "yarn lint && yarn test",
     "serve": "browser-sync start --directory -s -f build *.html",
-    "start": "yarn build && concurrently --kill-others -n Server,Typescript,Rollup 'yarn serve' 'yarn tsc:src -w' 'rollup -c -w'",
+    "start": "yarn build && concurrently --kill-others -n Server,Typescript,Rollup 'yarn serve' 'rollup -c -w'",
     "pretest": "yarn build:style",
     "test": "jest",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
@@ -83,8 +84,7 @@
     "module": "vega-lite-dev-config",
     "drivers": [
       "prettier",
-      "eslint",
-      "babel"
+      "eslint"
     ],
     "prettier": {
       "ignore": [
