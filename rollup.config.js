@@ -1,10 +1,34 @@
+import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
-import nodeResolve from "@rollup/plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
+import bundleSize from "rollup-plugin-bundle-size";
 import { terser } from "rollup-plugin-terser";
-import typescript from "rollup-plugin-typescript2";
 
 const pkg = require("./package.json");
+
+const extensions = [".js", ".ts"];
+
+const plugins = [
+  resolve({ extensions }),
+  commonjs(),
+  babel({
+    presets: [
+      "@babel/preset-typescript",
+      [
+        "@babel/preset-env",
+        {
+          targets: "defaults and not IE 11",
+          debug: true
+        }
+      ]
+    ],
+    extensions: [".js", ".ts"],
+    babelHelpers: "bundled"
+  }),
+  json(),
+  bundleSize()
+];
 
 export default [
   {
@@ -21,7 +45,7 @@ export default [
         }
       },
       {
-        file: "build/vega-embed.js",
+        file: "build/vega-embed.min.js",
         format: "iife",
         sourcemap: true,
         name: "vegaEmbed",
@@ -32,14 +56,7 @@ export default [
         plugins: [terser()]
       }
     ],
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      typescript({
-        tsconfig: "tsconfig.src.json"
-      }),
-      json()
-    ],
+    plugins,
     external: ["vega", "vega-lite"]
   },
   {
@@ -49,14 +66,7 @@ export default [
       format: "esm",
       sourcemap: true
     },
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      typescript({
-        tsconfig: "tsconfig.src.json"
-      }),
-      json()
-    ],
+    plugins,
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)]
   }
 ];

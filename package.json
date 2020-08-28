@@ -30,6 +30,7 @@
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-json": "^4.1.0",
@@ -42,6 +43,7 @@
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.14.1",
     "rollup": "^2.26.5",
+    "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.0",
     "rollup-plugin-typescript2": "^0.27.2",
     "terser": "^5.2.1",
