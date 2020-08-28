@@ -1,7 +1,21 @@
 {
-  "extends": "./tsconfig.src.json",
   "compilerOptions": {
-    "noEmit": true
+    "target": "es6",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noEmit": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    "esModuleInterop": true,
+    "strict": true,
+    "preserveConstEnums": true,
+    "noEmitOnError": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "lib": ["es6", "dom"]
   },
   "include": ["src/*.ts", "test/*.ts"]
 }

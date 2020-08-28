@@ -1,7 +1,7 @@
-import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
+import ts from "@wessberg/rollup-plugin-ts";
 import bundleSize from "rollup-plugin-bundle-size";
 import { terser } from "rollup-plugin-terser";
 
@@ -12,21 +12,10 @@ const extensions = [".js", ".ts"];
 const plugins = [
   resolve({ extensions }),
   commonjs(),
-  babel({
-    presets: [
-      "@babel/preset-typescript",
-      [
-        "@babel/preset-env",
-        {
-          targets: "defaults and not IE 11",
-          debug: true
-        }
-      ]
-    ],
-    extensions: [".js", ".ts"],
-    babelHelpers: "bundled"
-  }),
   json(),
+  ts({
+    browserslist: ["defaults", "not IE 11"]
+  }),
   bundleSize()
 ];
 
