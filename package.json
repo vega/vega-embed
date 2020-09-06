@@ -23,6 +23,10 @@
       "url": "https://www.domoritz.de"
     }
   ],
+  "bugs": {
+    "url": "https://github.com/vega/vega-embed/issues"
+  },
+  "homepage": "https://github.com/vega/vega-embed#readme",
   "license": "BSD-3-Clause",
   "main": "build/vega-embed.js",
   "module": "build/vega-embed.module.js",
@@ -51,7 +55,7 @@
     "typescript": "^4.0.2",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.14.1"
+    "vega-lite-dev-config": "^0.14.2"
   },
   "peerDependencies": {
     "vega": "^5.13.0",
@@ -66,10 +70,10 @@
     "vega-tooltip": "^0.23.2"
   },
   "scripts": {
-    "prebuild": "rimraf build && rimraf build-es5 && yarn build:style",
+    "prebuild": "yarn clean && yarn build:style",
     "build": "rollup -c",
     "build:style": "./build-style.sh",
-    "clean": "rimraf build && rimraf src/style.ts && mkdir build",
+    "clean": "rimraf build && rimraf build-es5 && rimraf src/style.ts",
     "prepublishOnly": "yarn clean && yarn build",
     "preversion": "yarn lint && yarn test",
     "serve": "browser-sync start --directory -s -f build *.html",
@@ -78,7 +82,7 @@
     "test": "beemo jest",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
     "prepare": "beemo create-config",
-    "prettierbase": "beemo prettier '*.{css,html}'",
+    "prettierbase": "beemo prettier '*.{css,scss,html}'",
     "eslintbase": "beemo eslint .",
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
     "lint": "yarn eslintbase && yarn prettierbase --check"
@@ -92,11 +96,6 @@
       "jest",
       "typescript"
     ],
-    "prettier": {
-      "ignore": [
-        "README.md"
-      ]
-    },
     "jest": {
       "testURL": "http://localhost/",
       "setupFiles": [

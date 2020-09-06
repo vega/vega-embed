@@ -2,7 +2,6 @@
 .eslintignore
 .eslintrc.js
 .prettierignore
-*.tsbuildinfo
 babel.config.js
 beemo-error.log
 build

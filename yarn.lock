@@ -7787,10 +7787,10 @@ vega-hierarchy@~4.0.8:
     vega-dataflow "^5.7.2"
     vega-util "^1.15.1"
 
-vega-lite-dev-config@^0.14.1:
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.14.1.tgz#3ee8b41fde4d43c91e8f49cdd5c49e83f828d56a"
-  integrity sha512-URJjlW0zYB9UWb+CNg7x1E7m9jAs6UiQ6dHnDfcF1mktKTK3u7BsPtK4LpsZ535rGkb44rvYKlTSNU8yuxKQLQ==
+vega-lite-dev-config@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.14.2.tgz#78de22bf2b0d9d532d691b14387abad703f321b8"
+  integrity sha512-YkizcKXnNcSrjEgmV05pkfjZbcdlFCjqtbIaXr0X6BSHrDVJtT4cvw2tp9wpxFpD7h2C7nNMsXBXNx59DQ6o5g==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
