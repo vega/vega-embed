@@ -3,7 +3,6 @@
 .eslintrc.js
 .prettierignore
 beemo-error.log
-bower_components
 build
 build-es5
 coverage/

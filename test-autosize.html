@@ -37,19 +37,19 @@
               { a: "F", b: 53 },
               { a: "G", b: 19 },
               { a: "H", b: 87 },
-              { a: "I", b: 52 }
-            ]
+              { a: "I", b: 52 },
+            ],
           },
           mark: "bar",
           encoding: {
             x: { field: "a", type: "nominal" },
             y: { field: "b", type: "quantitative" },
-            tooltip: { field: "b", type: "quantitative" }
-          }
+            tooltip: { field: "b", type: "quantitative" },
+          },
         };
 
         const result = await vegaEmbed("#vis", spec, {
-          actions: true
+          actions: true,
         });
 
         console.log(result);
