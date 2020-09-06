@@ -32,7 +32,7 @@
   "module": "build/vega-embed.module.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
-  "types": "build/src/embed.d.ts",
+  "types": "build/vega-embed.d.ts",
   "files": [
     "src",
     "build",
@@ -90,11 +90,11 @@
   "beemo": {
     "module": "vega-lite-dev-config",
     "drivers": [
+      "typescript",
       "prettier",
       "eslint",
       "babel",
-      "jest",
-      "typescript"
+      "jest"
     ],
     "jest": {
       "testURL": "http://localhost/",
