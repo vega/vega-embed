@@ -1,6 +1,6 @@
-import { applyPatch, Operation } from 'fast-json-patch';
+import {applyPatch, Operation} from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
-import { satisfies } from 'semver';
+import {satisfies} from 'semver';
 import * as vegaImport from 'vega';
 import {
   EncodeEntryName,
@@ -10,18 +10,18 @@ import {
   Spec as VgSpec,
   TooltipHandler,
   View,
-  Config as VgConfig
+  Config as VgConfig,
 } from 'vega';
 import * as vegaLiteImport from 'vega-lite';
-import { Config as VlConfig, TopLevelSpec as VlSpec } from 'vega-lite';
+import {Config as VlConfig, TopLevelSpec as VlSpec} from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
-import { Handler, Options as TooltipOptions } from 'vega-tooltip';
-import { isBoolean, isString, mergeConfig } from 'vega-util';
+import {Handler, Options as TooltipOptions} from 'vega-tooltip';
+import {isBoolean, isString, mergeConfig} from 'vega-util';
 import post from './post';
 import embedStyle from './style';
-import { Config, Mode } from './types';
-import { mergeDeep } from './util';
+import {Config, Mode} from './types';
+import {mergeDeep} from './util';
 
 export * from './types';
 
@@ -35,13 +35,13 @@ if (vegaLite === undefined && w?.['vl']?.compile) {
 }
 
 export interface Actions {
-  export?: boolean | { svg?: boolean; png?: boolean };
+  export?: boolean | {svg?: boolean; png?: boolean};
   source?: boolean;
   compiled?: boolean;
   editor?: boolean;
 }
 
-export const DEFAULT_ACTIONS = { export: { svg: true, png: true }, source: true, compiled: true, editor: true };
+export const DEFAULT_ACTIONS = {export: {svg: true, png: true}, source: true, compiled: true, editor: true};
 
 export interface Hover {
   hoverSet?: EncodeEntryName;
@@ -56,7 +56,7 @@ const I18N = {
   EDITOR_ACTION: 'Open in Vega Editor',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
-  SVG_ACTION: 'Save as SVG'
+  SVG_ACTION: 'Save as SVG',
 };
 
 export interface EmbedOptions<S = string> {
@@ -71,7 +71,7 @@ export interface EmbedOptions<S = string> {
   patch?: S | PatchFunc | Operation[];
   width?: number;
   height?: number;
-  padding?: number | { left?: number; right?: number; top?: number; bottom?: number };
+  padding?: number | {left?: number; right?: number; top?: number; bottom?: number};
   scaleFactor?: number;
   config?: S | Config;
   sourceHeader?: string;
@@ -85,19 +85,19 @@ export interface EmbedOptions<S = string> {
   ast?: boolean;
 }
 
-const NAMES: { [key in Mode]: string } = {
+const NAMES: {[key in Mode]: string} = {
   vega: 'Vega',
-  'vega-lite': 'Vega-Lite'
+  'vega-lite': 'Vega-Lite',
 };
 
 const VERSION = {
   vega: vega.version,
-  'vega-lite': vegaLite ? vegaLite.version : 'not available'
+  'vega-lite': vegaLite ? vegaLite.version : 'not available',
 };
 
-const PREPROCESSOR: { [mode in Mode]: (spec: any, config?: Config) => VgSpec } = {
+const PREPROCESSOR: {[mode in Mode]: (spec: any, config?: Config) => VgSpec} = {
   vega: (vgSpec: VgSpec) => vgSpec,
-  'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec as VlSpec, { config: config as VlConfig }).spec
+  'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec as VlSpec, {config: config as VlConfig}).spec,
 };
 
 const SVG_CIRCLES = `
@@ -132,6 +132,7 @@ function isTooltipHandler(h?: boolean | TooltipOptions | TooltipHandler): h is T
 function viewSource(source: string, sourceHeader: string, sourceFooter: string, mode: Mode) {
   const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
   const footer = `</code></pre>${sourceFooter}</body></html>`;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const win = window.open('')!;
   win.document.write(header + source + footer);
   win.document.title = `${NAMES[mode]} JSON Source`;
@@ -215,7 +216,7 @@ export default async function embed(
 
   const mergedOpts = {
     ...mergeDeep(parsedOpts, usermetaOpts),
-    config: mergeConfig(parsedOpts.config ?? {}, usermetaOpts.config ?? {})
+    config: mergeConfig(parsedOpts.config ?? {}, usermetaOpts.config ?? {}),
   };
 
   return await _embed(el, parsedSpec, mergedOpts, loader);
@@ -226,17 +227,17 @@ async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions
   const patch: PatchFunc | Operation[] = isString(opt.patch) ? JSON.parse(await loader.load(opt.patch)) : opt.patch;
   return {
     ...(opt as any),
-    ...(patch ? { patch } : {}),
-    ...(config ? { config } : {})
+    ...(patch ? {patch} : {}),
+    ...(config ? {config} : {}),
   };
 }
 
 function getRoot(el: Element) {
   const possibleRoot = el.getRootNode ? el.getRootNode() : document;
   if (possibleRoot instanceof ShadowRoot) {
-    return { root: possibleRoot, rootContainer: possibleRoot };
+    return {root: possibleRoot, rootContainer: possibleRoot};
   } else {
-    return { root: document, rootContainer: document.head ?? document.body };
+    return {root: document, rootContainer: document.head ?? document.body};
   }
 }
 
@@ -249,7 +250,7 @@ async function _embed(
   const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config ?? {}) : opts.config;
 
   const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions ?? {});
-  const i18n = { ...I18N, ...opts.i18n };
+  const i18n = {...I18N, ...opts.i18n};
 
   const renderer = opts.renderer ?? 'canvas';
   const logLevel = opts.logLevel ?? vega.Warn;
@@ -263,7 +264,7 @@ async function _embed(
   if (opts.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
-    const { root, rootContainer } = getRoot(div);
+    const {root, rootContainer} = getRoot(div);
     if (!root.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
@@ -321,17 +322,17 @@ async function _embed(
     vega.timeFormatLocale(opts.timeFormatLocale);
   }
 
-  const { ast } = opts;
+  const {ast} = opts;
 
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.
   // This call may throw an Error if parsing fails.
-  const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : (config as VgConfig), { ast });
+  const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : (config as VgConfig), {ast});
 
   const view = new vega.View(runtime, {
     loader,
     logLevel,
     renderer,
-    ...(ast ? { expr: (vega as any).expressionInterpreter } : {})
+    ...(ast ? {expr: (vega as any).expressionInterpreter} : {}),
   });
 
   if (opts.tooltip !== false) {
@@ -346,14 +347,14 @@ async function _embed(
     view.tooltip(handler);
   }
 
-  let { hover } = opts;
+  let {hover} = opts;
 
   if (hover === undefined) {
     hover = mode === 'vega';
   }
 
   if (hover) {
-    const { hoverSet, updateSet } = (typeof hover === 'boolean' ? {} : hover) as Hover;
+    const {hoverSet, updateSet} = (typeof hover === 'boolean' ? {} : hover) as Hover;
 
     view.hover(hoverSet, updateSet);
   }
@@ -403,8 +404,8 @@ async function _embed(
     // add 'Export' action
     if (actions === true || actions.export !== false) {
       for (const ext of ['svg', 'png'] as const) {
-        if (actions === true || actions.export === true || (actions.export as { svg?: boolean; png?: boolean })[ext]) {
-          const i18nExportAction = (i18n as { [key: string]: string })[`${ext.toUpperCase()}_ACTION`];
+        if (actions === true || actions.export === true || (actions.export as {svg?: boolean; png?: boolean})[ext]) {
+          const i18nExportAction = (i18n as {[key: string]: string})[`${ext.toUpperCase()}_ACTION`];
           const exportLink = document.createElement('a');
 
           exportLink.text = i18nExportAction;
@@ -463,7 +464,7 @@ async function _embed(
           config: config as Config,
           mode,
           renderer,
-          spec: stringify(spec)
+          spec: stringify(spec),
         });
         e.preventDefault();
       });
@@ -479,5 +480,5 @@ async function _embed(
     view.finalize();
   }
 
-  return { view, spec, vgSpec, finalize };
+  return {view, spec, vgSpec, finalize};
 }

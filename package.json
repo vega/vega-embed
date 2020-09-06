@@ -29,21 +29,20 @@
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
+  "files": [
+    "src",
+    "build",
+    "build-es5"
+  ],
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@types/jest": "^26.0.13",
     "@types/semver": "^7.3.3",
     "@wessberg/rollup-plugin-ts": "^1.3.4",
-    "babel-jest": "^26.3.0",
     "browser-sync": "^2.26.12",
     "concurrently": "^5.3.0",
-    "jest": "^26.4.2",
     "jest-canvas-mock": "^2.2.0",
     "node-sass": "^4.14.1",
     "rollup": "^2.26.10",
@@ -52,7 +51,7 @@
     "typescript": "^4.0.2",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.13.0"
+    "vega-lite-dev-config": "^0.14.1"
   },
   "peerDependencies": {
     "vega": "^5.13.0",
@@ -76,11 +75,11 @@
     "serve": "browser-sync start --directory -s -f build *.html",
     "start": "yarn build && concurrently --kill-others -n Server,Rollup 'yarn serve' 'rollup -c -w'",
     "pretest": "yarn build:style",
-    "test": "jest",
+    "test": "beemo jest",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
     "prepare": "beemo create-config",
     "prettierbase": "beemo prettier '*.{css,html}'",
-    "eslintbase": "beemo eslint",
+    "eslintbase": "beemo eslint .",
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
     "lint": "yarn eslintbase && yarn prettierbase --check"
   },
@@ -88,19 +87,21 @@
     "module": "vega-lite-dev-config",
     "drivers": [
       "prettier",
-      "eslint"
+      "eslint",
+      "babel",
+      "jest",
+      "typescript"
     ],
     "prettier": {
       "ignore": [
-        "src/style.ts",
         "README.md"
       ]
+    },
+    "jest": {
+      "testURL": "http://localhost/",
+      "setupFiles": [
+        "jest-canvas-mock"
+      ]
     }
-  },
-  "jest": {
-    "testURL": "http://localhost/",
-    "setupFiles": [
-      "jest-canvas-mock"
-    ]
   }
 }

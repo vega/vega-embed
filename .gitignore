@@ -2,13 +2,17 @@
 .eslintignore
 .eslintrc.js
 .prettierignore
+*.tsbuildinfo
+babel.config.js
 beemo-error.log
 build
 build-es5
 coverage/
+jest.config.js
 node_modules
 npm-debug.log*
 prettier.config.js
 src/style.ts
+tsconfig.json
 yarn-debug.log*
 yarn-error.log*

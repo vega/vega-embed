@@ -1,4 +1,4 @@
-import { writeConfig } from 'vega';
+import {writeConfig} from 'vega';
 
 // polyfill for IE
 if (!String.prototype.startsWith) {
@@ -12,7 +12,7 @@ export function isURL(s: string): boolean {
   return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');
 }
 
-export type DeepPartial<T> = { [P in keyof T]?: P extends unknown ? unknown : DeepPartial<T[P]> };
+export type DeepPartial<T> = {[P in keyof T]?: P extends unknown ? unknown : DeepPartial<T[P]>};
 
 export function mergeDeep<T>(dest: T, ...src: readonly DeepPartial<T>[]): T {
   for (const s of src) {

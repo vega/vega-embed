@@ -1,13 +1,13 @@
 import * as vega from 'vega';
-import { View } from 'vega';
+import {View} from 'vega';
 import * as vl from 'vega-lite';
-import { compile, TopLevelSpec } from 'vega-lite';
-import embed, { guessMode, Mode } from '../src/embed';
+import {compile, TopLevelSpec} from 'vega-lite';
+import embed, {guessMode, Mode} from '../src/embed';
 
 const vlSpec: TopLevelSpec = {
-  data: { values: [1, 2, 3] },
+  data: {values: [1, 2, 3]},
   encoding: {},
-  mark: 'point'
+  mark: 'point',
 };
 
 const vgSpec = compile(vlSpec).spec;
@@ -24,13 +24,13 @@ test('embed returns result', async () => {
 
 test('can change renderer to SVG', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { renderer: 'svg' });
+  await embed(el, vlSpec, {renderer: 'svg'});
   expect(el.children[0].children[0].tagName).toBe('svg');
 });
 
 test('creates simple actions for Vega-Lite', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { defaultStyle: false });
+  await embed(el, vlSpec, {defaultStyle: false});
   expect(el.children[1].classList[0]).toBe('vega-actions');
 });
 
@@ -44,31 +44,31 @@ test('creates default actions for Vega-Lite', async () => {
 
 test('creates all actions for Vega-Lite', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: true });
+  await embed(el, vlSpec, {actions: true});
   expect(el.children[1].children[1].childElementCount).toBe(5);
 });
 
 test('can disable actions', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: false });
+  await embed(el, vlSpec, {actions: false});
   expect(el.childElementCount).toBe(2);
 });
 
 test('can disable specific actions', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: { export: false } });
+  await embed(el, vlSpec, {actions: {export: false}});
   expect(el.children[1].children[1].childElementCount).toBe(3);
 });
 
 test('can disable export actions', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: { export: { svg: false } } });
+  await embed(el, vlSpec, {actions: {export: {svg: false}}});
   expect(el.children[1].children[1].childElementCount).toBe(4);
 });
 
 test('creates default download filename for svg', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: true });
+  await embed(el, vlSpec, {actions: true});
   expect(el.children[1].children[1].children[0].getAttribute('download')).toBe('visualization.svg');
 });
 
@@ -80,13 +80,13 @@ test('create default download filename for png', async () => {
 
 test('can use custom download filename for svg', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { downloadFileName: 'your_chart' });
+  await embed(el, vlSpec, {downloadFileName: 'your_chart'});
   expect(el.children[1].children[1].children[0].getAttribute('download')).toBe('your_chart.svg');
 });
 
 test('can use custom download filename for png', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { downloadFileName: 'my_chart' });
+  await embed(el, vlSpec, {downloadFileName: 'my_chart'});
   expect(el.children[1].children[1].children[1].getAttribute('download')).toBe('my_chart.png');
 });
 
@@ -101,7 +101,7 @@ test('creates default actions for Vega', async () => {
 
 test('does not set has-actions if actions are not specified', async () => {
   const el = document.createElement('div');
-  await embed(el, vlSpec, { actions: false });
+  await embed(el, vlSpec, {actions: false});
   expect(el.classList).toHaveLength(1);
   expect(el.querySelector('.has-actions')).toBeNull();
 });
@@ -115,7 +115,7 @@ test('can access compiled Vega', async () => {
 
 test('can patch Vega', async () => {
   const el = document.createElement('div');
-  const result = await embed(el, vgSpec, { patch: [{ op: 'add', path: '/description', value: 'Hello World!' }] });
+  const result = await embed(el, vgSpec, {patch: [{op: 'add', path: '/description', value: 'Hello World!'}]});
   expect(vgSpec.description).toBeUndefined();
   expect(result.spec).toEqual(vgSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
@@ -124,7 +124,7 @@ test('can patch Vega', async () => {
 
 test('can patch compiled Vega', async () => {
   const el = document.createElement('div');
-  const result = await embed(el, vlSpec, { patch: [{ op: 'add', path: '/description', value: 'Hello World!' }] });
+  const result = await embed(el, vlSpec, {patch: [{op: 'add', path: '/description', value: 'Hello World!'}]});
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
   expect(result.vgSpec.description).toBe('Hello World!');
@@ -132,17 +132,17 @@ test('can patch compiled Vega', async () => {
 
 test('can patch compiled Vega signals', async () => {
   const el = document.createElement('div');
-  const result = await embed(el, vlSpec, { patch: [{ op: 'add', path: '/signals', value: [{ name: 'mySignal' }] }] });
+  const result = await embed(el, vlSpec, {patch: [{op: 'add', path: '/signals', value: [{name: 'mySignal'}]}]});
   const compiledVgSpec = compile(vlSpec).spec;
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compiledVgSpec);
-  expect(result.vgSpec.signals).toEqual((compiledVgSpec.signals ?? []).concat({ name: 'mySignal' }));
+  expect(result.vgSpec.signals).toEqual((compiledVgSpec.signals ?? []).concat({name: 'mySignal'}));
 });
 
 test('can patch compiled Vega with a function', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {
-    patch: (spec) => ({ ...spec, description: 'Hello World!' })
+    patch: (spec) => ({...spec, description: 'Hello World!'}),
   });
   expect(result.spec).toEqual(vlSpec);
   expect(result.vgSpec).not.toEqual(compile(vlSpec).spec);
@@ -150,24 +150,22 @@ test('can patch compiled Vega with a function', async () => {
 });
 
 test('guessMode from Vega schema', () => {
-  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega/v5.json' }, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v5.json'}, 'invalid' as Mode)).toBe('vega');
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({ $schema: 'https://vega.github.io/schema/vega-lite/v4.json' }, 'invalid' as Mode)).toBe(
-    'vega-lite'
-  );
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v4.json'}, 'invalid' as Mode)).toBe('vega-lite');
 });
 
 test('guessMode from Vega-Lite spec', () => {
-  const unitSpec: TopLevelSpec = { data: { values: [] }, mark: 'bar', encoding: {} };
+  const unitSpec: TopLevelSpec = {data: {values: []}, mark: 'bar', encoding: {}};
   const specs: TopLevelSpec[] = [
     unitSpec,
-    { layer: [] },
-    { repeat: {}, spec: unitSpec },
-    { data: { values: [] }, facet: { row: { field: 'foo', type: 'nominal' } }, spec: { mark: 'bar', encoding: {} } },
-    { vconcat: [] },
-    { hconcat: [] }
+    {layer: []},
+    {repeat: {}, spec: unitSpec},
+    {data: {values: []}, facet: {row: {field: 'foo', type: 'nominal'}}, spec: {mark: 'bar', encoding: {}}},
+    {vconcat: []},
+    {hconcat: []},
   ];
 
   for (const spec of specs) {
@@ -176,7 +174,7 @@ test('guessMode from Vega-Lite spec', () => {
 });
 
 test('guessMode from Vega spec', () => {
-  expect(guessMode({ marks: [] }, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({marks: []}, 'invalid' as Mode)).toBe('vega');
 });
 
 test('can set locale', async () => {
@@ -184,8 +182,8 @@ test('can set locale', async () => {
   const result = await embed(el, vlSpec, {
     formatLocale: {
       decimal: ',',
-      thousands: '.'
-    }
+      thousands: '.',
+    },
   });
   expect(result).toBeTruthy();
 });
@@ -194,8 +192,8 @@ test('can set tooltip theme', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {
     tooltip: {
-      theme: 'dark'
-    }
+      theme: 'dark',
+    },
   });
   expect(result).toBeTruthy();
 });
@@ -203,7 +201,7 @@ test('can set tooltip theme', async () => {
 test('can set ast option', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {
-    ast: true
+    ast: true,
   });
   expect(result).toBeTruthy();
 });
@@ -212,7 +210,7 @@ test('can change i18n strings', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, {
     actions: true,
-    i18n: { COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux' }
+    i18n: {COMPILED_ACTION: 'foo', EDITOR_ACTION: 'bar', PNG_ACTION: 'baz', SOURCE_ACTION: 'qux', SVG_ACTION: 'quux'},
   });
 
   const ctrl = el.children[1].children[1];
@@ -237,7 +235,7 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   await embed(el, vlSpec, {
-    hover: true
+    hover: true,
   });
   expect(hoverSpy).toHaveBeenCalledWith(undefined, undefined);
   hoverSpy.mockReset();
@@ -248,23 +246,23 @@ test('can set hover arguments', async () => {
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
-    hover: false
+    hover: false,
   });
   expect(hoverSpy).not.toHaveBeenCalled();
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
     hover: {
-      hoverSet: 'enter'
-    }
+      hoverSet: 'enter',
+    },
   });
   expect(hoverSpy).toHaveBeenCalledWith('enter', undefined);
   hoverSpy.mockReset();
 
   await embed(el, vgSpec, {
     hover: {
-      updateSet: 'exit'
-    }
+      updateSet: 'exit',
+    },
   });
   expect(hoverSpy).toHaveBeenCalledWith(undefined, 'exit');
   hoverSpy.mockReset();
@@ -282,7 +280,7 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
     {
       $schema: 'https://vega.github.io/schema/vega-lite/v2.json',
       mark: 'bar',
-      encoding: {}
+      encoding: {},
     },
     {}
   );
@@ -290,7 +288,7 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
   await embed(
     el,
     {
-      $schema: 'https://vega.github.io/schema/vega/v4.json'
+      $schema: 'https://vega.github.io/schema/vega/v4.json',
     },
     {}
   );
@@ -298,7 +296,7 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
   expect(spy).toHaveBeenCalledTimes(2);
   expect(spy.mock.calls).toEqual([
     [`The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
-    [`The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`]
+    [`The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`],
   ]);
 
   spy.mockRestore();

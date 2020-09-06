@@ -1,5 +1,5 @@
-import { View } from 'vega';
-import embed, { EmbedOptions, VisualizationSpec } from './embed';
+import {View} from 'vega';
+import embed, {EmbedOptions, VisualizationSpec} from './embed';
 
 /**
  * Create a promise to an HTML Div element with an embedded Vega-Lite or Vega visualization.
@@ -8,7 +8,7 @@ import embed, { EmbedOptions, VisualizationSpec } from './embed';
  * The main use case is in [Observable](https://observablehq.com/).
  */
 export default async function (spec: VisualizationSpec | string, opt: EmbedOptions = {}) {
-  const wrapper = document.createElement('div') as HTMLDivElement & { value: View };
+  const wrapper = document.createElement('div') as HTMLDivElement & {value: View};
   wrapper.classList.add('vega-embed-wrapper');
 
   const div = document.createElement('div');
@@ -17,11 +17,11 @@ export default async function (spec: VisualizationSpec | string, opt: EmbedOptio
   const actions =
     opt.actions === true || opt.actions === false
       ? opt.actions
-      : { export: true, source: false, compiled: true, editor: true, ...(opt.actions ?? {}) };
+      : {export: true, source: false, compiled: true, editor: true, ...(opt.actions ?? {})};
 
   const result = await embed(div, spec, {
     actions,
-    ...(opt ?? {})
+    ...(opt ?? {}),
   });
 
   wrapper.value = result.view;
