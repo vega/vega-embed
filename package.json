@@ -32,14 +32,13 @@
   "module": "build/vega-embed.module.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
-  "types": "build/vega-embed.d.ts",
+  "types": "build/vega-embed.module.d.ts",
   "files": [
     "src",
     "build",
     "build-es5"
   ],
   "devDependencies": {
-    "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",

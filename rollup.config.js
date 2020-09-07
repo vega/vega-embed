@@ -6,14 +6,18 @@ import bundleSize from 'rollup-plugin-bundle-size';
 import {terser} from 'rollup-plugin-terser';
 
 const pkg = require('./package.json');
+const tsconfig = require('./tsconfig.json').compilerOptions;
 
-const extensions = ['.js', '.ts'];
-
-const plugins = (browserslist) => [
-  resolve({extensions}),
+const plugins = (browserslist, declaration = false) => [
+  resolve({extensions: ['.js', '.ts']}),
   commonjs(),
   json(),
   ts({
+    tsconfig: {
+      ...tsconfig,
+      declaration,
+      declarationMap: declaration,
+    },
     browserslist: browserslist || 'defaults and not IE 11',
   }),
   bundleSize(),
@@ -27,7 +31,7 @@ const outputs = [
       format: 'esm',
       sourcemap: true,
     },
-    plugins: plugins(),
+    plugins: plugins('defaults and not IE 11', true),
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)],
   },
 ];
@@ -43,6 +47,7 @@ for (const build of ['es5', 'es6']) {
         sourcemap: true,
         name: 'vegaEmbed',
         globals: {
+          vega: 'vega',
           'vega-lite': 'vegaLite',
         },
       },
@@ -52,12 +57,13 @@ for (const build of ['es5', 'es6']) {
         sourcemap: true,
         name: 'vegaEmbed',
         globals: {
+          vega: 'vega',
           'vega-lite': 'vegaLite',
         },
         plugins: [terser()],
       },
     ],
-    plugins: plugins(build === 'es5' ? 'defaults' : null),
+    plugins: plugins(build === 'es5' ? 'defaults' : 'defaults and not IE 11', false),
     external: ['vega', 'vega-lite'],
   });
 }
