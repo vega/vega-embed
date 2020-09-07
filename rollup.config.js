@@ -30,7 +30,7 @@ const outputs = [
       format: 'esm',
       sourcemap: true,
     },
-    plugins: plugins('defaults and not IE 11', true),
+    plugins: plugins(undefined, true),
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)],
   },
 ];
@@ -42,7 +42,7 @@ for (const build of ['es5', 'es6']) {
     output: [
       {
         file: `${buildFolder}/vega-embed.js`,
-        format: 'umd', // cannot do iife because rollup generates code that expects Vega-Lite to be present
+        format: 'umd',
         sourcemap: true,
         name: 'vegaEmbed',
         globals: {
