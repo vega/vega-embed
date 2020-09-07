@@ -24,7 +24,7 @@ const plugins = (browserslist, declaration) => [
 
 const outputs = [
   {
-    input: 'src/index.ts',
+    input: 'src/embed.ts',
     output: {
       file: 'build/vega-embed.module.js',
       format: 'esm',
