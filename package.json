@@ -54,7 +54,7 @@
     "typescript": "^4.0.2",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.14.2"
+    "vega-lite-dev-config": "^0.14.6"
   },
   "peerDependencies": {
     "vega": "^5.13.0",
@@ -65,8 +65,8 @@
     "json-stringify-pretty-compact": "^2.0.0",
     "semver": "^7.3.2",
     "vega-schema-url-parser": "^2.1.0",
-    "vega-themes": "^2.8.5",
-    "vega-tooltip": "^0.23.2"
+    "vega-themes": "^2.9.0",
+    "vega-tooltip": "^0.24.0"
   },
   "scripts": {
     "prebuild": "yarn clean && yarn build:style",

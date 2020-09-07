@@ -7,8 +7,8 @@ import {terser} from 'rollup-plugin-terser';
 
 const pkg = require('./package.json');
 
-const plugins = (browserslist, declaration = false) => [
-  resolve({extensions: ['.js', '.ts']}),
+const plugins = (browserslist, declaration) => [
+  resolve(),
   commonjs(),
   json(),
   ts({
@@ -47,6 +47,7 @@ for (const build of ['es5', 'es6']) {
         name: 'vegaEmbed',
         globals: {
           vega: 'vega',
+          'vega-util': 'vega',
           'vega-lite': 'vegaLite',
         },
       },
@@ -57,13 +58,14 @@ for (const build of ['es5', 'es6']) {
         name: 'vegaEmbed',
         globals: {
           vega: 'vega',
+          'vega-util': 'vega',
           'vega-lite': 'vegaLite',
         },
         plugins: [terser()],
       },
     ],
     plugins: plugins(build === 'es5' ? 'defaults' : 'defaults and not IE 11', false),
-    external: ['vega', 'vega-lite'],
+    external: ['vega', 'vega-util', 'vega-lite'],
   });
 }
 
