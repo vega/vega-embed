@@ -47,7 +47,6 @@ for (const build of ['es5', 'es6']) {
         name: 'vegaEmbed',
         globals: {
           vega: 'vega',
-          'vega-util': 'vega',
           'vega-lite': 'vegaLite',
         },
       },
@@ -58,14 +57,13 @@ for (const build of ['es5', 'es6']) {
         name: 'vegaEmbed',
         globals: {
           vega: 'vega',
-          'vega-util': 'vega',
           'vega-lite': 'vegaLite',
         },
         plugins: [terser()],
       },
     ],
     plugins: plugins(build === 'es5' ? 'defaults' : 'defaults and not IE 11', false),
-    external: ['vega', 'vega-util', 'vega-lite'],
+    external: ['vega', 'vega-lite'],
   });
 }
 

@@ -3,21 +3,23 @@ import stringify from 'json-stringify-pretty-compact';
 import {satisfies} from 'semver';
 import * as vegaImport from 'vega';
 import {
+  Config as VgConfig,
   EncodeEntryName,
+  isBoolean,
+  isString,
   Loader,
   LoaderOptions,
+  mergeConfig,
   Renderers,
   Spec as VgSpec,
   TooltipHandler,
   View,
-  Config as VgConfig,
 } from 'vega';
 import * as vegaLiteImport from 'vega-lite';
 import {Config as VlConfig, TopLevelSpec as VlSpec} from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import {Handler, Options as TooltipOptions} from 'vega-tooltip';
-import {isBoolean, isString, mergeConfig} from 'vega-util';
 import post from './post';
 import embedStyle from './style';
 import {Config, Mode} from './types';
