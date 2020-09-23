@@ -39,7 +39,7 @@
     "build-es5"
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "15.0.0",
+    "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@types/semver": "^7.3.3",
