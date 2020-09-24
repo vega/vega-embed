@@ -7952,11 +7952,11 @@ vega-time@^2.0.3, vega-time@^2.0.4, vega-time@~2.0.4:
     vega-util "^1.15.2"
 
 vega-tooltip@^0.24.0:
-  version "0.24.1"
-  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.24.1.tgz#34ecaf80ff9d91cc29317208f6ad5fe226e34b94"
-  integrity sha512-LmhjS/bdwe2IeLhXF+aiBrV5sTD33HYPUqtHaJh1Qhcsf0uHCBPVyy32pYBXLNs6QDAy+xLT4iRxBTcm4l7CYw==
+  version "0.24.2"
+  resolved "https://registry.yarnpkg.com/vega-tooltip/-/vega-tooltip-0.24.2.tgz#da55a171a96ea48a8ff135a728622e1cbb1152af"
+  integrity sha512-b7IeYQl/piNVsMmTliOgTnwSOhBs67KqoZ9UzP1I3XpH7TKbSuc3YHA7b1CSxkRR0hHKdradby4UI8c9rdH74w==
   dependencies:
-    vega-util "^1.15.1"
+    vega-util "^1.15.2"
 
 vega-transforms@~4.9.3:
   version "4.9.3"
