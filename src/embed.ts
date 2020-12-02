@@ -62,7 +62,7 @@ const I18N = {
 };
 
 export interface EmbedOptions<S = string> {
-  bindContainer?: HTMLElement | string;
+  bind?: HTMLElement | string;
   actions?: boolean | Actions;
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
@@ -374,7 +374,7 @@ async function _embed(
     }
   }
 
-  await view.initialize(container, opts.bindContainer).runAsync();
+  await view.initialize(container, opts.bind).runAsync();
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
