@@ -62,6 +62,7 @@ const I18N = {
 };
 
 export interface EmbedOptions<S = string> {
+  bind?: HTMLElement | string;
   actions?: boolean | Actions;
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
@@ -258,15 +259,15 @@ async function _embed(
   const logLevel = opts.logLevel ?? vega.Warn;
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
-  const div = typeof el === 'string' ? document.querySelector(el) : el;
-  if (!div) {
+  const element = typeof el === 'string' ? document.querySelector(el) : el;
+  if (!element) {
     throw new Error(`${el} does not exist`);
   }
 
   if (opts.defaultStyle !== false) {
     // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
-    const {root, rootContainer} = getRoot(div);
+    const {root, rootContainer} = getRoot(element);
     if (!root.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
@@ -292,18 +293,18 @@ async function _embed(
     }
   }
 
-  div.classList.add('vega-embed');
+  element.classList.add('vega-embed');
   if (actions) {
-    div.classList.add('has-actions');
+    element.classList.add('has-actions');
   }
-  div.innerHTML = ''; // clear container
+  element.innerHTML = ''; // clear container
 
-  let target = div;
+  let container = element;
   if (actions) {
     const chartWrapper = document.createElement('div');
     chartWrapper.classList.add(CHART_WRAPPER_CLASS);
-    div.appendChild(chartWrapper);
-    target = chartWrapper;
+    element.appendChild(chartWrapper);
+    container = chartWrapper;
   }
 
   const patch = opts.patch;
@@ -373,17 +374,17 @@ async function _embed(
     }
   }
 
-  await view.initialize(target).runAsync();
+  await view.initialize(container, opts.bind).runAsync();
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
-    let wrapper = div;
+    let wrapper = element;
 
     if (opts.defaultStyle !== false) {
       const details = document.createElement('details');
       details.title = i18n.CLICK_TO_VIEW_ACTIONS;
-      div.append(details);
+      element.append(details);
 
       wrapper = details;
       const summary = document.createElement('summary');
