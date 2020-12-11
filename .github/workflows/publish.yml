@@ -9,8 +9,6 @@ jobs:
   publish:
     name: Publish to NPM
 
-    needs: test
-
     runs-on: ubuntu-latest
 
     steps:
