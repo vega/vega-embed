@@ -3,6 +3,7 @@ import pkg from '../package.json';
 import container from './container';
 import embed, {vega, vegaLite} from './embed';
 import {isURL} from './util';
+
 /**
  * Returns true if the object is an HTML element.
  */
