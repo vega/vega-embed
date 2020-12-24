@@ -1,5 +1,5 @@
 import {isString} from 'vega';
-import {version} from '../package.json';
+import pkg from '../package.json';
 import container from './container';
 import embed, {vega, vegaLite} from './embed';
 import {isURL} from './util';
@@ -27,6 +27,6 @@ const wrapper: Wrapper = (...args: any[]): any => {
 (wrapper as any).embed = embed;
 (wrapper as any).vega = vega;
 (wrapper as any).default = embed;
-(wrapper as any).version = version;
+(wrapper as any).version = pkg.version;
 
 export default wrapper;
