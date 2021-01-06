@@ -66,7 +66,7 @@
     "semver": "^7.3.4",
     "vega-schema-url-parser": "^2.1.0",
     "vega-themes": "^2.9.1",
-    "vega-tooltip": "^0.24.2"
+    "vega-tooltip": "^0.25.0"
   },
   "scripts": {
     "prebuild": "yarn clean && yarn build:style",
