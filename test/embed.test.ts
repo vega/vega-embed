@@ -301,3 +301,34 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
 
   spy.mockRestore();
 });
+
+test('can set loader', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec, {
+    loader: {
+      target: '_blank',
+    },
+  });
+  expect(result).toBeTruthy();
+  expect((result.view as any)._loader.options).toEqual({
+    target: '_blank',
+  });
+});
+
+test('can set loader via usermeta', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, {
+    ...vlSpec,
+    usermeta: {
+      embedOptions: {
+        loader: {
+          target: '_blank',
+        },
+      },
+    },
+  });
+  expect(result).toBeTruthy();
+  expect((result.view as any)._loader.options).toEqual({
+    target: '_blank',
+  });
+});

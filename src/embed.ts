@@ -193,6 +193,14 @@ function isLoader(o?: LoaderOptions | Loader): o is Loader {
   return !!(o && 'load' in o);
 }
 
+function createLoader(opts?: Loader | LoaderOptions) {
+  return isLoader(opts) ? opts : vega.loader(opts);
+}
+
+function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
+  return (parsedSpec.usermeta && (parsedSpec.usermeta as any)['embedOptions']) ?? {};
+}
+
 /**
  * Embed a Vega visualization component in a web page. This function returns a promise.
  *
@@ -206,15 +214,24 @@ export default async function embed(
   spec: VisualizationSpec | string,
   opts: EmbedOptions = {}
 ): Promise<Result> {
-  const loader: Loader = isLoader(opts.loader) ? opts.loader : vega.loader(opts.loader);
+  let parsedSpec: VisualizationSpec;
+  let loader: Loader | undefined;
 
-  // load spec, config, and patch that are references by URLs
-  const parsedSpec = isString(spec) ? JSON.parse(await loader.load(spec)) : spec;
+  if (isString(spec)) {
+    loader = createLoader(opts.loader);
+    parsedSpec = JSON.parse(await loader.load(spec));
+  } else {
+    parsedSpec = spec;
+  }
 
-  const usermetaOpts = await loadOpts(
-    (parsedSpec.usermeta && (parsedSpec.usermeta as any)['embedOptions']) ?? {},
-    loader
-  );
+  const usermetaLoader = embedOptionsFromUsermeta(parsedSpec).loader;
+
+  // either create the loader for the first time or create a new loader if the spec has new loader options
+  if (!loader || usermetaLoader) {
+    loader = createLoader(opts.loader ?? usermetaLoader);
+  }
+
+  const usermetaOpts = await loadOpts(embedOptionsFromUsermeta(parsedSpec), loader);
   const parsedOpts = await loadOpts(opts, loader);
 
   const mergedOpts = {
