@@ -1,23 +1,23 @@
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
-import ts from '@wessberg/rollup-plugin-ts';
 import bundleSize from 'rollup-plugin-bundle-size';
-import {terser} from 'rollup-plugin-terser';
+import esbuild from 'rollup-plugin-esbuild';
 
 const pkg = require('./package.json');
 
-const plugins = (browserslist, declaration) => [
+const plugins = (target, minify, declaration) => [
   resolve(),
   commonjs(),
   json(),
-  ts({
-    tsconfig: (resolvedConfig) => ({
-      ...resolvedConfig,
-      declaration,
-      declarationMap: declaration,
-    }),
-    browserslist,
+  esbuild({
+    sourceMap: true,
+    minify,
+    target,
+    tsconfig: 'tsconfig.json',
+    loaders: {
+      json: 'json',
+    },
   }),
   bundleSize(),
 ];
@@ -30,41 +30,52 @@ const outputs = [
       format: 'esm',
       sourcemap: true,
     },
-    plugins: plugins(undefined, true),
+    plugins: plugins(undefined, false, true),
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)],
   },
 ];
 
+const globals = {
+  vega: 'vega',
+  'vega-lite': 'vegaLite',
+};
+
+const external = ['vega', 'vega-lite'];
+
 for (const build of ['es5', 'es6']) {
   const buildFolder = build === 'es5' ? 'build-es5' : 'build';
-  outputs.push({
-    input: 'src/index.ts',
-    output: [
+  outputs.push(
+    ...[
       {
-        file: `${buildFolder}/vega-embed.js`,
-        format: 'umd',
-        sourcemap: true,
-        name: 'vegaEmbed',
-        globals: {
-          vega: 'vega',
-          'vega-lite': 'vegaLite',
-        },
+        input: 'src/index.ts',
+        output: [
+          {
+            file: `${buildFolder}/vega-embed.js`,
+            format: 'umd',
+            sourcemap: true,
+            name: 'vegaEmbed',
+            globals,
+          },
+        ],
+        plugins: plugins(build === 'es5' ? 'es2020' : 'es2015', false, false),
+        external,
       },
       {
-        file: `${buildFolder}/vega-embed.min.js`,
-        format: 'umd', // cannot do iife because rollup generates code that expects Vega-Lite to be present
-        sourcemap: true,
-        name: 'vegaEmbed',
-        globals: {
-          vega: 'vega',
-          'vega-lite': 'vegaLite',
-        },
-        plugins: [terser()],
+        input: 'src/index.ts',
+        output: [
+          {
+            file: `${buildFolder}/vega-embed.min.js`,
+            format: 'umd', // cannot do iife because rollup generates code that expects Vega-Lite to be present
+            sourcemap: true,
+            name: 'vegaEmbed',
+            globals,
+          },
+        ],
+        plugins: plugins(build === 'es5' ? 'es2020' : 'es2015', true, false),
+        external,
       },
-    ],
-    plugins: plugins(build === 'es5' ? 'defaults' : 'defaults and not IE 11', false),
-    external: ['vega', 'vega-lite'],
-  });
+    ]
+  );
 }
 
 export default outputs;
