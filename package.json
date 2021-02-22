@@ -54,7 +54,7 @@
     "typescript": "^4.1.5",
     "vega": "^5.10.0",
     "vega-lite": "^4.7.0",
-    "vega-lite-dev-config": "^0.15.0"
+    "vega-lite-dev-config": "^0.15.1"
   },
   "peerDependencies": {
     "vega": "^5.13.0",

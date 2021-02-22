@@ -7620,10 +7620,10 @@ vega-label@~1.0.0:
     vega-scenegraph "^4.9.2"
     vega-util "^1.15.2"
 
-vega-lite-dev-config@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.15.0.tgz#eaf42002f1a2dcd41f8a7d7e05253bd8e1542b1c"
-  integrity sha512-W8+QQ8o1NrehreVvW3IJzW/TGy5UsVp+jqYeqNq6iCNeG72EPbvxt7kkKBbxJ4gb9SfPDYc4vdFBbpqHR8aNsQ==
+vega-lite-dev-config@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.15.1.tgz#3bda1baedb0f1b8e9cabf477086f1b9f5583efc3"
+  integrity sha512-etWY1gtDAD6mTdTU9wJ2/q7dIU6FtmZuBxjNjiywDnwR99/u9n4g3ejpP/V+0RdiIpE35E2L2FVATIRfj8SKWw==
   dependencies:
     "@babel/core" "^7.12.17"
     "@babel/preset-env" "^7.12.17"
