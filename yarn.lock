@@ -7529,7 +7529,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.0.0, typescript@^4.2.2:
+typescript@^4.0.0, typescript@^4.1.0, typescript@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.2.tgz#1450f020618f872db0ea17317d16d8da8ddb8c4c"
   integrity sha512-tbb+NVrLfnsJy3M59lsDgrzWIflR4d4TIUjz+heUnHZwdF7YsrMTKoRERiIvI2lvBG95dfpLxB21WZhys1bgaQ==
@@ -7783,9 +7783,9 @@ vega-label@~1.0.0:
     vega-util "^1.15.2"
 
 vega-lite-dev-config@^0.16.1:
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.16.1.tgz#a369de4ef523d4751f976535386722a1c978c32f"
-  integrity sha512-VWXStp1hsd4jyhTHMKOtMQckTGm/OBydLzsTG+p7pZwui6269FQGrQEscYB1JA2z/N4LMNQKI1TpFB3ri7eKJA==
+  version "0.16.6"
+  resolved "https://registry.yarnpkg.com/vega-lite-dev-config/-/vega-lite-dev-config-0.16.6.tgz#dc55543ee8b1fec4d02a9fb0a4083878bca09ae7"
+  integrity sha512-oVD3BZuMmcPh3ee2z2Ed8SAC1lgaaCjXHlAewVWlAomNKsRgRHLpZnwKRKX9Wk6pVC0oVLKddBB6OcMNbF6MTA==
   dependencies:
     "@babel/core" "^7.13.1"
     "@babel/preset-env" "^7.13.5"
@@ -7808,7 +7808,7 @@ vega-lite-dev-config@^0.16.1:
     eslint-plugin-react "^7.22.0"
     jest "^26.6.3"
     prettier "^2.2.1"
-    typescript "^4.2.2"
+    typescript "^4.1.0"
 
 vega-lite@^5.0.0:
   version "5.0.0"
