@@ -61,7 +61,7 @@ const I18N = {
   SVG_ACTION: 'Save as SVG',
 };
 
-export interface EmbedOptions<S = string> {
+export interface EmbedOptions<S = string, R = Renderers> {
   bind?: HTMLElement | string;
   actions?: boolean | Actions;
   mode?: Mode;
@@ -69,7 +69,7 @@ export interface EmbedOptions<S = string> {
   defaultStyle?: boolean | string;
   logLevel?: number;
   loader?: Loader | LoaderOptions;
-  renderer?: Renderers;
+  renderer?: R;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
   patch?: S | PatchFunc | Operation[];
   width?: number;
@@ -86,6 +86,7 @@ export interface EmbedOptions<S = string> {
   formatLocale?: Record<string, unknown>;
   timeFormatLocale?: Record<string, unknown>;
   ast?: boolean;
+  viewClass?: typeof View;
 }
 
 const NAMES: {[key in Mode]: string} = {
@@ -348,7 +349,7 @@ async function _embed(
   // This call may throw an Error if parsing fails.
   const runtime = vega.parse(vgSpec, mode === 'vega-lite' ? {} : (config as VgConfig), {ast});
 
-  const view = new vega.View(runtime, {
+  const view = new (opts.viewClass || vega.View)(runtime, {
     loader,
     logLevel,
     renderer,

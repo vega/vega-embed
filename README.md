@@ -179,7 +179,7 @@ var opt = {
 | `theme`       | String        | If specified, tells Vega-Embed use the theme from [Vega Themes](https://github.com/vega/vega-themes). **Experimental: we may update themes with minor version updates of Vega-Embed.** |
 | `defaultStyle` | Boolean or String | If set to `true` (default), the embed actions are shown in a menu. Set to `false` to use simple links. Provide a string to set the style sheet. |
 | `bind`        | String or Element | The element that should contain any input elements bound to signals. |
-| `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. |
+| `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. May be a custom value if passing your own `viewClass` option. |
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip`     | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
 | `loader`      | Loader / Object | _Loader_ : Sets a custom Vega loader. _Object_ : Vega loader options for a loader that will be created. <br> See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
@@ -198,6 +198,7 @@ var opt = {
 | `formatLocale` | Object   | Sets the default locale definition for number formatting. See the [d3-format locale collection](https://github.com/d3/d3-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 | `timeFormatLocale` | Object   | Sets the default locale definition for date/time formatting. See the [d3-time-format locale collection](https://github.com/d3/d3-time-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 | `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. In addition to enabling the `ast` option, you need to load the Vega interpreter module before loading Vega. See https://github.com/vega/vega/pull/2658 for details. |
+| `viewClass` | Class         | Class which extends [Vega `View`](https://vega.github.io/vega/docs/api/view/#view) for custom rendering. |
 
 ## Common questions
 
