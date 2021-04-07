@@ -1,6 +1,13 @@
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 .DS_Store
 .eslintignore
 .eslintrc.js
+.pnp.*
 .prettierignore
 babel.config.js
 beemo-error.log
