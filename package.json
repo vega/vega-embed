@@ -72,7 +72,7 @@
   },
   "scripts": {
     "prebuild": "yarn clean && yarn build:style",
-    "build": "rollup -c",
+    "build": "yarn prebuild && rollup -c",
     "build:style": "./build-style.sh",
     "clean": "del build build-es5 src/style.ts",
     "prepublishOnly": "yarn clean && yarn build",
@@ -80,7 +80,7 @@
     "serve": "browser-sync start --directory -s -f build *.html",
     "start": "yarn build && concurrently --kill-others -n Server,Rollup 'yarn serve' 'rollup -c -w'",
     "pretest": "yarn build:style",
-    "test": "beemo jest",
+    "test": "yarn pretest && beemo jest",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
     "prepare": "beemo create-config",
     "prettierbase": "beemo prettier '*.{css,scss,html}'",
