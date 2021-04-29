@@ -3,14 +3,11 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+    day: sunday
     time: "23:00"
     timezone: PST8PDT
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: vega-lite
-    versions:
-    - 5.0.0
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
