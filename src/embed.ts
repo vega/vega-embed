@@ -273,7 +273,7 @@ async function _embed(
   const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions ?? {});
   const i18n = {...I18N, ...opts.i18n};
 
-  const renderer = opts.renderer ?? 'canvas';
+  const renderer = opts.renderer ?? 'svg';
   const logLevel = opts.logLevel ?? vega.Warn;
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
