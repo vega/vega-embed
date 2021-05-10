@@ -111,8 +111,12 @@
   }
 
   .chart-wrapper {
-    width: 100%;
-    height: 100%;
+    &.fit-x {
+      width: 100%;
+    }
+    &.fit-y {
+      height: 100%;
+    }
   }
 }
 
