@@ -80,7 +80,7 @@
     "serve": "browser-sync start --directory -s -f build *.html",
     "start": "yarn build && concurrently --kill-others -n Server,Rollup 'yarn serve' 'rollup -c -w'",
     "pretest": "yarn build:style",
-    "test": "beemo jest",
+    "test": "beemo jest --stdio stream",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
     "prepare": "beemo create-config",
     "prettierbase": "beemo prettier '*.{css,scss,html}'",
