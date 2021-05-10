@@ -323,6 +323,14 @@ async function _embed(
     chartWrapper.classList.add(CHART_WRAPPER_CLASS);
     element.appendChild(chartWrapper);
     container = chartWrapper;
+    // apply autosize styles to chartWrapper element
+    let autosize = spec.autosize && spec.autosize.type;
+    if (autosize == 'fit' || autosize == 'fit-x') {
+      chartWrapper.classList.add('fit-x');
+    }
+    if (autosize == 'fit' || autosize == 'fit-y') {
+      chartWrapper.classList.add('fit-y');
+    }
   }
 
   const patch = opts.patch;
