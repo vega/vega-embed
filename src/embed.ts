@@ -6,6 +6,7 @@ import {
   Config as VgConfig,
   EncodeEntryName,
   isBoolean,
+  isObject,
   isString,
   Loader,
   LoaderOptions,
@@ -323,13 +324,13 @@ async function _embed(
     chartWrapper.classList.add(CHART_WRAPPER_CLASS);
     element.appendChild(chartWrapper);
     container = chartWrapper;
-    
-    const {autosize} =  vgSpec;
-    let autosize = isObject(autosize) ? autosize.type : autosize;
-    if (autosize == 'fit' || autosize == 'fit-x') {
+
+    const {autosize} = vgSpec;
+    const autosizeType = isObject(autosize) ? (autosize as any).type : autosize;
+    if (autosizeType == 'fit' || autosizeType == 'fit-x') {
       chartWrapper.classList.add('fit-x');
     }
-    if (autosize == 'fit' || autosize == 'fit-y') {
+    if (autosizeType == 'fit' || autosizeType == 'fit-y') {
       chartWrapper.classList.add('fit-y');
     }
   }
