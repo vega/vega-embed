@@ -324,7 +324,7 @@ async function _embed(
     element.appendChild(chartWrapper);
     container = chartWrapper;
     // apply autosize styles to chartWrapper element
-    let autosize = spec.autosize && spec.autosize.type;
+    let autosize = spec?.autosize.type;
     if (autosize == 'fit' || autosize == 'fit-x') {
       chartWrapper.classList.add('fit-x');
     }
