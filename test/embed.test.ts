@@ -106,6 +106,59 @@ test('does not set has-actions if actions are not specified', async () => {
   expect(el.querySelector('.has-actions')).toBeNull();
 });
 
+test('add fix-x class when needed', async () => {
+  const el = document.createElement('div');
+  await embed(el, {
+    autosize: 'fit-x',
+  });
+  expect(el.children[0].classList).toHaveLength(2);
+  expect(el.children[0].classList[1]).toBe('fit-x');
+
+  await embed(el, {
+    autosize: {
+      type: 'fit-x',
+    },
+  });
+  expect(el.children[0].classList).toHaveLength(2);
+  expect(el.children[0].classList[1]).toBe('fit-x');
+});
+
+test('add fix-y class when needed', async () => {
+  const el = document.createElement('div');
+  await embed(el, {
+    autosize: 'fit-y',
+  });
+  expect(el.children[0].classList).toHaveLength(2);
+  expect(el.children[0].classList[1]).toBe('fit-y');
+
+  await embed(el, {
+    autosize: {
+      type: 'fit-y',
+    },
+  });
+  expect(el.children[0].classList).toHaveLength(2);
+  expect(el.children[0].classList[1]).toBe('fit-y');
+});
+
+test('add fix-x and fit-y class when needed', async () => {
+  const el = document.createElement('div');
+  await embed(el, {
+    autosize: 'fit',
+  });
+  expect(el.children[0].classList).toHaveLength(3);
+  expect(el.children[0].classList[1]).toBe('fit-x');
+  expect(el.children[0].classList[2]).toBe('fit-y');
+
+  await embed(el, {
+    autosize: {
+      type: 'fit',
+    },
+  });
+  expect(el.children[0].classList).toHaveLength(3);
+  expect(el.children[0].classList[1]).toBe('fit-x');
+  expect(el.children[0].classList[2]).toBe('fit-y');
+});
+
 test('can access compiled Vega', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec);
