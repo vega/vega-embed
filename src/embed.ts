@@ -323,8 +323,9 @@ async function _embed(
     chartWrapper.classList.add(CHART_WRAPPER_CLASS);
     element.appendChild(chartWrapper);
     container = chartWrapper;
-    // apply autosize styles to chartWrapper element
-    let autosize = spec?.autosize.type;
+    
+    const {autosize} =  vgSpec;
+    let autosize = isObject(autosize) ? autosize.type : autosize;
     if (autosize == 'fit' || autosize == 'fit-x') {
       chartWrapper.classList.add('fit-x');
     }
