@@ -35,8 +35,7 @@
   "types": "build/vega-embed.module.d.ts",
   "files": [
     "src",
-    "build",
-    "build-es5"
+    "build"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "19.0.0",
@@ -74,7 +73,7 @@
     "prebuild": "yarn clean && yarn build:style",
     "build": "rollup -c",
     "build:style": "./build-style.sh",
-    "clean": "del build build-es5 src/style.ts",
+    "clean": "del build src/style.ts",
     "prepublishOnly": "yarn clean && yarn build",
     "preversion": "yarn lint && yarn test",
     "serve": "browser-sync start --directory -s -f build *.html",
