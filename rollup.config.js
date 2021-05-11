@@ -17,6 +17,8 @@ const plugins = (browserslist, declaration) => [
       declaration,
       declarationMap: declaration,
     }),
+    transpiler: "babel",
+    babelConfig: {"presets": ["@babel/preset-env"]},
     browserslist,
   }),
   bundleSize(),
