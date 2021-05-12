@@ -3,10 +3,10 @@ import stringify from 'json-stringify-pretty-compact';
 import {satisfies} from 'semver';
 import * as vegaImport from 'vega';
 import {
+  AutoSize,
   Config as VgConfig,
   EncodeEntryName,
   isBoolean,
-  isObject,
   isString,
   Loader,
   LoaderOptions,
@@ -324,15 +324,6 @@ async function _embed(
     chartWrapper.classList.add(CHART_WRAPPER_CLASS);
     element.appendChild(chartWrapper);
     container = chartWrapper;
-
-    const {autosize} = vgSpec;
-    const autosizeType = isObject(autosize) ? (autosize as any).type : autosize;
-    if (autosizeType == 'fit' || autosizeType == 'fit-x') {
-      chartWrapper.classList.add('fit-x');
-    }
-    if (autosizeType == 'fit' || autosizeType == 'fit-y') {
-      chartWrapper.classList.add('fit-y');
-    }
   }
 
   const patch = opts.patch;
@@ -364,6 +355,21 @@ async function _embed(
     logLevel,
     renderer,
     ...(ast ? {expr: (vega as any).expressionInterpreter} : {}),
+  });
+
+  view.addSignalListener('autosize', (_, autosize: Exclude<AutoSize, string>) => {
+    const {type} = autosize;
+    if (type == 'fit-x') {
+      container.classList.add('fit-x');
+      container.classList.remove('fit-y');
+    } else if (type == 'fit-y') {
+      container.classList.remove('fit-x');
+      container.classList.add('fit-y');
+    } else if (type == 'fit') {
+      container.classList.add('fit-x', 'fit-y');
+    } else {
+      container.classList.remove('fit-x', 'fit-y');
+    }
   });
 
   if (opts.tooltip !== false) {
