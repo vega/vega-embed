@@ -359,12 +359,16 @@ async function _embed(
 
   view.addSignalListener('autosize', (_, autosize: Exclude<AutoSize, string>) => {
     const {type} = autosize;
-    container.classList.remove('fit-x', 'fit-y');
-    if (type == 'fit' || type == 'fit-x') {
+    if (type == 'fit-x') {
       container.classList.add('fit-x');
-    }
-    if (type == 'fit' || type == 'fit-y') {
+      container.classList.remove('fit-y');
+    } else if (type == 'fit-y') {
+      container.classList.remove('fit-x');
       container.classList.add('fit-y');
+    } else if (type == 'fit') {
+      container.classList.add('fit-x', 'fit-y');
+    } else {
+      container.classList.remove('fit-x', 'fit-y');
     }
   });
 
