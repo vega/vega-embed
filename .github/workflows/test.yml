@@ -23,7 +23,7 @@ jobs:
           node-version: "15"
 
       - name: Install Node dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --immutable
 
       - run: yarn lint
       - run: yarn build
