@@ -15,3 +15,13 @@ src/style.ts
 tsconfig.json
 yarn-debug.log*
 yarn-error.log*
+
+# Yarn 2
+# Default settings for non-zero-install
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
