@@ -41,21 +41,21 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "19.0.1",
     "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "@types/semver": "^7.3.5",
+    "@rollup/plugin-node-resolve": "^13.0.2",
+    "@types/semver": "^7.3.7",
     "@wessberg/rollup-plugin-ts": "^1.3.14",
-    "browser-sync": "^2.26.14",
-    "concurrently": "^6.0.2",
-    "del-cli": "^4.0.0",
+    "browser-sync": "^2.27.4",
+    "concurrently": "^6.2.0",
+    "del-cli": "^4.0.1",
     "jest-canvas-mock": "^2.3.1",
-    "node-sass": "^6.0.0",
+    "node-sass": "^6.0.1",
     "rollup": "2.53.2",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.2.4",
+    "typescript": "^4.3.5",
     "vega": "^5.19.1",
     "vega-lite": "^5.0.0",
-    "vega-lite-dev-config": "^0.17.3"
+    "vega-lite-dev-config": "^0.18.0"
   },
   "peerDependencies": {
     "vega": "^5.13.0",
@@ -65,7 +65,7 @@
     "fast-json-patch": "^3.0.0-1",
     "json-stringify-pretty-compact": "^3.0.0",
     "semver": "^7.3.5",
-    "tslib": "^2.2.0",
+    "tslib": "^2.3.0",
     "vega-schema-url-parser": "^2.2.0",
     "vega-themes": "^2.10.0",
     "vega-tooltip": "^0.26.0"
