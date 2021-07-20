@@ -88,6 +88,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   timeFormatLocale?: Record<string, unknown>;
   ast?: boolean;
   viewClass?: typeof View;
+  exportDataSet?: string;
 }
 
 const NAMES: {[key in Mode]: string} = {
@@ -261,6 +262,36 @@ function getRoot(el: Element) {
   } else {
     return {root: document, rootContainer: document.head ?? document.body};
   }
+}
+
+/**
+ * Set the data field on a spec to the current values of the given dataset
+ * @param spec Specification to update
+ * @param dataSet Dataset to use values from
+ * @param view View to get the data from
+ * @param mode Vega mode
+ * @returns A copy of the spec with the expected data values
+ */
+function updateSpecWithDataSet(
+  spec: VisualizationSpec,
+  dataSet: string,
+  view: vegaImport.View,
+  mode: Mode
+): VisualizationSpec {
+  const exportSpec = {...spec};
+
+  const exportSpecData = {
+    name: dataSet,
+    // We convert from JSON and back to remove the un-serialisable Symbol from view.data
+    values: view.data(dataSet).map((d) => JSON.parse(JSON.stringify(d))),
+  };
+  if (mode === 'vega') {
+    exportSpec.data = [exportSpecData];
+  } else if (mode === 'vega-lite') {
+    exportSpec.data = exportSpecData;
+  }
+
+  return exportSpec;
 }
 
 async function _embed(
@@ -468,7 +499,9 @@ async function _embed(
       viewSourceLink.text = i18n.SOURCE_ACTION;
       viewSourceLink.href = '#';
       viewSourceLink.addEventListener('click', function (this, e) {
-        viewSource(stringify(spec), opts.sourceHeader ?? '', opts.sourceFooter ?? '', mode);
+        const exportSpec =
+          opts.exportDataSet !== undefined ? updateSpecWithDataSet(spec, opts.exportDataSet, view, mode) : spec;
+        viewSource(stringify(exportSpec), opts.sourceHeader ?? '', opts.sourceFooter ?? '', mode);
         e.preventDefault();
       });
 
@@ -497,11 +530,13 @@ async function _embed(
       editorLink.text = i18n.EDITOR_ACTION;
       editorLink.href = '#';
       editorLink.addEventListener('click', function (this, e) {
+        const exportSpec =
+          opts.exportDataSet !== undefined ? updateSpecWithDataSet(spec, opts.exportDataSet, view, mode) : spec;
         post(window, editorUrl, {
           config: config as Config,
           mode,
           renderer,
-          spec: stringify(spec),
+          spec: stringify(exportSpec),
         });
         e.preventDefault();
       });

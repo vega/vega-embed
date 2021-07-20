@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vega-Embed for Vega-Lite</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="build/vega-embed.js"></script>
+  </head>
+  <body>
+    <h1>Template for Embedding Vega-Lite Visualization</h1>
+    <div id="vis"></div>
+
+    <script>
+      const vlSpec = {
+        $schema: "https://vega.github.io/schema/vega-lite/v4.json",
+        data: { name: "table" },
+        width: 400,
+        mark: "line",
+        encoding: {
+          x: { field: "x", type: "quantitative", scale: { zero: false } },
+          y: { field: "y", type: "quantitative" },
+          color: { field: "category", type: "nominal" },
+        },
+      };
+      vegaEmbed("#vis", vlSpec, { exportDataSet: "table" }).then(function (res) {
+        /**
+         * Generates a new tuple with random walk.
+         */
+        function newGenerator() {
+          let counter = -1;
+          let previousY = [5, 5, 5, 5];
+          return function () {
+            counter++;
+            const newVals = previousY.map(function (v, c) {
+              return {
+                x: counter,
+                y: v + Math.round(Math.random() * 10 - c * 3),
+                category: c,
+              };
+            });
+            previousY = newVals.map(function (v) {
+              return v.y;
+            });
+            return newVals;
+          };
+        }
+
+        const valueGenerator = newGenerator();
+        let minimumX = -100;
+        let counter = 0;
+        const looper = window.setInterval(function () {
+          minimumX++;
+          const changeSet = vega
+            .changeset()
+            .insert(valueGenerator())
+            .remove(function (t) {
+              return t.x < minimumX;
+            });
+          res.view.change("table", changeSet).run();
+
+          if (counter++ >= 5) {
+            window.clearInterval(looper);
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
