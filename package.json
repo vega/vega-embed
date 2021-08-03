@@ -74,7 +74,7 @@
     "prebuild": "yarn clean && yarn build:style",
     "build": "rollup -c",
     "build:style": "./build-style.sh",
-    "clean": "del build build-es5 src/style.ts",
+    "clean": "del-cli build build-es5 src/style.ts",
     "prepublishOnly": "yarn clean && yarn build",
     "preversion": "yarn lint && yarn test",
     "serve": "browser-sync start --directory -s -f build *.html",
