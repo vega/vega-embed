@@ -10,6 +10,8 @@ import {
   isString,
   Loader,
   LoaderOptions,
+  logger as VgLogger,
+  LoggerInterface,
   mergeConfig,
   Renderers,
   Spec as VgSpec,
@@ -68,6 +70,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   mode?: Mode;
   theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
   defaultStyle?: boolean | string;
+  logger?: LoggerInterface;
   logLevel?: number;
   loader?: Loader | LoaderOptions;
   renderer?: R;
@@ -275,6 +278,7 @@ async function _embed(
   const i18n = {...I18N, ...opts.i18n};
 
   const renderer = opts.renderer ?? 'canvas';
+  const logger = opts.logger ?? VgLogger();
   const logLevel = opts.logLevel ?? vega.Warn;
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
@@ -352,6 +356,7 @@ async function _embed(
 
   const view = new (opts.viewClass || vega.View)(runtime, {
     loader,
+    logger,
     logLevel,
     renderer,
     ...(ast ? {expr: (vega as any).expressionInterpreter} : {}),
