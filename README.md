@@ -180,6 +180,7 @@ var opt = {
 | `defaultStyle` | Boolean or String | If set to `true` (default), the embed actions are shown in a menu. Set to `false` to use simple links. Provide a string to set the style sheet. |
 | `bind`        | String or Element | The element that should contain any input elements bound to signals. |
 | `renderer`    | String        | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. May be a custom value if passing your own `viewClass` option. |
+| `logger`      | Object        | Sets a custom logger handler. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logger) for details. It must follow the interface of [the original one](https://github.com/vega/vega/tree/master/packages/vega-util#logger). |
 | `logLevel`    | Level         | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip`     | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
 | `loader`      | Loader / Object | _Loader_ : Sets a custom Vega loader. _Object_ : Vega loader options for a loader that will be created. <br> See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
