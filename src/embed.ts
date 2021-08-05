@@ -10,7 +10,7 @@ import {
   isString,
   Loader,
   LoaderOptions,
-  logger as VgLogger,
+  logger as vegaLogger,
   LoggerInterface,
   mergeConfig,
   Renderers,
@@ -278,7 +278,7 @@ async function _embed(
   const i18n = {...I18N, ...opts.i18n};
 
   const renderer = opts.renderer ?? 'canvas';
-  const logger = opts.logger ?? VgLogger();
+  const logger = opts.logger ?? vegaLogger();
   const logLevel = opts.logLevel ?? vega.Warn;
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
