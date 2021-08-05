@@ -385,3 +385,11 @@ test('can set loader via usermeta', async () => {
     target: '_blank',
   });
 });
+
+test('can set logger', async () => {
+  const el = document.createElement('div');
+  const logger = vega.logger();
+  const result = await embed(el, vlSpec, {logger});
+  expect(result).toBeTruthy();
+  expect((result.view as any)._log).toEqual(logger);
+});
