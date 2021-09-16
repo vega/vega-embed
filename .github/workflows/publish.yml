@@ -30,6 +30,12 @@ jobs:
       - name: Build
         run: yarn build
 
+      # - name: Run debug script
+      #   run: yarn run auto info
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create release
         run: yarn run release
         env:
