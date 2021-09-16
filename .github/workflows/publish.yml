@@ -39,5 +39,7 @@ jobs:
       - name: Create release
         run: yarn run release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # test a wrong token to see if it triggers same error
+          NODE_AUTH_TOKEN: XXXXX-XXXXX-XXXXX-XXXXX
+          # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
