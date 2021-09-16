@@ -37,7 +37,9 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create release
-        run: yarn run release
+        run: |
+          npm config set scripts-prepend-node-path true
+          yarn run release
         env:
           # test a wrong token to see if it triggers same error
           NODE_AUTH_TOKEN: XXXXX-XXXXX-XXXXX-XXXXX
