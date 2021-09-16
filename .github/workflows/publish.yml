@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v2.3.0
         with:
           registry-url: "https://registry.npmjs.org"
-          node-version: "14"
+          node-version: "15"
 
       - name: Install Node dependencies
         run: yarn --frozen-lockfile
@@ -36,13 +36,14 @@ jobs:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # npm config set scripts-prepend-node-path true
+      # don't use yarn to avoid using yarnpkg registry
       - name: Create release
         run: |
-          npm config set scripts-prepend-node-path true
-          yarn run release
+          npm run release
         env:
           # test a wrong token to see if it triggers same error
           # NODE_AUTH_TOKEN: XXXXX-XXXXX-XXXXX-XXXXX
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
