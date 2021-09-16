@@ -90,6 +90,6 @@
     "eslintbase": "beemo eslint .",
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
     "lint": "yarn eslintbase && yarn prettierbase --check",
-    "release": "auto shipit -v"
+    "release": "auto shipit"
   }
 }
