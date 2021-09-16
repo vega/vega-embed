@@ -2,36 +2,36 @@ name: Publish
 
 on:
   push:
-    tags:
-      - "v*"
+    branches-ignore:
+      # No canary deploys for branches opened by dependabot
+      - 'dependabot/**'
 
 jobs:
   publish:
-    name: Publish to NPM
+    name: Make a release and publish to NPM
 
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Prepare repository
+        run: git fetch --unshallow --tags
+
       - uses: actions/setup-node@v2.4.0
         with:
           registry-url: "https://registry.npmjs.org"
           node-version: "15"
+
       - name: Install Node dependencies
         run: yarn --frozen-lockfile
+
       - name: Build
         run: yarn build
-      - name: Publish to NPM
-        run: npm publish
+
+      - name: Create release
+        run: yarn run release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false

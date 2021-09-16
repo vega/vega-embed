@@ -89,6 +89,7 @@
     "prettierbase": "beemo prettier '*.{css,scss,html}'",
     "eslintbase": "beemo eslint .",
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
-    "lint": "yarn eslintbase && yarn prettierbase --check"
+    "lint": "yarn eslintbase && yarn prettierbase --check",
+    "release": "yarn auto shipit"
   }
 }
