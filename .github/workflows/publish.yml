@@ -30,7 +30,6 @@ jobs:
       - name: Build
         run: yarn build
 
-      # npm config set scripts-prepend-node-path true
       # don't use yarn run to avoid using yarnpkg registry
       - name: Create release
         run: |
