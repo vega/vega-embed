@@ -161,6 +161,7 @@ var opt = {
   timeFormatLocale: ...,
 
   ast: ...,
+  expr: ...,
 
   i18n: {
     COMPILED_ACTION: ...,
@@ -197,7 +198,8 @@ var opt = {
 | `downloadFileName` | String   | Sets the file name (default: `visualization`) for charts downloaded using the `png` or `svg` action. |
 | `formatLocale` | Object   | Sets the default locale definition for number formatting. See the [d3-format locale collection](https://github.com/d3/d3-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 | `timeFormatLocale` | Object   | Sets the default locale definition for date/time formatting. See the [d3-time-format locale collection](https://github.com/d3/d3-time-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
-| `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. In addition to enabling the `ast` option, you need to load the Vega interpreter module before loading Vega. See https://github.com/vega/vega/pull/2658 for details. |
+| `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. |
+| `expr` | Object   | Custom Vega Expression interpreter. |
 | `viewClass` | Class         | Class which extends [Vega `View`](https://vega.github.io/vega/docs/api/view/#view) for custom rendering. |
 
 ## Common questions
