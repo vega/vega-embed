@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src https://cdn.jsdelivr.net/ 'self' 'unsafe-inline'" />
     <title>Vega-Embed for Vega-Lite</title>
 
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -14,18 +15,6 @@
     <div id="vis"></div>
     <script>
       async function run() {
-        const config = {
-          // default view background color
-          // covers the entire view component
-          background: "#efefef",
-          axis: {
-            labelFont: "serif",
-            labelFontSize: 16,
-            tickWidth: 3,
-            tickColor: "red",
-          },
-        };
-
         const spec = {
           $schema: "https://vega.github.io/schema/vega-lite/v4.json",
           data: {
@@ -45,16 +34,12 @@
           encoding: {
             x: { field: "a", type: "nominal" },
             y: { field: "b", type: "quantitative" },
-            tooltip: { field: "b", type: "quantitative" },
           },
         };
 
         const result = await vegaEmbed("#vis", spec, {
-          config: config,
-          tooltip: { theme: "dark" },
+          ast: true,
         });
-
-        console.log(result);
       }
       run();
     </script>

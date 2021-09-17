@@ -39,42 +39,46 @@
     "build-es5"
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "19.0.0",
+    "@auto-it/conventional-commits": "^10.32.0",
+    "@auto-it/first-time-contributor": "^10.32.0",
+    "@rollup/plugin-commonjs": "20.0.0",
     "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "@types/semver": "^7.3.5",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@types/semver": "^7.3.8",
     "@wessberg/rollup-plugin-ts": "^1.3.14",
-    "browser-sync": "^2.26.14",
-    "concurrently": "^6.0.2",
-    "del-cli": "^3.0.1",
+    "auto": "^10.32.0",
+    "browser-sync": "^2.27.5",
+    "concurrently": "^6.2.1",
+    "del-cli": "^4.0.1",
     "jest-canvas-mock": "^2.3.1",
-    "node-sass": "^6.0.0",
-    "rollup": "2.46.0",
+    "node-sass": "^6.0.1",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.2.4",
-    "vega": "^5.19.1",
+    "rollup": "2.56.3",
+    "typescript": "^4.4.3",
+    "vega-interpreter": "^1.0.4",
+    "vega-lite-dev-config": "^0.18.0",
     "vega-lite": "^5.0.0",
-    "vega-lite-dev-config": "^0.17.3"
+    "vega": "^5.19.1"
   },
   "peerDependencies": {
-    "vega": "^5.13.0",
+    "vega": "^5.20.2",
     "vega-lite": "*"
   },
   "dependencies": {
-    "fast-json-patch": "^3.0.0-1",
+    "fast-json-patch": "^3.1.0",
     "json-stringify-pretty-compact": "^3.0.0",
     "semver": "^7.3.5",
-    "tslib": "^2.2.0",
+    "tslib": "^2.3.1",
     "vega-schema-url-parser": "^2.2.0",
     "vega-themes": "^2.10.0",
-    "vega-tooltip": "^0.25.1"
+    "vega-tooltip": "^0.27.0"
   },
   "scripts": {
     "prebuild": "yarn clean && yarn build:style",
     "build": "rollup -c",
     "build:style": "./build-style.sh",
-    "clean": "del build build-es5 src/style.ts",
+    "clean": "del-cli build build-es5 src/style.ts",
     "prepublishOnly": "yarn clean && yarn build",
     "preversion": "yarn lint && yarn test",
     "serve": "browser-sync start --directory -s -f build *.html",
@@ -86,6 +90,7 @@
     "prettierbase": "beemo prettier '*.{css,scss,html}'",
     "eslintbase": "beemo eslint .",
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
-    "lint": "yarn eslintbase && yarn prettierbase --check"
+    "lint": "yarn eslintbase && yarn prettierbase --check",
+    "release": "auto shipit"
   }
 }

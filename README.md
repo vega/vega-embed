@@ -161,6 +161,7 @@ var opt = {
   timeFormatLocale: ...,
 
   ast: ...,
+  expr: ...,
 
   i18n: {
     COMPILED_ACTION: ...,
@@ -197,7 +198,8 @@ var opt = {
 | `downloadFileName` | String   | Sets the file name (default: `visualization`) for charts downloaded using the `png` or `svg` action. |
 | `formatLocale` | Object   | Sets the default locale definition for number formatting. See the [d3-format locale collection](https://github.com/d3/d3-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 | `timeFormatLocale` | Object   | Sets the default locale definition for date/time formatting. See the [d3-time-format locale collection](https://github.com/d3/d3-time-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
-| `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. In addition to enabling the `ast` option, you need to load the Vega interpreter module before loading Vega. See https://github.com/vega/vega/pull/2658 for details. |
+| `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. |
+| `expr` | Object   | Custom Vega Expression interpreter. |
 | `viewClass` | Class         | Class which extends [Vega `View`](https://vega.github.io/vega/docs/api/view/#view) for custom rendering. |
 
 ## Common questions
@@ -220,4 +222,9 @@ To build `vega-embed.js` and view the test examples, you must have [yarn](https:
 
 ## Release Process
 
-To release a new version, make sure that everything works. Then run `yarn version` and bump the version number. Lastly, push to GitHub (with the release tag). GitHub Actions will build a bundle and make the [npm release](https://www.npmjs.com/package/vega-embed) automatically.
+Publishing is handled by a 2-branch [pre-release process](https://intuit.github.io/auto/docs/generated/shipit#next-branch-default), configured in `publish.yml`. All changes should be based off the default `next` branch, and are published automatically.
+
+- PRs made into the default branch that [would trigger a version bump](https://intuit.github.io/auto/docs/generated/conventional-commits) are auto-deployed to the `next` pre-release tag on NPM. The result can be installed with `npm install vega-embed/@next`.
+  - When merging into `next`, please use the `squash and merge` strategy.
+- To release a new stable version, open a PR from `next` into `stable` using this [compare link](https://github.com/vega/vega-embed/compare/stable...next).
+  - When merging from `next` into `stable`, please use the `create a merge commit` strategy.

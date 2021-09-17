@@ -16,6 +16,7 @@ import {
   TooltipHandler,
   View,
 } from 'vega';
+import {expressionInterpreter} from 'vega-interpreter';
 import * as vegaLiteImport from 'vega-lite';
 import {Config as VlConfig, TopLevelSpec as VlSpec} from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
@@ -87,6 +88,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   formatLocale?: Record<string, unknown>;
   timeFormatLocale?: Record<string, unknown>;
   ast?: boolean;
+  expr?: typeof expressionInterpreter;
   viewClass?: typeof View;
 }
 
@@ -354,7 +356,7 @@ async function _embed(
     loader,
     logLevel,
     renderer,
-    ...(ast ? {expr: (vega as any).expressionInterpreter} : {}),
+    ...(ast ? {expr: (vega as any).expressionInterpreter ?? opts.expr ?? expressionInterpreter} : {}),
   });
 
   view.addSignalListener('autosize', (_, autosize: Exclude<AutoSize, string>) => {
