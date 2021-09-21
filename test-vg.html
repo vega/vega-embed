@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vega-Embed for Vega</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/vega-interpreter"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="build/vega-embed.js"></script>
   </head>
@@ -17,7 +16,6 @@
         const result = await vegaEmbed("#vis", "bar-chart.vg.json", {
           theme: "dark",
           loader: { baseURL: "https://vega.github.io/vega/examples/" },
-          // ast: true
         });
 
         console.log(result);
