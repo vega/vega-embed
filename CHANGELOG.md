@@ -1,3 +1,15 @@
+# v6.19.1 (Tue Sep 21 2021)
+
+#### 🐛 Bug Fix
+
+- fix: add missing interpreter dependency [#751](https://github.com/vega/vega-embed/pull/751) ([@domoritz](https://github.com/domoritz))
+
+#### Authors: 1
+
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.19.0 (Fri Sep 17 2021)
 
 :tada: This release contains work from a new contributor! :tada:
