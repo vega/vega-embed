@@ -26,6 +26,9 @@ import post from './post';
 import embedStyle from './style';
 import {Config, Mode} from './types';
 import {mergeDeep} from './util';
+import pkg from '../package.json';
+
+export const version = pkg.version;
 
 export * from './types';
 
