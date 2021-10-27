@@ -41,7 +41,7 @@
   "devDependencies": {
     "@auto-it/conventional-commits": "^10.32.0",
     "@auto-it/first-time-contributor": "^10.32.0",
-    "@rollup/plugin-commonjs": "20.0.0",
+    "@rollup/plugin-commonjs": "21.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@types/semver": "^7.3.8",
@@ -54,7 +54,7 @@
     "node-sass": "^6.0.1",
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup": "2.56.3",
+    "rollup": "2.58.1",
     "typescript": "^4.4.3",
     "vega-lite-dev-config": "^0.18.0",
     "vega-lite": "^5.0.0",
