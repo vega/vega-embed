@@ -1,3 +1,35 @@
+# v6.20.0 (Wed Oct 27 2021)
+
+#### 🚀 Enhancement
+
+- feat: export version [#772](https://github.com/vega/vega-embed/pull/772) ([@domoritz](https://github.com/domoritz))
+
+#### 🔩 Dependency Updates
+
+- chore(deps-dev): bump @rollup/plugin-commonjs from 21.0.0 to 21.0.1 [#768](https://github.com/vega/vega-embed/pull/768) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.58.0 to 2.58.1 [#769](https://github.com/vega/vega-embed/pull/769) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @types/semver from 7.3.8 to 7.3.9 [#770](https://github.com/vega/vega-embed/pull/770) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-node-resolve from 13.0.5 to 13.0.6 [#771](https://github.com/vega/vega-embed/pull/771) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump typescript from 4.4.3 to 4.4.4 [#766](https://github.com/vega/vega-embed/pull/766) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-commonjs from 20.0.0 to 21.0.0 [#757](https://github.com/vega/vega-embed/pull/757) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump actions/setup-node from 2.4.0 to 2.4.1 [#756](https://github.com/vega/vega-embed/pull/756) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump auto from 10.32.0 to 10.32.1 [#758](https://github.com/vega/vega-embed/pull/758) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump concurrently from 6.2.1 to 6.3.0 [#759](https://github.com/vega/vega-embed/pull/759) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump vega-lite-dev-config from 0.18.0 to 0.18.1 [#760](https://github.com/vega/vega-embed/pull/760) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/conventional-commits from 10.32.0 to 10.32.1 [#761](https://github.com/vega/vega-embed/pull/761) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.57.0 to 2.58.0 [#762](https://github.com/vega/vega-embed/pull/762) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/first-time-contributor from 10.32.0 to 10.32.1 [#763](https://github.com/vega/vega-embed/pull/763) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-node-resolve from 13.0.4 to 13.0.5 [#753](https://github.com/vega/vega-embed/pull/753) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump vega from 5.20.2 to 5.21.0 [#754](https://github.com/vega/vega-embed/pull/754) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.56.3 to 2.57.0 [#755](https://github.com/vega/vega-embed/pull/755) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.19.1 (Tue Sep 21 2021)
 
 #### 🐛 Bug Fix
