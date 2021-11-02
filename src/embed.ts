@@ -37,8 +37,8 @@ export let vegaLite = vegaLiteImport;
 
 // For backwards compatibility with Vega-Lite before v4.
 const w = (typeof window !== 'undefined' ? window : undefined) as any;
-if (vegaLite === undefined && w?.['vl']?.compile) {
-  vegaLite = w['vl'];
+if (vegaLite === undefined && w?.vl?.compile) {
+  vegaLite = w.vl;
 }
 
 export interface Actions {
@@ -205,7 +205,7 @@ function createLoader(opts?: Loader | LoaderOptions) {
 }
 
 function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
-  return (parsedSpec.usermeta && (parsedSpec.usermeta as any)['embedOptions']) ?? {};
+  return (parsedSpec.usermeta && (parsedSpec.usermeta as any).embedOptions) ?? {};
 }
 
 /**
@@ -261,11 +261,9 @@ async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions
 
 function getRoot(el: Element) {
   const possibleRoot = el.getRootNode ? el.getRootNode() : document;
-  if (possibleRoot instanceof ShadowRoot) {
-    return {root: possibleRoot, rootContainer: possibleRoot};
-  } else {
-    return {root: document, rootContainer: document.head ?? document.body};
-  }
+  return possibleRoot instanceof ShadowRoot
+    ? {root: possibleRoot, rootContainer: possibleRoot}
+    : {root: document, rootContainer: document.head ?? document.body};
 }
 
 async function _embed(
@@ -333,11 +331,7 @@ async function _embed(
 
   const patch = opts.patch;
   if (patch) {
-    if (patch instanceof Function) {
-      vgSpec = patch(vgSpec);
-    } else {
-      vgSpec = applyPatch(vgSpec, patch, true, false).newDocument;
-    }
+    vgSpec = patch instanceof Function ? patch(vgSpec) : applyPatch(vgSpec, patch, true, false).newDocument;
   }
 
   // Set locale. Note that this is a global setting.
@@ -378,13 +372,10 @@ async function _embed(
   });
 
   if (opts.tooltip !== false) {
-    let handler: TooltipHandler;
-    if (isTooltipHandler(opts.tooltip)) {
-      handler = opts.tooltip;
-    } else {
-      // user provided boolean true or tooltip options
-      handler = new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
-    }
+    const handler = isTooltipHandler(opts.tooltip)
+      ? opts.tooltip
+      : // user provided boolean true or tooltip options
+        new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
 
     view.tooltip(handler);
   }
