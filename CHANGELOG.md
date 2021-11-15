@@ -1,3 +1,34 @@
+# v6.20.1 (Mon Nov 15 2021)
+
+#### 🐛 Bug Fix
+
+- fix: fix build with semver [#790](https://github.com/vega/vega-embed/pull/790) ([@domoritz](https://github.com/domoritz))
+- test: no warnings when versions are compatible [#789](https://github.com/vega/vega-embed/pull/789) ([@domoritz](https://github.com/domoritz))
+- chore: upgrade deps [#788](https://github.com/vega/vega-embed/pull/788) ([@domoritz](https://github.com/domoritz))
+- chore: upgrade deps [#785](https://github.com/vega/vega-embed/pull/785) ([@domoritz](https://github.com/domoritz))
+- chore: switch to new sass version [#784](https://github.com/vega/vega-embed/pull/784) ([@domoritz](https://github.com/domoritz))
+- style: apply some code style improvements [#783](https://github.com/vega/vega-embed/pull/783) ([@domoritz](https://github.com/domoritz))
+- ci: use node 16 [#781](https://github.com/vega/vega-embed/pull/781) ([@domoritz](https://github.com/domoritz))
+
+#### 🔩 Dependency Updates
+
+- chore(deps-dev): bump concurrently from 6.3.0 to 6.4.0 [#786](https://github.com/vega/vega-embed/pull/786) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.59.0 to 2.60.0 [#787](https://github.com/vega/vega-embed/pull/787) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.58.3 to 2.59.0 [#782](https://github.com/vega/vega-embed/pull/782) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump vega-lite-dev-config from 0.18.1 to 0.19.0 [#779](https://github.com/vega/vega-embed/pull/779) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.58.1 to 2.58.3 [#778](https://github.com/vega/vega-embed/pull/778) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/conventional-commits from 10.32.1 to 10.32.2 [#774](https://github.com/vega/vega-embed/pull/774) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump auto from 10.32.1 to 10.32.2 [#775](https://github.com/vega/vega-embed/pull/775) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/first-time-contributor from 10.32.1 to 10.32.2 [#776](https://github.com/vega/vega-embed/pull/776) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump browser-sync from 2.27.5 to 2.27.7 [#777](https://github.com/vega/vega-embed/pull/777) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.0 (Wed Oct 27 2021)
 
 #### 🚀 Enhancement
