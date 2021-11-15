@@ -1,6 +1,7 @@
 import {applyPatch, Operation} from 'fast-json-patch';
 import stringify from 'json-stringify-pretty-compact';
-import {satisfies} from 'semver';
+// need this import because of https://github.com/npm/node-semver/issues/381
+import satisfies from 'semver/functions/satisfies';
 import * as vegaImport from 'vega';
 import {
   AutoSize,
