@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v2.4.1
         with:
           registry-url: "https://registry.npmjs.org"
-          node-version: "15"
+          node-version: "16"
 
       - name: Install Node dependencies
         run: yarn --frozen-lockfile

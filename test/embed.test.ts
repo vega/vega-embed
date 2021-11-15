@@ -350,6 +350,17 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
   await embed(
     el,
     {
+      // should not cause a warning
+      $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+      mark: 'bar',
+      encoding: {},
+    },
+    {}
+  );
+
+  await embed(
+    el,
+    {
       $schema: 'https://vega.github.io/schema/vega/v4.json',
     },
     {}
