@@ -1,3 +1,15 @@
+# v6.20.2 (Tue Nov 16 2021)
+
+#### 🐛 Bug Fix
+
+- fix: update style generation script [#793](https://github.com/vega/vega-embed/pull/793) ([@domoritz](https://github.com/domoritz))
+
+#### Authors: 1
+
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.1 (Mon Nov 15 2021)
 
 #### 🐛 Bug Fix
