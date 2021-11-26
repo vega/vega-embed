@@ -1,3 +1,15 @@
+# v6.20.4 (Fri Nov 26 2021)
+
+#### 🐛 Bug Fix
+
+- fix: use npm for postinstall [#802](https://github.com/vega/vega-embed/pull/802) ([@domoritz](https://github.com/domoritz))
+
+#### Authors: 1
+
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.3 (Fri Nov 26 2021)
 
 #### 🐛 Bug Fix
