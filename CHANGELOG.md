@@ -1,3 +1,17 @@
+# v6.20.3 (Fri Nov 26 2021)
+
+#### 🐛 Bug Fix
+
+- fix: inline yallist iterator patch [#800](https://github.com/vega/vega-embed/pull/800) ([@domoritz](https://github.com/domoritz))
+- chore: upgrade deps [#798](https://github.com/vega/vega-embed/pull/798) ([@domoritz](https://github.com/domoritz))
+- ci: simplify publishing [#795](https://github.com/vega/vega-embed/pull/795) ([@domoritz](https://github.com/domoritz))
+
+#### Authors: 1
+
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.2 (Tue Nov 16 2021)
 
 #### 🐛 Bug Fix
