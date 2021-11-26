@@ -36,7 +36,8 @@
   "files": [
     "src",
     "build",
-    "build-es5"
+    "build-es5",
+    "patches"
   ],
   "devDependencies": {
     "@auto-it/conventional-commits": "^10.32.3",
