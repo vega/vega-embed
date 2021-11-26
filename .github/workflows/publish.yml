@@ -16,19 +16,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Prepare repository
-        run: git fetch --unshallow --tags
-
       - uses: actions/setup-node@v2.4.1
         with:
           registry-url: "https://registry.npmjs.org"
           node-version: "16"
 
+      - name: Prepare repository
+        run: git fetch --unshallow --tags
+
       - name: Install Node dependencies
         run: yarn --frozen-lockfile
-
-      - name: Build
-        run: yarn build
 
       # don't use yarn run to avoid using yarnpkg registry
       - name: Create release
