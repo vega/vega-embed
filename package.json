@@ -95,6 +95,6 @@
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
     "lint": "yarn eslintbase && yarn prettierbase --check",
     "release": "yarn build && auto shipit",
-    "postinstall": "patch-package"
+    "postinstall": "npx patch-package"
   }
 }
