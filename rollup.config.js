@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import ts from 'rollup-plugin-ts';
 import bundleSize from 'rollup-plugin-bundle-size';
 import {terser} from 'rollup-plugin-terser';
+import copy from 'rollup-plugin-copy'
 
 const pkg = require('./package.json');
 
@@ -22,6 +23,12 @@ const plugins = (browserslist, declaration) => [
     browserslist,
   }),
   bundleSize(),
+  copy({
+    targets: [
+      { src: 'node_modules/yallist/iterator.js', dest: 'build/' },
+      { src: 'node_modules/yallist/iterator.js', dest: 'build-es5/' },
+    ]
+  }),
 ];
 
 const outputs = [
