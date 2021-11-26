@@ -1,0 +1,15 @@
+diff --git a/node_modules/yallist/yallist.js b/node_modules/yallist/yallist.js
+index 4e83ab1..f25394e 100644
+--- a/node_modules/yallist/yallist.js
++++ b/node_modules/yallist/yallist.js
+@@ -422,5 +422,9 @@ function Node (value, prev, next, list) {
+ 
+ try {
+   // add if support for Symbol.iterator is present
+-  require('./iterator.js')(Yallist)
++  Yallist.prototype[Symbol.iterator] = function* () {
++    for (let walker = this.head; walker; walker = walker.next) {
++      yield walker.value
++    }
++  }
+ } catch (er) {}
