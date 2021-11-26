@@ -36,7 +36,8 @@
   "files": [
     "src",
     "build",
-    "build-es5"
+    "build-es5",
+    "patches"
   ],
   "devDependencies": {
     "@auto-it/conventional-commits": "^10.32.3",
@@ -95,6 +96,6 @@
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
     "lint": "yarn eslintbase && yarn prettierbase --check",
     "release": "yarn build && auto shipit",
-    "postinstall": "patch-package"
+    "postinstall": "npx patch-package"
   }
 }
