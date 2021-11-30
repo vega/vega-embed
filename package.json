@@ -58,7 +58,7 @@
     "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^2.0.4",
-    "sass": "^1.43.4",
+    "sass": "^1.43.5",
     "typescript": "^4.5.2",
     "vega": "^5.21.0",
     "vega-lite": "^5.0.0",
@@ -78,6 +78,9 @@
     "vega-themes": "^2.10.0",
     "vega-tooltip": "^0.27.0"
   },
+  "bundledDependencies": [
+    "yallist"
+  ],
   "scripts": {
     "prebuild": "yarn clean && yarn build:style",
     "build": "rollup -c",
@@ -90,12 +93,11 @@
     "pretest": "yarn build:style",
     "test": "beemo jest --stdio stream",
     "test:inspect": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
-    "prepare": "beemo create-config",
+    "prepare": "beemo create-config && npx patch-package",
     "prettierbase": "beemo prettier '*.{css,scss,html}'",
     "eslintbase": "beemo eslint .",
     "format": "yarn eslintbase --fix && yarn prettierbase --write",
     "lint": "yarn eslintbase && yarn prettierbase --check",
-    "release": "yarn build && auto shipit",
-    "postinstall": "npx patch-package"
+    "release": "yarn build && auto shipit"
   }
 }
