@@ -1,3 +1,21 @@
+# v6.20.5 (Tue Nov 30 2021)
+
+#### 🐛 Bug Fix
+
+- fix: try bundledDependencies [#807](https://github.com/vega/vega-embed/pull/807) ([@domoritz](https://github.com/domoritz))
+
+#### 🔩 Dependency Updates
+
+- chore(deps-dev): bump vega-lite from 5.1.1 to 5.2.0 [#804](https://github.com/vega/vega-embed/pull/804) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.43.4 to 1.43.5 [#805](https://github.com/vega/vega-embed/pull/805) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.4 (Fri Nov 26 2021)
 
 #### 🐛 Bug Fix
