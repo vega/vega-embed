@@ -5,6 +5,7 @@
 
   &.has-actions {
     padding-right: 38px;
+    --vega-action-padding: 38px;
   }
 
   details:not([open]) > :not(summary) {
