@@ -48,7 +48,7 @@
   }
 
   &:hover summary,
-  &:focus summary {
+  &:focus-within summary {
     opacity: 1 !important;
     transition: opacity 0.2s ease;
   }
@@ -80,7 +80,8 @@
       color: #434a56;
       text-decoration: none;
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: #f7f7f9;
         color: black;
       }
