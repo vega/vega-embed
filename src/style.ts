@@ -32,7 +32,6 @@ export default `.vega-embed {
   display: none;
 }
 .vega-embed summary:focus {
-  background-color: pink !important;
   opacity: 1 !important;
   transition: opacity 0.2s ease;
 }
