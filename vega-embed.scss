@@ -69,6 +69,9 @@
     animation-name: scale-in;
     animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
     text-align: left; // only to make sure this is not a a different value
+    :focus:not(:focus-visible) {
+      outline: none;
+    } // only add default focus rings via keyboard nav
 
     a {
       padding: 8px 16px;
