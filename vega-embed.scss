@@ -53,8 +53,7 @@
     opacity: 0.7;
   }
 
-  &:hover summary,
-  &:focus summary {
+  &:hover summary {
     opacity: 1 !important;
     transition: opacity 0.2s ease;
   }
