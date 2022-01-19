@@ -24,6 +24,7 @@ export default `.vega-embed {
   border-radius: 999px;
   opacity: 0.2;
   transition: opacity 0.4s ease-in;
+  outline: none;
   cursor: pointer;
   line-height: 0px;
 }
@@ -40,7 +41,7 @@ export default `.vega-embed {
 .vega-embed details[open] summary {
   opacity: 0.7;
 }
-.vega-embed:hover summary, .vega-embed:focus-visible summary {
+.vega-embed:hover summary, .vega-embed:focus-within summary {
   opacity: 1 !important;
   transition: opacity 0.2s ease;
 }
@@ -62,9 +63,6 @@ export default `.vega-embed {
   animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
   text-align: left;
 }
-.vega-embed .vega-actions :focus:not(:focus-visible) {
-  outline: none;
-}
 .vega-embed .vega-actions a {
   padding: 8px 16px;
   font-family: sans-serif;
@@ -74,7 +72,7 @@ export default `.vega-embed {
   color: #434a56;
   text-decoration: none;
 }
-.vega-embed .vega-actions a:hover, .vega-embed .vega-actions a:focus-visible {
+.vega-embed .vega-actions a:hover {
   background-color: #f7f7f9;
   color: black;
 }

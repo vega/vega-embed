@@ -25,6 +25,7 @@
     border-radius: 999px;
     opacity: 0.2;
     transition: opacity 0.4s ease-in;
+    outline: none;
     cursor: pointer;
     line-height: 0px; // For Safari
 
@@ -47,7 +48,7 @@
   }
 
   &:hover summary,
-  &:focus-visible summary {
+  &:focus-within summary {
     opacity: 1 !important;
     transition: opacity 0.2s ease;
   }
@@ -69,9 +70,6 @@
     animation-name: scale-in;
     animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
     text-align: left; // only to make sure this is not a a different value
-    :focus:not(:focus-visible) {
-      outline: none;
-    } // only add default focus rings via keyboard nav
 
     a {
       padding: 8px 16px;
@@ -82,8 +80,7 @@
       color: #434a56;
       text-decoration: none;
 
-      &:hover,
-      &:focus-visible {
+      &:hover {
         background-color: #f7f7f9;
         color: black;
       }
