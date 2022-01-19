@@ -4,14 +4,14 @@
 .prettierignore
 babel.config.js
 beemo-error.log
-# build
-# build-es5
+build
+build-es5
 coverage/
 jest.config.js
 node_modules
 npm-debug.log*
 prettier.config.js
-# src/style.ts
+src/style.ts
 tsconfig.json
 yarn-debug.log*
 yarn-error.log*
