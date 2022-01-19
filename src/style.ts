@@ -31,6 +31,9 @@ export default `.vega-embed {
 .vega-embed summary::-webkit-details-marker {
   display: none;
 }
+.vega-embed summary:focus-within {
+  background-color: pink !important;
+}
 .vega-embed summary:active {
   box-shadow: #aaa 0px 0px 0px 1px inset;
 }
@@ -41,7 +44,7 @@ export default `.vega-embed {
 .vega-embed details[open] summary {
   opacity: 0.7;
 }
-.vega-embed:hover summary, .vega-embed:focus-within summary {
+.vega-embed:hover summary, .vega-embed:focus summary {
   opacity: 1 !important;
   transition: opacity 0.2s ease;
 }
