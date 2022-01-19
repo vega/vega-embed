@@ -48,7 +48,7 @@
     }
   }
 
-  details[open] summary {
+  details[open] summary:focus {
     opacity: 0.7;
   }
 
