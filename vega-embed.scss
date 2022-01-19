@@ -33,11 +33,9 @@
       display: none;
     }
 
-    &:focus-visible {
+    &:focus {
       opacity: 1 !important;
       transition: opacity 0.2s ease;
-      outline: -webkit-focus-ring-color auto thin;
-      outline: revert;
     }
 
     &:active {
@@ -52,7 +50,6 @@
 
   details[open] summary {
     opacity: 0.7;
-    outline: none;
   }
 
   &:hover summary {
@@ -88,7 +85,7 @@
       text-decoration: none;
 
       &:hover,
-      &:focus-visible {
+      &:focus {
         background-color: #f7f7f9;
         color: black;
       }
