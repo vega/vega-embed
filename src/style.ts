@@ -46,6 +46,7 @@ export default `.vega-embed {
 }
 .vega-embed details[open] summary {
   opacity: 0.7;
+  outline: none;
 }
 .vega-embed:hover summary {
   opacity: 1 !important;
