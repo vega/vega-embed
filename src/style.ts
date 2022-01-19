@@ -31,7 +31,7 @@ export default `.vega-embed {
 .vega-embed summary::-webkit-details-marker {
   display: none;
 }
-.vega-embed summary:focus {
+.vega-embed summary:focus-visible {
   opacity: 1 !important;
   transition: opacity 0.2s ease;
   outline: -webkit-focus-ring-color auto thin;
@@ -79,7 +79,7 @@ export default `.vega-embed {
   color: #434a56;
   text-decoration: none;
 }
-.vega-embed .vega-actions a:hover, .vega-embed .vega-actions a:focus {
+.vega-embed .vega-actions a:hover, .vega-embed .vega-actions a:focus-visible {
   background-color: #f7f7f9;
   color: black;
 }

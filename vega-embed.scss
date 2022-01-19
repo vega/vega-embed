@@ -33,7 +33,7 @@
       display: none;
     }
 
-    &:focus {
+    &:focus-visible {
       opacity: 1 !important;
       transition: opacity 0.2s ease;
       outline: -webkit-focus-ring-color auto thin;
@@ -88,7 +88,7 @@
       text-decoration: none;
 
       &:hover,
-      &:focus {
+      &:focus-visible {
         background-color: #f7f7f9;
         color: black;
       }
