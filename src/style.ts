@@ -31,7 +31,7 @@ export default `.vega-embed {
 .vega-embed summary::-webkit-details-marker {
   display: none;
 }
-.vega-embed summary:focus-within {
+.vega-embed summary:focus {
   background-color: pink !important;
   opacity: 1 !important;
   transition: opacity 0.2s ease;
