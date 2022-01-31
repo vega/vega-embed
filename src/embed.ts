@@ -304,7 +304,7 @@ async function _embed(
 
   const mode = guessMode(spec, opts.mode);
 
-  let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config);
+  let vgSpec: VgSpec = PREPROCESSOR[mode](spec, { ...config, logger });
 
   if (mode === 'vega-lite') {
     if (vgSpec.$schema) {
