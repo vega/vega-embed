@@ -206,7 +206,7 @@ function createLoader(opts?: Loader | LoaderOptions) {
 }
 
 function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
-  return (parsedSpec.usermeta && (parsedSpec.usermeta as any).embedOptions) ?? {};
+  return (parsedSpec.usermeta as any)?.embedOptions ?? {};
 }
 
 /**

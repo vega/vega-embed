@@ -25,7 +25,6 @@
     border-radius: 999px;
     opacity: 0.2;
     transition: opacity 0.4s ease-in;
-    outline: none;
     cursor: pointer;
     line-height: 0px; // For Safari
 
@@ -48,7 +47,7 @@
   }
 
   &:hover summary,
-  &:focus summary {
+  &:focus-within summary {
     opacity: 1 !important;
     transition: opacity 0.2s ease;
   }
@@ -80,7 +79,8 @@
       color: #434a56;
       text-decoration: none;
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: #f7f7f9;
         color: black;
       }
