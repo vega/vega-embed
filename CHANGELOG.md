@@ -1,3 +1,15 @@
+# v6.20.7 (Thu Feb 10 2022)
+
+#### 🐛 Bug Fix
+
+- fix: use innerHTML to set style to avoid <br> [#858](https://github.com/vega/vega-embed/pull/858) ([@domoritz](https://github.com/domoritz))
+
+#### Authors: 1
+
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.6 (Wed Feb 09 2022)
 
 #### 🐛 Bug Fix
