@@ -288,13 +288,12 @@ async function _embed(
   }
 
   if (opts.defaultStyle !== false) {
-    // Add a default stylesheet to the head of the document.
     const ID = 'vega-embed-style';
     const {root, rootContainer} = getRoot(element);
     if (!root.getElementById(ID)) {
       const style = document.createElement('style');
       style.id = ID;
-      style.innerText =
+      style.innerHTML =
         opts.defaultStyle === undefined || opts.defaultStyle === true
           ? (embedStyle ?? '').toString()
           : opts.defaultStyle;
