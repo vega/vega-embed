@@ -206,7 +206,12 @@ function createLoader(opts?: Loader | LoaderOptions) {
 }
 
 function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
-  return (parsedSpec.usermeta as any)?.embedOptions ?? {};
+  const opts = (parsedSpec.usermeta as any)?.embedOptions ?? {};
+  if (isString(opts.defaultStyle)) {
+    // we don't allow styles set via usermeta since it would allow injection of logic (we set the style via innerHTML)
+    opts.defaultStyle = false;
+  }
+  return opts;
 }
 
 /**
