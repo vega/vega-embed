@@ -132,6 +132,9 @@ export interface Result {
   /** The compiled and patched Vega specification. */
   vgSpec: VgSpec;
 
+  /** The Vega-Embed options. */
+  embedOptions: EmbedOptions;
+
   /** Removes references to unwanted behaviors and memory leaks. Calls Vega's `view.finalize`.  */
   finalize: () => void;
 }
@@ -237,14 +240,15 @@ export default async function embed(
     parsedSpec = spec;
   }
 
-  const usermetaLoader = embedOptionsFromUsermeta(parsedSpec).loader;
+  const loadedEmbedOptions = embedOptionsFromUsermeta(parsedSpec);
+  const usermetaLoader = loadedEmbedOptions.loader;
 
   // either create the loader for the first time or create a new loader if the spec has new loader options
   if (!loader || usermetaLoader) {
     loader = createLoader(opts.loader ?? usermetaLoader);
   }
 
-  const usermetaOpts = await loadOpts(embedOptionsFromUsermeta(parsedSpec), loader);
+  const usermetaOpts = await loadOpts(loadedEmbedOptions, loader);
   const parsedOpts = await loadOpts(opts, loader);
 
   const mergedOpts = {
@@ -518,5 +522,5 @@ async function _embed(
     view.finalize();
   }
 
-  return {view, spec, vgSpec, finalize};
+  return {view, spec, vgSpec, finalize, embedOptions: opts};
 }

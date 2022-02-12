@@ -401,7 +401,24 @@ test('can set loader via usermeta', async () => {
     },
   });
   expect(result).toBeTruthy();
+  expect(result.embedOptions.loader).toEqual({
+    target: '_blank',
+  });
   expect((result.view as any)._loader.options).toEqual({
     target: '_blank',
   });
+});
+
+test('cannot set style via usermeta', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, {
+    ...vlSpec,
+    usermeta: {
+      embedOptions: {
+        defaultStyle: 'body {color: red}',
+      },
+    },
+  });
+  expect(result).toBeTruthy();
+  expect(result.embedOptions.defaultStyle).toBe(false);
 });
