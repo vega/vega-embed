@@ -1,3 +1,20 @@
+# v6.20.8 (Mon Feb 14 2022)
+
+#### 🐛 Bug Fix
+
+- fix: don't allow defaultStyle in usermeta [#861](https://github.com/vega/vega-embed/pull/861) ([@domoritz](https://github.com/domoritz))
+
+#### 🔩 Dependency Updates
+
+- chore(deps-dev): bump rollup from 2.67.1 to 2.67.2 [#862](https://github.com/vega/vega-embed/pull/862) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+
+---
+
 # v6.20.7 (Thu Feb 10 2022)
 
 #### 🐛 Bug Fix
