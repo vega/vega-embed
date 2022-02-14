@@ -132,6 +132,9 @@ export interface Result {
   /** The compiled and patched Vega specification. */
   vgSpec: VgSpec;
 
+  /** The Vega-Embed options. */
+  embedOptions: EmbedOptions;
+
   /** Removes references to unwanted behaviors and memory leaks. Calls Vega's `view.finalize`.  */
   finalize: () => void;
 }
@@ -206,7 +209,12 @@ function createLoader(opts?: Loader | LoaderOptions) {
 }
 
 function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
-  return (parsedSpec.usermeta as any)?.embedOptions ?? {};
+  const opts = (parsedSpec.usermeta as any)?.embedOptions ?? {};
+  if (isString(opts.defaultStyle)) {
+    // we don't allow styles set via usermeta since it would allow injection of logic (we set the style via innerHTML)
+    opts.defaultStyle = false;
+  }
+  return opts;
 }
 
 /**
@@ -232,14 +240,15 @@ export default async function embed(
     parsedSpec = spec;
   }
 
-  const usermetaLoader = embedOptionsFromUsermeta(parsedSpec).loader;
+  const loadedEmbedOptions = embedOptionsFromUsermeta(parsedSpec);
+  const usermetaLoader = loadedEmbedOptions.loader;
 
   // either create the loader for the first time or create a new loader if the spec has new loader options
   if (!loader || usermetaLoader) {
     loader = createLoader(opts.loader ?? usermetaLoader);
   }
 
-  const usermetaOpts = await loadOpts(embedOptionsFromUsermeta(parsedSpec), loader);
+  const usermetaOpts = await loadOpts(loadedEmbedOptions, loader);
   const parsedOpts = await loadOpts(opts, loader);
 
   const mergedOpts = {
@@ -513,5 +522,5 @@ async function _embed(
     view.finalize();
   }
 
-  return {view, spec, vgSpec, finalize};
+  return {view, spec, vgSpec, finalize, embedOptions: opts};
 }
