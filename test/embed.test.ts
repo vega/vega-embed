@@ -20,15 +20,15 @@ const vlSpecCustomFunction: TopLevelSpec = {
       axis: {
         format: '',
         formatType: 'simpleFunction',
-      }
-    }
+      },
+    },
   },
   mark: 'point',
   transform: [
-    {calculate: "simpleFunction()", as: "result1"},
-    {calculate: "visitorFunction()", as: "result2"},
+    {calculate: 'simpleFunction()', as: 'result1'},
+    {calculate: 'functionWithVisitor()', as: 'result2'},
   ],
-}
+};
 
 test('embed returns result', async () => {
   const el = document.createElement('div');
@@ -261,21 +261,39 @@ test('can set locale', async () => {
 
 test('throws error when expressionFunction does not exist', async () => {
   const el = document.createElement('div');
-  try {
-    await embed(el, vlSpecCustomFunction);
-  } catch (e: any) {
-    expect(e.message).toEqual('Unrecognized function: simpleFunction');
-  }
+
+  const getErrorFromEmbed = async () => {
+    try {
+      await embed(el, vlSpecCustomFunction);
+
+      throw Error('No Thrown Error');
+    } catch (e: any) {
+      return e;
+    }
+  };
+
+  const error = await getErrorFromEmbed();
+  expect(error.message).toBe('Unrecognized function: simpleFunction');
 });
 
 test('can set and use expressionFunctions', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpecCustomFunction, {
     expressionFunctions: {
-      'simpleFunction': () => {},
-      'visitorFunction': {fn: () => {}, visitor: () => {}},
+      simpleFunction: () => {
+        return 'test';
+      },
+      functionWithVisitor: {
+        fn: () => {
+          return 'test';
+        },
+        visitor: () => {
+          return 'test';
+        },
+      },
     },
-  })
+  });
+  expect(result).toBeTruthy();
 });
 
 test('can set tooltip theme', async () => {

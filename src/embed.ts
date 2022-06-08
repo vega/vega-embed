@@ -358,6 +358,8 @@ async function _embed(
       const expressionFunction = opts.expressionFunctions[name];
       if ('fn' in expressionFunction && 'visitor' in expressionFunction) {
         vega.expressionFunction(name, expressionFunction.fn, expressionFunction.visitor);
+      } else if ('fn' in expressionFunction) {
+        vega.expressionFunction(name, expressionFunction.fn);
       } else {
         vega.expressionFunction(name, expressionFunction);
       }

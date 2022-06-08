@@ -159,6 +159,7 @@ var opt = {
 
   formatLocale: ...,
   timeFormatLocale: ...,
+  expressionFunctions: ...,
 
   ast: ...,
   expr: ...,
@@ -198,6 +199,7 @@ var opt = {
 | `downloadFileName` | String   | Sets the file name (default: `visualization`) for charts downloaded using the `png` or `svg` action. |
 | `formatLocale` | Object   | Sets the default locale definition for number formatting. See the [d3-format locale collection](https://github.com/d3/d3-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
 | `timeFormatLocale` | Object   | Sets the default locale definition for date/time formatting. See the [d3-time-format locale collection](https://github.com/d3/d3-time-format/tree/master/locale) for definition files for a variety of languages. Note that this is a global setting. |
+| `expressionFunctions` | Object   | Sets custom expression functions. Maps a function name to a JavaScript `function`, or an Object with the `fn`, and `visitor` parameters. See [Vega Expression Functions](https://vega.github.io/vega/docs/api/extensibility/#expressionFunction) for more information. |
 | `ast` | Boolean   | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. |
 | `expr` | Object   | Custom Vega Expression interpreter. |
 | `viewClass` | Class         | Class which extends [Vega `View`](https://vega.github.io/vega/docs/api/view/#view) for custom rendering. |
