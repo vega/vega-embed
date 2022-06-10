@@ -13,6 +13,23 @@ const vlSpec: TopLevelSpec = {
 
 const vgSpec = compile(vlSpec).spec;
 
+const vlSpecCustomFunction: TopLevelSpec = {
+  data: {values: [1, 2, 3]},
+  encoding: {
+    y: {
+      axis: {
+        format: '',
+        formatType: 'simpleFunction',
+      },
+    },
+  },
+  mark: 'point',
+  transform: [
+    {calculate: 'simpleFunction()', as: 'result1'},
+    {calculate: 'functionWithVisitor()', as: 'result2'},
+  ],
+};
+
 test('embed returns result', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec);
@@ -237,6 +254,43 @@ test('can set locale', async () => {
     formatLocale: {
       decimal: ',',
       thousands: '.',
+    },
+  });
+  expect(result).toBeTruthy();
+});
+
+test('throws error when expressionFunction does not exist', async () => {
+  const el = document.createElement('div');
+
+  const getErrorFromEmbed = async () => {
+    try {
+      await embed(el, vlSpecCustomFunction);
+
+      throw Error('No Thrown Error');
+    } catch (e: any) {
+      return e;
+    }
+  };
+
+  const error = await getErrorFromEmbed();
+  expect(error.message).toBe('Unrecognized function: simpleFunction');
+});
+
+test('can set and use expressionFunctions', async () => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpecCustomFunction, {
+    expressionFunctions: {
+      simpleFunction: () => {
+        return 'test';
+      },
+      functionWithVisitor: {
+        fn: () => {
+          return 'test';
+        },
+        visitor: () => {
+          return 'test';
+        },
+      },
     },
   });
   expect(result).toBeTruthy();

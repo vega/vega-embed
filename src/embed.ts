@@ -25,7 +25,7 @@ import * as themes from 'vega-themes';
 import {Handler, Options as TooltipOptions} from 'vega-tooltip';
 import post from './post';
 import embedStyle from './style';
-import {Config, Mode} from './types';
+import {Config, ExpressionFunction, Mode} from './types';
 import {mergeDeep} from './util';
 import pkg from '../package.json';
 
@@ -91,6 +91,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   downloadFileName?: string;
   formatLocale?: Record<string, unknown>;
   timeFormatLocale?: Record<string, unknown>;
+  expressionFunctions?: ExpressionFunction;
   ast?: boolean;
   expr?: typeof expressionInterpreter;
   viewClass?: typeof View;
@@ -163,8 +164,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
       console.warn(
-        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
-          NAMES[providedMode] ?? providedMode
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[providedMode] ?? providedMode
         }.`
       );
     }
@@ -352,6 +352,18 @@ async function _embed(
     vega.timeFormatLocale(opts.timeFormatLocale);
   }
 
+  // Set custom expression functions
+  if (opts.expressionFunctions) {
+    for (const name in opts.expressionFunctions) {
+      const expressionFunction = opts.expressionFunctions[name];
+      if ('fn' in expressionFunction) {
+        vega.expressionFunction(name, expressionFunction.fn, expressionFunction['visitor']);
+      } else if (expressionFunction instanceof Function) {
+        vega.expressionFunction(name, expressionFunction);
+      }
+    }
+  }
+
   const {ast} = opts;
 
   // Do not apply the config to Vega when we have already applied it to Vega-Lite.
@@ -384,7 +396,7 @@ async function _embed(
     const handler = isTooltipHandler(opts.tooltip)
       ? opts.tooltip
       : // user provided boolean true or tooltip options
-        new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
+      new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
 
     view.tooltip(handler);
   }
