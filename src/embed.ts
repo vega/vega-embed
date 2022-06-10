@@ -356,11 +356,9 @@ async function _embed(
   if (opts.expressionFunctions) {
     for (const name in opts.expressionFunctions) {
       const expressionFunction = opts.expressionFunctions[name];
-      if ('fn' in expressionFunction && 'visitor' in expressionFunction) {
-        vega.expressionFunction(name, expressionFunction.fn, expressionFunction.visitor);
-      } else if ('fn' in expressionFunction) {
-        vega.expressionFunction(name, expressionFunction.fn);
-      } else {
+      if ('fn' in expressionFunction) {
+        vega.expressionFunction(name, expressionFunction.fn, expressionFunction['visitor']);
+      } else if (expressionFunction instanceof Function) {
         vega.expressionFunction(name, expressionFunction);
       }
     }
