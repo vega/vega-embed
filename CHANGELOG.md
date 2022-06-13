@@ -1,3 +1,97 @@
+# v6.21.0 (Mon Jun 13 2022)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Zachary Bys ([@ZacharyBys](https://github.com/ZacharyBys)), for all your work!
+
+#### 🚀 Enhancement
+
+- feat: Expose expression functions [#935](https://github.com/vega/vega-embed/pull/935) ([@ZacharyBys](https://github.com/ZacharyBys) [@kanitw](https://github.com/kanitw))
+
+#### 🐛 Bug Fix
+
+- chore: upgrade TypeScript to 4.7 [#929](https://github.com/vega/vega-embed/pull/929) ([@domoritz](https://github.com/domoritz))
+- chore: upgrade deps [#871](https://github.com/vega/vega-embed/pull/871) ([@domoritz](https://github.com/domoritz))
+
+#### 🔩 Dependency Updates
+
+- chore(deps-dev): bump sass from 1.52.2 to 1.52.3 [#937](https://github.com/vega/vega-embed/pull/937) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.75.5 to 2.75.6 [#938](https://github.com/vega/vega-embed/pull/938) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup-plugin-ts from 3.0.1 to 3.0.2 [#939](https://github.com/vega/vega-embed/pull/939) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.75.4 to 2.75.5 [#930](https://github.com/vega/vega-embed/pull/930) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump typescript from 4.7.2 to 4.7.3 [#931](https://github.com/vega/vega-embed/pull/931) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.52.1 to 1.52.2 [#932](https://github.com/vega/vega-embed/pull/932) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup-plugin-ts from 3.0.0 to 3.0.1 [#933](https://github.com/vega/vega-embed/pull/933) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.74.1 to 2.75.3 [#924](https://github.com/vega/vega-embed/pull/924) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/first-time-contributor from 10.37.0 to 10.37.1 [#923](https://github.com/vega/vega-embed/pull/923) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump auto from 10.37.0 to 10.37.1 [#926](https://github.com/vega/vega-embed/pull/926) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/conventional-commits from 10.37.0 to 10.37.1 [#927](https://github.com/vega/vega-embed/pull/927) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.73.0 to 2.74.1 [#920](https://github.com/vega/vega-embed/pull/920) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump browser-sync from 2.27.9 to 2.27.10 [#921](https://github.com/vega/vega-embed/pull/921) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/conventional-commits from 10.36.5 to 10.37.0 [#922](https://github.com/vega/vega-embed/pull/922) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump concurrently from 7.2.0 to 7.2.1 [#915](https://github.com/vega/vega-embed/pull/915) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.51.0 to 1.52.1 [#916](https://github.com/vega/vega-embed/pull/916) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @babel/plugin-transform-runtime from 7.17.10 to 7.18.0 [#917](https://github.com/vega/vega-embed/pull/917) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/first-time-contributor from 10.36.5 to 10.37.0 [#918](https://github.com/vega/vega-embed/pull/918) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump auto from 10.36.5 to 10.37.0 [#919](https://github.com/vega/vega-embed/pull/919) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.72.1 to 2.73.0 [#914](https://github.com/vega/vega-embed/pull/914) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump concurrently from 7.1.0 to 7.2.0 [#912](https://github.com/vega/vega-embed/pull/912) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.71.1 to 2.72.1 [#911](https://github.com/vega/vega-embed/pull/911) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-node-resolve from 13.2.1 to 13.3.0 [#910](https://github.com/vega/vega-embed/pull/910) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.70.2 to 2.71.1 [#904](https://github.com/vega/vega-embed/pull/904) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.50.1 to 1.51.0 [#906](https://github.com/vega/vega-embed/pull/906) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump typescript from 4.6.3 to 4.6.4 [#907](https://github.com/vega/vega-embed/pull/907) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump jest-canvas-mock from 2.3.1 to 2.4.0 [#908](https://github.com/vega/vega-embed/pull/908) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump ejs from 3.1.6 to 3.1.7 [#909](https://github.com/vega/vega-embed/pull/909) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @babel/plugin-transform-runtime from 7.17.0 to 7.17.10 [#905](https://github.com/vega/vega-embed/pull/905) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-commonjs from 21.1.0 to 22.0.0 [#900](https://github.com/vega/vega-embed/pull/900) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.50.0 to 1.50.1 [#901](https://github.com/vega/vega-embed/pull/901) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump codecov/codecov-action from 3.0.0 to 3.1.0 [#902](https://github.com/vega/vega-embed/pull/902) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump tslib from 2.3.1 to 2.4.0 [#903](https://github.com/vega/vega-embed/pull/903) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.70.1 to 2.70.2 [#898](https://github.com/vega/vega-embed/pull/898) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-commonjs from 21.0.3 to 21.1.0 [#895](https://github.com/vega/vega-embed/pull/895) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump semver from 7.3.6 to 7.3.7 [#896](https://github.com/vega/vega-embed/pull/896) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-node-resolve from 13.1.3 to 13.2.1 [#897](https://github.com/vega/vega-embed/pull/897) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup-plugin-ts from 2.0.5 to 2.0.7 [#899](https://github.com/vega/vega-embed/pull/899) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump codecov/codecov-action from 2.1.0 to 3.0.0 [#894](https://github.com/vega/vega-embed/pull/894) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump semver from 7.3.5 to 7.3.6 [#892](https://github.com/vega/vega-embed/pull/892) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.49.11 to 1.50.0 [#893](https://github.com/vega/vega-embed/pull/893) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.49.9 to 1.49.11 [#890](https://github.com/vega/vega-embed/pull/890) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump concurrently from 7.0.0 to 7.1.0 [#891](https://github.com/vega/vega-embed/pull/891) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump minimist from 1.2.5 to 1.2.6 [#889](https://github.com/vega/vega-embed/pull/889) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump fast-json-patch from 3.1.0 to 3.1.1 [#885](https://github.com/vega/vega-embed/pull/885) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-commonjs from 21.0.2 to 21.0.3 [#886](https://github.com/vega/vega-embed/pull/886) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump typescript from 4.6.2 to 4.6.3 [#887](https://github.com/vega/vega-embed/pull/887) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump vega from 5.22.0 to 5.22.1 [#888](https://github.com/vega/vega-embed/pull/888) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/first-time-contributor from 10.34.1 to 10.36.5 [#881](https://github.com/vega/vega-embed/pull/881) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump auto from 10.34.1 to 10.36.5 [#882](https://github.com/vega/vega-embed/pull/882) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/conventional-commits from 10.34.1 to 10.36.5 [#883](https://github.com/vega/vega-embed/pull/883) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump browser-sync from 2.27.8 to 2.27.9 [#884](https://github.com/vega/vega-embed/pull/884) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump vega from 5.21.0 to 5.22.0 [#878](https://github.com/vega/vega-embed/pull/878) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.70.0 to 2.70.1 [#880](https://github.com/vega/vega-embed/pull/880) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump browser-sync from 2.27.7 to 2.27.8 [#879](https://github.com/vega/vega-embed/pull/879) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.69.1 to 2.70.0 [#875](https://github.com/vega/vega-embed/pull/875) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump node-fetch from 2.6.1 to 2.6.7 [#877](https://github.com/vega/vega-embed/pull/877) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump auto from 10.32.6 to 10.34.1 [#872](https://github.com/vega/vega-embed/pull/872) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/first-time-contributor from 10.32.6 to 10.34.1 [#873](https://github.com/vega/vega-embed/pull/873) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @auto-it/conventional-commits from 10.32.6 to 10.34.1 [#874](https://github.com/vega/vega-embed/pull/874) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump actions/checkout from 2 to 3 [#876](https://github.com/vega/vega-embed/pull/876) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.49.8 to 1.49.9 [#866](https://github.com/vega/vega-embed/pull/866) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump @rollup/plugin-commonjs from 21.0.1 to 21.0.2 [#867](https://github.com/vega/vega-embed/pull/867) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.67.3 to 2.68.0 [#868](https://github.com/vega/vega-embed/pull/868) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps): bump actions/setup-node from 2.5.1 to 3 [#869](https://github.com/vega/vega-embed/pull/869) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump rollup from 2.67.2 to 2.67.3 [#864](https://github.com/vega/vega-embed/pull/864) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- chore(deps-dev): bump sass from 1.49.7 to 1.49.8 [#865](https://github.com/vega/vega-embed/pull/865) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 4
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Dominik Moritz ([@domoritz](https://github.com/domoritz))
+- Kanit Wongsuphasawat ([@kanitw](https://github.com/kanitw))
+- Zachary Bys ([@ZacharyBys](https://github.com/ZacharyBys))
+
+---
+
 # v6.20.8 (Mon Feb 14 2022)
 
 #### 🐛 Bug Fix
