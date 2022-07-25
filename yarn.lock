@@ -21,11 +21,11 @@
   integrity sha512-mV7CxJzlraJYu6qy+ljCosFLfQZkXvdSX+2f5Na3KAuDPLbaFGLwZRa5i53JBYORsS9+n9pbEg5jC+M5HCC0xQ==
 
 "@auto-it/conventional-commits@^10.37.1":
-  version "10.37.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/conventional-commits/-/conventional-commits-10.37.2.tgz#fc3951f0ae9bc67a0414cbef79a017590ddf8cd2"
-  integrity sha512-hlhpWdiTrjntDc8yuIBYWdIh7oI+CykAWvxoXyDG0H5IcDqk0pEybZV5u+K2jebb7x2D8yfqqdaXShnn/IwTkg==
+  version "10.37.3"
+  resolved "https://registry.yarnpkg.com/@auto-it/conventional-commits/-/conventional-commits-10.37.3.tgz#1f7b173b4ebd75bd4888bdfbcef04f6d006853b4"
+  integrity sha512-2MkGzEEeTYWKhZgCWQ9hC5GF64vAov+LRbeKJCD7ltQ/bq+ZCKkW8SVgf72lK2Kw9R/IEhzX+2VZObREWHGIMQ==
   dependencies:
-    "@auto-it/core" "10.37.2"
+    "@auto-it/core" "10.37.3"
     array.prototype.flatmap "^1.2.2"
     conventional-changelog-core "^4.2.0"
     conventional-changelog-preset-loader "^2.3.4"
