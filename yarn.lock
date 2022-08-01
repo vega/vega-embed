@@ -10,11 +10,6 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@auto-it/bot-list@10.37.2":
-  version "10.37.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/bot-list/-/bot-list-10.37.2.tgz#bd32fd0b7d1ab8c94482d7842209877663ebf35f"
-  integrity sha512-CLcXVCXUcn2ZZ4XBImZYqum62M0K1uJ3/b2p63OEjZSPaJw5ci3kbfIq8mkpoymQM33wj9rxRNiemfAUecunGg==
-
 "@auto-it/bot-list@10.37.3":
   version "10.37.3"
   resolved "https://registry.yarnpkg.com/@auto-it/bot-list/-/bot-list-10.37.3.tgz#b0adeca53b744142a502d8548a2d7ea6abe81173"
@@ -34,51 +29,6 @@
     fp-ts "^2.5.3"
     io-ts "^2.1.2"
     tslib "2.1.0"
-
-"@auto-it/core@10.37.2":
-  version "10.37.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/core/-/core-10.37.2.tgz#bdd851f2bd2d671cac07e411b9b0b87aa392796a"
-  integrity sha512-U0hJra9nQLCyBowJQEma2JJOJyo7ySzcL8T9Cid8LrZmte9RV7nWEJ4B/etDFd6pSXLEuIK1XYjVAT8LuwPJJA==
-  dependencies:
-    "@auto-it/bot-list" "10.37.2"
-    "@endemolshinegroup/cosmiconfig-typescript-loader" "^3.0.2"
-    "@octokit/plugin-enterprise-compatibility" "1.3.0"
-    "@octokit/plugin-retry" "^3.0.9"
-    "@octokit/plugin-throttling" "^3.6.2"
-    "@octokit/rest" "^18.12.0"
-    await-to-js "^3.0.0"
-    chalk "^4.0.0"
-    cosmiconfig "7.0.0"
-    deepmerge "^4.0.0"
-    dotenv "^8.0.0"
-    endent "^2.1.0"
-    enquirer "^2.3.4"
-    env-ci "^5.0.1"
-    fast-glob "^3.1.1"
-    fp-ts "^2.5.3"
-    fromentries "^1.2.0"
-    gitlog "^4.0.3"
-    https-proxy-agent "^5.0.0"
-    import-cwd "^3.0.0"
-    import-from "^3.0.0"
-    io-ts "^2.1.2"
-    lodash.chunk "^4.2.0"
-    log-symbols "^4.0.0"
-    node-fetch "2.6.7"
-    parse-author "^2.0.0"
-    parse-github-url "1.0.2"
-    pretty-ms "^7.0.0"
-    requireg "^0.2.2"
-    semver "^7.0.0"
-    signale "^1.4.0"
-    tapable "^2.2.0"
-    terminal-link "^2.1.1"
-    tinycolor2 "^1.4.1"
-    ts-node "^9.1.1"
-    tslib "2.1.0"
-    type-fest "^0.21.1"
-    typescript-memoize "^1.0.0-alpha.3"
-    url-join "^4.0.0"
 
 "@auto-it/core@10.37.3":
   version "10.37.3"
@@ -8274,9 +8224,9 @@ vega-lite-dev-config@^0.20.0:
     typescript "^4.4.4"
 
 vega-lite@^5.2.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-5.3.0.tgz#b9b9ecd80e869e823e6848c67d0a8ad94954bdee"
-  integrity sha512-6giodZ/bJnWyLq6Gj4OyiDt7EndoGyC9f5xDQjo82yPpUiO4MuG9iiPMqR1SPKmG9/qPBf+klWQR0v/7Mgju0Q==
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-5.4.0.tgz#d09331e2a1c87843d5865de0fa7704919796ab56"
+  integrity sha512-e/P5iOtBE62WEWZhKP7sLcBd92YS9prfUQafelxoOeloooSSrkUwM/ZDmN5Q5ffByEZTiKfODtnwD6/xKDYUmw==
   dependencies:
     "@types/clone" "~2.1.1"
     array-flat-polyfill "^1.0.1"
