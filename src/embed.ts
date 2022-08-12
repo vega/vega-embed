@@ -164,7 +164,8 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
       console.warn(
-        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[providedMode] ?? providedMode
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
+          NAMES[providedMode] ?? providedMode
         }.`
       );
     }
@@ -396,7 +397,7 @@ async function _embed(
     const handler = isTooltipHandler(opts.tooltip)
       ? opts.tooltip
       : // user provided boolean true or tooltip options
-      new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
+        new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
 
     view.tooltip(handler);
   }
