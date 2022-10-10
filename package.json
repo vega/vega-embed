@@ -43,7 +43,7 @@
     "@auto-it/conventional-commits": "^10.37.4",
     "@auto-it/first-time-contributor": "^10.37.4",
     "@babel/plugin-transform-runtime": "^7.18.10",
-    "@rollup/plugin-commonjs": "22.0.2",
+    "@rollup/plugin-commonjs": "23.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^14.0.1",
     "@types/semver": "^7.3.12",
