@@ -8,6 +8,9 @@ on:
     branches:
       - next
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test on Node
