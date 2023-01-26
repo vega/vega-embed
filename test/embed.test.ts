@@ -476,3 +476,11 @@ test('cannot set style via usermeta', async () => {
   expect(result).toBeTruthy();
   expect(result.embedOptions.defaultStyle).toBe(false);
 });
+
+test.each([5, {svg: 2, png: 5}, {svg: 2}, {png: 5}])('can set scaleFactor', async (scaleFactor) => {
+  const el = document.createElement('div');
+  const result = await embed(el, vlSpec, {
+    scaleFactor,
+  });
+  expect(result).toBeTruthy();
+});
