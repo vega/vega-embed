@@ -40,14 +40,13 @@
     "patches"
   ],
   "devDependencies": {
-    "@auto-it/conventional-commits": "^10.37.6",
-    "@auto-it/first-time-contributor": "^10.37.6",
     "@babel/plugin-transform-runtime": "^7.19.6",
+    "@release-it/conventional-changelog": "^5.1.1",
     "@rollup/plugin-commonjs": "24.0.1",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
     "@types/semver": "^7.3.13",
-    "auto": "^10.37.6",
     "browser-sync": "^2.27.10",
     "concurrently": "^7.5.0",
     "del-cli": "^5.0.0",
@@ -55,15 +54,15 @@
     "jest-environment-jsdom": "^29.3.1",
     "patch-package": "^6.5.0",
     "postinstall-postinstall": "^2.1.0",
-    "rollup": "3.12.0",
+    "release-it": "^15.6.0",
     "rollup-plugin-bundle-size": "^1.0.3",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^3.0.2",
+    "rollup": "3.12.0",
     "sass": "^1.56.1",
     "typescript": "^4.9.3",
-    "vega": "^5.22.1",
+    "vega-lite-dev-config": "^0.21.0",
     "vega-lite": "^5.2.0",
-    "vega-lite-dev-config": "^0.21.0"
+    "vega": "^5.22.1"
   },
   "peerDependencies": {
     "vega": "^5.21.0",
