@@ -8,6 +8,9 @@ on:
     branches:
       - next
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test on Node
@@ -20,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          cache: "yarn"
 
       - name: Install Node dependencies
         run: yarn --frozen-lockfile
@@ -32,4 +35,4 @@ jobs:
         run: yarn jest test/ --collectCoverage=true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v3.1.1

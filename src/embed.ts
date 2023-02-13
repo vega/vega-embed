@@ -8,6 +8,7 @@ import {
   Config as VgConfig,
   EncodeEntryName,
   isBoolean,
+  isObject,
   isString,
   Loader,
   LoaderOptions,
@@ -81,7 +82,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   width?: number;
   height?: number;
   padding?: number | {left?: number; right?: number; top?: number; bottom?: number};
-  scaleFactor?: number;
+  scaleFactor?: number | {svg?: number; png?: number};
   config?: S | Config;
   sourceHeader?: string;
   sourceFooter?: string;
@@ -164,7 +165,8 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
       console.warn(
-        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${NAMES[providedMode] ?? providedMode
+        `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
+          NAMES[providedMode] ?? providedMode
         }.`
       );
     }
@@ -396,7 +398,7 @@ async function _embed(
     const handler = isTooltipHandler(opts.tooltip)
       ? opts.tooltip
       : // user provided boolean true or tooltip options
-      new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
+        new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
 
     view.tooltip(handler);
   }
@@ -461,6 +463,7 @@ async function _embed(
         if (actions === true || actions.export === true || (actions.export as {svg?: boolean; png?: boolean})[ext]) {
           const i18nExportAction = (i18n as {[key: string]: string})[`${ext.toUpperCase()}_ACTION`];
           const exportLink = document.createElement('a');
+          const scaleFactor = isObject(opts.scaleFactor) ? opts.scaleFactor[ext] : opts.scaleFactor;
 
           exportLink.text = i18nExportAction;
           exportLink.href = '#';
@@ -469,7 +472,7 @@ async function _embed(
           // add link on mousedown so that it's correct when the click happens
           exportLink.addEventListener('mousedown', async function (this, e) {
             e.preventDefault();
-            const url = await view.toImageURL(ext, opts.scaleFactor);
+            const url = await view.toImageURL(ext, scaleFactor);
             this.href = url;
           });
 
