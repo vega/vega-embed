@@ -1,3 +1,104 @@
+
+
+## <small>6.21.1 (2023-02-13)</small>
+
+* chore: switch to release-it ([062b8df](https://github.com/vega/vega-embed/commit/062b8df))
+* chore: update release command ([4317570](https://github.com/vega/vega-embed/commit/4317570))
+* chore: update release script ([d95c801](https://github.com/vega/vega-embed/commit/d95c801))
+* chore(deps-dev): bump @auto-it/conventional-commits from 10.37.6 to 10.38.5 (#1062) ([e6ba266](https://github.com/vega/vega-embed/commit/e6ba266)), closes [#1062](https://github.com/vega/vega-embed/issues/1062)
+* chore(deps-dev): bump @auto-it/first-time-contributor from 10.37.6 to 10.38.5 (#1060) ([64580fb](https://github.com/vega/vega-embed/commit/64580fb)), closes [#1060](https://github.com/vega/vega-embed/issues/1060)
+* chore(deps-dev): bump auto from 10.37.6 to 10.38.5 (#1059) ([d66c0e0](https://github.com/vega/vega-embed/commit/d66c0e0)), closes [#1059](https://github.com/vega/vega-embed/issues/1059)
+* chore(deps-dev): bump jest-environment-jsdom from 29.3.1 to 29.4.1 (#1057) ([f3773f9](https://github.com/vega/vega-embed/commit/f3773f9)), closes [#1057](https://github.com/vega/vega-embed/issues/1057)
+* chore(deps-dev): bump rollup from 3.10.1 to 3.12.0 (#1054) ([0694d2d](https://github.com/vega/vega-embed/commit/0694d2d)), closes [#1054](https://github.com/vega/vega-embed/issues/1054)
+* chore(deps-dev): bump rollup-plugin-ts from 3.1.1 to 3.2.0 (#1056) ([5fa509d](https://github.com/vega/vega-embed/commit/5fa509d)), closes [#1056](https://github.com/vega/vega-embed/issues/1056)
+* chore(deps-dev): bump sass from 1.57.1 to 1.58.0 (#1058) ([c4d7afc](https://github.com/vega/vega-embed/commit/c4d7afc)), closes [#1058](https://github.com/vega/vega-embed/issues/1058)
+* chore(deps-dev): bump typescript from 4.9.4 to 4.9.5 (#1061) ([a3df837](https://github.com/vega/vega-embed/commit/a3df837)), closes [#1061](https://github.com/vega/vega-embed/issues/1061)
+* chore(deps): bump tslib from 2.4.1 to 2.5.0 (#1055) ([e0b050a](https://github.com/vega/vega-embed/commit/e0b050a)), closes [#1055](https://github.com/vega/vega-embed/issues/1055)
+
+
+
+## 6.21.0 (2022-06-13)
+
+* Bump version to: 6.21.0 [skip ci] ([7e7a0df](https://github.com/vega/vega-embed/commit/7e7a0df))
+* Update CHANGELOG.md [skip ci] ([a897233](https://github.com/vega/vega-embed/commit/a897233))
+
+
+
+## <small>6.20.8 (2022-02-14)</small>
+
+* "Bump version to: 6.20.8 [skip ci]" ([71dccd9](https://github.com/vega/vega-embed/commit/71dccd9))
+* Update CHANGELOG.md [skip ci] ([83cacf6](https://github.com/vega/vega-embed/commit/83cacf6))
+
+
+
+## <small>6.20.7 (2022-02-10)</small>
+
+* "Bump version to: 6.20.7 [skip ci]" ([05b5337](https://github.com/vega/vega-embed/commit/05b5337))
+* Update CHANGELOG.md [skip ci] ([2f9bf76](https://github.com/vega/vega-embed/commit/2f9bf76))
+
+
+
+## <small>6.20.6 (2022-02-09)</small>
+
+* "Bump version to: 6.20.6 [skip ci]" ([cd5bb74](https://github.com/vega/vega-embed/commit/cd5bb74))
+* Update CHANGELOG.md [skip ci] ([9737085](https://github.com/vega/vega-embed/commit/9737085))
+
+
+
+## <small>6.20.5 (2021-11-30)</small>
+
+* "Bump version to: 6.20.5 [skip ci]" ([1f5d676](https://github.com/vega/vega-embed/commit/1f5d676))
+* Update CHANGELOG.md [skip ci] ([45df6b1](https://github.com/vega/vega-embed/commit/45df6b1))
+
+
+
+## <small>6.20.4 (2021-11-26)</small>
+
+* "Bump version to: 6.20.4 [skip ci]" ([c43f95f](https://github.com/vega/vega-embed/commit/c43f95f))
+* Update CHANGELOG.md [skip ci] ([c0bacb9](https://github.com/vega/vega-embed/commit/c0bacb9))
+
+
+
+## <small>6.20.3 (2021-11-26)</small>
+
+* "Bump version to: 6.20.3 [skip ci]" ([f01f30c](https://github.com/vega/vega-embed/commit/f01f30c))
+* Update CHANGELOG.md [skip ci] ([90e748a](https://github.com/vega/vega-embed/commit/90e748a))
+
+
+
+## <small>6.20.2 (2021-11-16)</small>
+
+* "Bump version to: 6.20.2 [skip ci]" ([607c2de](https://github.com/vega/vega-embed/commit/607c2de))
+* Update CHANGELOG.md [skip ci] ([9946498](https://github.com/vega/vega-embed/commit/9946498))
+
+
+
+## <small>6.20.1 (2021-11-15)</small>
+
+* "Bump version to: 6.20.1 [skip ci]" ([c914d08](https://github.com/vega/vega-embed/commit/c914d08))
+* Update CHANGELOG.md [skip ci] ([a8e1bb5](https://github.com/vega/vega-embed/commit/a8e1bb5))
+
+
+
+## 6.20.0 (2021-10-27)
+
+* "Bump version to: 6.20.0 [skip ci]" ([52c4895](https://github.com/vega/vega-embed/commit/52c4895))
+* Update CHANGELOG.md [skip ci] ([6541e8f](https://github.com/vega/vega-embed/commit/6541e8f))
+
+
+
+## <small>6.19.1 (2021-09-21)</small>
+
+* "Bump version to: 6.19.1 [skip ci]" ([b8135e2](https://github.com/vega/vega-embed/commit/b8135e2))
+* Update CHANGELOG.md [skip ci] ([622fc8b](https://github.com/vega/vega-embed/commit/622fc8b))
+
+
+
+## 6.19.0 (2021-09-17)
+
+* "Bump version to: 6.19.0 [skip ci]" ([b074b2e](https://github.com/vega/vega-embed/commit/b074b2e))
+* Update CHANGELOG.md [skip ci] ([4d6475c](https://github.com/vega/vega-embed/commit/4d6475c))
+
 # v6.21.0 (Mon Jun 13 2022)
 
 :tada: This release contains work from a new contributor! :tada:
