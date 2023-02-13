@@ -222,11 +222,6 @@ To build `vega-embed.js` and view the test examples, you must have [Yarn 1](http
 2. Run `yarn build`. This will create `vega-embed.js` and the minified `vega-embed.min.js`.
 3. Run a local webserver with `yarn start` then point your web browser at the test page (e.g., `http://localhost:8000/test-vg.html`(Vega) or `http://localhost:8000/test-vl.html`(Vega-Lite)).
 
-## Release Process
+## Publishing
 
-Publishing is handled by a 2-branch [pre-release process](https://intuit.github.io/auto/docs/generated/shipit#next-branch-default), configured in `publish.yml`. All changes should be based off the default `next` branch, and are published automatically.
-
-- PRs made into the default branch that [would trigger a version bump](https://intuit.github.io/auto/docs/generated/conventional-commits) are auto-deployed to the `next` pre-release tag on NPM. The result can be installed with `npm install vega-embed/@next`.
-  - When merging into `next`, please use the `squash and merge` strategy.
-- To release a new stable version, open a PR from `next` into `stable` using this [compare link](https://github.com/vega/vega-embed/compare/stable...next).
-  - When merging from `next` into `stable`, please use the `create a merge commit` strategy.
+To make a release, run `npm run release`.
