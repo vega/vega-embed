@@ -1,5 +1,7 @@
 
 
+## [6.21.3](https://github.com/vega/vega-embed/compare/v6.21.2...v6.21.3) (2023-02-16)
+
 ## <small>6.21.2 (2023-02-13)</small>
 
 * fix: upgrade deps including themes and tooltips, fixes version issues ([ba8ba18](https://github.com/vega/vega-embed/commit/ba8ba18))
