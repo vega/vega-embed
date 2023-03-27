@@ -2580,21 +2580,19 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browser-sync-client@^2.28.3:
-  version "2.28.3"
-  resolved "https://registry.yarnpkg.com/browser-sync-client/-/browser-sync-client-2.28.3.tgz#cc9c35430235c131b3ab15138f1d8ef2b204b9a4"
-  integrity sha512-SMsnGkyXlySVLBWRrXdnTdtQCy0Sl5UoiF8BVtigj9S49DaPWQiesbsyq+uJBUKgpyNve+cvfpBU3KSfIp6oLQ==
+browser-sync-client@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/browser-sync-client/-/browser-sync-client-2.29.1.tgz#a07b50cbf0d0529418f545c30c87047e0b2dd04d"
+  integrity sha512-aESnjt3rU7CZpzjyqzhIC2UJ3MVhzRis7cPKkGbyYWDf/wnbxyRa3fFenF3Qx9061/guY3HHhD67uiTVV26DVg==
   dependencies:
     etag "1.8.1"
     fresh "0.5.2"
     mitt "^1.1.3"
-    rxjs "^5.5.6"
-    typescript "^4.6.2"
 
-browser-sync-ui@^2.28.3:
-  version "2.28.3"
-  resolved "https://registry.yarnpkg.com/browser-sync-ui/-/browser-sync-ui-2.28.3.tgz#6ed7469a9d557e04c264106cbeb7032fc175f09d"
-  integrity sha512-Mj5M+O3jroGp5hlO6pDfUo19wzUTIuvGyzaRrJAYUgsSkpFacrX+MLCjN9VbZm9fYXbtHyIsnIUUIlYag87wgQ==
+browser-sync-ui@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/browser-sync-ui/-/browser-sync-ui-2.29.1.tgz#21c201a8e61aa2eaa4eebfa144066392eb8e625f"
+  integrity sha512-MB7SAiUgVUrhipO2xyO1sheC9H0+LKXPQ3L1tQWcZ3AgizBnUNKAqDZPSwe4grNSa8o8ImSAwJp7lMS6XYy1Dw==
   dependencies:
     async-each-series "0.1.1"
     chalk "4.1.2"
@@ -2605,12 +2603,12 @@ browser-sync-ui@^2.28.3:
     stream-throttle "^0.1.3"
 
 browser-sync@^2.27.11:
-  version "2.28.3"
-  resolved "https://registry.yarnpkg.com/browser-sync/-/browser-sync-2.28.3.tgz#ff4c4a7b8e905f20d5ff517ecb0b4ba82c234896"
-  integrity sha512-gublDeevvAuypnc01SQNGL8fkm4RdIkEagnAJ8Tl9mvr2td3Pl4nVIg5S6fcgoMDEWb8IT7nUHG9YwTATn/k2g==
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/browser-sync/-/browser-sync-2.29.1.tgz#a21c9152b93589d7500f7c147cc3657713f2c2c3"
+  integrity sha512-WXy9HMJVQaNUTPjmai330E2fnDA6W84l/vBILGkYu9yHXIpWw1gJYjdQWDfEhLFljYUHNTN9jM3GCej2T55m+g==
   dependencies:
-    browser-sync-client "^2.28.3"
-    browser-sync-ui "^2.28.3"
+    browser-sync-client "^2.29.1"
+    browser-sync-ui "^2.29.1"
     bs-recipes "1.3.4"
     bs-snippet-injector "^2.0.1"
     chalk "4.1.2"
@@ -7965,13 +7963,6 @@ rx@4.1.0:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
   integrity sha512-CiaiuN6gapkdl+cZUr67W6I8jquN4lkak3vtIsIWCl4XIPP8ffsoyN6/+PuGXnQy8Cu8W2y9Xxh31Rq4M6wUug==
 
-rxjs@^5.5.6:
-  version "5.5.12"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.12.tgz#6fa61b8a77c3d793dbaf270bee2f43f652d741cc"
-  integrity sha512-xx2itnL5sBbqeeiVgNPVuQQ1nC8Jp2WfNJhXWHmElW9YmrpS9UVnNzhP3EH3HFqexO5Tlp8GhYY+WEcqcVMvGw==
-  dependencies:
-    symbol-observable "1.0.1"
-
 rxjs@^7.0.0, rxjs@^7.8.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
@@ -8603,11 +8594,6 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
-symbol-observable@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
-  integrity sha512-Kb3PrPYz4HanVF1LVGuAdW6LoVgIwjUYJGzFe7NDrBLCN4lsV/5J0MFurV+ygS4bRVwrCEt2c7MQ1R2a72oJDw==
-
 symbol-tree@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
@@ -8870,7 +8856,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@^4.6.2, typescript@^4.7.4:
+typescript@^4.7.4:
   version "4.9.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
