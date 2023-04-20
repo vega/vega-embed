@@ -18,13 +18,12 @@ const plugins = (browserslist, declaration) => [
       declarationMap: declaration,
     }),
     transpiler: "babel",
-    babelConfig: { presets: ["@babel/preset-env"] },
     browserslist,
   }),
   bundleSize(),
 ];
 
-const outputs = [
+export default [
   {
     input: "src/embed.ts",
     output: {
@@ -32,18 +31,14 @@ const outputs = [
       format: "esm",
       sourcemap: true,
     },
-    plugins: plugins(undefined, true),
+    plugins: plugins(false, true),
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)],
   },
-];
-
-for (const build of ["es5", "es6"]) {
-  const buildFolder = build === "es5" ? "build-es5" : "build";
-  outputs.push({
+  {
     input: "src/index.ts",
     output: [
       {
-        file: `${buildFolder}/vega-embed.js`,
+        file: "build/vega-embed.js",
         format: "umd",
         sourcemap: true,
         name: "vegaEmbed",
@@ -53,7 +48,7 @@ for (const build of ["es5", "es6"]) {
         },
       },
       {
-        file: `${buildFolder}/vega-embed.min.js`,
+        file: "build/vega-embed.min.js",
         format: "umd", // cannot do iife because rollup generates code that expects Vega-Lite to be present
         sourcemap: true,
         name: "vegaEmbed",
@@ -64,9 +59,7 @@ for (const build of ["es5", "es6"]) {
         plugins: [terser()],
       },
     ],
-    plugins: plugins(build === "es5" ? "defaults" : "defaults and not IE 11", false),
+    plugins: plugins("defaults", false),
     external: ["vega", "vega-lite"],
-  });
-}
-
-export default outputs;
+  },
+];
