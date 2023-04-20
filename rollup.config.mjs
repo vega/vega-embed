@@ -1,9 +1,9 @@
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
-import ts from "rollup-plugin-ts";
-import bundleSize from "rollup-plugin-bundle-size";
 import terser from "@rollup/plugin-terser";
+import bundleSize from "rollup-plugin-bundle-size";
+import ts from "rollup-plugin-ts";
 
 import pkg from "./package.json" assert { type: "json" };
 
