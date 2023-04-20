@@ -14,9 +14,11 @@ module.exports = {
   ],
   "coverageDirectory": "./coverage/",
   "collectCoverage": true,
-  "testURL": "http://localhost/",
   "setupFiles": [
     "jest-canvas-mock"
   ],
-  "testEnvironment": "jsdom"
+  "testEnvironment": "jsdom",
+  "testEnvironmentOptions": {
+    "url": "http://localhost/"
+  }
 };
