@@ -1,5 +1,14 @@
 
 
+# [6.22.0](https://github.com/vega/vega-embed/compare/v6.21.3...v6.22.0) (2023-04-20)
+
+
+### Features
+
+* remove beemo and old IE compatibility ([#1116](https://github.com/vega/vega-embed/issues/1116)) ([c344c90](https://github.com/vega/vega-embed/commit/c344c903d63b28a3f2240b455cfe5374576709b6))
+* smaller bundle and remove es5 builds since they are not really es5 builds anyway ([#1114](https://github.com/vega/vega-embed/issues/1114)) ([d4133c6](https://github.com/vega/vega-embed/commit/d4133c6500359f23a42d158283381d302d7ecd44))
+* update tooltip and themes dependencies ([e1a2ae1](https://github.com/vega/vega-embed/commit/e1a2ae16b2aa9c003f574b96d0859db269d4a50c))
+
 ## [6.21.3](https://github.com/vega/vega-embed/compare/v6.21.2...v6.21.3) (2023-02-16)
 
 ## <small>6.21.2 (2023-02-13)</small>
