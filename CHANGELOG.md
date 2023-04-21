@@ -1,5 +1,12 @@
 
 
+## [6.22.1](https://github.com/vega/vega-embed/compare/v6.22.0...v6.22.1) (2023-04-21)
+
+
+### Bug Fixes
+
+* fix issue with broken semver version ([ac5b84c](https://github.com/vega/vega-embed/commit/ac5b84c81d02a0cdbd2a9c40a6ab7c660e6cb15a))
+
 # [6.22.0](https://github.com/vega/vega-embed/compare/v6.21.3...v6.22.0) (2023-04-20)
 
 
