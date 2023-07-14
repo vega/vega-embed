@@ -27,6 +27,7 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/ban-types': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/prefer-for-of': 'error',
     '@typescript-eslint/no-for-in-array': 'error',
     '@typescript-eslint/no-require-imports': 'error',

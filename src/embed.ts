@@ -167,7 +167,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
       console.warn(
         `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
           NAMES[providedMode] ?? providedMode
-        }.`
+        }.`,
       );
     }
 
@@ -175,7 +175,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
 
     if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
       console.warn(
-        `The input spec uses ${NAMES[mode]} ${parsed.version}, but the current version of ${NAMES[mode]} is v${VERSION[mode]}.`
+        `The input spec uses ${NAMES[mode]} ${parsed.version}, but the current version of ${NAMES[mode]} is v${VERSION[mode]}.`,
       );
     }
 
@@ -230,7 +230,7 @@ function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
 export default async function embed(
   el: HTMLElement | string,
   spec: VisualizationSpec | string,
-  opts: EmbedOptions = {}
+  opts: EmbedOptions = {},
 ): Promise<Result> {
   let parsedSpec: VisualizationSpec;
   let loader: Loader | undefined;
@@ -282,7 +282,7 @@ async function _embed(
   el: HTMLElement | string,
   spec: VisualizationSpec,
   opts: EmbedOptions<never> = {},
-  loader: Loader
+  loader: Loader,
 ): Promise<Result> {
   const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config ?? {}) : opts.config;
 
