@@ -398,7 +398,7 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
       mark: 'bar',
       encoding: {},
     },
-    {}
+    {},
   );
 
   await embed(
@@ -409,7 +409,7 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
       mark: 'bar',
       encoding: {},
     },
-    {}
+    {},
   );
 
   await embed(
@@ -417,7 +417,7 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
     {
       $schema: 'https://vega.github.io/schema/vega/v4.json',
     },
-    {}
+    {},
   );
 
   expect(spy).toHaveBeenCalledTimes(2);
