@@ -8346,9 +8346,9 @@ vega-statistics@^1.8.1, vega-statistics@^1.9.0, vega-statistics@~1.9.0:
     d3-array "^3.2.2"
 
 vega-themes@^2.13.0:
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/vega-themes/-/vega-themes-2.13.0.tgz#be1a4e2eeec948d9ac4459e530473c1abe371c26"
-  integrity sha512-SVr/YDqGhkVDO2bRS62TeGyr1dVuXaNLJNCu42b1tbcnnmX2m9cyaq8G6gcputPeibArvHT1MsTF7MUzboOIWg==
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/vega-themes/-/vega-themes-2.14.0.tgz#0df269396e057123ecf3942e3b704bf125d1eed7"
+  integrity sha512-9dLmsUER7gJrDp8SEYKxBFmXmpyzLlToKIjxq3HCvYjz8cnNrRGyAhvIlKWOB3ZnGvfYV+vnv3ZRElSNL31nkA==
 
 vega-time@^2.1.1, vega-time@~2.1.1:
   version "2.1.1"
