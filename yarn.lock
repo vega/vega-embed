@@ -8219,9 +8219,9 @@ vega-label@~1.2.1:
     vega-util "^1.15.2"
 
 vega-lite@^5.2.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-5.13.0.tgz#cfab1cdc23cf1ffbbaff6cd06ee74a48bb445ecd"
-  integrity sha512-lygGw1KfegtkELn4PbDWwV8AskmUdvDbJ/ZG+IvWiBYUhTGGLIKPy1lnNQzpJG0z6zgD1s1bafAVyO2u2k0AFQ==
+  version "5.14.1"
+  resolved "https://registry.yarnpkg.com/vega-lite/-/vega-lite-5.14.1.tgz#02177cb04af85c7011ab302a441d17e0bb6ac810"
+  integrity sha512-VFvi0QtUoLQqwfAXTGjo0Acw/OTjiK3zOrcO/HyksGnnNDBHWM1GTcFryiWZYoAi99ehvv7tI/q94O46+fGRSQ==
   dependencies:
     "@types/clone" "~2.1.1"
     clone "~2.1.2"
