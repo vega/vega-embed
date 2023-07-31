@@ -1,5 +1,7 @@
 
 
+## [6.22.2](https://github.com/vega/vega-embed/compare/v6.22.1...v6.22.2) (2023-07-31)
+
 ## [6.22.1](https://github.com/vega/vega-embed/compare/v6.22.0...v6.22.1) (2023-04-21)
 
 
