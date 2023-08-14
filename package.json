@@ -89,7 +89,7 @@
     "vega-interpreter": "^1.0.5",
     "vega-schema-url-parser": "^2.2.0",
     "vega-themes": "^2.14.0",
-    "vega-tooltip": "^0.32.0"
+    "vega-tooltip": "^0.33.0"
   },
   "bundledDependencies": [
     "yallist"
