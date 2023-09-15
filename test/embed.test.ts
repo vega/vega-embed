@@ -124,6 +124,18 @@ test('does not set has-actions if actions are not specified', async () => {
   expect(el.querySelector('.has-actions')).toBeNull();
 });
 
+test('shows actions in menu if defaultStyle and forceActionsMenu are both false', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, {defaultStyle: false, forceActionsMenu: false});
+  expect(el.querySelector('details')).toBeNull();
+});
+
+test('shows actions in menu if defaultStyle is false and forceActionsMenu is true', async () => {
+  const el = document.createElement('div');
+  await embed(el, vlSpec, {defaultStyle: false, forceActionsMenu: true});
+  expect(el.querySelector('details')).not.toBeNull();
+});
+
 test('add fix-x class when needed', async () => {
   const el = document.createElement('div');
   await embed(el, {

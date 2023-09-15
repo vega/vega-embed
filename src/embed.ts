@@ -96,6 +96,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   ast?: boolean;
   expr?: typeof expressionInterpreter;
   viewClass?: typeof View;
+  forceActionsMenu?: boolean;
 }
 
 const NAMES: {[key in Mode]: string} = {
@@ -434,7 +435,7 @@ async function _embed(
   if (actions !== false) {
     let wrapper = element;
 
-    if (opts.defaultStyle !== false) {
+    if (opts.defaultStyle !== false || opts.forceActionsMenu) {
       const details = document.createElement('details');
       details.title = i18n.CLICK_TO_VIEW_ACTIONS;
       element.append(details);
