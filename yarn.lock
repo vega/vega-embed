@@ -7000,9 +7000,9 @@ rollup-plugin-bundle-size@^1.0.3:
     maxmin "^2.1.0"
 
 rollup-plugin-ts@^3.2.0:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-ts/-/rollup-plugin-ts-3.4.3.tgz#e887c34e16605b6a6bca3a1da52e90e124858f47"
-  integrity sha512-W76Q47JpyPhhAp1SXLi9HK1XRo/RPclPQizs1IS2mN1aVKtTp9O4IJEtmN2OwQLJbYFuCZqayxtG+aQSdEHMnA==
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-ts/-/rollup-plugin-ts-3.4.5.tgz#2e04fb121c67f711ba800c3b4349782243def388"
+  integrity sha512-9iCstRJpEZXSRQuXitlSZAzcGlrqTbJg1pE4CMbEi6xYldxVncdPyzA2I+j6vnh73wBymZckerS+Q/iEE/M3Ow==
   dependencies:
     "@rollup/pluginutils" "^5.0.2"
     "@wessberg/stringutil" "^1.0.19"
