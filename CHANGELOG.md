@@ -1,5 +1,12 @@
 
 
+# [6.23.0](https://github.com/vega/vega-embed/compare/v6.22.2...v6.23.0) (2023-09-28)
+
+
+### Features
+
+* Add new forceActionsMenu embed option ([#1242](https://github.com/vega/vega-embed/issues/1242)) ([fbbcd9e](https://github.com/vega/vega-embed/commit/fbbcd9e96881374c39674c2db586944c08ca71c8))
+
 ## [6.22.2](https://github.com/vega/vega-embed/compare/v6.22.1...v6.22.2) (2023-07-31)
 
 ## [6.22.1](https://github.com/vega/vega-embed/compare/v6.22.0...v6.22.1) (2023-04-21)
