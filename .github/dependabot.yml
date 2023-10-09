@@ -3,14 +3,8 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: weekly
-      day: sunday
-      time: "23:00"
-      timezone: PST8PDT
+      interval: monthly
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
-      day: sunday
-      time: "23:00"
-      timezone: PST8PDT
+      interval: monthly
