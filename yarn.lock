@@ -6958,9 +6958,9 @@ regjsparser@^0.9.1:
     jsesc "~0.5.0"
 
 release-it@^16.1.3:
-  version "16.2.1"
-  resolved "https://registry.yarnpkg.com/release-it/-/release-it-16.2.1.tgz#1dc9f5e327f903933777a6851e139179c115d67a"
-  integrity sha512-+bHiKPqkpld+NaiW+K/2WsjaHgfPB00J6uk8a+g8QyuBtzfFoMVe+GKsfaDO5ztEHRrSg+7luoXzd8IfvPNPig==
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/release-it/-/release-it-16.3.0.tgz#d962283fd72cc24d80d1956fcc020922326f7a5a"
+  integrity sha512-CP+WwKbgEvXreq6Iz9po3BtcyELtTxrt5RXRGnazQ0eCphPxFZR29+8sEZRCsJq2IKvlwb5mFUbf92u426oQog==
   dependencies:
     "@iarna/toml" "2.2.5"
     "@octokit/rest" "19.0.13"
