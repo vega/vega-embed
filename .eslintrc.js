@@ -6,21 +6,21 @@ module.exports = {
     'plugin:jest/recommended',
     'plugin:jest/style',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
     project: 'tsconfig.json',
     ecmaVersion: 2020,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   overrides: [
     {
-      files: ['*.ts']
-    }
+      files: ['*.ts'],
+    },
   ],
   rules: {
     'prettier/prettier': 'warn',
@@ -39,8 +39,8 @@ module.exports = {
       {
         vars: 'all',
         args: 'after-used',
-        ignoreRestSiblings: true
-      }
+        ignoreRestSiblings: true,
+      },
     ],
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
@@ -56,8 +56,8 @@ module.exports = {
     'no-return-assign': 'error',
     'no-useless-call': 'error',
     'no-useless-concat': 'error',
-    "prefer-template": "error",
+    'prefer-template': 'error',
     'no-undef': 'off', // typescript takes care of this for us
-    'no-unreachable': 'off' // typescript takes care of this for us
-  }
+    'no-unreachable': 'off', // typescript takes care of this for us
+  },
 };
