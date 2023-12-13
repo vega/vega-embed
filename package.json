@@ -75,8 +75,8 @@
     "rollup-plugin-ts": "^3.4.5",
     "sass": "^1.69.5",
     "typescript": "^5.3.3",
-    "vega": "^5.26.1",
-    "vega-lite": "^5.16.3"
+    "vega": "^5.22.1",
+    "vega-lite": "^5.2.0"
   },
   "peerDependencies": {
     "vega": "^5.21.0",
