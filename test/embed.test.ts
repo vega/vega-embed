@@ -4,6 +4,7 @@ import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
 import embed, {guessMode, Mode} from '../src/embed';
+import {RepeatSpec} from 'vega-lite/build/src/spec';
 
 const vlSpec: TopLevelSpec = {
   data: {values: [1, 2, 3]},
@@ -245,7 +246,7 @@ test('guessMode from Vega-Lite spec', () => {
   const specs: TopLevelSpec[] = [
     unitSpec,
     {layer: []},
-    {repeat: {}, spec: unitSpec},
+    {repeat: {}, spec: unitSpec} as RepeatSpec,
     {data: {values: []}, facet: {row: {field: 'foo', type: 'nominal'}}, spec: {mark: 'bar', encoding: {}}},
     {vconcat: []},
     {hconcat: []},

@@ -1,24 +1,19 @@
-module.exports = {
-  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  "moduleFileExtensions": [
-    "ts",
-    "tsx",
-    "js",
-    "jsx",
-    "json"
-  ],
-  "testPathIgnorePatterns": [
-    "<rootDir>/dist/",
-    "<rootDir>/node_modules/",
-    "<rootDir>/build/"
-  ],
-  "coverageDirectory": "./coverage/",
-  "collectCoverage": true,
-  "setupFiles": [
-    "jest-canvas-mock"
-  ],
-  "testEnvironment": "jsdom",
-  "testEnvironmentOptions": {
-    "url": "http://localhost/"
-  }
+/** @type {import('jest').Config} */
+const config = {
+  testPathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/build', '<rootDir>/src'],
+  coverageDirectory: './coverage/',
+  collectCoverage: true,
+  testEnvironment: './FixJSDOMEnvironment.ts',
+  testEnvironmentOptions: {
+    url: 'http://localhost/',
+  },
+  setupFiles: ['jest-canvas-mock'],
+  globals: {
+    'ts-jest': {
+      diagnostics: false,
+      useESM: true,
+    },
+  },
 };
+
+module.exports = config;
