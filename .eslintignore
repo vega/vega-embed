@@ -5,3 +5,4 @@ jest.config.js
 rollup.config.js
 build
 coverage
+FixJSDOMEnvironment.ts
