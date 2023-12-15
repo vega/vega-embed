@@ -17,11 +17,11 @@ export default async function (spec: VisualizationSpec | string, opt: EmbedOptio
   const actions =
     opt.actions === true || opt.actions === false
       ? opt.actions
-      : {export: true, source: false, compiled: true, editor: true, ...(opt.actions ?? {})};
+      : {export: true, source: false, compiled: true, editor: true, ...opt.actions};
 
   const result = await embed(div, spec, {
     actions,
-    ...(opt ?? {}),
+    ...opt,
   });
 
   wrapper.value = result.view;
