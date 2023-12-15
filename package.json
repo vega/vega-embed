@@ -111,5 +111,6 @@
     "format": "eslint . --fix && yarn prettierbase --write",
     "lint": "eslint . && yarn prettierbase --check",
     "release": "release-it"
-  }
+  },
+  "type": "module"
 }
