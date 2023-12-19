@@ -72,7 +72,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   bind?: HTMLElement | string;
   actions?: boolean | Actions;
   mode?: Mode;
-  theme?: keyof typeof themes;
+  theme?: keyof Omit<typeof themes, 'version'>;
   defaultStyle?: boolean | string;
   logLevel?: number;
   loader?: Loader | LoaderOptions;
