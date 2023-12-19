@@ -396,10 +396,12 @@ async function _embed(
   });
 
   if (opts.tooltip !== false) {
-    const handler = isTooltipHandler(opts.tooltip)
-      ? opts.tooltip
+    const {loader: loader_, tooltip} = opts;
+    const baseURL = loader_ && !isLoader(loader_) ? loader_?.baseURL : undefined;
+    const handler = isTooltipHandler(tooltip)
+      ? tooltip
       : // user provided boolean true or tooltip options
-        new Handler(opts.tooltip === true ? {} : opts.tooltip).call;
+        new Handler({baseURL, ...(tooltip === true ? {} : tooltip)}).call;
 
     view.tooltip(handler);
   }

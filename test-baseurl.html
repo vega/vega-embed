@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vega-Embed for Vega-Lite</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="build/vega-embed.js"></script>
+  </head>
+
+  <body>
+    <div id="vis"></div>
+    <script>
+      async function run() {
+        const spec = {
+          $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+          view: { stroke: null },
+          data: {
+            values: [{ image: "data/ffox.png" }, { image: "data/gimp.png" }, { image: "data/7zip.png" }],
+          },
+          mark: "text",
+          encoding: {
+            text: { field: "image" },
+            y: { field: "image", axis: null },
+            tooltip: [{ field: "image" }],
+          },
+        };
+        const result = await vegaEmbed("#vis", spec, {
+          loader: { baseURL: "https://vega.github.io/vega-datasets/" },
+        });
+
+        console.log(result);
+      }
+      run();
+    </script>
+  </body>
+</html>
