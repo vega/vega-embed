@@ -1,5 +1,17 @@
 
 
+# [6.24.0](https://github.com/vega/vega-embed/compare/v6.23.0...v6.24.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* allow all themes from vega themes in types ([#1288](https://github.com/vega/vega-embed/issues/1288)) ([cab79d2](https://github.com/vega/vega-embed/commit/cab79d226dd065183b40e809ec277504d32c5955))
+
+
+### Features
+
+* pass baseurl through to default tooltip handler ([#1286](https://github.com/vega/vega-embed/issues/1286)) ([e3e703d](https://github.com/vega/vega-embed/commit/e3e703dafe51a5046608a879f10cb834bacb2e45))
+
 # [6.23.0](https://github.com/vega/vega-embed/compare/v6.22.2...v6.23.0) (2023-09-28)
 
 
