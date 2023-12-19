@@ -72,7 +72,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   bind?: HTMLElement | string;
   actions?: boolean | Actions;
   mode?: Mode;
-  theme?: 'excel' | 'ggplot2' | 'quartz' | 'vox' | 'dark';
+  theme?: keyof typeof themes;
   defaultStyle?: boolean | string;
   logLevel?: number;
   loader?: Loader | LoaderOptions;
