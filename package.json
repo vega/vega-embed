@@ -38,6 +38,17 @@
     "build",
     "patches"
   ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/vega-embed.module.d.ts",
+        "default": "./build/vega-embed.module.js"
+      },
+      "require": {
+        "default": "./build/vega-embed.js"
+      }
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/plugin-proposal-async-generator-functions": "^7.20.7",
