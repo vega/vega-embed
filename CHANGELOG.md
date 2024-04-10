@@ -1,5 +1,12 @@
 
 
+# [6.25.0](https://github.com/vega/vega-embed/compare/v6.24.0...v6.25.0) (2024-04-10)
+
+
+### Features
+
+* remove patch package and update deps ([#1315](https://github.com/vega/vega-embed/issues/1315)) ([37dc579](https://github.com/vega/vega-embed/commit/37dc5791284611d78be5c4b78004331f2fa9ff19))
+
 # [6.24.0](https://github.com/vega/vega-embed/compare/v6.23.0...v6.24.0) (2023-12-19)
 
 
