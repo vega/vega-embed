@@ -522,9 +522,9 @@ async function _embed(
       editorLink.addEventListener('click', function (this, e) {
         post(window, editorUrl, {
           config: config as Config,
-          mode,
+          mode: patch ? 'vega' : mode,
           renderer,
-          spec: stringify(spec),
+          spec: stringify(patch ? vgSpec : spec),
         });
         e.preventDefault();
       });
