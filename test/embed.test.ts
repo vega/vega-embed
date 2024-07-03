@@ -3,8 +3,9 @@ import {View} from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
-import embed, {guessMode, Mode} from '../src/embed';
 import {RepeatSpec} from 'vega-lite/build/src/spec';
+import {expect, test, vi} from 'vitest';
+import embed, {guessMode, Mode} from '../src/embed';
 
 const vlSpec: TopLevelSpec = {
   data: {values: [1, 2, 3]},
@@ -354,7 +355,7 @@ test('can change i18n strings', async () => {
 });
 
 test('can set hover arguments', async () => {
-  const hoverSpy = jest.spyOn(View.prototype, 'hover');
+  const hoverSpy = vi.spyOn(View.prototype, 'hover');
 
   const el = document.createElement('div');
 
@@ -402,7 +403,7 @@ test('can set hover arguments', async () => {
 test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
   const el = document.createElement('div');
 
-  const spy = jest.spyOn(console, 'warn').mockImplementation();
+  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
   await embed(
     el,

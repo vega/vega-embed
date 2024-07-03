@@ -1,6 +1,6 @@
-import {DEFAULT_ACTIONS, Actions} from './../src/embed';
-import {isURL} from '../src/util';
-import {mergeDeep} from '../src/util';
+import {expect, test} from 'vitest';
+import {isURL, mergeDeep} from '../src/util';
+import {Actions, DEFAULT_ACTIONS} from './../src/embed';
 
 test('isURL detects URL', () => {
   expect(isURL('https://vega.github.io/vega/examples/global-development.vg.json')).toBeTruthy();
