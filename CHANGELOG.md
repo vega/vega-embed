@@ -1,5 +1,17 @@
 
 
+# [6.26.0](https://github.com/vega/vega-embed/compare/v6.25.0...v6.26.0) (2024-07-03)
+
+
+### Bug Fixes
+
+* apply patch before posting ([#1337](https://github.com/vega/vega-embed/issues/1337)) ([2397535](https://github.com/vega/vega-embed/commit/23975350624ba335a16a9bb04d6430aa8b12e990))
+
+
+### Features
+
+* add explicit exports ([#1301](https://github.com/vega/vega-embed/issues/1301)) ([3d1e921](https://github.com/vega/vega-embed/commit/3d1e92118635cd9e47419cd33743b1f73c6887e4))
+
 # [6.25.0](https://github.com/vega/vega-embed/compare/v6.24.0...v6.25.0) (2024-04-10)
 
 
