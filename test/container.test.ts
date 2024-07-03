@@ -1,4 +1,5 @@
 import {TopLevelSpec} from 'vega-lite';
+import {expect, test} from 'vitest';
 import container from '../src/container';
 
 const vlSpec: TopLevelSpec = {
