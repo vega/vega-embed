@@ -149,7 +149,7 @@ function isTooltipHandler(h?: boolean | TooltipOptions | TooltipHandler): h is T
 function viewSource(source: string, sourceHeader: string, sourceFooter: string, mode: Mode) {
   const header = `<html><head>${sourceHeader}</head><body><pre><code class="json">`;
   const footer = `</code></pre>${sourceFooter}</body></html>`;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
   const win = window.open('')!;
   win.document.write(header + source + footer);
   win.document.title = `${NAMES[mode]} JSON Source`;
@@ -263,7 +263,7 @@ export default async function embed(
 }
 
 async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions<never>> {
-  const config: Config = isString(opt.config) ? JSON.parse(await loader.load(opt.config)) : opt.config ?? {};
+  const config: Config = isString(opt.config) ? JSON.parse(await loader.load(opt.config)) : (opt.config ?? {});
   const patch: PatchFunc | Operation[] = isString(opt.patch) ? JSON.parse(await loader.load(opt.patch)) : opt.patch;
   return {
     ...(opt as any),
