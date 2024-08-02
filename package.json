@@ -60,7 +60,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@types/semver": "^7.5.8",
-    "@typescript-eslint/parser": "^7.15.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "@vitest/coverage-v8": "^1.6.0",
     "browser-sync": "^3.0.2",
     "concurrently": "^8.2.2",
