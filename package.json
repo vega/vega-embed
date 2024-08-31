@@ -61,7 +61,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@types/semver": "^7.5.8",
     "@typescript-eslint/parser": "^8.3.0",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/coverage-istanbul": "^2.0.5",
     "browser-sync": "^3.0.2",
     "concurrently": "^8.2.2",
     "del-cli": "^5.1.0",
