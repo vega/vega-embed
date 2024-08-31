@@ -54,7 +54,6 @@ export default [
       ...vitest.configs.recommended.rules,
       "prettier/prettier": "warn",
       "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/ban-types": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/prefer-for-of": "error",
       "@typescript-eslint/no-for-in-array": "error",
