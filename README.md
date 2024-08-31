@@ -217,11 +217,11 @@ When using [container](https://vega.github.io/vega-lite/docs/size.html#specifyin
 
 ## Build Process
 
-To build `vega-embed.js` and view the test examples, you must have [Yarn 1](https://classic.yarnpkg.com/) installed.
+To build `vega-embed.js` and view the test examples, you must have npm installed.
 
-1. Run `yarn` in the Vega-Embed folder to install dependencies.
-2. Run `yarn build`. This will create `vega-embed.js` and the minified `vega-embed.min.js`.
-3. Run a local webserver with `yarn start` then point your web browser at the test page (e.g., `http://localhost:8000/test-vg.html`(Vega) or `http://localhost:8000/test-vl.html`(Vega-Lite)).
+1. Run `npm install` in the Vega-Embed folder to install dependencies.
+2. Run `npm run build`. This will create `vega-embed.js` and the minified `vega-embed.min.js`.
+3. Run a local webserver with `npm run start` then point your web browser at the test page (e.g., `http://localhost:8000/test-vg.html`(Vega) or `http://localhost:8000/test-vl.html`(Vega-Lite)).
 
 ## Publishing
 

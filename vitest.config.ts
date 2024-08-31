@@ -14,5 +14,8 @@ export default defineConfig({
         resources: 'usable',
       },
     },
+    coverage: {
+      provider: 'istanbul', // or 'v8'
+    },
   },
 });
