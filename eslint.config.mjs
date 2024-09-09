@@ -8,7 +8,7 @@ import vitest from "eslint-plugin-vitest";
 delete globals.browser["AudioWorkletGlobalScope "];
 
 /**
- * @type {import('eslint').Linter.FlatConfig[]}
+ * @type {import('eslint').Linter.Config[]}
  */
 export default [
   {
