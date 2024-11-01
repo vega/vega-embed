@@ -64,7 +64,7 @@
     "@vitest/coverage-istanbul": "^2.1.1",
     "browser-sync": "^3.0.3",
     "concurrently": "^9.0.1",
-    "del-cli": "^5.1.0",
+    "del-cli": "^6.0.0",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
