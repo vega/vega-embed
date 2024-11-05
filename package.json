@@ -32,7 +32,7 @@
   "module": "build/vega-embed.module.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
-  "types": "build/vega-embed.module.d.ts",
+  "types": "build/src/index.d.ts",
   "files": [
     "src",
     "build"
@@ -40,7 +40,7 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./build/vega-embed.module.d.ts",
+        "types": "./build/src/index.d.ts",
         "default": "./build/vega-embed.module.js"
       },
       "require": {
@@ -60,11 +60,12 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
     "@types/semver": "^7.5.8",
-    "@typescript-eslint/parser": "^8.12.2",
+    "@typescript-eslint/parser": "^8.13.0",
     "@vitest/coverage-istanbul": "^2.1.4",
     "browser-sync": "^3.0.3",
-    "concurrently": "^9.0.1",
+    "concurrently": "^9.1.0",
     "del-cli": "^6.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -75,10 +76,9 @@
     "prettier": "^3.3.3",
     "release-it": "^17.10.0",
     "rollup-plugin-bundle-size": "^1.0.3",
-    "rollup-plugin-ts": "^3.4.5",
-    "rollup": "4.24.3",
+    "rollup": "4.24.4",
     "sass": "^1.80.6",
-    "typescript-eslint": "^8.12.2",
+    "typescript-eslint": "^8.13.0",
     "typescript": "^5.6.3",
     "vega-lite": "^5.21.0",
     "vega": "^5.30.0",
@@ -97,7 +97,7 @@
     "vega-interpreter": "^1.0.5",
     "vega-schema-url-parser": "^2.2.0",
     "vega-themes": "^2.15.0",
-    "vega-tooltip": "^0.34.0"
+    "vega-tooltip": "^0.35.1"
   },
   "scripts": {
     "prebuild": "npm run clean && npm run build:style",

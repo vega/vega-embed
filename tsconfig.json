@@ -3,6 +3,7 @@
     "target": "es2020",
     "module": "es2020",
     "moduleResolution": "node",
+    "outDir": "build",
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
