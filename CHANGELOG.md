@@ -1,5 +1,12 @@
 
 
+# [6.27.0](https://github.com/vega/vega-embed/compare/v6.26.0...v6.27.0) (2024-11-05)
+
+
+### Features
+
+* update vega tooltip and add update rollup typescript ([2e90bf4](https://github.com/vega/vega-embed/commit/2e90bf4b27424184adf6916bb788629abc52fe07))
+
 # [6.26.0](https://github.com/vega/vega-embed/compare/v6.25.0...v6.26.0) (2024-07-03)
 
 
