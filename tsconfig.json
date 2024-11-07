@@ -10,7 +10,10 @@
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "fast-json-patch/index.mjs": ["./node_modules/fast-json-patch/index.d.ts"]
+    }
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }

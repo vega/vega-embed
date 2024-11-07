@@ -1,4 +1,4 @@
-import {applyPatch, Operation} from 'fast-json-patch';
+import {applyPatch, Operation} from 'fast-json-patch/index.mjs';
 import stringify from 'json-stringify-pretty-compact';
 // need this import because of https://github.com/npm/node-semver/issues/381
 import satisfies from 'semver/functions/satisfies';
