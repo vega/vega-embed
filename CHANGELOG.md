@@ -1,5 +1,12 @@
 
 
+# [6.28.0](https://github.com/vega/vega-embed/compare/v6.27.1...v6.28.0) (2024-11-07)
+
+
+### Features
+
+* use esm version of fast-json-patch ([#1364](https://github.com/vega/vega-embed/issues/1364)) ([1a36845](https://github.com/vega/vega-embed/commit/1a3684553a31681a737f0cca975ceec802e0332a))
+
 ## [6.27.1](https://github.com/vega/vega-embed/compare/v6.27.0...v6.27.1) (2024-11-07)
 
 
