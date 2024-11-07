@@ -32,7 +32,7 @@
   "module": "build/vega-embed.module.js",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
-  "types": "build/src/index.d.ts",
+  "types": "build/src/embed.d.ts",
   "files": [
     "src",
     "build"
@@ -40,7 +40,7 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./build/src/index.d.ts",
+        "types": "./build/src/embed.d.ts",
         "default": "./build/vega-embed.module.js"
       },
       "require": {
