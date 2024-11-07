@@ -1,5 +1,12 @@
 
 
+## [6.27.1](https://github.com/vega/vega-embed/compare/v6.27.0...v6.27.1) (2024-11-07)
+
+
+### Bug Fixes
+
+* correct types reference ([794b9cc](https://github.com/vega/vega-embed/commit/794b9ccca3fdbd1205685708ce7c4c209233cac5))
+
 # [6.27.0](https://github.com/vega/vega-embed/compare/v6.26.0...v6.27.0) (2024-11-05)
 
 
