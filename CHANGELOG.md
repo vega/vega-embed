@@ -1,5 +1,12 @@
 
 
+# [6.29.0](https://github.com/vega/vega-embed/compare/v6.28.0...v6.29.0) (2024-11-19)
+
+
+### Features
+
+* update json-stringify-pretty-compact ([#1365](https://github.com/vega/vega-embed/issues/1365)) ([6e5f5ff](https://github.com/vega/vega-embed/commit/6e5f5ff9c4b335d4c191b0f19810cd8943e86647))
+
 # [6.28.0](https://github.com/vega/vega-embed/compare/v6.27.1...v6.28.0) (2024-11-07)
 
 
