@@ -29,7 +29,7 @@
   "homepage": "https://github.com/vega/vega-embed#readme",
   "license": "BSD-3-Clause",
   "main": "build/vega-embed.js",
-  "module": "build/vega-embed.module.js",
+  "module": "build/vega-embed.module.mjs",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
   "types": "build/src/embed.d.ts",
@@ -41,7 +41,7 @@
     ".": {
       "import": {
         "types": "./build/src/embed.d.ts",
-        "default": "./build/vega-embed.module.js"
+        "default": "./build/vega-embed.module.mjs"
       },
       "require": {
         "default": "./build/vega-embed.js"
