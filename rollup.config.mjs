@@ -24,7 +24,7 @@ export default [
   {
     input: "src/embed.ts",
     output: {
-      file: "build/vega-embed.module.js",
+      file: "build/vega-embed.module.mjs",
       format: "esm",
       sourcemap: true,
     },
