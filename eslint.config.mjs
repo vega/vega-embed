@@ -13,12 +13,10 @@ delete globals.browser["AudioWorkletGlobalScope "];
 export default [
   {
     ignores: [
-      ".eslintrc.js",
       "babel.config.js",
       "prettier.config.js",
       "vitest.config.ts",
       "vitest.setup.ts",
-      "rollup.config.js",
       "build/**",
       "coverage/**",
       "FixJSDOMEnvironment.ts",
