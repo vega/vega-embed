@@ -19,7 +19,6 @@ export default [
       "vitest.setup.ts",
       "build/**",
       "coverage/**",
-      "FixJSDOMEnvironment.ts",
     ],
   },
   eslint.configs.recommended,
