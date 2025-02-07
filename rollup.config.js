@@ -9,7 +9,7 @@ import pkg from './package.json' with {type: 'json'};
 
 const outputs = [
   {
-    input: 'src/index.ts',
+    input: 'src/embed.ts',
     output: {
       file: pkg.exports.default,
       format: 'esm',
@@ -24,7 +24,6 @@ const outputs = [
       file: pkg.unpkg,
       format: 'umd',
       name: 'vegaEmbed',
-      exports: 'named',
       sourcemap: true,
       globals: {
         vega: 'vega',
