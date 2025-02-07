@@ -17,5 +17,5 @@
       "fast-json-patch/index.mjs": ["./node_modules/fast-json-patch/index.d.ts"]
     }
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/index.ts"]
 }

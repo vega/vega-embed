@@ -3,6 +3,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import bundleSize from 'rollup-plugin-bundle-size';
+import commonjs from '@rollup/plugin-commonjs';
 
 import pkg from './package.json' with {type: 'json'};
 
@@ -10,11 +11,11 @@ const outputs = [
   {
     input: 'src/index.ts',
     output: {
-      file: pkg.exports,
+      file: pkg.exports.default,
       format: 'esm',
       sourcemap: true,
     },
-    plugins: [nodeResolve(), json(), typescript()],
+    plugins: [nodeResolve(), commonjs(), json(), typescript()],
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)],
   },
   {
@@ -30,7 +31,7 @@ const outputs = [
         'vega-lite': 'vegaLite',
       },
     },
-    plugins: [nodeResolve(), json(), typescript(), terser(), bundleSize()],
+    plugins: [nodeResolve(), commonjs(), json(), typescript(), terser(), bundleSize()],
     external: ['vega', 'vega-lite'],
   },
 ];
