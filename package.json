@@ -28,35 +28,17 @@
   },
   "homepage": "https://github.com/vega/vega-embed#readme",
   "license": "BSD-3-Clause",
-  "main": "build/vega-embed.js",
-  "module": "build/vega-embed.module.js",
+  "type": "module",
+  "exports": "./build/vega-embed.js",
+  "types": "build/index.d.ts",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
-  "types": "build/src/embed.d.ts",
   "files": [
     "src",
     "build"
   ],
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./build/src/embed.d.ts",
-        "default": "./build/vega-embed.module.js"
-      },
-      "require": {
-        "default": "./build/vega-embed.js"
-      }
-    }
-  },
   "devDependencies": {
-    "@babel/core": "^7.26.7",
-    "@babel/eslint-parser": "^7.26.5",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.25.9",
-    "@babel/preset-env": "^7.26.7",
-    "@babel/preset-typescript": "^7.26.0",
     "@release-it/conventional-changelog": "^10.0.0",
-    "@rollup/plugin-commonjs": "28.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
@@ -67,23 +49,23 @@
     "browser-sync": "^3.0.3",
     "concurrently": "^9.1.2",
     "del-cli": "^6.0.0",
+    "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-vitest": "^0.5.4",
-    "eslint": "^9.19.0",
     "jsdom": "^26.0.0",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.4.2",
     "release-it": "^18.1.2",
-    "rollup-plugin-bundle-size": "^1.0.3",
     "rollup": "4.34.0",
+    "rollup-plugin-bundle-size": "^1.0.3",
     "sass": "^1.83.4",
-    "typescript-eslint": "^8.22.0",
     "typescript": "^5.7.3",
-    "vega-lite": "^5.23.0",
+    "typescript-eslint": "^8.22.0",
     "vega": "^5.31.0",
-    "vitest-canvas-mock": "^0.3.3",
-    "vitest": "^3.0.4"
+    "vega-lite": "^5.23.0",
+    "vitest": "^3.0.4",
+    "vitest-canvas-mock": "^0.3.3"
   },
   "peerDependencies": {
     "vega": "^5.21.0",
