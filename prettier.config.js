@@ -1,4 +1,8 @@
-module.exports = {
+/**
+ * @see https://prettier.io/docs/en/configuration.html
+ * @type {import("prettier").Config}
+ */
+const config = {
   printWidth: 120,
   proseWrap: 'never',
   overrides: [
@@ -11,3 +15,5 @@ module.exports = {
     },
   ],
 };
+
+export default config;

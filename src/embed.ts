@@ -1,8 +1,8 @@
 import {applyPatch, Operation} from 'fast-json-patch/index.mjs';
 import stringify from 'json-stringify-pretty-compact';
 // need this import because of https://github.com/npm/node-semver/issues/381
-import satisfies from 'semver/functions/satisfies';
-import * as vegaImport from 'vega';
+import satisfies from 'semver/functions/satisfies.js';
+import vegaImport from 'vega';
 import {
   AutoSize,
   Config as VgConfig,
@@ -19,20 +19,20 @@ import {
   View,
 } from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
-import * as vegaLiteImport from 'vega-lite';
+import vegaLiteImport from 'vega-lite';
 import {Config as VlConfig, TopLevelSpec as VlSpec} from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import {Handler, Options as TooltipOptions} from 'vega-tooltip';
-import post from './post';
-import embedStyle from './style';
-import {Config, ExpressionFunction, Mode} from './types';
-import {mergeDeep} from './util';
+import post from './post.js';
+import embedStyle from './style.js';
+import {Config, ExpressionFunction, Mode} from './types.js';
+import {mergeDeep} from './util.js';
 import pkg from '../package.json';
 
 export const version = pkg.version;
 
-export * from './types';
+export * from './types.js';
 
 export const vega = vegaImport;
 export let vegaLite = vegaLiteImport;

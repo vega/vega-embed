@@ -1,4 +1,4 @@
-import {MessageData} from './types';
+import {MessageData} from './types.js';
 
 /**
  * Open editor url in a new window, and pass a message.

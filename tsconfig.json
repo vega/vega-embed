@@ -1,19 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
-    "moduleResolution": "node",
-    "outDir": "build",
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "noEmit": true,
-    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "build",
+    "declarationMap": true,
     "strict": true,
-    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "paths": {
       "fast-json-patch/index.mjs": ["./node_modules/fast-json-patch/index.d.ts"]
     }
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/index.ts"]
 }

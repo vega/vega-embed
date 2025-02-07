@@ -1,5 +1,5 @@
 import {View} from 'vega';
-import embed, {EmbedOptions, VisualizationSpec} from './embed';
+import embed, {EmbedOptions, VisualizationSpec} from './embed.js';
 
 /**
  * Create a promise to an HTML Div element with an embedded Vega-Lite or Vega visualization.
