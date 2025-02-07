@@ -77,7 +77,7 @@
     "semver": "^7.6.3",
     "tslib": "^2.8.1",
     "vega-interpreter": "^1.1.0",
-    "vega-schema-url-parser": "^2.2.0",
+    "vega-schema-url-parser": "^3.0.0",
     "vega-themes": "^2.15.0",
     "vega-tooltip": "^0.35.2"
   },

@@ -1,7 +1,7 @@
 import {isString} from 'vega';
-import container from './container';
-import embed, {vega, vegaLite, version} from './embed';
-import {isURL} from './util';
+import container from './container.js';
+import embed, {vega, vegaLite, version} from './embed.js';
+import {isURL} from './util.js';
 
 /**
  * Returns true if the object is an HTML element.
