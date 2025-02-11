@@ -15,9 +15,9 @@
     <div id="vis"></div>
     <script>
       async function run() {
-        const result = await vegaEmbed("#vis", "examples/histogram.vg.json", {
-          bind: "#bind",
-          loader: { baseURL: "https://vega.github.io/vega/" },
+        const result = await vegaEmbed('#vis', 'examples/histogram.vg.json', {
+          bind: '#bind',
+          loader: {baseURL: 'https://vega.github.io/vega/'},
         });
       }
       run();

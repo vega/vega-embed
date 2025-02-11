@@ -13,9 +13,9 @@
     <div id="vis"></div>
     <script type="module">
       async function run() {
-        const result = await vegaEmbed("#vis", "bar-chart.vg.json", {
-          theme: "dark",
-          loader: { baseURL: "https://vega.github.io/vega/examples/" },
+        const result = await vegaEmbed('#vis', 'bar-chart.vg.json', {
+          theme: 'dark',
+          loader: {baseURL: 'https://vega.github.io/vega/examples/'},
         });
 
         console.log(result);

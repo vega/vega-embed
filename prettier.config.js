@@ -5,15 +5,8 @@
 const config = {
   printWidth: 120,
   proseWrap: 'never',
-  overrides: [
-    {
-      files: '*.{js,jsx,ts,tsx}',
-      options: {
-        bracketSpacing: false,
-        singleQuote: true,
-      },
-    },
-  ],
+  bracketSpacing: false,
+  singleQuote: true,
 };
 
 export default config;

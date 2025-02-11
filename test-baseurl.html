@@ -15,20 +15,20 @@
     <script>
       async function run() {
         const spec = {
-          $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-          view: { stroke: null },
+          $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+          view: {stroke: null},
           data: {
-            values: [{ image: "data/ffox.png" }, { image: "data/gimp.png" }, { image: "data/7zip.png" }],
+            values: [{image: 'data/ffox.png'}, {image: 'data/gimp.png'}, {image: 'data/7zip.png'}],
           },
-          mark: "text",
+          mark: 'text',
           encoding: {
-            text: { field: "image" },
-            y: { field: "image", axis: null },
-            tooltip: [{ field: "image" }],
+            text: {field: 'image'},
+            y: {field: 'image', axis: null},
+            tooltip: [{field: 'image'}],
           },
         };
-        const result = await vegaEmbed("#vis", spec, {
-          loader: { baseURL: "https://vega.github.io/vega-datasets/" },
+        const result = await vegaEmbed('#vis', spec, {
+          loader: {baseURL: 'https://vega.github.io/vega-datasets/'},
         });
 
         console.log(result);
