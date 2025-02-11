@@ -82,7 +82,7 @@
     "vega-interpreter": "^1.1.0",
     "vega-schema-url-parser": "^3.0.1",
     "vega-themes": "3.0.0-alpha.3",
-    "vega-tooltip": "1.0.0-alpha.4"
+    "vega-tooltip": "1.0.0-alpha.5"
   },
   "scripts": {
     "prebuild": "npm run clean && npm run build:style",
