@@ -95,8 +95,8 @@
     "start": "npm run build && concurrently --kill-others -n Server,Rollup 'npm run serve' 'rollup -c -w'",
     "pretest": "npm run build:style",
     "test": "vitest run",
-    "format": "eslint . --fix && prettier . --write",
-    "lint": "eslint . && prettier . --check",
+    "format": "eslint --fix && prettier . --write",
+    "lint": "eslint && prettier . --check",
     "release": "release-it"
   }
 }
