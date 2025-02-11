@@ -30,8 +30,8 @@
   "license": "BSD-3-Clause",
   "type": "module",
   "exports": {
-    "default": "./build/index.js",
-    "types": "./build/index.d.ts"
+    "types": "./build/index.d.ts",
+    "default": "./build/index.js"
   },
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",

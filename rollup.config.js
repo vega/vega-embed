@@ -15,7 +15,7 @@ const outputs = [
       format: 'esm',
       sourcemap: true,
     },
-    plugins: [nodeResolve(), commonjs(), json(), typescript()],
+    plugins: [nodeResolve(), commonjs(), json(), typescript(), bundleSize()],
     external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)],
   },
   {
