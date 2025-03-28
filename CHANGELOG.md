@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.1](https://github.com/vega/vega-embed/compare/v7.0.0...v7.0.1) (2025-03-28)
+
+
+### Bug Fixes
+
+* update peer dep ([a7c1853](https://github.com/vega/vega-embed/commit/a7c185317911c33671defcd136ff61c486b4c692))
+
 # [7.0.0](https://github.com/vega/vega-embed/compare/v6.29.0...v7.0.0) (2025-03-28)
 
 
