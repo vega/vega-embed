@@ -67,7 +67,7 @@
     "vitest-canvas-mock": "^0.3.3"
   },
   "peerDependencies": {
-    "vega": "^5.21.0",
+    "vega": "*",
     "vega-lite": "*"
   },
   "dependencies": {
