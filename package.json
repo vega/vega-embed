@@ -62,7 +62,7 @@
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.28.0",
     "vega": "^6.0.0",
-    "vega-lite": "^6.0.1",
+    "vega-lite": "^6.0.2",
     "vitest": "^3.0.9",
     "vitest-canvas-mock": "^0.3.3"
   },
