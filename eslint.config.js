@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 import tsParser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
-import vitest from 'eslint-plugin-vitest';
+import vitest from '@vitest/eslint-plugin';
 
 delete globals.browser['AudioWorkletGlobalScope '];
 

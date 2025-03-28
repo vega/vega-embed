@@ -235,11 +235,11 @@ test('can patch compiled Vega with a function', async () => {
 });
 
 test('guessMode from Vega schema', () => {
-  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v5.json'}, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, 'invalid' as Mode)).toBe('vega');
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v4.json'}, 'invalid' as Mode)).toBe('vega-lite');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v6.json'}, 'invalid' as Mode)).toBe('vega-lite');
 });
 
 test('guessMode from Vega-Lite spec', () => {
@@ -434,7 +434,6 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
     {},
   );
 
-  expect(spy).toHaveBeenCalledTimes(2);
   expect(spy.mock.calls).toEqual([
     [`The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
     [`The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`],
