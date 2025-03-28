@@ -1,4 +1,12 @@
+# Changelog
 
+# [7.0.0](https://github.com/vega/vega-embed/compare/v6.29.0...v7.0.0) (2025-03-28)
+
+
+### Bug Fixes
+
+* correct order of exports ([467fb19](https://github.com/vega/vega-embed/commit/467fb19bfa02638e04ae989a625db08a5baa9dc1))
+* fix examples and build ([892eb20](https://github.com/vega/vega-embed/commit/892eb20540c49fa6c1c0c597c16cdecbb8f5187d))
 
 # [6.29.0](https://github.com/vega/vega-embed/compare/v6.28.0...v6.29.0) (2024-11-19)
 
