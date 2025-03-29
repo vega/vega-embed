@@ -45,8 +45,6 @@ You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](
 </html>
 ```
 
-Look at the example online in the [Vega-Embed Block](https://bl.ocks.org/domoritz/455e1c7872c4b38a58b90df0c3d7b1b9).
-
 ### JavaScript or TypeScript
 
 The basic example below needs to be transpiled and bundled (using rollup, webpack, etc..) before it can be loaded in a browser.
