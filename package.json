@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/vega/vega-embed.git"
+    "url": "git+http://github.com/vega/vega-embed.git"
   },
   "author": {
     "name": "Vega",
