@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.0.2](https://github.com/vega/vega-embed/compare/v7.0.1...v7.0.2) (2025-03-29)
+
+
+### Bug Fixes
+
+* correct repo entry ([7e78bc8](https://github.com/vega/vega-embed/commit/7e78bc8755ca9232f149b49a8c5d2a2980317646))
+* use embed.js for clearer mapping to what file we are using ([30a8437](https://github.com/vega/vega-embed/commit/30a8437b99676410b9d406754174643454d8fa20))
+
 ## [7.0.1](https://github.com/vega/vega-embed/compare/v7.0.0...v7.0.1) (2025-03-28)
 
 
