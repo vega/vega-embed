@@ -55,7 +55,7 @@
     "jsdom": "^26.0.0",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.5.3",
-    "release-it": "^18.1.2",
+    "release-it": "^19.0.1",
     "rollup": "4.40.1",
     "rollup-plugin-bundle-size": "^1.0.3",
     "sass": "^1.86.0",
