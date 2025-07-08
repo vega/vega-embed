@@ -1,4 +1,4 @@
-name: "Publish documentation"
+name: "Publish TypeDoc"
 on:
   push:
     branches:
