@@ -6,3 +6,4 @@ npm-debug.log*
 src/style.ts
 yarn-debug.log*
 yarn-error.log*
+docs/
