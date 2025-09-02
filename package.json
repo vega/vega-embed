@@ -56,7 +56,7 @@
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.6.2",
     "release-it": "^19.0.3",
-    "rollup": "4.44.2",
+    "rollup": "4.50.0",
     "rollup-plugin-bundle-size": "^1.0.3",
     "sass": "^1.89.2",
     "typedoc": "^0.28.7",
