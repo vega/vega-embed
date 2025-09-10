@@ -173,7 +173,7 @@ var opt = {
 | `defaultStyle` | Boolean or String | If set to `true` (default), the embed actions are shown in a menu. Set to `false` to use simple links. Provide a string to set the style sheet (not supported in usermeta). |
 | `forceActionsMenu` | Boolean | If set to `true`, the embed actions are shown in a menu like they would be if the `defaultStyle` option were truthy. This can be useful when setting `defaultStyle` to `false` and defining menu styles in the parent application. |
 | `bind` | String or Element | The element that should contain any input elements bound to signals. |
-| `renderer` | String | The renderer to use for the view. One of `"canvas"` (default) or `"svg"`. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. May be a custom value if passing your own `viewClass` option. |
+| `renderer` | String | The renderer to use for the view. One of `"canvas"` or `"svg"` (default). See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_renderer) for details. May be a custom value if passing your own `viewClass` option. |
 | `logLevel` | Level | Sets the current log level. See [Vega docs](https://vega.github.io/vega/docs/api/view/#view_logLevel) for details. |
 | `tooltip` | Handler or Boolean or Object | Provide a [tooltip handler](https://vega.github.io/vega/docs/api/view/#view_tooltip), customize the default [Vega Tooltip](https://github.com/vega/vega-tooltip) handler, or disable the default handler. |
 | `loader` | Loader / Object | _Loader_ : Sets a custom Vega loader. _Object_ : Vega loader options for a loader that will be created. <br> See [Vega docs](https://vega.github.io/vega/docs/api/view/#view) for details. |
