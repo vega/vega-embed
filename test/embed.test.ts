@@ -497,3 +497,35 @@ test.each([5, {svg: 2, png: 5}, {svg: 2}, {png: 5}])('can set scaleFactor', asyn
   });
   expect(result).toBeTruthy();
 });
+
+test('can set logLevel', async () => {
+  const el = document.createElement('div');
+  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const faultySpec = {
+    encoding: {text: {datum: 0}},
+    mark: 'point',
+  } as TopLevelSpec;
+
+  await embed(
+    el,
+    {
+      $schema: '$schema": "https://vega.github.io/schema/vega-lite/v1.json',
+      mark: 'bar',
+    },
+    {logLevel: vega.None},
+  );
+
+  await embed(el, faultySpec, {logLevel: vega.None});
+
+  await embed(el, {
+    ...faultySpec,
+    usermeta: {
+      embedOptions: {
+        logLevel: 0,
+      },
+    },
+  });
+
+  expect(spy.mock.calls).toEqual([]);
+  spy.mockRestore();
+});
