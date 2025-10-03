@@ -17,6 +17,7 @@ import {
   Spec as VgSpec,
   TooltipHandler,
   View,
+  logger,
 } from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vegaLiteImport from 'vega-lite';
@@ -109,9 +110,10 @@ const VERSION = {
   'vega-lite': vegaLite ? vegaLite.version : 'not available',
 };
 
-const PREPROCESSOR: {[mode in Mode]: (spec: any, config?: Config) => VgSpec} = {
+const PREPROCESSOR: {[mode in Mode]: (spec: any, config?: Config, logLevel?: number) => VgSpec} = {
   vega: (vgSpec: VgSpec) => vgSpec,
-  'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec as VlSpec, {config: config as VlConfig}).spec,
+  'vega-lite': (vlSpec, config, logLevel) =>
+    vegaLite.compile(vlSpec as VlSpec, {config: config as VlConfig, logger: logger(logLevel)}).spec,
 };
 
 const SVG_CIRCLES = `
@@ -160,11 +162,11 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
  *
  * @param spec Vega or Vega-Lite spec.
  */
-export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
+export function guessMode(spec: VisualizationSpec, logLevel: number, providedMode?: Mode): Mode {
   // Decide mode
   if (spec.$schema) {
     const parsed = schemaParser(spec.$schema);
-    if (providedMode && providedMode !== parsed.library) {
+    if (providedMode && providedMode !== parsed.library && logLevel >= vega.Warn) {
       console.warn(
         `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
           NAMES[providedMode] ?? providedMode
@@ -174,7 +176,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
 
     const mode = parsed.library as Mode;
 
-    if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
+    if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`) && logLevel >= vega.Warn) {
       console.warn(
         `The input spec uses ${NAMES[mode]} ${parsed.version}, but the current version of ${NAMES[mode]} is v${VERSION[mode]}.`,
       );
@@ -313,15 +315,15 @@ async function _embed(
     }
   }
 
-  const mode = guessMode(spec, opts.mode);
+  const mode = guessMode(spec, logLevel, opts.mode);
 
-  let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config);
+  let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config, logLevel);
 
   if (mode === 'vega-lite') {
     if (vgSpec.$schema) {
       const parsed = schemaParser(vgSpec.$schema);
 
-      if (!satisfies(VERSION.vega, `^${parsed.version.slice(1)}`)) {
+      if (!satisfies(VERSION.vega, `^${parsed.version.slice(1)}`) && logLevel >= vega.Warn) {
         console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is v${VERSION.vega}.`);
       }
     }
