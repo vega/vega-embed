@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import * as vega from 'vega';
-import {View} from 'vega';
+import {View, Spec as VgSpec} from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
@@ -435,8 +436,8 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
   );
 
   expect(spy.mock.calls).toEqual([
-    [`The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
-    [`The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`],
+    ['WARN', `The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
+    ['WARN', `The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`],
   ]);
 
   spy.mockRestore();
@@ -501,10 +502,17 @@ test.each([5, {svg: 2, png: 5}, {svg: 2}, {png: 5}])('can set scaleFactor', asyn
 test('can set logLevel', async () => {
   const el = document.createElement('div');
   const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const logLevel = vega.None
+
   const faultySpec = {
     encoding: {text: {datum: 0}},
     mark: 'point',
   } as TopLevelSpec;
+
+  const faultyVgSpec = {
+    $schema: 'https://vega.github.io/schema/vega/v6.json',
+    data: [{url: 'data/cars2.json'}],
+  } as VgSpec;
 
   await embed(
     el,
@@ -512,19 +520,21 @@ test('can set logLevel', async () => {
       $schema: '$schema": "https://vega.github.io/schema/vega-lite/v1.json',
       mark: 'bar',
     },
-    {logLevel: vega.None},
+    {logLevel},
   );
 
-  await embed(el, faultySpec, {logLevel: vega.None});
+  await embed(el, faultySpec, {logLevel});
 
   await embed(el, {
     ...faultySpec,
     usermeta: {
       embedOptions: {
-        logLevel: 0,
+        logLevel,
       },
     },
   });
+
+  await embed(el, faultyVgSpec, {logLevel});
 
   expect(spy.mock.calls).toEqual([]);
   spy.mockRestore();
