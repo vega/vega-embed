@@ -1,5 +1,5 @@
 import * as vega from 'vega';
-import {View, Spec as VgSpec} from 'vega';
+import {View, Spec as VgSpec, logger} from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
@@ -13,6 +13,8 @@ const vlSpec: TopLevelSpec = {
 };
 
 const vgSpec = compile(vlSpec).spec;
+
+const testLogger = logger(vega.Warn);
 
 const vlSpecCustomFunction: TopLevelSpec = {
   data: {values: [1, 2, 3]},
@@ -234,11 +236,15 @@ test('can patch compiled Vega with a function', async () => {
 });
 
 test('guessMode from Vega schema', () => {
-  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, testLogger, 'invalid' as Mode)).toBe(
+    'vega',
+  );
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v6.json'}, 'invalid' as Mode)).toBe('vega-lite');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v6.json'}, testLogger, 'invalid' as Mode)).toBe(
+    'vega-lite',
+  );
 });
 
 test('guessMode from Vega-Lite spec', () => {
@@ -253,12 +259,12 @@ test('guessMode from Vega-Lite spec', () => {
   ];
 
   for (const spec of specs) {
-    expect(guessMode(spec, 'invalid' as Mode)).toBe('vega-lite');
+    expect(guessMode(spec, testLogger, 'invalid' as Mode)).toBe('vega-lite');
   }
 });
 
 test('guessMode from Vega spec', () => {
-  expect(guessMode({marks: []}, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({marks: []}, testLogger, 'invalid' as Mode)).toBe('vega');
 });
 
 test('can set locale', async () => {
