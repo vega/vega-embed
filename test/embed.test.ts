@@ -1,10 +1,8 @@
-/* eslint-disable prettier/prettier */
 import * as vega from 'vega';
 import {View, Spec as VgSpec} from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
-import {RepeatSpec} from 'vega-lite/build/src/spec';
 import {expect, test, vi} from 'vitest';
 import embed, {guessMode, Mode} from '../src/embed';
 
@@ -248,7 +246,7 @@ test('guessMode from Vega-Lite spec', () => {
   const specs: TopLevelSpec[] = [
     unitSpec,
     {layer: []},
-    {repeat: {}, spec: unitSpec} as RepeatSpec,
+    {repeat: {}, spec: unitSpec} as any,
     {data: {values: []}, facet: {row: {field: 'foo', type: 'nominal'}}, spec: {mark: 'bar', encoding: {}}},
     {vconcat: []},
     {hconcat: []},
@@ -502,7 +500,7 @@ test.each([5, {svg: 2, png: 5}, {svg: 2}, {png: 5}])('can set scaleFactor', asyn
 test('can set logLevel', async () => {
   const el = document.createElement('div');
   const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-  const logLevel = vega.None
+  const logLevel = vega.None;
 
   const faultySpec = {
     encoding: {text: {datum: 0}},
