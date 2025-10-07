@@ -543,3 +543,32 @@ test('can set logLevel', async () => {
   expect(spy.mock.calls).toEqual([]);
   spy.mockRestore();
 });
+
+test('can set custom logger', async () => {
+  const el = document.createElement('div');
+  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const spec = {
+    $schema: '$schema": "https://vega.github.io/schema/vega-lite/v1.json',
+    mark: 'bar',
+  };
+
+  const customLogger = logger();
+  customLogger.warn = () => {
+    if (customLogger.level() >= vega.Warn) console.warn('test');
+    return customLogger;
+  };
+
+  const faultyLogger = () => undefined;
+
+  // should log 'test'
+  await embed(el, spec, {logger: customLogger});
+
+  // should log nothing
+  await embed(el, spec, {logger: customLogger, logLevel: vega.None});
+
+  // should default to Vega logger and log nothing
+  await embed(el, spec, {logger: faultyLogger as unknown as vega.LoggerInterface, logLevel: vega.None});
+
+  expect(spy.mock.calls).toEqual([['test']]);
+  spy.mockRestore();
+});

@@ -77,6 +77,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   theme?: keyof Omit<typeof themes, 'version'>;
   defaultStyle?: boolean | string;
   logLevel?: number;
+  logger?: Logger;
   loader?: Loader | LoaderOptions;
   renderer?: R;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
@@ -295,7 +296,7 @@ async function _embed(
 
   const renderer = opts.renderer ?? 'svg';
   const logLevel = opts.logLevel ?? vega.Warn;
-  const logger = VgLogger(logLevel);
+  const logger = opts.logger && opts.logger.level ? opts.logger.level(logLevel) : VgLogger(logLevel);
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
   const element = typeof el === 'string' ? document.querySelector(el) : el;
