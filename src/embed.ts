@@ -29,7 +29,7 @@ import {Handler, Options as TooltipOptions} from 'vega-tooltip';
 import post from './post.js';
 import embedStyle from './style.js';
 import {Config, ExpressionFunction, Mode} from './types.js';
-import {mergeDeep} from './util.js';
+import {mergeDeep, isValidLogger} from './util.js';
 import pkg from '../package.json';
 
 export const version = pkg.version;
@@ -296,7 +296,18 @@ async function _embed(
 
   const renderer = opts.renderer ?? 'svg';
   const logLevel = opts.logLevel ?? vega.Warn;
-  const logger = opts.logger && opts.logger.level ? opts.logger.level(logLevel) : VgLogger(logLevel);
+
+  // set logger to default Vega logger
+  let logger = VgLogger(logLevel);
+  // if a custom logger is provided, check if it matches the reguired API before using it
+  if (opts.logger) {
+    if (isValidLogger(opts.logger)) {
+      logger = opts.logger.level(logLevel);
+    } else {
+      logger.warn(`The supplied logger doesn't match the proper API, using the default Vega logger instead.`);
+    }
+  }
+
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
   const element = typeof el === 'string' ? document.querySelector(el) : el;

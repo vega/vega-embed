@@ -558,7 +558,7 @@ test('can set custom logger', async () => {
     return customLogger;
   };
 
-  const faultyLogger = () => undefined;
+  const invalidLogger = {};
 
   // should log 'test'
   await embed(el, spec, {logger: customLogger});
@@ -566,9 +566,11 @@ test('can set custom logger', async () => {
   // should log nothing
   await embed(el, spec, {logger: customLogger, logLevel: vega.None});
 
-  // should default to Vega logger and log nothing
-  await embed(el, spec, {logger: faultyLogger as unknown as vega.LoggerInterface, logLevel: vega.None});
+  // should default to Vega logger and log two warnings
+  await embed(el, spec, {logger: invalidLogger as unknown as vega.LoggerInterface});
 
-  expect(spy.mock.calls).toEqual([['test']]);
+  expect(spy.mock.calls[0]).toEqual(['test']);
+  expect(spy.mock.calls[1][0]).toEqual('WARN');
+  expect(spy.mock.calls[2][0]).toEqual('WARN');
   spy.mockRestore();
 });
