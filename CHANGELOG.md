@@ -1,5 +1,12 @@
 # Changelog
 
+# [7.1.0](https://github.com/vega/vega-embed/compare/v7.0.2...v7.1.0) (2025-10-09)
+
+
+### Bug Fixes
+
+* handle logLevel correctly ([#1475](https://github.com/vega/vega-embed/issues/1475)) ([6f47dc0](https://github.com/vega/vega-embed/commit/6f47dc0892c118aa8a407d49e2afd6c6f261363e))
+
 ## [7.0.2](https://github.com/vega/vega-embed/compare/v7.0.1...v7.0.2) (2025-03-29)
 
 
