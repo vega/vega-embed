@@ -1,9 +1,8 @@
 import * as vega from 'vega';
-import {View} from 'vega';
+import {View, Spec as VgSpec, logger} from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
-import {RepeatSpec} from 'vega-lite/build/src/spec';
 import {expect, test, vi} from 'vitest';
 import embed, {guessMode, Mode} from '../src/embed';
 
@@ -14,6 +13,8 @@ const vlSpec: TopLevelSpec = {
 };
 
 const vgSpec = compile(vlSpec).spec;
+
+const testLogger = logger(vega.Warn);
 
 const vlSpecCustomFunction: TopLevelSpec = {
   data: {values: [1, 2, 3]},
@@ -235,11 +236,15 @@ test('can patch compiled Vega with a function', async () => {
 });
 
 test('guessMode from Vega schema', () => {
-  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, testLogger, 'invalid' as Mode)).toBe(
+    'vega',
+  );
 });
 
 test('guessMode from Vega-Lite schema', () => {
-  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v6.json'}, 'invalid' as Mode)).toBe('vega-lite');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega-lite/v6.json'}, testLogger, 'invalid' as Mode)).toBe(
+    'vega-lite',
+  );
 });
 
 test('guessMode from Vega-Lite spec', () => {
@@ -247,19 +252,19 @@ test('guessMode from Vega-Lite spec', () => {
   const specs: TopLevelSpec[] = [
     unitSpec,
     {layer: []},
-    {repeat: {}, spec: unitSpec} as RepeatSpec,
+    {repeat: {}, spec: unitSpec} as any,
     {data: {values: []}, facet: {row: {field: 'foo', type: 'nominal'}}, spec: {mark: 'bar', encoding: {}}},
     {vconcat: []},
     {hconcat: []},
   ];
 
   for (const spec of specs) {
-    expect(guessMode(spec, 'invalid' as Mode)).toBe('vega-lite');
+    expect(guessMode(spec, testLogger, 'invalid' as Mode)).toBe('vega-lite');
   }
 });
 
 test('guessMode from Vega spec', () => {
-  expect(guessMode({marks: []}, 'invalid' as Mode)).toBe('vega');
+  expect(guessMode({marks: []}, testLogger, 'invalid' as Mode)).toBe('vega');
 });
 
 test('can set locale', async () => {
@@ -435,8 +440,8 @@ test('Should warn about incompatible Vega and Vega-Lite versions', async () => {
   );
 
   expect(spy.mock.calls).toEqual([
-    [`The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
-    [`The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`],
+    ['WARN', `The input spec uses Vega-Lite v2, but the current version of Vega-Lite is v${vl.version}.`],
+    ['WARN', `The input spec uses Vega v4, but the current version of Vega is v${vega.version}.`],
   ]);
 
   spy.mockRestore();
@@ -496,4 +501,70 @@ test.each([5, {svg: 2, png: 5}, {svg: 2}, {png: 5}])('can set scaleFactor', asyn
     scaleFactor,
   });
   expect(result).toBeTruthy();
+});
+
+test('can set logLevel', async () => {
+  const el = document.createElement('div');
+  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const logLevel = vega.None;
+
+  const faultySpec = {
+    encoding: {text: {datum: 0}},
+    mark: 'point',
+  } as TopLevelSpec;
+
+  const faultyVgSpec = {
+    $schema: 'https://vega.github.io/schema/vega/v6.json',
+    data: [{url: 'data/cars2.json'}],
+  } as VgSpec;
+
+  await embed(
+    el,
+    {
+      $schema: '$schema": "https://vega.github.io/schema/vega-lite/v1.json',
+      mark: 'bar',
+    },
+    {logLevel},
+  );
+
+  await embed(el, faultySpec, {logLevel});
+
+  await embed(el, {
+    ...faultySpec,
+    usermeta: {
+      embedOptions: {
+        logLevel,
+      },
+    },
+  });
+
+  await embed(el, faultyVgSpec, {logLevel});
+
+  expect(spy.mock.calls).toEqual([]);
+  spy.mockRestore();
+});
+
+test('can set custom logger', async () => {
+  const el = document.createElement('div');
+  const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  const spec = {
+    $schema: '$schema": "https://vega.github.io/schema/vega-lite/v1.json',
+    mark: 'bar',
+  };
+
+  const customLogger = logger();
+  customLogger.warn = () => {
+    if (customLogger.level() >= vega.Warn) console.warn('test');
+    return customLogger;
+  };
+
+  // should log nothing
+  await embed(el, spec, {logger: customLogger});
+
+  // should log 'test'
+  await embed(el, spec, {logger: customLogger, logLevel: vega.Warn});
+
+  expect(spy.mock.calls).toEqual([['test']]);
+
+  spy.mockRestore();
 });

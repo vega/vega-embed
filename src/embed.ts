@@ -17,6 +17,8 @@ import {
   Spec as VgSpec,
   TooltipHandler,
   View,
+  logger as VgLogger,
+  LoggerInterface as Logger,
 } from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vegaLiteImport from 'vega-lite';
@@ -75,6 +77,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   theme?: keyof Omit<typeof themes, 'version'>;
   defaultStyle?: boolean | string;
   logLevel?: number;
+  logger?: Logger;
   loader?: Loader | LoaderOptions;
   renderer?: R;
   tooltip?: TooltipHandler | TooltipOptions | boolean;
@@ -109,9 +112,10 @@ const VERSION = {
   'vega-lite': vegaLite ? vegaLite.version : 'not available',
 };
 
-const PREPROCESSOR: {[mode in Mode]: (spec: any, config?: Config) => VgSpec} = {
+const PREPROCESSOR: {[mode in Mode]: (spec: any, logger: Logger, config?: Config) => VgSpec} = {
   vega: (vgSpec: VgSpec) => vgSpec,
-  'vega-lite': (vlSpec, config) => vegaLite.compile(vlSpec as VlSpec, {config: config as VlConfig}).spec,
+  'vega-lite': (vlSpec, logger, config) =>
+    vegaLite.compile(vlSpec as VlSpec, {config: config as VlConfig, logger}).spec,
 };
 
 const SVG_CIRCLES = `
@@ -160,12 +164,12 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
  *
  * @param spec Vega or Vega-Lite spec.
  */
-export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
+export function guessMode(spec: VisualizationSpec, logger: Logger, providedMode?: Mode): Mode {
   // Decide mode
   if (spec.$schema) {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
-      console.warn(
+      logger.warn(
         `The given visualization spec is written in ${NAMES[parsed.library]}, but mode argument sets ${
           NAMES[providedMode] ?? providedMode
         }.`,
@@ -175,7 +179,7 @@ export function guessMode(spec: VisualizationSpec, providedMode?: Mode): Mode {
     const mode = parsed.library as Mode;
 
     if (!satisfies(VERSION[mode], `^${parsed.version.slice(1)}`)) {
-      console.warn(
+      logger.warn(
         `The input spec uses ${NAMES[mode]} ${parsed.version}, but the current version of ${NAMES[mode]} is v${VERSION[mode]}.`,
       );
     }
@@ -291,7 +295,9 @@ async function _embed(
   const i18n = {...I18N, ...opts.i18n};
 
   const renderer = opts.renderer ?? 'svg';
-  const logLevel = opts.logLevel ?? vega.Warn;
+  const logger = opts.logger ?? VgLogger(vega.Warn);
+  if (opts.logLevel !== undefined) logger.level(opts.logLevel);
+
   const downloadFileName = opts.downloadFileName ?? 'visualization';
 
   const element = typeof el === 'string' ? document.querySelector(el) : el;
@@ -313,16 +319,16 @@ async function _embed(
     }
   }
 
-  const mode = guessMode(spec, opts.mode);
+  const mode = guessMode(spec, logger, opts.mode);
 
-  let vgSpec: VgSpec = PREPROCESSOR[mode](spec, config);
+  let vgSpec: VgSpec = PREPROCESSOR[mode](spec, logger, config);
 
   if (mode === 'vega-lite') {
     if (vgSpec.$schema) {
       const parsed = schemaParser(vgSpec.$schema);
 
       if (!satisfies(VERSION.vega, `^${parsed.version.slice(1)}`)) {
-        console.warn(`The compiled spec uses Vega ${parsed.version}, but current version is v${VERSION.vega}.`);
+        logger.warn(`The compiled spec uses Vega ${parsed.version}, but current version is v${VERSION.vega}.`);
       }
     }
   }
@@ -375,7 +381,7 @@ async function _embed(
 
   const view = new (opts.viewClass || vega.View)(runtime, {
     loader,
-    logLevel,
+    logger,
     renderer,
     ...(ast ? {expr: (vega as any).expressionInterpreter ?? opts.expr ?? expressionInterpreter} : {}),
   });
