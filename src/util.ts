@@ -1,4 +1,4 @@
-import {writeConfig, LoggerInterface} from 'vega';
+import {writeConfig} from 'vega';
 
 export function isURL(s: string): boolean {
   return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');
@@ -17,12 +17,4 @@ function deepMerge_(dest: any, src: any) {
   for (const property of Object.keys(src)) {
     writeConfig(dest, property, src[property], true);
   }
-}
-
-export function isValidLogger(obj: unknown): obj is LoggerInterface {
-  if (typeof obj !== 'object' || obj === null) return false;
-
-  const requiredMethods: (keyof LoggerInterface)[] = ['level', 'error', 'warn', 'info', 'debug'];
-
-  return requiredMethods.every((method) => typeof (obj as Record<string, unknown>)[method] === 'function');
 }
