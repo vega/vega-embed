@@ -1,4 +1,4 @@
-import {View} from 'vega';
+import {View} from '@omni-co/vega';
 import embed, {EmbedOptions, VisualizationSpec} from './embed.js';
 
 /**

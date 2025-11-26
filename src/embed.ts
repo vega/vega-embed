@@ -2,7 +2,7 @@ import {applyPatch, Operation} from 'fast-json-patch/index.mjs';
 import stringify from 'json-stringify-pretty-compact';
 // need this import because of https://github.com/npm/node-semver/issues/381
 import satisfies from 'semver/functions/satisfies.js';
-import * as vegaImport from 'vega';
+import * as vegaImport from '@omni-co/vega';
 import {
   AutoSize,
   Config as VgConfig,
@@ -19,8 +19,8 @@ import {
   View,
   logger as VgLogger,
   LoggerInterface as Logger,
-} from 'vega';
-import {expressionInterpreter} from 'vega-interpreter';
+} from '@omni-co/vega';
+import {expressionInterpreter} from '@omni-co/vega-interpreter';
 import * as vegaLiteImport from 'vega-lite';
 import {Config as VlConfig, TopLevelSpec as VlSpec} from 'vega-lite';
 import schemaParser from 'vega-schema-url-parser';

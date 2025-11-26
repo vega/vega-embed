@@ -1,6 +1,6 @@
-import * as vega from 'vega';
-import {View, Spec as VgSpec, logger} from 'vega';
-import {expressionInterpreter} from 'vega-interpreter';
+import * as vega from '@omni-co/vega';
+import {View, Spec as VgSpec, logger} from '@omni-co/vega';
+import {expressionInterpreter} from '@omni-co/vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
 import {expect, test, vi} from 'vitest';

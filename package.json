@@ -1,5 +1,5 @@
 {
-  "name": "vega-embed",
+  "name": "@omni-co/vega-embed",
   "version": "7.1.0",
   "description": "Publish Vega visualizations as embedded web components.",
   "keywords": [
@@ -62,13 +62,13 @@
     "typedoc": "^0.28.14",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vega": "^6.2.0",
+    "@omni-co/vega": "^6.2.0",
     "vega-lite": "^6.4.1",
     "vitest": "^4.0.9",
     "vitest-canvas-mock": "^0.3.3"
   },
   "peerDependencies": {
-    "vega": "*",
+    "@omni-co/vega": "*",
     "vega-lite": "*"
   },
   "dependencies": {
@@ -76,10 +76,13 @@
     "json-stringify-pretty-compact": "^4.0.0",
     "semver": "^7.7.3",
     "tslib": "^2.8.1",
-    "vega-interpreter": "^2.2.1",
+    "@omni-co/vega-interpreter": "^2.2.1",
     "vega-schema-url-parser": "^3.0.2",
     "vega-themes": "3.0.0",
     "vega-tooltip": "1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "prebuild": "npm run clean && npm run build:style",

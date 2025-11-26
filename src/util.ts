@@ -1,4 +1,4 @@
-import {writeConfig} from 'vega';
+import {writeConfig} from '@omni-co/vega';
 
 export function isURL(s: string): boolean {
   return s.startsWith('http://') || s.startsWith('https://') || s.startsWith('//');

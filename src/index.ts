@@ -1,4 +1,4 @@
-import {isString} from 'vega';
+import {isString} from '@omni-co/vega';
 import container from './container.js';
 import embed, {vega, vegaLite, version} from './embed.js';
 import {isURL} from './util.js';
