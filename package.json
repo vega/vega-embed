@@ -30,6 +30,7 @@
     "types": "./build/embed.d.ts",
     "default": "./build/embed.js"
   },
+  "types": "./build/embed.d.ts",
   "unpkg": "build/vega-embed.min.js",
   "jsdelivr": "build/vega-embed.min.js",
   "files": [
