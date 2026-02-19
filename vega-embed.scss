@@ -1,10 +1,14 @@
 .vega-embed {
   position: relative;
-  display: inline-block;
+  display: flex;
   box-sizing: border-box;
 
   &.has-actions {
     padding-right: 38px;
+  }
+
+  details {
+    position: relative;
   }
 
   details:not([open]) > :not(summary) {
@@ -13,9 +17,6 @@
 
   summary {
     list-style: none;
-    position: absolute;
-    top: 0;
-    right: 0;
     padding: 6px;
     z-index: 1000;
     background: white;
@@ -114,6 +115,7 @@
     &.fit-x {
       width: 100%;
     }
+
     &.fit-y {
       height: 100%;
     }
