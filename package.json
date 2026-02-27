@@ -52,7 +52,9 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
     "jsdom": "^27.4.0",
+    "lint-staged": "^16.2.7",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.7.4",
     "release-it": "^19.2.2",
@@ -95,6 +97,10 @@
     "test": "vitest run",
     "format": "eslint --fix && prettier . --write",
     "lint": "eslint && prettier . --check",
-    "release": "release-it"
+    "release": "release-it",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs,cjs}": "eslint --fix"
   }
 }
