@@ -62,7 +62,7 @@
     "rollup": "4.60.1",
     "rollup-plugin-bundle-size": "^1.0.3",
     "sass": "^1.97.1",
-    "typedoc": "^0.28.15",
+    "typedoc": "^0.28.18",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.51.0",
     "vega": "^6.2.0",
