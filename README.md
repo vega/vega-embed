@@ -156,6 +156,10 @@ var opt = {
   ast: ...,
   expr: ...,
 
+  scheduling: {
+    signal: ...,
+  },
+
   i18n: {
     COMPILED_ACTION: ...,
     EDITOR_ACTION: ...,
@@ -197,6 +201,7 @@ var opt = {
 | `ast` | Boolean | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. |
 | `expr` | Object | Custom Vega Expression interpreter. |
 | `viewClass` | Class | Class which extends [Vega `View`](https://vega.github.io/vega/docs/api/view/#view) for custom rendering. |
+| `scheduling` | Boolean / Object | Opt-in (default `false`): chunk the embed pipeline into abortable main-thread tasks using the [Prioritized Task Scheduling API](https://developer.mozilla.org/en-US/docs/Web/API/Prioritized_Task_Scheduling_API). When enabled, the CPU-heavy phases (compile, parse + view construction, first render, actions menu) are separated by [`scheduler.yield()`](https://developer.mozilla.org/en-US/docs/Web/API/Scheduler/yield) so the page stays responsive while embedding complex specs. Parse and view construction share one task: they snapshot Vega's global locale and expression-function registries, which must not change between registration and construction. The option is also passed to the Vega View ([vega/vega#4309](https://github.com/vega/vega/pull/4309)) so dataflow evaluation and canvas rendering yield too: long `runAsync` calls yield periodically and canvas output is drawn to an offscreen buffer that is displayed once rendering completes. On a Vega version without View-level scheduling, only the embed pipeline seams yield. <br> _Boolean_: `true` enables chunking. <br> _Object_: Optional key `signal`, an `AbortSignal` that aborts in-flight embedding at the next stage boundary; `embed()` rejects with the signal's reason and the container is left in its cleared state. <br> Vega-Embed posts no tasks itself: to run the pipeline at a specific [`TaskPriority`](https://developer.mozilla.org/en-US/docs/Web/API/Prioritized_Task_Scheduling_API#task_priorities), wrap the call in your own task, e.g. `scheduler.postTask(() => vegaEmbed(el, spec, {scheduling: true}), {priority: 'background'})` — the yields inside `embed()` inherit the enclosing task's priority. <br> In [browsers without `scheduler.yield()` support](https://developer.mozilla.org/en-US/docs/Web/API/Scheduler#browser_compatibility), yields fall back to `setTimeout` (task priorities do not apply there). This option is only honored when passed directly to `embed()`; it is stripped from `usermeta.embedOptions`. <br> Do not start another embed into the same element while a scheduled embed is in flight — await the returned promise or abort it first. Inputs rendered into an external `bind` container are not removed on abort. |
 
 ## Common questions
 

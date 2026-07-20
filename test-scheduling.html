@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vega-Embed Scheduling</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+    <script src="build/vega-embed.min.js"></script>
+  </head>
+
+  <body>
+    <p>
+      Open DevTools and record a Performance trace while reloading. With <code>scheduling: true</code>, the embed work
+      appears as multiple tasks instead of one long task. In browsers without the Prioritized Task Scheduling API,
+      yields fall back to <code>setTimeout</code>.
+    </p>
+    <button id="abort">Abort in-flight embed</button>
+    <div id="vis"></div>
+    <script>
+      async function run() {
+        const values = Array.from({length: 100000}, (_, i) => ({
+          x: i % 1000,
+          y: Math.random() * 100 + (i % 7) * 10,
+          category: `series-${i % 7}`,
+        }));
+
+        const spec = {
+          $schema: 'https://vega.github.io/schema/vega-lite/v6.json',
+          data: {values},
+          mark: 'point',
+          encoding: {
+            x: {field: 'x', type: 'quantitative'},
+            y: {field: 'y', type: 'quantitative'},
+            color: {field: 'category', type: 'nominal'},
+          },
+        };
+
+        const controller = new AbortController();
+        document.getElementById('abort').addEventListener('click', () => controller.abort(new Error('user aborted')));
+
+        performance.mark('embed-start');
+        try {
+          // vega-embed posts no tasks itself; wrapping the call in postTask sets the priority
+          // that the scheduler.yield() calls inside the pipeline inherit
+          const result = await scheduler.postTask(
+            () =>
+              vegaEmbed('#vis', spec, {
+                // canvas renderer: 100k points as SVG would create 100k DOM nodes and crash the tab
+                renderer: 'canvas',
+                // scheduling forwards to the Vega View (vega/vega#4309): released vega ignores it
+                scheduling: {signal: controller.signal},
+              }),
+            {priority: 'user-visible'},
+          );
+          performance.mark('embed-end');
+          performance.measure('vega-embed scheduled', 'embed-start', 'embed-end');
+          console.log(result);
+        } catch (error) {
+          console.log('embed aborted or failed:', error);
+        }
+      }
+      run();
+    </script>
+  </body>
+</html>

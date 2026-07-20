@@ -27,6 +27,7 @@ import schemaParser from 'vega-schema-url-parser';
 import * as themes from 'vega-themes';
 import {Handler, Options as TooltipOptions} from 'vega-tooltip';
 import post from './post.js';
+import {EmbedSchedulingOptions, ResolvedScheduling, resolveScheduling, yieldToMain} from './scheduler.js';
 import embedStyle from './style.js';
 import {Config, ExpressionFunction, Mode} from './types.js';
 import {mergeDeep} from './util.js';
@@ -35,6 +36,7 @@ import pkg from '../package.json';
 export const version = pkg.version;
 
 export * from './types.js';
+export type {EmbedSchedulingOptions} from './scheduler.js';
 
 export const vega = vegaImport;
 export let vegaLite = vegaLiteImport;
@@ -100,6 +102,7 @@ export interface EmbedOptions<S = string, R = Renderers> {
   expr?: typeof expressionInterpreter;
   viewClass?: typeof View;
   forceActionsMenu?: boolean;
+  scheduling?: boolean | EmbedSchedulingOptions;
 }
 
 const NAMES: {[key in Mode]: string} = {
@@ -221,6 +224,7 @@ function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
     // we don't allow styles set via usermeta since it would allow injection of logic (we set the style via innerHTML)
     opts.defaultStyle = false;
   }
+  delete opts.scheduling;
   return opts;
 }
 
@@ -237,6 +241,10 @@ export default async function embed(
   spec: VisualizationSpec | string,
   opts: EmbedOptions = {},
 ): Promise<Result> {
+  if (Object.hasOwn(opts, 'scheduling')) {
+    resolveScheduling(opts.scheduling).signal?.throwIfAborted();
+  }
+
   let parsedSpec: VisualizationSpec;
   let loader: Loader | undefined;
 
@@ -289,6 +297,46 @@ async function _embed(
   opts: EmbedOptions<never> = {},
   loader: Loader,
 ): Promise<Result> {
+  const scheduling = resolveScheduling(Object.hasOwn(opts, 'scheduling') ? opts.scheduling : undefined);
+
+  if (!scheduling.enabled) {
+    return runEmbedPipeline(el, spec, opts, loader, scheduling);
+  }
+
+  scheduling.signal?.throwIfAborted();
+
+  const viewHolder: ViewHolder = {};
+  try {
+    return await runEmbedPipeline(el, spec, opts, loader, scheduling, viewHolder);
+  } catch (error) {
+    try {
+      viewHolder.view?.finalize();
+    } catch {
+      /* empty */
+    }
+    if (viewHolder.element && containerOwners.get(viewHolder.element) === viewHolder) {
+      viewHolder.element.innerHTML = '';
+      viewHolder.element.classList.remove('vega-embed', 'has-actions', 'fit-x', 'fit-y');
+    }
+    throw error;
+  }
+}
+
+interface ViewHolder {
+  view?: View;
+  element?: Element;
+}
+
+const containerOwners = new WeakMap<Element, ViewHolder>();
+
+async function runEmbedPipeline(
+  el: HTMLElement | string,
+  spec: VisualizationSpec,
+  opts: EmbedOptions<never>,
+  loader: Loader,
+  scheduling: ResolvedScheduling,
+  viewHolder: ViewHolder = {},
+): Promise<Result> {
   const config = opts.theme ? mergeConfig(themes[opts.theme], opts.config ?? {}) : opts.config;
 
   const actions = isBoolean(opts.actions) ? opts.actions : mergeDeep<Actions>({}, DEFAULT_ACTIONS, opts.actions ?? {});
@@ -321,6 +369,10 @@ async function _embed(
 
   const mode = guessMode(spec, logger, opts.mode);
 
+  if (scheduling.enabled) {
+    await yieldToMain(scheduling.signal);
+  }
+
   let vgSpec: VgSpec = PREPROCESSOR[mode](spec, logger, config);
 
   if (mode === 'vega-lite') {
@@ -333,6 +385,8 @@ async function _embed(
     }
   }
 
+  viewHolder.element = element;
+  containerOwners.set(element, viewHolder);
   element.classList.add('vega-embed');
   if (actions) {
     element.classList.add('has-actions');
@@ -350,6 +404,10 @@ async function _embed(
   const patch = opts.patch;
   if (patch) {
     vgSpec = patch instanceof Function ? patch(vgSpec) : applyPatch(vgSpec, patch, true, false).newDocument;
+  }
+
+  if (scheduling.enabled) {
+    await yieldToMain(scheduling.signal);
   }
 
   // Set locale. Note that this is a global setting.
@@ -384,7 +442,9 @@ async function _embed(
     logger,
     renderer,
     ...(ast ? {expr: (vega as any).expressionInterpreter ?? opts.expr ?? expressionInterpreter} : {}),
-  });
+    ...(scheduling.enabled ? {scheduling: {signal: scheduling.signal}} : {}),
+  } as ConstructorParameters<typeof View>[1]);
+  viewHolder.view = view;
 
   view.addSignalListener('autosize', (_, autosize: Exclude<AutoSize, string>) => {
     const {type} = autosize;
@@ -436,11 +496,23 @@ async function _embed(
     }
   }
 
+  if (scheduling.enabled) {
+    await yieldToMain(scheduling.signal);
+  }
+
   await view.initialize(container, opts.bind).runAsync();
+
+  if (scheduling.enabled) {
+    scheduling.signal?.throwIfAborted();
+  }
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
 
   if (actions !== false) {
+    if (scheduling.enabled) {
+      await yieldToMain(scheduling.signal);
+    }
+
     let wrapper = element;
 
     if (opts.defaultStyle !== false || opts.forceActionsMenu) {
