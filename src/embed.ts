@@ -388,16 +388,16 @@ async function _embed(
 
   view.addSignalListener('autosize', (_, autosize: Exclude<AutoSize, string>) => {
     const {type} = autosize;
-    if (type == 'fit-x') {
-      container.classList.add('fit-x');
-      container.classList.remove('fit-y');
-    } else if (type == 'fit-y') {
-      container.classList.remove('fit-x');
-      container.classList.add('fit-y');
-    } else if (type == 'fit') {
-      container.classList.add('fit-x', 'fit-y');
-    } else {
-      container.classList.remove('fit-x', 'fit-y');
+    const fitX = type == 'fit-x' || type == 'fit';
+    const fitY = type == 'fit-y' || type == 'fit';
+
+    // Mark the chart wrapper so it can fill, and the root so it can become a
+    // full-width block. Only container-sized charts stretch the root, which keeps
+    // the actions menu next to the chart for fixed-size ones. When actions are
+    // disabled there is no wrapper and both are the same element.
+    for (const target of new Set([container, element])) {
+      target.classList.toggle('fit-x', fitX);
+      target.classList.toggle('fit-y', fitY);
     }
   });
 
