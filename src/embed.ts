@@ -388,16 +388,14 @@ async function _embed(
 
   view.addSignalListener('autosize', (_, autosize: Exclude<AutoSize, string>) => {
     const {type} = autosize;
-    if (type == 'fit-x') {
-      container.classList.add('fit-x');
-      container.classList.remove('fit-y');
-    } else if (type == 'fit-y') {
-      container.classList.remove('fit-x');
-      container.classList.add('fit-y');
-    } else if (type == 'fit') {
-      container.classList.add('fit-x', 'fit-y');
-    } else {
-      container.classList.remove('fit-x', 'fit-y');
+    const fitX = type == 'fit-x' || type == 'fit';
+    const fitY = type == 'fit-y' || type == 'fit';
+
+    // Mark the chart wrapper and the root (the same element when actions are
+    // disabled) so the CSS can stretch them.
+    for (const target of new Set([container, element])) {
+      target.classList.toggle('fit-x', fitX);
+      target.classList.toggle('fit-y', fitY);
     }
   });
 

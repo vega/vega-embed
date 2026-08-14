@@ -3,6 +3,13 @@
   display: inline-block;
   box-sizing: border-box;
 
+  // Stretch the root for container-sized charts so the chart wrapper's
+  // `width: 100%` resolves against a definite width instead of shrink-to-fit.
+  &.fit-x {
+    display: block;
+    width: 100%;
+  }
+
   &.has-actions {
     padding-right: 38px;
   }
