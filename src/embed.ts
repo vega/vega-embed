@@ -391,10 +391,8 @@ async function _embed(
     const fitX = type == 'fit-x' || type == 'fit';
     const fitY = type == 'fit-y' || type == 'fit';
 
-    // Mark the chart wrapper so it can fill, and the root so it can become a
-    // full-width block. Only container-sized charts stretch the root, which keeps
-    // the actions menu next to the chart for fixed-size ones. When actions are
-    // disabled there is no wrapper and both are the same element.
+    // Mark the chart wrapper and the root (the same element when actions are
+    // disabled) so the CSS can stretch them.
     for (const target of new Set([container, element])) {
       target.classList.toggle('fit-x', fitX);
       target.classList.toggle('fit-y', fitY);

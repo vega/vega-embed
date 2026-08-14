@@ -3,11 +3,8 @@
   display: inline-block;
   box-sizing: border-box;
 
-  // Container-sized charts have to fill the parent. `.chart-wrapper.fit-x` sizes
-  // itself with `width: 100%`, which only resolves against a root with a definite
-  // width — an inline-block root is shrink-to-fit, so it would resolve to 0.
-  // embed.ts sets `fit-x` on the root too, so only container-sized charts stretch
-  // it; fixed-size charts keep the shrink-to-fit root and their actions menu.
+  // Stretch the root for container-sized charts so the chart wrapper's
+  // `width: 100%` resolves against a definite width instead of shrink-to-fit.
   &.fit-x {
     display: block;
     width: 100%;
