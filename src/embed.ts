@@ -29,7 +29,7 @@ import {Handler, Options as TooltipOptions} from 'vega-tooltip';
 import post from './post.js';
 import embedStyle from './style.js';
 import {Config, ExpressionFunction, Mode} from './types.js';
-import {mergeDeep} from './util.js';
+import {isValidEditorURL, mergeDeep} from './util.js';
 import pkg from '../package.json';
 
 export const version = pkg.version;
@@ -517,8 +517,12 @@ async function _embed(
     }
 
     // add 'Open in Vega Editor' action
-    if (actions === true || actions.editor !== false) {
-      const editorUrl = opts.editorUrl ?? 'https://vega.github.io/editor/';
+    const editorUrl = opts.editorUrl ?? 'https://vega.github.io/editor/';
+    const showEditorAction = actions === true || actions.editor !== false;
+
+    if (showEditorAction && !isValidEditorURL(editorUrl)) {
+      logger.warn(`Ignoring the editor action since editorUrl is not an http or https url: ${editorUrl}`);
+    } else if (showEditorAction) {
       const editorLink = document.createElement('a');
 
       editorLink.text = i18n.EDITOR_ACTION;
