@@ -1,5 +1,12 @@
 # Changelog
 
+# [7.2.0](https://github.com/vega/vega-embed/compare/v7.1.0...v7.2.0) (2026-09-02)
+
+
+### Bug Fixes
+
+* stretch the root only for container-sized charts ([#1554](https://github.com/vega/vega-embed/issues/1554)) ([ea3e7b8](https://github.com/vega/vega-embed/commit/ea3e7b8e50b15ba7847fc82cb0a18b76789de2d1))
+
 # [7.1.0](https://github.com/vega/vega-embed/compare/v7.0.2...v7.1.0) (2025-10-09)
 
 
