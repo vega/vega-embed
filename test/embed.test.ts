@@ -267,6 +267,42 @@ test('guessMode from Vega spec', () => {
   expect(guessMode({marks: []}, testLogger, 'invalid' as Mode)).toBe('vega');
 });
 
+test('guessMode prefers provided mode', () => {
+  expect(guessMode({signals: [], marks: []}, testLogger, 'vega-lite')).toBe('vega-lite');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, testLogger, 'vega-lite')).toBe('vega-lite');
+});
+
+test('guessMode without provided mode', () => {
+  expect(guessMode({mark: 'bar'} as TopLevelSpec, testLogger)).toBe('vega-lite');
+  expect(guessMode({marks: []}, testLogger)).toBe('vega');
+});
+
+test('guessMode defaults to Vega', () => {
+  expect(guessMode({}, testLogger)).toBe('vega');
+  expect(guessMode({}, testLogger, 'invalid' as Mode)).toBe('vega');
+});
+
+test('guessMode warns when mode and schema disagree', () => {
+  const warnLogger = logger(vega.Warn);
+  const warn = vi.spyOn(warnLogger, 'warn');
+  guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, warnLogger, 'vega-lite');
+  expect(warn).toHaveBeenCalledWith(expect.stringContaining('mode argument sets Vega-Lite'));
+});
+
+test('guessMode does not warn when mode and schema agree', () => {
+  const warnLogger = logger(vega.Warn);
+  const warn = vi.spyOn(warnLogger, 'warn');
+  guessMode({$schema: `https://vega.github.io/schema/vega/v${vega.version.split('.')[0]}.json`}, warnLogger, 'vega');
+  expect(warn).not.toHaveBeenCalled();
+});
+
+test('guessMode warns about outdated schema version', () => {
+  const warnLogger = logger(vega.Warn);
+  const warn = vi.spyOn(warnLogger, 'warn');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v1.json'}, warnLogger)).toBe('vega');
+  expect(warn).toHaveBeenCalledWith(expect.stringContaining('The input spec uses Vega v1'));
+});
+
 test('can set locale', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {

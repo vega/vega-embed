@@ -165,7 +165,8 @@ function viewSource(source: string, sourceHeader: string, sourceFooter: string, 
  * @param spec Vega or Vega-Lite spec.
  */
 export function guessMode(spec: VisualizationSpec, logger: Logger, providedMode?: Mode): Mode {
-  // Decide mode
+  const isValidMode = providedMode !== undefined && providedMode in NAMES;
+
   if (spec.$schema) {
     const parsed = schemaParser(spec.$schema);
     if (providedMode && providedMode !== parsed.library) {
@@ -174,6 +175,9 @@ export function guessMode(spec: VisualizationSpec, logger: Logger, providedMode?
           NAMES[providedMode] ?? providedMode
         }.`,
       );
+      if (isValidMode) {
+        return providedMode;
+      }
     }
 
     const mode = parsed.library as Mode;
@@ -187,7 +191,10 @@ export function guessMode(spec: VisualizationSpec, logger: Logger, providedMode?
     return mode;
   }
 
-  // try to guess from the provided spec
+  if (isValidMode) {
+    return providedMode;
+  }
+
   if (
     'mark' in spec ||
     'encoding' in spec ||
@@ -200,11 +207,7 @@ export function guessMode(spec: VisualizationSpec, logger: Logger, providedMode?
     return 'vega-lite';
   }
 
-  if ('marks' in spec || 'signals' in spec || 'scales' in spec || 'axes' in spec) {
-    return 'vega';
-  }
-
-  return providedMode ?? 'vega';
+  return 'vega';
 }
 
 function isLoader(o?: LoaderOptions | Loader): o is Loader {
