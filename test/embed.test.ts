@@ -267,6 +267,11 @@ test('guessMode from Vega spec', () => {
   expect(guessMode({marks: []}, testLogger, 'invalid' as Mode)).toBe('vega');
 });
 
+test('guessMode prefers provided mode', () => {
+  expect(guessMode({signals: [], marks: []}, testLogger, 'vega-lite')).toBe('vega-lite');
+  expect(guessMode({$schema: 'https://vega.github.io/schema/vega/v6.json'}, testLogger, 'vega-lite')).toBe('vega-lite');
+});
+
 test('can set locale', async () => {
   const el = document.createElement('div');
   const result = await embed(el, vlSpec, {

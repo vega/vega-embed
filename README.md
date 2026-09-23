@@ -168,7 +168,7 @@ var opt = {
 
 | Property | Type | Description |
 | :-- | :-- | :-- |
-| `mode` | String | If specified, tells Vega-Embed to parse the spec as `vega` or `vega-lite`. Vega-Embed will parse the [`$schema` url](https://github.com/vega/schema) if the mode is not specified. Vega-Embed will default to `vega` if neither `mode`, nor `$schema` are specified. |
+| `mode` | String | If specified, tells Vega-Embed to parse the spec as `vega` or `vega-lite`. If the mode is not specified, Vega-Embed will parse the [`$schema` url](https://github.com/vega/schema) or guess the mode from the spec. Vega-Embed will default to `vega` otherwise. |
 | `config` | String / Object | _String_ : A URL string from which to load a [Vega](https://vega.github.io/vega/docs/config/)/[Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) or [Vega-Lite](https://vega.github.io/vega-lite/docs/config.html) configuration file. This URL will be subject to standard browser security restrictions. Typically this URL will point to a file on the same host and port number as the web page itself. <br> _Object_ : A Vega/Vega-Lite configuration as a parsed JSON object to override the default configuration options. |
 | `theme` | String | If specified, tells Vega-Embed use the theme from [Vega Themes](https://github.com/vega/vega-themes). **Experimental: we may update themes with minor version updates of Vega-Embed.** |
 | `defaultStyle` | Boolean or String | If set to `true` (default), the embed actions are shown in a menu. Set to `false` to use simple links. Provide a string to set the style sheet (not supported in usermeta). |
