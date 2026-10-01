@@ -46,7 +46,7 @@
     "@rollup/plugin-typescript": "^12.3.0",
     "@types/semver": "^7.8.0",
     "@typescript-eslint/parser": "^8.69.0",
-    "@vitest/coverage-istanbul": "^4.1.11",
+    "@vitest/coverage-istanbul": "^5.0.2",
     "@vitest/eslint-plugin": "^1.6.27",
     "browser-sync": "^3.0.4",
     "concurrently": "^10.0.5",
