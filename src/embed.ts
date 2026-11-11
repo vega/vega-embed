@@ -221,7 +221,7 @@ function createLoader(opts?: Loader | LoaderOptions) {
 function embedOptionsFromUsermeta(parsedSpec: VisualizationSpec) {
   const opts = (parsedSpec.usermeta as any)?.embedOptions ?? {};
   if (isString(opts.defaultStyle)) {
-    // we don't allow styles set via usermeta since it would allow injection of logic (we set the style via innerHTML)
+    // we don't allow styles set via usermeta since it would allow injection of arbitrary CSS into the page
     opts.defaultStyle = false;
   }
   return opts;
@@ -279,11 +279,30 @@ async function loadOpts(opt: EmbedOptions, loader: Loader): Promise<EmbedOptions
   };
 }
 
-function getRoot(el: Element) {
+function getRoot(el: Element): Document | ShadowRoot {
   const possibleRoot = el.getRootNode ? el.getRootNode() : document;
-  return possibleRoot instanceof ShadowRoot
-    ? {root: possibleRoot, rootContainer: possibleRoot}
-    : {root: document, rootContainer: document.head ?? document.body};
+  return possibleRoot instanceof ShadowRoot ? possibleRoot : document;
+}
+
+/**
+ * The default stylesheets adopted by each document or shadow root.
+ */
+const adoptedStyles = new WeakMap<Document | ShadowRoot, CSSStyleSheet>();
+
+/**
+ * Adopt the default styles once per document or shadow root. A new `CSSStyleSheet` is not blocked
+ * by CSP, and the `vega-embed` cascade layer lets unlayered page styles override it.
+ */
+function addDefaultStyle(root: Document | ShadowRoot, css: string) {
+  const existing = adoptedStyles.get(root);
+  if (existing && root.adoptedStyleSheets.includes(existing)) {
+    return;
+  }
+
+  const sheet = new CSSStyleSheet();
+  sheet.replaceSync(`@layer vega-embed {\n${css}}\n`);
+  adoptedStyles.set(root, sheet);
+  root.adoptedStyleSheets = [...root.adoptedStyleSheets, sheet];
 }
 
 async function _embed(
@@ -309,17 +328,10 @@ async function _embed(
   }
 
   if (opts.defaultStyle !== false) {
-    const ID = 'vega-embed-style';
-    const {root, rootContainer} = getRoot(element);
-    if (!root.getElementById(ID)) {
-      const style = document.createElement('style');
-      style.id = ID;
-      style.innerHTML =
-        opts.defaultStyle === undefined || opts.defaultStyle === true
-          ? (embedStyle ?? '').toString()
-          : opts.defaultStyle;
-      rootContainer.appendChild(style);
-    }
+    addDefaultStyle(
+      getRoot(element),
+      opts.defaultStyle === undefined || opts.defaultStyle === true ? (embedStyle ?? '').toString() : opts.defaultStyle,
+    );
   }
 
   const mode = guessMode(spec, logger, opts.mode);
