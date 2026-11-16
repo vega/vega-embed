@@ -53,6 +53,13 @@
     opacity: 0.7;
   }
 
+  @media (prefers-contrast: more) {
+    summary,
+    details[open] summary {
+      opacity: 1;
+    }
+  }
+
   &:hover summary,
   &:focus-within summary {
     opacity: 1 !important;
