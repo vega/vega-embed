@@ -87,6 +87,53 @@ test('can disable export actions', async () => {
   expect(el.children[1].children[1].childElementCount).toBe(4);
 });
 
+test('toggles fullscreen for the embedded chart', async () => {
+  const el = document.createElement('div');
+  let fullscreenElement: HTMLElement | null = null;
+  const setFullscreen = (value: HTMLElement | null) => {
+    fullscreenElement = value;
+    document.dispatchEvent(new Event('fullscreenchange'));
+  };
+  const requestFullscreen = vi.fn(() => Promise.resolve(setFullscreen(el)));
+  const exitFullscreen = vi.fn(() => Promise.resolve(setFullscreen(null)));
+  Object.defineProperty(el, 'requestFullscreen', {value: requestFullscreen});
+  Object.defineProperties(document, {
+    fullscreenEnabled: {value: true, configurable: true},
+    fullscreenElement: {get: () => fullscreenElement, configurable: true},
+    exitFullscreen: {value: exitFullscreen, configurable: true},
+  });
+
+  try {
+    const {finalize} = await embed(el, vlSpec, {actions: {fullscreen: true}});
+    const button = el.querySelector<HTMLButtonElement>('.vega-actions button')!;
+    expect(button.textContent).toBe('View Fullscreen');
+    button.click();
+    expect(requestFullscreen).toHaveBeenCalledOnce();
+    expect(button.textContent).toBe('Exit Fullscreen');
+    button.click();
+    expect(exitFullscreen).toHaveBeenCalledOnce();
+    expect(button.textContent).toBe('View Fullscreen');
+
+    setFullscreen(el);
+    setFullscreen(null);
+    expect(button.textContent).toBe('View Fullscreen');
+    finalize();
+    setFullscreen(el);
+    expect(button.textContent).toBe('View Fullscreen');
+  } finally {
+    for (const key of ['fullscreenEnabled', 'fullscreenElement', 'exitFullscreen']) {
+      Reflect.deleteProperty(document, key);
+    }
+  }
+});
+
+test('omits the fullscreen action when fullscreen is unavailable', async () => {
+  const el = document.createElement('div');
+  const {finalize} = await embed(el, vlSpec, {actions: {fullscreen: true}});
+  expect(el.querySelector('.vega-actions button')).toBeNull();
+  finalize();
+});
+
 test('creates default download filename for svg', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, {actions: true});

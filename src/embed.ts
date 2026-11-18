@@ -50,6 +50,7 @@ export interface Actions {
   source?: boolean;
   compiled?: boolean;
   editor?: boolean;
+  fullscreen?: boolean;
 }
 
 export const DEFAULT_ACTIONS = {export: {svg: true, png: true}, source: true, compiled: true, editor: true};
@@ -65,6 +66,8 @@ const I18N = {
   CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
   COMPILED_ACTION: 'View Compiled Vega',
   EDITOR_ACTION: 'Open in Vega Editor',
+  EXIT_FULLSCREEN_ACTION: 'Exit Fullscreen',
+  FULLSCREEN_ACTION: 'View Fullscreen',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
   SVG_ACTION: 'Save as SVG',
@@ -440,6 +443,7 @@ async function _embed(
   await view.initialize(container, opts.bind).runAsync();
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
+  let cleanupFullscreenAction: (() => void) | undefined;
 
   if (actions !== false) {
     let wrapper = element;
@@ -542,12 +546,50 @@ async function _embed(
 
       ctrl.append(editorLink);
     }
+
+    const ownerDocument = element.ownerDocument;
+    if (
+      (actions === true || actions.fullscreen === true) &&
+      ownerDocument.fullscreenEnabled &&
+      typeof element.requestFullscreen === 'function'
+    ) {
+      const fullscreenButton = ownerDocument.createElement('button');
+      fullscreenButton.type = 'button';
+      fullscreenButton.className = 'vega-fullscreen';
+      const isFullscreen = () => {
+        const root = element.getRootNode();
+        return ('fullscreenElement' in root ? root.fullscreenElement : ownerDocument.fullscreenElement) === element;
+      };
+      const updateFullscreenLabel = () => {
+        fullscreenButton.textContent = isFullscreen() ? i18n.EXIT_FULLSCREEN_ACTION : i18n.FULLSCREEN_ACTION;
+      };
+      const toggleFullscreen = async () => {
+        try {
+          if (isFullscreen()) {
+            await ownerDocument.exitFullscreen();
+          } else {
+            await element.requestFullscreen();
+          }
+        } catch (error) {
+          logger.warn('Could not change fullscreen mode:', error);
+        }
+      };
+      updateFullscreenLabel();
+      fullscreenButton.addEventListener('click', toggleFullscreen);
+      ownerDocument.addEventListener('fullscreenchange', updateFullscreenLabel);
+      ctrl.append(fullscreenButton);
+      cleanupFullscreenAction = () => {
+        fullscreenButton.removeEventListener('click', toggleFullscreen);
+        ownerDocument.removeEventListener('fullscreenchange', updateFullscreenLabel);
+      };
+    }
   }
 
   function finalize() {
     if (documentClickHandler) {
       document.removeEventListener('click', documentClickHandler);
     }
+    cleanupFullscreenAction?.();
     view.finalize();
   }
 

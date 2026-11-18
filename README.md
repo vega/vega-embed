@@ -132,7 +132,8 @@ var opt = {
     export: ...,
     source: ...,
     compiled: ...,
-    editor: ...
+    editor: ...,
+    fullscreen: ...
   },
 
   scaleFactor: ...,
@@ -159,6 +160,8 @@ var opt = {
   i18n: {
     COMPILED_ACTION: ...,
     EDITOR_ACTION: ...,
+    EXIT_FULLSCREEN_ACTION: ...,
+    FULLSCREEN_ACTION: ...,
     PNG_ACTION: ...,
     SOURCE_ACTION: ...,
     SVG_ACTION: ...
@@ -197,6 +200,8 @@ var opt = {
 | `ast` | Boolean | Generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) instead of expressions and use an interpreter instead of native evaluation. While the interpreter is slower, it adds support for Vega expressions that are [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)-compliant. |
 | `expr` | Object | Custom Vega Expression interpreter. |
 | `viewClass` | Class | Class which extends [Vega `View`](https://vega.github.io/vega/docs/api/view/#view) for custom rendering. |
+
+Use `actions: {fullscreen: true}` to add **View Fullscreen** to the actions menu. The action is also included with `actions: true`. It appears only where the browser allows fullscreen, and its label changes to **Exit Fullscreen** while the chart is fullscreen. Set `i18n.FULLSCREEN_ACTION` and `i18n.EXIT_FULLSCREEN_ACTION` to customize the labels.
 
 ## Common questions
 
