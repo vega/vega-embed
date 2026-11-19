@@ -63,7 +63,18 @@ console.log(result.view);
 
 ### In Observable
 
-You can require embed with `embed = require('vega-embed@6')` and then embed a chart with `viewof view = embed(...)`. Check the [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed) for more details.
+You can require embed with `embed = require('vega-embed@6')` and then embed a chart with `viewof view = embed(...)`. Check [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed) for more details.
+
+When a cell can rerun, use the two-argument form of `embed` to get its `finalize` method. Call it when Observable [invalidates the cell](https://observablehq.com/@observablehq/invalidation) to clean up the previous chart.
+
+```js
+chart = {
+  const element = html`<div></div>`;
+  const {finalize} = await embed(element, spec);
+  invalidation.then(finalize);
+  return element;
+}
+```
 
 ## API Reference
 
