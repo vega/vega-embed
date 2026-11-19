@@ -27,7 +27,7 @@
   "license": "BSD-3-Clause",
   "type": "module",
   "exports": {
-    "types": "./build/embed.d.ts",
+    "types": "./build/module.d.ts",
     "default": "./build/embed.js"
   },
   "unpkg": "build/vega-embed.min.js",
