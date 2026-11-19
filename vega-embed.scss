@@ -66,6 +66,24 @@
     transition: opacity 0.2s ease;
   }
 
+  .vega-actions a,
+  .vega-actions .vega-fullscreen,
+  > .vega-fullscreen-close {
+    padding: 8px 16px;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #434a56;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: #f7f7f9;
+      color: black;
+    }
+  }
+
   .vega-actions {
     position: absolute;
     z-index: 1001;
@@ -84,25 +102,12 @@
     animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
     text-align: left; // only to make sure this is not a a different value
 
-    a,
-    .vega-fullscreen {
-      padding: 8px 16px;
-      font-family: sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-      color: #434a56;
-      text-decoration: none;
-
-      &:hover,
-      &:focus {
-        background-color: #f7f7f9;
-        color: black;
-      }
+    &[hidden] {
+      display: none;
     }
 
     .vega-fullscreen {
-      background: transparent;
+      background-color: transparent;
       border: 0;
       cursor: pointer;
       text-align: inherit;
@@ -145,17 +150,19 @@
     display: grid;
     place-items: safe center;
     overflow: auto;
+    padding-right: 0;
     background: white;
+  }
 
-    > details {
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-
-    .vega-actions {
-      right: 5px;
-    }
+  > .vega-fullscreen-close {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: pointer;
   }
 }
 

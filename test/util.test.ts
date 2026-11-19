@@ -24,6 +24,7 @@ test('mergeDeep', () => {
     export: {svg: false, png: true},
     source: true,
     compiled: true,
+    fullscreen: true,
     editor: true,
   });
 });
