@@ -18,27 +18,43 @@
 
 ### Directly in the Browser
 
-Load the ES module from a CDN such as [jsDelivr](https://www.jsdelivr.com/package/npm/vega-embed), which also resolves its dependencies. Pin the major version to keep updates within the same major release.
+You can import Vega-Embed from a local copy or (as shown below) [from jsDelivr](https://www.jsdelivr.com/package/npm/vega-embed). Please replace `[VERSION]` with the correct [Vega](https://www.jsdelivr.com/package/npm/vega), [Vega-Lite](https://www.jsdelivr.com/package/npm/vega-lite), and [Vega-Embed](https://www.jsdelivr.com/package/npm/vega-embed) versions. We recommend that you specify the major versions (`vega@5`, `vega-lite@5`, `vega-embed@6`).
 
 ```html
 <!DOCTYPE html>
-<div id="vis"></div>
-<script type="module">
-  import embed from 'https://cdn.jsdelivr.net/npm/vega-embed@7/+esm';
+<html>
+  <head>
+    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@[VERSION]"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@[VERSION]"></script>
+    <!-- Import vega-embed -->
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@[VERSION]"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
 
-  const spec = 'https://vega.github.io/vega/examples/bar-chart.vg.json';
-  const {view} = await embed('#vis', spec);
-</script>
+    <script type="text/javascript">
+      var spec = 'https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json';
+      vegaEmbed('#vis', spec)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        })
+        .catch(console.error);
+    </script>
+  </body>
+</html>
 ```
 
 ### JavaScript or TypeScript
 
-Install `vega-embed`, `vega`, and `vega-lite` from npm to use Vega-Embed in your project.
+The basic example below needs to be transpiled and bundled (using rollup, webpack, etc..) before it can be loaded in a browser.
 
 ```ts
 import embed from 'vega-embed';
 
-const spec = 'https://vega.github.io/vega/examples/bar-chart.vg.json';
+const spec = {
+  ...
+}
 
 const result = await embed('#vis', spec);
 
@@ -47,7 +63,7 @@ console.log(result.view);
 
 ### In Observable
 
-In an [Observable JavaScript cell](https://observablehq.com/@observablehq/notebooks-system-guide), import `container` and display the returned element. When Observable removes the cell's output, Vega-Embed finalizes the chart and cleans up its listeners.
+In an [Observable notebook](https://observablehq.com/@observablehq/notebooks-system-guide), import `container` and display the element that it returns. When Observable removes the cell's output, for example because the cell runs again, Vega-Embed finalizes the chart and removes its listeners.
 
 ```js
 import {container} from 'npm:vega-embed@7';
@@ -56,9 +72,11 @@ const spec = 'https://vega.github.io/vega/examples/bar-chart.vg.json';
 display(await container(spec));
 ```
 
+In classic Observable notebooks, use `embed = require('vega-embed@7')` and then `viewof view = embed(spec)`.
+
 ## API Reference
 
-The ES module exports [`embed`](#embed) by default and [`container`](#container) as a named export. The UMD bundle, loaded with a classic script tag, exposes a global `vegaEmbed` function that chooses between them based on its arguments.
+The ES module exports [`embed`](#embed) as the default export and [`container`](#container) as a named export. When you load Vega-Embed with a `script` tag, the global `vegaEmbed` function is a wrapper that chooses between [`embed`](#embed) and [`container`](#container) based on the arguments. This is convenient in interactive environments such as classic [Observable](https://observablehq.com/) notebooks.
 
 <a href="#embed" name="embed">#</a> <b>embed</b>(<i>el</i>, <i>spec</i>[, <i>opt</i>]) [<>](https://github.com/vega/vega-embed/blob/master/src/embed.ts 'Source')
 
@@ -83,7 +101,7 @@ _Note: Internet Explorer does not support [the ES6 Promise](https://developer.mo
 
 <a href="#container" name="container">#</a> <b>container</b>(<i>spec</i>[, <i>opt</i>]) [<>](https://github.com/vega/vega-embed/blob/master/src/container.ts 'Source')
 
-Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. Once the element has been displayed, removing it from the document finalizes the chart. Moving it to another connected parent synchronously keeps the chart live. The `container` function accepts the following arguments:
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\* that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. The function is designed to work with [Observable](https://observablehq.com/). When the element is removed from the document, Vega-Embed calls `finalize` on the embedded chart. If you move the element synchronously to a different place in the document, the chart stays live. The `container` function accepts the following arguments:
 
 | Property | Type | Description |
 | :-- | :-- | :-- |
