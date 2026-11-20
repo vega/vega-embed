@@ -1,5 +1,15 @@
 # Changelog
 
+# [7.4.0](https://github.com/vega/vega-embed/compare/v7.3.0...v7.4.0) (2026-11-20)
+
+### Bug Fixes
+
+* respect higher contrast preference for action menu ([#1581](https://github.com/vega/vega-embed/issues/1581)) ([ffcc3a1](https://github.com/vega/vega-embed/commit/ffcc3a1894d6289b1a8b9a2b8178537a371f7cdb))
+
+### Features
+
+* finalize container charts when removed from the document ([#1583](https://github.com/vega/vega-embed/issues/1583)) ([4a69d92](https://github.com/vega/vega-embed/commit/4a69d9297c2d49b7da4576c42c91f69b3f45c5cf))
+
 # [7.3.0](https://github.com/vega/vega-embed/compare/v7.2.0...v7.3.0) (2026-09-23)
 
 
