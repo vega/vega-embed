@@ -3,8 +3,9 @@ import {View, Spec as VgSpec, logger} from 'vega';
 import {expressionInterpreter} from 'vega-interpreter';
 import * as vl from 'vega-lite';
 import {compile, TopLevelSpec} from 'vega-lite';
-import {expect, test, vi} from 'vitest';
+import {describe, expect, test, vi} from 'vitest';
 import embed, {guessMode, Mode} from '../src/embed';
+import {FakeCSSStyleSheet} from '../vitest.setup';
 
 const vlSpec: TopLevelSpec = {
   data: {values: [1, 2, 3]},
@@ -514,6 +515,70 @@ test('can set loader via usermeta', async () => {
   });
   expect((result.view as any)._loader.options).toEqual({
     target: '_blank',
+  });
+});
+
+function adoptedSheets(root: Document | ShadowRoot = document) {
+  return root.adoptedStyleSheets as unknown as FakeCSSStyleSheet[];
+}
+
+describe('default style', () => {
+  test('adopts a stylesheet instead of adding a <style> element', async () => {
+    const el = document.createElement('div');
+    await embed(el, vlSpec);
+
+    expect(document.getElementById('vega-embed-style')).toBeNull();
+    expect(adoptedSheets()).toHaveLength(1);
+    expect(adoptedSheets()[0].text).toContain('.vega-embed');
+  });
+
+  test('wraps the styles in a cascade layer so page styles can override them', async () => {
+    const el = document.createElement('div');
+    await embed(el, vlSpec);
+
+    expect(adoptedSheets()[0].text).toMatch(/^@layer vega-embed \{/);
+  });
+
+  test('adopts the stylesheet only once per document', async () => {
+    await embed(document.createElement('div'), vlSpec);
+    await embed(document.createElement('div'), vlSpec);
+
+    expect(adoptedSheets()).toHaveLength(1);
+  });
+
+  test('keeps stylesheets the page already adopted', async () => {
+    const pageSheet = new FakeCSSStyleSheet();
+    document.adoptedStyleSheets = [pageSheet as unknown as CSSStyleSheet];
+
+    await embed(document.createElement('div'), vlSpec);
+
+    expect(adoptedSheets()).toHaveLength(2);
+    expect(adoptedSheets()[0]).toBe(pageSheet);
+  });
+
+  test('adopts the stylesheet into the shadow root of the element', async () => {
+    const host = document.createElement('div');
+    const shadowRoot = host.attachShadow({mode: 'open'});
+    const el = document.createElement('div');
+    shadowRoot.appendChild(el);
+
+    await embed(el, vlSpec);
+
+    expect(adoptedSheets(shadowRoot)).toHaveLength(1);
+    expect(adoptedSheets()).toHaveLength(0);
+  });
+
+  test('adopts a custom stylesheet if `defaultStyle` is a string', async () => {
+    await embed(document.createElement('div'), vlSpec, {defaultStyle: '.foo {color: red}'});
+
+    expect(adoptedSheets()).toHaveLength(1);
+    expect(adoptedSheets()[0].text).toContain('.foo {color: red}');
+  });
+
+  test('does not adopt a stylesheet if `defaultStyle` is false', async () => {
+    await embed(document.createElement('div'), vlSpec, {defaultStyle: false});
+
+    expect(adoptedSheets()).toHaveLength(0);
   });
 });
 
