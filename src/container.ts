@@ -3,21 +3,36 @@ import embed, {EmbedOptions, VisualizationSpec} from './embed.js';
 
 const lifecycleTag = 'vega-embed-lifecycle';
 
-/**
- * Calls `finalize` when it is removed from the document.
- * A move within the document also disconnects the element, so we check again after the move completes.
- */
-class Lifecycle extends HTMLElement {
+interface Lifecycle extends HTMLElement {
   finalize?: () => void;
+}
 
-  disconnectedCallback() {
-    queueMicrotask(() => {
-      if (!this.isConnected) {
-        this.finalize?.();
-        this.finalize = undefined;
-      }
-    });
+/**
+ * Creates an element that calls `finalize` when it is removed from the document.
+ * The custom element is defined on first use because `HTMLElement` does not exist outside the browser.
+ */
+function createLifecycle(finalize: () => void) {
+  if (!customElements.get(lifecycleTag)) {
+    customElements.define(
+      lifecycleTag,
+      class extends HTMLElement implements Lifecycle {
+        finalize?: () => void;
+
+        disconnectedCallback() {
+          // A move within the document also disconnects the element, so check again after the move completes.
+          queueMicrotask(() => {
+            if (!this.isConnected) {
+              this.finalize?.();
+              this.finalize = undefined;
+            }
+          });
+        }
+      },
+    );
   }
+  const lifecycle = document.createElement(lifecycleTag) as Lifecycle;
+  lifecycle.finalize = finalize;
+  return lifecycle;
 }
 
 /**
@@ -46,12 +61,7 @@ export default async function (spec: VisualizationSpec | string, opt: EmbedOptio
 
   wrapper.value = result.view;
 
-  if (!customElements.get(lifecycleTag)) {
-    customElements.define(lifecycleTag, Lifecycle);
-  }
-  const lifecycle = document.createElement(lifecycleTag) as Lifecycle;
-  lifecycle.finalize = result.finalize;
-  wrapper.append(lifecycle);
+  wrapper.append(createLifecycle(result.finalize));
 
   return wrapper;
 }
