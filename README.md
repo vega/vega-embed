@@ -10,7 +10,7 @@
 - Includes [Vega Tooltip](https://github.com/vega/vega-tooltip).
 - Includes [Vega Themes](https://github.com/vega/vega-themes). **Experimental: themes are not stable yet**
 
-**Vega-Lite works well with [Observable](https://beta.observablehq.com/). Learn how to use it in [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed).**
+**Vega-Lite works well with [Observable](https://observablehq.com/). See the [Observable example](#in-observable) below.**
 
 <img src="embed.gif" width="500">
 
@@ -63,11 +63,20 @@ console.log(result.view);
 
 ### In Observable
 
-You can require embed with `embed = require('vega-embed@6')` and then embed a chart with `viewof view = embed(...)`. Check the [our example notebook](https://beta.observablehq.com/@domoritz/hello-vega-embed) for more details.
+In an [Observable notebook](https://observablehq.com/@observablehq/notebooks-system-guide), import `container` and display the element that it returns. When Observable removes the cell's output, for example because the cell runs again, Vega-Embed finalizes the chart and removes its listeners.
+
+```js
+import {container} from 'npm:vega-embed@7';
+
+const spec = 'https://vega.github.io/vega/examples/bar-chart.vg.json';
+display(await container(spec));
+```
+
+In classic Observable notebooks, use `embed = require('vega-embed@7')` and then `viewof view = embed(spec)`.
 
 ## API Reference
 
-When using a `script` tag, the default export of Vega-Embed is a wrapper function that automatically chooses between [`embed`](#embed) and [`container`](#container) based on the provided arguments. Vega-Embed provides this convenience for imports in interactive environments like [Observable](https://www.observablehq.com/). When using the Vega-Embed npm package, the default export is the [`embed`](#embed) function.
+The ES module exports [`embed`](#embed) as the default export and [`container`](#container) as a named export. When you load Vega-Embed with a `script` tag, the global `vegaEmbed` function is a wrapper that chooses between [`embed`](#embed) and [`container`](#container) based on the arguments. This is convenient in interactive environments such as classic [Observable](https://observablehq.com/) notebooks.
 
 <a href="#embed" name="embed">#</a> <b>embed</b>(<i>el</i>, <i>spec</i>[, <i>opt</i>]) [<>](https://github.com/vega/vega-embed/blob/master/src/embed.ts 'Source')
 
@@ -92,7 +101,7 @@ _Note: Internet Explorer does not support [the ES6 Promise](https://developer.mo
 
 <a href="#container" name="container">#</a> <b>container</b>(<i>spec</i>[, <i>opt</i>]) [<>](https://github.com/vega/vega-embed/blob/master/src/container.ts 'Source')
 
-Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\* that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. The function is designed to work with [Observable](https://observablehq.com/). The `container` function accepts the following arguments:
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\* that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. The function is designed to work with [Observable](https://observablehq.com/). When the element is removed from the document, Vega-Embed calls `finalize` on the embedded chart. If you attach the element again in the same task, for example to put it in a layout, the chart stays live. The `container` function accepts the following arguments:
 
 | Property | Type | Description |
 | :-- | :-- | :-- |

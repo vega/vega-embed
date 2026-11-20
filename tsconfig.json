@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "Node16",
     "moduleResolution": "Node16",
+    "rootDir": "src",
     "noEmit": true,
     "sourceMap": true,
     "declaration": true,
@@ -17,5 +18,5 @@
       "fast-json-patch/index.mjs": ["./node_modules/fast-json-patch/index.d.ts"]
     }
   },
-  "include": ["src/index.ts"]
+  "include": ["src/index.ts", "src/module.ts"]
 }

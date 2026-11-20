@@ -9,7 +9,7 @@ import pkg from './package.json' with {type: 'json'};
 
 const outputs = [
   {
-    input: 'src/embed.ts',
+    input: 'src/module.ts',
     output: {
       file: pkg.exports.default,
       format: 'esm',
