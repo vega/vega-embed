@@ -93,3 +93,14 @@ test('keeps the view alive when composed into a layout that is attached later in
   await nextTask();
   expect(finalize).toHaveBeenCalledTimes(1);
 });
+
+test('works without custom elements', async () => {
+  vi.stubGlobal('customElements', null);
+  try {
+    const div = await container(vlSpec);
+    expect(div.value).toBeDefined();
+    expect(div.querySelector('vega-embed-lifecycle')).toBeNull();
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});

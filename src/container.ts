@@ -23,8 +23,9 @@ function createLifecycle(finalize: () => void) {
           // that is attached later in the same task. Check again in the next task.
           setTimeout(() => {
             if (!this.isConnected) {
-              this.finalize?.();
+              const pendingFinalize = this.finalize;
               this.finalize = undefined;
+              pendingFinalize?.();
             }
           });
         }
@@ -62,7 +63,10 @@ export default async function (spec: VisualizationSpec | string, opt: EmbedOptio
 
   wrapper.value = result.view;
 
-  wrapper.append(createLifecycle(result.finalize));
+  // Some environments, such as Chrome extension content scripts, do not support custom elements.
+  if (globalThis.customElements) {
+    wrapper.append(createLifecycle(result.finalize));
+  }
 
   return wrapper;
 }
