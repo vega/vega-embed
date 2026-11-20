@@ -19,8 +19,9 @@ function createLifecycle(finalize: () => void) {
         finalize?: () => void;
 
         disconnectedCallback() {
-          // A move within the document also disconnects the element, so check again after the move completes.
-          queueMicrotask(() => {
+          // Moves also disconnect the element, for example when an Observable cell puts the chart in a new layout
+          // that is attached later in the same task. Check again in the next task.
+          setTimeout(() => {
             if (!this.isConnected) {
               this.finalize?.();
               this.finalize = undefined;

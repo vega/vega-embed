@@ -101,7 +101,7 @@ _Note: Internet Explorer does not support [the ES6 Promise](https://developer.mo
 
 <a href="#container" name="container">#</a> <b>container</b>(<i>spec</i>[, <i>opt</i>]) [<>](https://github.com/vega/vega-embed/blob/master/src/container.ts 'Source')
 
-Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\* that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. The function is designed to work with [Observable](https://observablehq.com/). When the element is removed from the document, Vega-Embed calls `finalize` on the embedded chart. If you move the element synchronously to a different place in the document, the chart stays live. The `container` function accepts the following arguments:
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\* that resolves to an HTML element with the [Vega `View` instance](https://github.com/vega/vega-view#vega-view) as the `value` property. The function is designed to work with [Observable](https://observablehq.com/). When the element is removed from the document, Vega-Embed calls `finalize` on the embedded chart. If you attach the element again in the same task, for example to put it in a layout, the chart stays live. The `container` function accepts the following arguments:
 
 | Property | Type | Description |
 | :-- | :-- | :-- |

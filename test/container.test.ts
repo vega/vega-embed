@@ -2,6 +2,8 @@ import {TopLevelSpec} from 'vega-lite';
 import {expect, test, vi} from 'vitest';
 import container from '../src/container.js';
 
+const nextTask = () => new Promise((resolve) => setTimeout(resolve));
+
 const vlSpec: TopLevelSpec = {
   data: {values: [1, 2, 3]},
   encoding: {},
@@ -34,7 +36,7 @@ test('finalizes the view and removes the action listener when the container is r
   const finalize = vi.spyOn(div.value, 'finalize');
   const menu = div.querySelector('details')!;
 
-  await Promise.resolve();
+  await nextTask();
   expect(finalize).not.toHaveBeenCalled();
 
   document.body.append(div);
@@ -43,7 +45,7 @@ test('finalizes the view and removes the action listener when the container is r
   expect(menu.open).toBe(false);
 
   div.remove();
-  await Promise.resolve();
+  await nextTask();
   expect(finalize).toHaveBeenCalledTimes(1);
   menu.open = true;
   document.body.click();
@@ -58,15 +60,36 @@ test('keeps the view alive when moved and finalizes it once after removal', asyn
 
   document.body.append(host, div);
   shadow.append(div);
-  await Promise.resolve();
+  await nextTask();
   expect(finalize).not.toHaveBeenCalled();
 
   host.remove();
-  await Promise.resolve();
+  await nextTask();
   expect(finalize).toHaveBeenCalledTimes(1);
 
   document.body.append(host);
   host.remove();
+  await nextTask();
+  expect(finalize).toHaveBeenCalledTimes(1);
+});
+
+test('keeps the view alive when composed into a layout that is attached later in the same task', async () => {
+  const div = await container(vlSpec);
+  const finalize = vi.spyOn(div.value, 'finalize');
+  const cell = document.createElement('div');
+  document.body.append(cell);
+  cell.append(div);
+
+  const layout = document.createElement('div');
+  layout.append(div);
   await Promise.resolve();
+  await Promise.resolve();
+  cell.replaceChildren(layout);
+
+  await nextTask();
+  expect(finalize).not.toHaveBeenCalled();
+
+  cell.remove();
+  await nextTask();
   expect(finalize).toHaveBeenCalledTimes(1);
 });
