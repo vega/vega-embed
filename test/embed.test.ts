@@ -87,6 +87,119 @@ test('can disable export actions', async () => {
   expect(el.children[1].children[1].childElementCount).toBe(4);
 });
 
+test.each([true, false])('shows a close button only while fullscreen (defaultStyle: %s)', async (defaultStyle) => {
+  const el = document.createElement('div');
+  const other = document.createElement('div');
+  document.body.append(el, other);
+  let fullscreenElement: HTMLElement | null = null;
+  const setFullscreen = (value: HTMLElement | null) => {
+    fullscreenElement = value;
+    document.dispatchEvent(new Event('fullscreenchange'));
+  };
+  const requestFullscreen = vi.fn(() => Promise.resolve(setFullscreen(el)));
+  const exitFullscreen = vi.fn(() => Promise.resolve(setFullscreen(null)));
+  Object.defineProperty(el, 'requestFullscreen', {value: requestFullscreen});
+  Object.defineProperty(other, 'requestFullscreen', {value: () => Promise.resolve(setFullscreen(other))});
+  Object.defineProperties(document, {
+    fullscreenEnabled: {value: true, configurable: true},
+    fullscreenElement: {get: () => fullscreenElement, configurable: true},
+    exitFullscreen: {value: exitFullscreen, configurable: true},
+  });
+
+  try {
+    const {finalize} = await embed(el, vlSpec, {defaultStyle});
+    const {finalize: finalizeOther} = await embed(other, vlSpec, {
+      actions: true,
+      i18n: {FULLSCREEN_ACTION: 'Full screen', EXIT_FULLSCREEN_ACTION: 'Close chart'},
+    });
+    const summary = el.querySelector('summary');
+    const menu = el.querySelector<HTMLElement>(defaultStyle ? 'details' : '.vega-actions')!;
+    const enter = el.querySelector<HTMLButtonElement>('.vega-fullscreen')!;
+    const close = el.querySelector<HTMLButtonElement>('.vega-fullscreen-close')!;
+    const otherClose = other.querySelector<HTMLButtonElement>('.vega-fullscreen-close')!;
+
+    expect(enter.textContent).toBe('View Fullscreen');
+    expect(enter.nextElementSibling?.textContent).toBe('Open in Vega Editor');
+    expect(close.textContent).toBe('Close');
+    expect(close.hidden).toBe(true);
+
+    if (summary) {
+      summary.click();
+    }
+    enter.click();
+    expect(requestFullscreen).toHaveBeenCalledOnce();
+    expect(menu.hidden).toBe(true);
+    expect(close.hidden).toBe(false);
+    expect(document.activeElement).toBe(close);
+    expect(otherClose.hidden).toBe(true);
+
+    close.click();
+    expect(exitFullscreen).toHaveBeenCalledOnce();
+    expect(menu.hidden).toBe(false);
+    expect(close.hidden).toBe(true);
+    expect(document.activeElement).toBe(summary ?? enter);
+
+    setFullscreen(other);
+    expect(close.hidden).toBe(true);
+    expect(otherClose.hidden).toBe(false);
+    expect(otherClose.textContent).toBe('Close chart');
+    expect(other.querySelector('.vega-fullscreen')?.textContent).toBe('Full screen');
+    setFullscreen(null);
+    expect(otherClose.hidden).toBe(true);
+    expect(other.querySelector<HTMLElement>('details')?.hidden).toBe(false);
+    expect(document.activeElement).toBe(other.querySelector('summary'));
+    finalizeOther();
+
+    setFullscreen(el);
+    finalize();
+    expect(exitFullscreen).toHaveBeenCalledTimes(2);
+    expect(el.querySelector('.vega-fullscreen-close')).toBeNull();
+    setFullscreen(el);
+    expect(menu.hidden).toBe(false);
+
+    const {finalize: finalizeDisabled} = await embed(el, vlSpec, {actions: {fullscreen: false}});
+    expect(el.querySelector('.vega-fullscreen')).toBeNull();
+    expect(el.querySelector('.vega-fullscreen-close')).toBeNull();
+    expect(el.querySelector('.vega-actions')?.textContent).toContain('Open in Vega Editor');
+    finalizeDisabled();
+  } finally {
+    el.remove();
+    other.remove();
+    for (const key of ['fullscreenEnabled', 'fullscreenElement', 'exitFullscreen']) {
+      Reflect.deleteProperty(document, key);
+    }
+  }
+});
+
+test('omits the fullscreen action when fullscreen is unavailable', async () => {
+  const el = document.createElement('div');
+  const {finalize} = await embed(el, vlSpec);
+  expect(el.querySelector('.vega-fullscreen')).toBeNull();
+  expect(el.querySelector('.vega-fullscreen-close')).toBeNull();
+  finalize();
+});
+
+test('can open and close the actions menu within a shadow root', async () => {
+  const host = document.createElement('div');
+  const root = host.attachShadow({mode: 'open'});
+  const el = document.createElement('div');
+  root.append(el);
+  document.body.append(host);
+  const {finalize} = await embed(el, vlSpec);
+
+  try {
+    const details = el.querySelector('details')!;
+    const summary = details.querySelector('summary')!;
+    summary.click();
+    expect(details.open).toBe(true);
+    summary.click();
+    expect(details.open).toBe(false);
+  } finally {
+    finalize();
+    host.remove();
+  }
+});
+
 test('creates default download filename for svg', async () => {
   const el = document.createElement('div');
   await embed(el, vlSpec, {actions: true});

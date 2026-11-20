@@ -49,10 +49,17 @@ export interface Actions {
   export?: boolean | {svg?: boolean; png?: boolean};
   source?: boolean;
   compiled?: boolean;
+  fullscreen?: boolean;
   editor?: boolean;
 }
 
-export const DEFAULT_ACTIONS = {export: {svg: true, png: true}, source: true, compiled: true, editor: true};
+export const DEFAULT_ACTIONS = {
+  export: {svg: true, png: true},
+  source: true,
+  compiled: true,
+  fullscreen: true,
+  editor: true,
+};
 
 export interface Hover {
   hoverSet?: EncodeEntryName;
@@ -65,6 +72,8 @@ const I18N = {
   CLICK_TO_VIEW_ACTIONS: 'Click to view actions',
   COMPILED_ACTION: 'View Compiled Vega',
   EDITOR_ACTION: 'Open in Vega Editor',
+  EXIT_FULLSCREEN_ACTION: 'Close',
+  FULLSCREEN_ACTION: 'View Fullscreen',
   PNG_ACTION: 'Save as PNG',
   SOURCE_ACTION: 'View Source',
   SVG_ACTION: 'Save as SVG',
@@ -440,23 +449,25 @@ async function _embed(
   await view.initialize(container, opts.bind).runAsync();
 
   let documentClickHandler: ((this: Document, ev: MouseEvent) => void) | undefined;
+  let cleanupFullscreenAction: (() => void) | undefined;
 
   if (actions !== false) {
-    let wrapper = element;
+    const details =
+      opts.defaultStyle !== false || opts.forceActionsMenu ? document.createElement('details') : undefined;
+    let summary: HTMLElement | undefined;
 
-    if (opts.defaultStyle !== false || opts.forceActionsMenu) {
-      const details = document.createElement('details');
+    if (details) {
       details.title = i18n.CLICK_TO_VIEW_ACTIONS;
       element.append(details);
 
-      wrapper = details;
-      const summary = document.createElement('summary');
+      summary = document.createElement('summary');
       summary.innerHTML = SVG_CIRCLES;
+      summary.setAttribute('aria-label', i18n.CLICK_TO_VIEW_ACTIONS);
 
       details.append(summary);
 
       documentClickHandler = (ev: MouseEvent) => {
-        if (!details.contains(ev.target as any)) {
+        if (!ev.composedPath().includes(details)) {
           details.removeAttribute('open');
         }
       };
@@ -464,7 +475,7 @@ async function _embed(
     }
 
     const ctrl = document.createElement('div');
-    wrapper.append(ctrl);
+    (details ?? element).append(ctrl);
     ctrl.classList.add('vega-actions');
 
     // add 'Export' action
@@ -519,6 +530,67 @@ async function _embed(
       ctrl.append(compileLink);
     }
 
+    const ownerDocument = element.ownerDocument;
+    if (
+      (actions === true || actions.fullscreen !== false) &&
+      ownerDocument.fullscreenEnabled &&
+      typeof element.requestFullscreen === 'function'
+    ) {
+      const fullscreenButton = ownerDocument.createElement('button');
+      fullscreenButton.type = 'button';
+      fullscreenButton.className = 'vega-fullscreen';
+      fullscreenButton.textContent = i18n.FULLSCREEN_ACTION;
+      ctrl.append(fullscreenButton);
+
+      const closeButton = ownerDocument.createElement('button');
+      closeButton.type = 'button';
+      closeButton.className = 'vega-fullscreen-close';
+      closeButton.textContent = i18n.EXIT_FULLSCREEN_ACTION;
+      closeButton.hidden = true;
+      element.append(closeButton);
+
+      const actionMenu = details ?? ctrl;
+      const isFullscreen = () => {
+        const root = element.getRootNode();
+        return ('fullscreenElement' in root ? root.fullscreenElement : ownerDocument.fullscreenElement) === element;
+      };
+      const updateFullscreenActions = () => {
+        const fullscreen = isFullscreen();
+        if (actionMenu.hidden === fullscreen) return;
+
+        actionMenu.removeAttribute('open');
+        actionMenu.hidden = fullscreen;
+        closeButton.hidden = !fullscreen;
+        (fullscreen ? closeButton : (summary ?? fullscreenButton)).focus();
+      };
+      const changeFullscreen = async (enter: boolean) => {
+        try {
+          if (enter) {
+            await element.requestFullscreen();
+          } else if (isFullscreen()) {
+            await ownerDocument.exitFullscreen();
+          }
+        } catch (error) {
+          logger.warn('Could not change fullscreen mode:', error);
+        }
+      };
+      const enterFullscreen = () => changeFullscreen(true);
+      const exitFullscreen = () => changeFullscreen(false);
+
+      fullscreenButton.addEventListener('click', enterFullscreen);
+      closeButton.addEventListener('click', exitFullscreen);
+      ownerDocument.addEventListener('fullscreenchange', updateFullscreenActions);
+      updateFullscreenActions();
+      cleanupFullscreenAction = () => {
+        fullscreenButton.removeEventListener('click', enterFullscreen);
+        closeButton.removeEventListener('click', exitFullscreen);
+        ownerDocument.removeEventListener('fullscreenchange', updateFullscreenActions);
+        actionMenu.hidden = false;
+        closeButton.remove();
+        void exitFullscreen();
+      };
+    }
+
     // add 'Open in Vega Editor' action
     const editorUrl = opts.editorUrl ?? 'https://vega.github.io/editor/';
     const showEditorAction = actions === true || actions.editor !== false;
@@ -548,6 +620,7 @@ async function _embed(
     if (documentClickHandler) {
       document.removeEventListener('click', documentClickHandler);
     }
+    cleanupFullscreenAction?.();
     view.finalize();
   }
 
